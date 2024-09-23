@@ -36,7 +36,19 @@ public class PacienteMySQL implements PacienteDao{
 
     @Override
     public int modificar(Paciente paciente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int resultado = 0;
+        try {
+            con = DBManager.getInstance().getConnection();
+            sql = "UPDATE paciente SET nombre = ? WHERE idPaciente = ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1, paciente.getNombre());
+            pst.setInt(2, paciente.getIdPaciente());
+            resultado = pst.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
