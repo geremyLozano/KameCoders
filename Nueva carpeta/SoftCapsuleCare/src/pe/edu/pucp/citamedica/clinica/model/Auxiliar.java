@@ -4,6 +4,20 @@ import java.util.Date;
 
 
 public class Auxiliar extends Persona{
+
+    /**
+     * @return the idAuxiliar
+     */
+    public int getIdAuxiliar() {
+        return idAuxiliar;
+    }
+
+    /**
+     * @param idAuxiliar the idAuxiliar to set
+     */
+    public void setIdAuxiliar(int idAuxiliar) {
+        this.idAuxiliar = idAuxiliar;
+    }
     private static int contador = 0;
 
     private int idAuxiliar;
