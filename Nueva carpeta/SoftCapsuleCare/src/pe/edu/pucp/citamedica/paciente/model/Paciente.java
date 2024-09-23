@@ -37,6 +37,15 @@ public class Paciente extends Persona {
 
     // Getters y Setters
 
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
+    
     public boolean isHistorialActivo() {
         return historialActivo;
     }
