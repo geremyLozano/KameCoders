@@ -46,7 +46,7 @@ public class Paciente extends Persona {
     }
     
     
-    public boolean isHistorialActivo() {
+    public boolean getHistorialActivo() {
         return historialActivo;
     }
 
