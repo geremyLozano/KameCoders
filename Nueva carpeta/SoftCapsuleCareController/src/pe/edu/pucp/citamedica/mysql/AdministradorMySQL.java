@@ -11,14 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.clinica.model.Administrador;
-import pe.edu.pucp.citamedica.dao.AdministradorDao;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 
 /**
  *
  * @author Usuario
  */
-public class AdministradorMySQL implements AdministradorDao{
+public class AdministradorMySQL implements AdministradorDAO{
 
     
     private Connection con;

@@ -11,7 +11,7 @@ import pe.edu.pucp.citamedica.clinica.model.Administrador;
  *
  * @author Usuario
  */
-public interface AdministradorDao {
+public interface AdministradorDAO {
     
     int insertar(Administrador administrador);
     int modificar(Administrador administrador);

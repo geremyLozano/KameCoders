@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class DBManager {
     private static DBManager dbManager;
     private Connection con;
-    private final String host = "progra3db1.ccxbmhla6erm.us-east-1.rds.amazonaws.com";
+    private final String host = "pruebaprog3.c7qeiwgs42xd.us-east-1.rds.amazonaws.com";
     private final String port = "3306";
     private final String db = "mydb";
     private final String username = "admin";
-    private final String password = "geremy128";
+    private final String password = "pucpprogra3#";
     
     private DBManager(){
         connectToDatabase();

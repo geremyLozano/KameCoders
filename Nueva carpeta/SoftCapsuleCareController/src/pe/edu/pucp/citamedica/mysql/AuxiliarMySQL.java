@@ -1,15 +1,15 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.clinica.model.Auxiliar;
-import pe.edu.pucp.citamedica.dao.AuxiliarDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 
 
-public abstract class AuxiliarMySQL implements AuxiliarDao{
+public abstract class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
     private PreparedStatement pst;
     private String sql;
