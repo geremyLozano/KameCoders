@@ -1,6 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.clinica.model.Auxiliar;
-import pe.edu.pucp.citamedica.dao.AuxiliarDao;
+import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
@@ -10,8 +10,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
-
-public abstract class AuxiliarMySQL implements AuxiliarDao{
+public abstract class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
     private PreparedStatement pstPersona;
     private PreparedStatement pstAuxiliar;
@@ -50,6 +49,11 @@ public abstract class AuxiliarMySQL implements AuxiliarDao{
             pstAuxiliar.setBoolean(2, auxiliar.isActivo());
             resultado = pstAuxiliar.executeUpdate();
             
+            sql = "INSERT into Auxiliar(dni,nombre) values(?,?)";
+            cst = con.prepareCall(sql);
+            cst.setInt(1,auxiliar.getDNI());
+            cst.setString(2, auxiliar.getNombre());
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
@@ -61,11 +65,13 @@ public abstract class AuxiliarMySQL implements AuxiliarDao{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
+
             sql = "UPDATE auxiliar SET activo = ? WHERE idAuxiliar = ?";
             pstAuxiliar = con.prepareStatement(sql);
             pstAuxiliar.setBoolean(1, auxiliar.isActivo());
             pstAuxiliar.setInt(2, auxiliar.getIdAuxiliar());
             resultado = pstAuxiliar.executeUpdate();  
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

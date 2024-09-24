@@ -18,6 +18,7 @@ public class SoftMain {
         paciente.setFechaNacimiento(sdf.parse("19-10-1987"));
         //Datos de Paciente
         paciente.setHistorialActivo(true);
+        paciente.setGenero('F');
         PacienteDao daoPaciente = new PacienteMySQL();
         int resultado = daoPaciente.insertar(paciente);
         if(resultado == 1)

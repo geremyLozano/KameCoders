@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.citamedica.mysql;
 
 import java.sql.CallableStatement;
@@ -11,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.clinica.model.Administrador;
-import pe.edu.pucp.citamedica.dao.AdministradorDao;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 
 /**
  *
  * @author Usuario
  */
-public class AdministradorMySQL implements AdministradorDao{
+public class AdministradorMySQL implements AdministradorDAO{
 
     
     private Connection con;
@@ -40,8 +36,8 @@ public class AdministradorMySQL implements AdministradorDao{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
+            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
+                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
             
             pstPersona = con.prepareStatement(sql);
             pstPersona.setString(1, administrador.getNombre());
@@ -51,6 +47,7 @@ public class AdministradorMySQL implements AdministradorDao{
             pstPersona.setString(5, administrador.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(administrador.getFechaNacimiento().getTime());
             pstPersona.setDate(6,sqlDate);
+            pstPersona.setString(7, String.valueOf(administrador.getGenero()));
             pstPersona.executeUpdate();
             
             rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
@@ -59,8 +56,8 @@ public class AdministradorMySQL implements AdministradorDao{
                 idPersona = rs.getInt(1);
             }
             
-             sql = "{INSERT INTO Administrador(idpersona) "
-                    + "values(?)}";
+             sql = "INSERT INTO Administrador(idpersona) "
+                    + "values(?)";
             pstAdministrador = con.prepareStatement(sql);
             pstAdministrador.setInt(1, idPersona);
            
