@@ -44,7 +44,7 @@ public class MedicoMySQL implements MedicoDAO {
                 idPersona = rs.getInt(1);
             }
             
-            sql = "INSERT INTO Paciente(especialidad,numColegiatura,horaInicioTrabajo,"
+            sql = "INSERT INTO Medico(especialidad,numColegiatura,horaInicioTrabajo,"
                     + "horaFinTrabajo, ahosExp, activo) "
                     + "values(?,?,?,?,?,?)";
             pstMedico = con.prepareStatement(sql);
