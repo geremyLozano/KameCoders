@@ -59,5 +59,9 @@ public class Auxiliar extends Persona{
     public void cargarEvaluacionMedica(){
             
     }
+
+    public void setIdAuxiliar(int idAuxiliar) {
+        this.idAuxiliar = idAuxiliar;
+    }
     
 }
