@@ -2,7 +2,10 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import pe.edu.pucp.citamedica.clinica.model.Auxiliar;
+import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
+import pe.edu.pucp.citamedica.mysql.AuxiliarMySQL;
 import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
 import pe.edu.pucp.citamedica.usuario.model.Usuario;
 
@@ -28,6 +31,7 @@ public class Principal {
             System.out.println("Se ha registrado con exito");
         else
             System.out.println("Ha ocurrido un error");
+        
         
         
     }

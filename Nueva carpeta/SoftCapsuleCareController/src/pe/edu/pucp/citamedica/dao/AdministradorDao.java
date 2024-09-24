@@ -1,4 +1,3 @@
-
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
