@@ -27,8 +27,8 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             con = DBManager.getInstance().getConnection();
             sql = "INSERT into Especialidad(nombre,costoConsulta) values(?,?)";
             pst = con.prepareStatement(sql);
-            pst = setString(1, especialidad.getNombre());
-            pst = setDouble(2, especialidad.getCostoConsulta());
+            pst.setString(1, especialidad.getNombre());
+            pst.setDouble(2, especialidad.getCostoConsulta());
             pst.executeUpdate();
                         
             resultado = pst.executeUpdate();
@@ -49,11 +49,11 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         sql = "UPDATE Especialidad SET nombre = ?, costoConsulta = ? WHERE idEspecialidad = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement pstMedico = con.prepareStatement(sql)) {
+             PreparedStatement pst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
-            pst = setString(1,especialidad.getNombre());
-            pst = setDouble(2,especialidad.getCostoConsulta());
+            pst.setString(1,especialidad.getNombre());
+            pst.setDouble(2,especialidad.getCostoConsulta());
             
             // Ejecutar la consulta de actualización
             resultado = pst.executeUpdate();
@@ -111,8 +111,9 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             while (rs.next()) {
                 // Crear un nuevo objeto 
                 Especialidad especialidad = new Especialidad();
+                
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
-                especialidad.setCostoConsulta(rs.getDouble("costoConsulta"))
+                especialidad.setCostoConsulta(rs.getDouble("costoConsulta"));
 
                 // Añadir el objeto Medico a la lista
                 listaEspecialidad.add(especialidad);
@@ -125,7 +126,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     }
 
     @Override
-    public Medico obtenerPorId(int idEspecialidad) {
+    public Especialidad obtenerPorId(int idEspecialidad) {
         Especialidad especialidad = null;
         String sql = "SELECT * FROM Especialidad WHERE idEspecialidad = ?";
 
@@ -137,14 +138,14 @@ public class EspecialidadMySQL implements EspecialidadDAO {
 
             if (rs.next()) {
                 especialidad = new Especialidad();
-                medico.setIdEspecialidad(rs.getInt("idEspecialidad"));
-                medico.setCostoConsulta(rs.getString("costoConsulta"));          
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setCostoConsulta(rs.getDouble("costoConsulta"));          
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return medico;
+        return especialidad;
     }
 }
