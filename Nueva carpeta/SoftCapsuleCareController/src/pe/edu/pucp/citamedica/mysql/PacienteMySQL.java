@@ -68,6 +68,34 @@ public class PacienteMySQL implements PacienteDao{
         }
         return resultado;
     }
+    /*
+    @Override
+    public int eliminar(int idPaciente) {
+        int resultado = 0;
+        String sql = "DELETE FROM Paciente WHERE idPaciente = ?";
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pstPaciente = con.prepareStatement(sql)) {
+
+            pstPaciente.setInt(1, idPaciente);
+
+            resultado = pstPaciente.executeUpdate();
+
+            // Verificar si el registro fue eliminado
+            if (resultado > 0) {
+                System.out.println("Paciente eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró ningún paciente con ese ID.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return resultado;
+    }
+
+    */
 
     @Override
     public ArrayList<Paciente> listarTodos() {
