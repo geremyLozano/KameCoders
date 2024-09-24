@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Time;
-import java.time.LocalTime;
 import pe.edu.pucp.citamedica.clinica.model.Especialidad;
 
 public class MedicoMySQL implements MedicoDAO {
@@ -21,13 +20,14 @@ public class MedicoMySQL implements MedicoDAO {
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
+    
     @Override
     public int insertar(Medico medico) {
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
+            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
+                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?)";
             pstPersona = con.prepareStatement(sql);
             pstPersona.setString(1, medico.getNombre());
             pstPersona.setString(2, medico.getApellido());
@@ -44,9 +44,9 @@ public class MedicoMySQL implements MedicoDAO {
                 idPersona = rs.getInt(1);
             }
             
-            sql = "{INSERT INTO Paciente(especialidad,numColegiatura,horaInicioTrabajo,"
+            sql = "INSERT INTO Paciente(especialidad,numColegiatura,horaInicioTrabajo,"
                     + "horaFinTrabajo, ahosExp, activo) "
-                    + "values(?,?,?,?,?,?)}";
+                    + "values(?,?,?,?,?,?)";
             pstMedico = con.prepareStatement(sql);
             pstMedico.setInt(1, medico.getEspecialidad().getIdEspecialidad());
             pstMedico.setString(2, medico.getNumColegiatura());

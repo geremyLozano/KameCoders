@@ -23,8 +23,8 @@ public class PacienteMySQL implements PacienteDao{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
+            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
+                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
             pstPersona = con.prepareStatement(sql);
             pstPersona.setString(1, paciente.getNombre());
             pstPersona.setString(2, paciente.getApellido());
@@ -33,6 +33,7 @@ public class PacienteMySQL implements PacienteDao{
             pstPersona.setString(5, paciente.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(paciente.getFechaNacimiento().getTime());
             pstPersona.setDate(6,sqlDate);
+            pstPersona.setString(7, String.valueOf(paciente.getGenero()));
             pstPersona.executeUpdate();
             
             rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
@@ -41,13 +42,13 @@ public class PacienteMySQL implements PacienteDao{
                 idPersona = rs.getInt(1);
             }
             
-            sql = "{INSERT INTO Paciente(idpersona,historialActivo) "
-                    + "values(?,?)}";
+            sql = "INSERT INTO Paciente(idpersona,historialActivo) "
+                    + "values(?,?)";
             pstPaciente = con.prepareStatement(sql);
             pstPaciente.setInt(1, idPersona);
             pstPaciente.setBoolean(2, paciente.getHistorialActivo());
             resultado = pstPaciente.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return resultado;
@@ -62,7 +63,7 @@ public class PacienteMySQL implements PacienteDao{
             cst = con.prepareCall(sql);
             cst.setInt(1, idPaciente);
             resultado = cst.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return resultado;
@@ -85,12 +86,12 @@ public class PacienteMySQL implements PacienteDao{
                 paciente.setHistorialActivo(true);
                 pacientes.add(paciente);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
