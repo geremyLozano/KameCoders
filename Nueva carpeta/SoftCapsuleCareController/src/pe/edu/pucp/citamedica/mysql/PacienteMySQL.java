@@ -25,7 +25,7 @@ public class PacienteMySQL implements PacienteDao{
             con = DBManager.getInstance().getConnection();
             sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
                     + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
-            pstPersona = con.prepareStatement(sql);
+            pstPersona = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstPersona.setString(1, paciente.getNombre());
             pstPersona.setString(2, paciente.getApellido());
             pstPersona.setString(3, paciente.getCorreoElectronico());
