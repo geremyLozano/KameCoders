@@ -3,7 +3,7 @@ import pe.edu.pucp.citamedica.paciente.model.Persona;
 
 import java.util.Date;
 
-public class Usuario extends Persona {
+public class Usuario {
     private static int contador = 0;
 
     private int idUsuario;
@@ -15,11 +15,8 @@ public class Usuario extends Persona {
     }
 
     // Incluimos el campo apellido en el constructor
-    public Usuario(String contrasenha, Persona datosPersonales, String nombre, String apellido, 
-                   String correoElectronico, int numTelefono, String direccion, 
-                   Date fechaNacimiento, char genero, int DNI) {
+    public Usuario(String contrasenha, Persona datosPersonales, int DNI) {
         // Llamamos al constructor de Persona pasando el apellido
-        super(nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero, DNI);
         this.idUsuario = ++contador;
         this.username = DNI;  // Asignamos el DNI como username
         this.contrasenha = contrasenha;
@@ -51,7 +48,6 @@ public class Usuario extends Persona {
         this.datosPersonales = datosPersonales;
     }
 
-    @Override
     public void actualizarInformacion() {
         // Implementar lógica de actualización
     }
