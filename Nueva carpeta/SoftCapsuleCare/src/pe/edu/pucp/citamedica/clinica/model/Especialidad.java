@@ -12,7 +12,10 @@ public class Especialidad {
         this.nombre = nombre;
         this.costoConsulta = costoConsulta;
     }
-
+    public int getIdEspecialidad(){
+        return idEspecialidad;
+    }
+    
     public String getNombre() {
         return nombre;
     }
