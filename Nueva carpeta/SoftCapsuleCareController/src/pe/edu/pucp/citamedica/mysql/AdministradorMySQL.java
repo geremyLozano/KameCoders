@@ -40,8 +40,8 @@ public class AdministradorMySQL implements AdministradorDao{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
+            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
+                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
             
             pstPersona = con.prepareStatement(sql);
             pstPersona.setString(1, administrador.getNombre());
@@ -51,6 +51,7 @@ public class AdministradorMySQL implements AdministradorDao{
             pstPersona.setString(5, administrador.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(administrador.getFechaNacimiento().getTime());
             pstPersona.setDate(6,sqlDate);
+            pstPersona.setString(7, String.valueOf(administrador.getGenero()));
             pstPersona.executeUpdate();
             
             rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
@@ -59,8 +60,8 @@ public class AdministradorMySQL implements AdministradorDao{
                 idPersona = rs.getInt(1);
             }
             
-             sql = "{INSERT INTO Administrador(idpersona) "
-                    + "values(?)}";
+             sql = "INSERT INTO Administrador(idpersona) "
+                    + "values(?)";
             pstAdministrador = con.prepareStatement(sql);
             pstAdministrador.setInt(1, idPersona);
            

@@ -70,7 +70,7 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public int modificar(Medico medico) {
         int resultado = 0;
-        String sql = "UPDATE Medico SET nombre = ?, especialidad = ?, "
+        sql = "UPDATE Medico SET nombre = ?, especialidad = ?, "
                 + "numColegiatura = ?, horaInicioTrabajo = ?, "
                 + "horaFinTrabajo = ?, aniosExp = ?, activo = ?"
                 + " WHERE idMedico = ?";
@@ -108,7 +108,7 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public int eliminar(int idMedico) {
         int resultado = 0;
-        String sql = "DELETE FROM Medico WHERE idMedico = ?";
+        sql = "DELETE FROM Medico WHERE idMedico = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql)) {

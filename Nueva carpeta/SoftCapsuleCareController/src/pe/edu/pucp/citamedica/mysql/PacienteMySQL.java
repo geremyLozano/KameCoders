@@ -141,7 +141,7 @@ public class PacienteMySQL implements PacienteDao{
             pstPaciente.setBoolean(1, paciente.getHistorialActivo());
             pstPaciente.setInt(2, paciente.getIdPaciente());
             resultado = pstPaciente.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return resultado;

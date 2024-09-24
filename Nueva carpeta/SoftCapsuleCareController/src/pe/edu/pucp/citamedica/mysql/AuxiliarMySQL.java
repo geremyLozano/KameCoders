@@ -4,6 +4,7 @@ import pe.edu.pucp.citamedica.dao.AuxiliarDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
@@ -19,12 +20,12 @@ public abstract class AuxiliarMySQL implements AuxiliarDao{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Auxiliar(dni,nombre) values(?,?)}";
+            sql = "INSERT into Auxiliar(dni,nombre) values(?,?)";
             cst = con.prepareCall(sql);
             cst.setInt(1,auxiliar.getDNI());
             cst.setString(2, auxiliar.getNombre());
             resultado = cst.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return resultado;
@@ -41,7 +42,7 @@ public abstract class AuxiliarMySQL implements AuxiliarDao{
             pst.setInt(2, auxiliar.getIdAuxiliar());
             resultado = pst.executeUpdate();
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return resultado;
