@@ -1,6 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.clinica.model.Auxiliar;
-import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
+import pe.edu.pucp.citamedica.dao.AuxiliarDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
