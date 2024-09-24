@@ -40,7 +40,14 @@ public class Medico extends Persona{
         this.diasLaborales = new ArrayList<>();
         this.activo = activo;
     }
-
+    
+    public int getIdMedico(){
+        return idMedico;
+    }
+    public void setIdMedico(int id){
+        this.idMedico = id;
+    }
+    
     public ArrayList<DiaSemana> getDiasLaborales() {
         return new ArrayList<DiaSemana>(diasLaborales);
     }
