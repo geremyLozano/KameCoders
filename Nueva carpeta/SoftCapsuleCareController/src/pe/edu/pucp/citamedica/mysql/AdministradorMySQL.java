@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.clinica.model.Administrador;
 import pe.edu.pucp.dbmanager.config.DBManager;
-import pe.edu.pucp.citamedica.dao.AdministradorDAO;
+import pe.edu.pucp.citamedica.dao.AdministradorDao;
 
 /**
  *
