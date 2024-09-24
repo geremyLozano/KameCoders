@@ -14,7 +14,7 @@ import pe.edu.pucp.citamedica.dao.AdministradorDAO;
  *
  * @author Usuario
  */
-public class AdministradorMySQL implements AdministradorDao{
+public class AdministradorMySQL implements AdministradorDAO{
 
     
     private Connection con;
