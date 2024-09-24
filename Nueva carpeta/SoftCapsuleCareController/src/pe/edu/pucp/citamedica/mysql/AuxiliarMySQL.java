@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
-public abstract class AuxiliarMySQL implements AuxiliarDAO{
+public abstract class AuxiliarMySQL implements AuxiliarDao{
     private Connection con;
     private PreparedStatement pstPersona;
     private PreparedStatement pstAuxiliar;
