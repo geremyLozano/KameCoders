@@ -2,8 +2,8 @@ package softmain;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import pe.edu.pucp.citamedica.paciente.model.Paciente;
-import pe.edu.pucp.citamedica.dao.PacienteDao;
 import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
+import pe.edu.pucp.citamedica.dao.PacienteDAO;
 
 public class SoftMain {
     public static void main(String[] args) throws ParseException{
@@ -19,7 +19,7 @@ public class SoftMain {
         //Datos de Paciente
         paciente.setHistorialActivo(true);
         paciente.setGenero('F');
-        PacienteDao daoPaciente = new PacienteMySQL();
+        PacienteDAO daoPaciente = new PacienteMySQL();
         int resultado = daoPaciente.insertar(paciente);
         if(resultado == 1)
             System.out.println("Se ha registrado con exito");

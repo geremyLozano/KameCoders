@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.PacienteDao;
 import pe.edu.pucp.citamedica.paciente.model.Paciente;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.citamedica.dao.PacienteDAO;
 
-public class PacienteMySQL implements PacienteDao{
+public class PacienteMySQL implements PacienteDAO{
     private Connection con;
     private Statement st;
     private PreparedStatement pstPersona;
