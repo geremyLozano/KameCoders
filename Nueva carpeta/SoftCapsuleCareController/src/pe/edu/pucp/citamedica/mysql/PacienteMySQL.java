@@ -58,7 +58,8 @@ public class PacienteMySQL implements PacienteDAO{
     public int eliminar(int idPaciente) {
         int resultado = 0;
         String sql = "DELETE FROM Paciente WHERE idPaciente = ?";
-
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
+                + "(SELECT idpersona FROM Paciente WHERE idPaciente = ?)";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstPaciente = con.prepareStatement(sql)) {
 
@@ -66,17 +67,25 @@ public class PacienteMySQL implements PacienteDAO{
 
             resultado = pstPaciente.executeUpdate();
 
-            // Verificar si el registro fue eliminado
             if (resultado > 0) {
                 System.out.println("Paciente eliminado correctamente.");
+                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
+                    pstPersona.setInt(1, idPaciente);
+                    int resultadoPersona = pstPersona.executeUpdate();
+                    if(resultadoPersona>0){
+                        System.out.println("Datos Persona del Paciente han sido eliminados");                     
+                    }else{
+                        System.out.println("No se encontro la persona asociada");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 System.out.println("No se encontró ningún paciente con ese ID.");
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return resultado;
     }
 
