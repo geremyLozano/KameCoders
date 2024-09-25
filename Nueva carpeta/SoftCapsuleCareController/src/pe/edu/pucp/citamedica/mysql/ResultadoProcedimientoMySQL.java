@@ -1,6 +1,5 @@
 package pe.edu.pucp.citamedica.mysql;
 
-import pe.edu.pucp.citamedica.procedimiento.model.ResultadoProcedimiento;
 import pe.edu.pucp.citamedica.dao.ResultadoProcedimientoDAO;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import pe.edu.pucp.citamedica.procedimiento.model.EstadoResultado;
+import pe.edu.pucp.citamedica.procedimiento.model.ResultadoProcedimiento;
 
 public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
     private Connection con;
