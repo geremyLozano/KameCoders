@@ -9,4 +9,8 @@ public interface EspecialidadDAO{
     int eliminar(int idEspecialidad);
     ArrayList<Especialidad> listarTodos();
     Especialidad obtenerPorId(int idEspecialidad);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bef43f378d4329cc4505c281b58d7979a13aaf29

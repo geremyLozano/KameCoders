@@ -47,7 +47,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         sql = "UPDATE Especialidad SET nombre = ?, costoConsulta = ? WHERE idEspecialidad = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement pstMedico = con.prepareStatement(sql)) {
+             PreparedStatement pst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
             pst.setString(1,especialidad.getNombre());
@@ -109,9 +109,14 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             while (rs.next()) {
                 // Crear un nuevo objeto 
                 Especialidad especialidad = new Especialidad();
+                
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
                 especialidad.setCostoConsulta(rs.getDouble("costoConsulta"));
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> bef43f378d4329cc4505c281b58d7979a13aaf29
                 // Añadir el objeto Medico a la lista
                 listaEspecialidad.add(especialidad);
             }

@@ -13,7 +13,9 @@ public class AmbienteMedico {
 
     public AmbienteMedico() {
     }
-
+    
+    
+    
     public AmbienteMedico(int numPiso, String ubicacion, int capacidad, TipoAmbiente tipoAmbiente) {
         this.idAmbiente = ++contador;
         this.numPiso = numPiso;
@@ -53,6 +55,20 @@ public class AmbienteMedico {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+    }
+
+    /**
+     * @return the idAmbiente
+     */
+    public int getIdAmbiente() {
+        return idAmbiente;
+    }
+
+    /**
+     * @param idAmbiente the idAmbiente to set
+     */
+    public void setIdAmbiente(int idAmbiente) {
+        this.idAmbiente = idAmbiente;
     }
     
 }
