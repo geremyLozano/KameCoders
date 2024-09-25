@@ -10,6 +10,7 @@ import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import pe.edu.pucp.citamedica.procedimiento.model.ResultadoProcedimiento;
+import pe.edu.pucp.citamedica.procedimiento.model.EstadoResultado;
 
 public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
     private Connection con;
