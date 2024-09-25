@@ -15,6 +15,7 @@ public class PacienteMySQL implements PacienteDAO{
     private Statement st;
     private PreparedStatement pstPersona;
     private PreparedStatement pstPaciente;
+    private PreparedStatement pstGetPersona;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
@@ -58,37 +59,60 @@ public class PacienteMySQL implements PacienteDAO{
     @Override
     public int eliminar(int idPaciente) {
         int resultado = 0;
-        String sql = "DELETE FROM Paciente WHERE idPaciente = ?";
-        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
-                + "(SELECT idpersona FROM Paciente WHERE idPaciente = ?)";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstPaciente = con.prepareStatement(sql)) {
-
-            pstPaciente.setInt(1, idPaciente);
-
-            resultado = pstPaciente.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Paciente eliminado correctamente.");
-                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
-                    pstPersona.setInt(1, idPaciente);
-                    int resultadoPersona = pstPersona.executeUpdate();
-                    if(resultadoPersona>0){
-                        System.out.println("Datos Persona del Paciente han sido eliminados");                     
-                    }else{
-                        System.out.println("No se encontro la persona asociada");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        String sqlPaciente = "DELETE FROM Paciente WHERE idPaciente = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = ? ";
+        String sqlGetPersona = "SELECT idpersona FROM Paciente WHERE idPaciente = ?";
+        
+        try (Connection con = DBManager.getInstance().getConnection()) {
+            int idPersona = 0;
+            try(PreparedStatement pstGetPersona = con.prepareStatement(sqlGetPersona)){
+                pstGetPersona.setInt(1, idPaciente);
+                ResultSet rsN = pstGetPersona.executeQuery();
+                if(rsN.next()){
+                    idPersona = rsN.getInt("idpersona");
+                }else{
+                    System.out.println("No se encontro ningun paciente con ese ID");
+                    return resultado;
                 }
-            } else {
-                System.out.println("No se encontró ningún paciente con ese ID.");
             }
+            
+            // Primero eliminar el registro de Paciente
+            try (PreparedStatement pstPaciente = con.prepareStatement(sqlPaciente)) {
+                pstPaciente.setInt(1, idPaciente);
+                resultado = pstPaciente.executeUpdate();
+                
+                if (resultado > 0) {
+                    System.out.println("Datos del Paciente han sido eliminados.");
+
+                    // Luego eliminar el registro de Persona asociado
+                    try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)) {
+                        pstPersona.setInt(1, idPersona);
+                        resultado = pstPersona.executeUpdate();
+
+                        if (resultado > 0) {
+                            System.out.println("Datos de la Persona han sido eliminados.");
+                        } else {
+                            System.out.println("No se encontró la persona asociada.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+                    System.out.println("No se encontró ningún paciente con ese ID.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return resultado;
     }
+
 
     @Override
     public ArrayList<Paciente> listarTodos() {
@@ -153,9 +177,9 @@ public class PacienteMySQL implements PacienteDAO{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "UPDATE paciente SET historialActivo = ? WHERE idPaciente = ?";
+            sql = "UPDATE Paciente SET historialActivo = ? WHERE idPaciente = ?";
             pstPaciente = con.prepareStatement(sql);
-            pstPaciente.setBoolean(1, paciente.getHistorialActivo());
+            pstPaciente.setBoolean(1, false);
             pstPaciente.setInt(2, paciente.getIdPaciente());
             resultado = pstPaciente.executeUpdate();
         } catch (SQLException e) {

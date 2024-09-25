@@ -5,12 +5,7 @@ import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
-import pe.edu.pucp.citamedica.consultas.model.EstadoCita;
-import pe.edu.pucp.citamedica.consultas.model.TipoCita;
-import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
-import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+
 
 public class SoftMain {
     public static void main(String[] args) throws ParseException {
@@ -30,43 +25,61 @@ public class SoftMain {
         paciente.setHistorialActivo(true);
         paciente.setGenero('F');
 
-        // Insertar paciente en la base de datos
+        // Insertar paciente en la base de datos*/
         PacienteDAO daoPaciente = new PacienteMySQL();
         int resultado = daoPaciente.insertar(paciente);
 
         if (resultado == 1) {
             System.out.println("El paciente ha sido registrado con éxito");
-
-            // Supongamos que la cita está asociada a este paciente
-            CitaMedica cita = new CitaMedica();
-            cita.setPaciente(paciente);  // Asignar paciente a la cita
-            cita.setTipo(TipoCita.Virtual);
-            cita.setEstado(EstadoCita.Confirmada);
-            cita.setFecha(sdf.parse("25-09-2024"));   // Fecha de la cita
-            // Hora de la cita usando LocalTime
-            cita.setHora(LocalTime.parse("10:30:00"));  // Marcar la hora de la cita
-
-            // Insertar cita en la base de datos
-            CitaMedicaDAO daoCita = new CitaMedicaMySQL();
-            int resultadoCita = daoCita.insertar(cita);
-
-            if (resultadoCita == 1) {
-                System.out.println("Cita registrada con éxito");
-
-                // Confirmar la asistencia del paciente a la cita
-                cita.setEstado(EstadoCita.Confirmada);  // Marcar la cita como asistida
-                int resultadoConfirmacion = daoCita.modificar(cita);
-
-                if (resultadoConfirmacion == 1) {
-                    System.out.println("Asistencia confirmada exitosamente");
-                } else {
-                    System.out.println("Error al confirmar la asistencia");
-                }
-            } else {
-                System.out.println("Hubo un error al registrar la cita");
-            }
         } else {
             System.out.println("Hubo un error al registrar el paciente");
         }
+        
+        Paciente paciente2 = new Paciente();
+        
+        paciente2.setDNI("1354863");
+        paciente2.setNombre("Lorenzo");
+        paciente2.setApellido("Rojas");
+        paciente2.setCorreoElectronico("lorenzorojas@gmail.com");
+        paciente2.setNumTelefono(985636852);
+        paciente2.setDireccion("Lince, 1888");
+        paciente2.setFechaNacimiento(sdf.parse("20-11-2001"));
+        // Datos de Paciente
+        paciente2.setHistorialActivo(true);
+        paciente2.setGenero('M');
+
+        // Insertar paciente en la base de datos
+//        PacienteDAO daoPaciente = new PacienteMySQL();
+//        int resultado = daoPaciente.insertar(paciente2);
+
+        if (resultado == 1) {
+            System.out.println("El paciente2 ha sido registrado con éxito");
+        } else {
+            System.out.println("Hubo un error al registrar el paciente");
+        }
+        //Probando modificar paciente
+//        PacienteDAO daoPaciente = new PacienteMySQL();
+//        int resultado;
+        resultado = daoPaciente.modificar(paciente);
+        if(resultado == 1){
+            System.out.println("Paciente modificado correctamente");
+        }else{
+            System.out.println("Paciente no modificado ");
+        }
+        
+        ///////////////////////////////////////
+        //Probando eliminar paciente2 
+//      PacienteDAO daoPaciente = new PacienteMySQL();
+//      int resultado = daoPaciente.eliminar(3);
+//        
+//      if(resultado == 1){
+//          System.out.println("El paciente2 ha sido eliminado con éxito");
+//      }else{
+//          System.out.println("Hubo un error al eliminar el paciente");
+//      }
+
+
+        
+        
     }
 }

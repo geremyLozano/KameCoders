@@ -25,7 +25,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     
     private PreparedStatement pstPersona;
     private PreparedStatement pstAdministrador;
-    
+    private PreparedStatement pstGetPersona;
     private ResultSet rs;
     private Statement st;
     
@@ -75,31 +75,50 @@ public class AdministradorMySQL implements AdministradorDAO{
     @Override
     public int eliminar(int idAdmin) {
         int resultado = 0;
-        String sql = "DELETE FROM Administrador WHERE idAdministrador = ?";
-        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
-                + "(SELECT idpersona FROM Administrador WHERE idAdministrador = ?)";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstAdministrador = con.prepareStatement(sql)) {
-
-            pstAdministrador.setInt(1,idAdmin);
-            
-            resultado = pstAdministrador.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Administrador eliminado correctamente.");
-                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
-                    pstPersona.setInt(1, idAdmin);
-                    int resultadoPersona = pstPersona.executeUpdate();
-                    if(resultadoPersona>0){
-                        System.out.println("Datos Persona del Administrador han sido eliminados");                     
-                    }else{
-                        System.out.println("No se encontro la persona asociada");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        String sqlAdmin = "DELETE FROM Administrador WHERE idAdministrador = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = ?";
+        String sqlGetPersona = "SELECT idpersona FROM Medico WHERE idAdministrador = ?";
+        try (Connection con = DBManager.getInstance().getConnection()) {
+            int idPersona = 0;
+            try(PreparedStatement pstGetPersona = con.prepareStatement(sqlGetPersona)){
+                pstGetPersona.setInt(1, idAdmin);
+                ResultSet rsN = pstGetPersona.executeQuery();
+                if(rsN.next()){
+                    idPersona = rsN.getInt("idpersona");
+                }else{
+                    System.out.println("No se encontro ningun administrador con ese ID");
+                    return resultado;
                 }
-            } else {
-                System.out.println("No se encontró ningún paciente con ese ID.");
+            }
+            
+            // Primero eliminar el registro de Paciente
+            try (PreparedStatement pstAdministrador = con.prepareStatement(sqlAdmin)) {
+                pstAdministrador.setInt(1, idAdmin);
+                resultado = pstAdministrador.executeUpdate();
+                
+                if (resultado > 0) {
+                    System.out.println("Datos del Auxiliar han sido eliminados.");
+
+                    // Luego eliminar el registro de Persona asociado
+                    try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)) {
+                        pstPersona.setInt(1, idPersona);
+                        resultado = pstPersona.executeUpdate();
+
+                        if (resultado > 0) {
+                            System.out.println("Datos de la Persona han sido eliminados.");
+                        } else {
+                            System.out.println("No se encontró la persona asociada.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+                    System.out.println("No se encontró ningún paciente con ese ID.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
 
         } catch (SQLException e) {
