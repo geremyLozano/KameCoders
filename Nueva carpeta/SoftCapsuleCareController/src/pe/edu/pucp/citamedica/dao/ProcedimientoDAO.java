@@ -14,7 +14,7 @@ import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
 public interface ProcedimientoDAO {
     
     
-    int insertar(Procedimiento procedimiento);
+    int insertar(Procedimiento procedimiento,int idAmbienteMedico);
     int modificar(Procedimiento procedimiento);
     int eliminar(int idProcedimiento);
     ArrayList<Procedimiento> listarTodos();
