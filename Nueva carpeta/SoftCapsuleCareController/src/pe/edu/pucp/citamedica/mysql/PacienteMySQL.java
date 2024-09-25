@@ -24,7 +24,7 @@ public class PacienteMySQL implements PacienteDAO{
         try {
             con = DBManager.getInstance().getConnection();
             sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
+                    + "direccion,fechaNacimiento,genero,dni) values(?,?,?,?,?,?,?,?)";
             pstPersona = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstPersona.setString(1, paciente.getNombre());
             pstPersona.setString(2, paciente.getApellido());
@@ -34,6 +34,7 @@ public class PacienteMySQL implements PacienteDAO{
             java.sql.Date sqlDate = new java.sql.Date(paciente.getFechaNacimiento().getTime());
             pstPersona.setDate(6,sqlDate);
             pstPersona.setString(7, String.valueOf(paciente.getGenero()));
+            pstPersona.setString(8, paciente.getDNI());
             pstPersona.executeUpdate();
             
             rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
@@ -86,11 +87,12 @@ public class PacienteMySQL implements PacienteDAO{
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT idPaciente,nombre,apellido FROM paciente WHERE "
+            sql = "SELECT idPaciente,dni,nombre,apellido FROM paciente WHERE "
                     + "historialActivo = 1";
             rs = st.executeQuery(sql);
             while(rs.next()){
                 Paciente paciente = new Paciente();
+                paciente.setDNI(rs.getString("DNI"));
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setApellido(rs.getString("apellido"));
