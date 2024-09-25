@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.clinica.model.AmbienteMedico;
-import pe.edu.pucp.citamedica.clinica.model.TipoAmbiente;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.usuario.model.Usuario;
 import pe.edu.pucp.dbmanager.config.DBManager;
@@ -101,7 +99,7 @@ public class UsuarioMySQL implements UsuarioDAO{
 
     @Override
     public Usuario obtenerPorId(int idUsuario) {
-        Usuario usuario = null;
+       Usuario usuario = null;
         try {
             con = DBManager.getInstance().getConnection();
             sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
@@ -114,7 +112,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setContrasenha(rs.getString("contrasenha"));
-                //int idPersona = 
+                //usuario.setDatosPersonales();
             }
 
         } catch (SQLException e) {
@@ -128,5 +126,4 @@ public class UsuarioMySQL implements UsuarioDAO{
         }
         return usuario;
     }
-    
 }
