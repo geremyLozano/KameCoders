@@ -128,7 +128,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         } catch (SQLException e) {
             e.printStackTrace();  // Manejar la excepción si ocurre un error
         }
-        return listaComunicacion;  // Retornar la lista de médicos
+        return listaComunicacion;  // Retornar la lista de comunicacion
     }
 
     @Override
@@ -160,6 +160,5 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         }
 
         return comunica;
-    }
-    
+    } 
 }
