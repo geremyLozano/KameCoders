@@ -60,9 +60,9 @@ public class ComunicacionMySQL implements ComunicacionDAO{
 
             // Verificar si la modificación fue exitosa
             if (resultado > 0) {
-                System.out.println("Médico modificado correctamente.");
+                System.out.println("FIla de la tabla Comunicacion modificada correctamente.");
             } else {
-                System.out.println("No se encontró ningún médico con ese ID.");
+                System.out.println("No se encontró ninguna fila de comunicacion con ese ID.");
             }
 
         } catch (SQLException e) {
