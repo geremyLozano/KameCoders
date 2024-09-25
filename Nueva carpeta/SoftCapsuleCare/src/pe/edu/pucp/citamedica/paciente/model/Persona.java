@@ -1,10 +1,5 @@
 package pe.edu.pucp.citamedica.paciente.model;
 
-import pe.edu.pucp.citamedica.clinica.model.Medico;
-import pe.edu.pucp.citamedica.clinica.model.Auxiliar;
-import pe.edu.pucp.citamedica.clinica.model.Administrador;
-import pe.edu.pucp.citamedica.usuario.model.Usuario;
-
 import java.util.Date;
 
 public abstract class Persona {  // Marcamos la clase como abstracta
@@ -15,13 +10,13 @@ public abstract class Persona {  // Marcamos la clase como abstracta
     private String direccion;
     private Date fechaNacimiento;
     private char genero; // M O F
-    private int DNI;
+    private String DNI;
 
     public Persona() {
     }
 
     public Persona(String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
-                   Date fechaNacimiento, char genero, int DNI) {
+                   Date fechaNacimiento, char genero, String DNI) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correoElectronico = correoElectronico;
@@ -89,11 +84,11 @@ public abstract class Persona {  // Marcamos la clase como abstracta
         this.genero = genero;
     }
 
-    public int getDNI() {
+    public String getDNI() {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(String DNI) {
         this.DNI = DNI;
     }
 
