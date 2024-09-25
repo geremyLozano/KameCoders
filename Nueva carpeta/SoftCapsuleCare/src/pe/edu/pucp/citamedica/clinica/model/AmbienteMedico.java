@@ -21,6 +21,15 @@ public class AmbienteMedico {
         this.capacidad = capacidad;
         this.tipoAmbiente = tipoAmbiente;
     }
+    
+    public AmbienteMedico(int idAmbiente,int numPiso, String ubicacion, int capacidad, TipoAmbiente tipoAmbiente) {
+        //this.idAmbiente = ++contador;
+        this.idAmbiente=idAmbiente;
+        this.numPiso = numPiso;
+        this.ubicacion = ubicacion;
+        this.capacidad = capacidad;
+        this.tipoAmbiente = tipoAmbiente;
+    }
 
     public TipoAmbiente getTipoAmbiente() {
         return tipoAmbiente;

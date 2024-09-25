@@ -63,15 +63,26 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     @Override
     public int eliminar(int idAmbienteMedico){
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call AMBIENTEMEDICO_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
-            cst.setInt(1, idAmbienteMedico);
-            resultado = cst.executeUpdate();
+        sql = "DELETE FROM AmbienteMedico WHERE idAmbienteMedico = ?";
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1, idAmbienteMedico);
+
+            resultado = pst.executeUpdate();
+
+            // Verificar si el registro fue eliminado
+            if (resultado > 0) {
+                System.out.println("AmbienteMedico eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró ninguna AmbienteMedico con ese ID.");
+            }
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
+
         return resultado;
     }
     
