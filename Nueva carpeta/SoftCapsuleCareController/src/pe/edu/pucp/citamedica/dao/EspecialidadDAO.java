@@ -8,5 +8,5 @@ public interface EspecialidadDAO{
     int modificar(Especialidad especialidad);
     int eliminar(int idEspecialidad);
     ArrayList<Especialidad> listarTodos();
-    Administrador obtenerPorId(int idEspecialidad);
+    Especialidad obtenerPorId(int idEspecialidad);
 }
