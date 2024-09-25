@@ -108,24 +108,35 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public int eliminar(int idMedico) {
         int resultado = 0;
-        sql = "DELETE FROM Medico WHERE idMedico = ?";
-
+        String sql = "DELETE FROM Medico WHERE idMedico = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
+                + "(SELECT idpersona FROM Medico WHERE idMedico = ?)";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql)) {
 
-            pstMedico.setInt(1, idMedico);
-
+            pstMedico.setInt(1,idMedico);
+            
             resultado = pstMedico.executeUpdate();
 
-            // Verificar si el registro fue eliminado
             if (resultado > 0) {
-                System.out.println("Médico eliminado correctamente.");
+                System.out.println("Medico eliminado correctamente.");
+                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
+                    pstPersona.setInt(1, idMedico);
+                    int resultadoPersona = pstPersona.executeUpdate();
+                    if(resultadoPersona>0){
+                        System.out.println("Datos Persona del Medico han sido eliminados");                     
+                    }else{
+                        System.out.println("No se encontro la persona asociada");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
-                System.out.println("No se encontró ningún médico con ese ID.");
+                System.out.println("No se encontró ningún paciente con ese ID.");
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return resultado;
