@@ -62,7 +62,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         for (Procedimiento proc : cita.getProcedimientos()) {
             pstProcedimiento = con.prepareStatement(sql);
             pstProcedimiento.setString(1, cita.getId());
-            pstProcedimiento.setString(2, proc.getIdProcedimiento()); // Asumiendo que Procedimiento tiene un id
+            pstProcedimiento.setInt(2, proc.getIdProcedimiento()); // Asumiendo que Procedimiento tiene un id
             pstProcedimiento.executeUpdate();
         }
 
