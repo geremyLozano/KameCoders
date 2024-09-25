@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.PacienteDao;
 import pe.edu.pucp.citamedica.paciente.model.Paciente;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.citamedica.dao.PacienteDAO;
 
-public class PacienteMySQL implements PacienteDao{
+public class PacienteMySQL implements PacienteDAO{
     private Connection con;
     private Statement st;
     private PreparedStatement pstPersona;
@@ -25,7 +25,7 @@ public class PacienteMySQL implements PacienteDao{
             con = DBManager.getInstance().getConnection();
             sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
                     + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
-            pstPersona = con.prepareStatement(sql);
+            pstPersona = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstPersona.setString(1, paciente.getNombre());
             pstPersona.setString(2, paciente.getApellido());
             pstPersona.setString(3, paciente.getCorreoElectronico());
@@ -57,21 +57,6 @@ public class PacienteMySQL implements PacienteDao{
     @Override
     public int eliminar(int idPaciente) {
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call PACIENTE_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
-            cst.setInt(1, idPaciente);
-            resultado = cst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return resultado;
-    }
-    /*
-    @Override
-    public int eliminar(int idPaciente) {
-        int resultado = 0;
         String sql = "DELETE FROM Paciente WHERE idPaciente = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();
@@ -94,8 +79,6 @@ public class PacienteMySQL implements PacienteDao{
 
         return resultado;
     }
-
-    */
 
     @Override
     public ArrayList<Paciente> listarTodos() {
@@ -128,7 +111,30 @@ public class PacienteMySQL implements PacienteDao{
 
     @Override
     public Paciente obtenerPorId(int idPaciente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Paciente paciente = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            sql = "SELECT idPaciente, activo FROM Paciente WHERE idPaciente = ?";
+            pstPaciente = con.prepareStatement(sql);
+            pstPaciente.setInt(1, idPaciente);
+            rs = pstPaciente.executeQuery();
+
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setHistorialActivo(rs.getBoolean("activo"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return paciente;
     }
 
     @Override
@@ -145,9 +151,5 @@ public class PacienteMySQL implements PacienteDao{
             System.out.println(e.getMessage());
         }
         return resultado;
-    }
-    
-    
-    
-    
+    }   
 }
