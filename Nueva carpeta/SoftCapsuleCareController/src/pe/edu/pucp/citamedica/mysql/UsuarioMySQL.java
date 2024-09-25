@@ -28,7 +28,7 @@ public class UsuarioMySQL implements UsuarioDAO{
             pst = con.prepareStatement(sql);
             pst.setString(1, usuario.getUsername());
             pst.setString(2, usuario.getContrasenha());
-            //pst.setInt(3,usuario.getDatosPersonales());
+            pst.setInt(3,usuario.getDatosPersonales().getIdPersona());
             resultado = pst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
@@ -82,7 +82,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setContrasenha(rs.getString("contrasenha"));
-                //usuario.setDatosPersonales();
+                int idPersona = rs.getInt("idpersona");
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setContrasenha(rs.getString("contrasenha"));
-                //usuario.setDatosPersonales();
+                int idPersona = rs.getInt("idpersona");
             }
 
         } catch (SQLException e) {
