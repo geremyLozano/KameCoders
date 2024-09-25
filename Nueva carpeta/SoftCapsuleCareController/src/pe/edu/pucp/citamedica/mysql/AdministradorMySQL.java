@@ -116,10 +116,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             rs = st.executeQuery(sql);
             while(rs.next()){
                 Administrador administrador = new Administrador();
-                administrador.setIdAdministrador(rs.getInt("idAdministrador"));
-                //administrador.setIdAdministrador(rs.getInt("idAdministrador")));
-                
-               
+                administrador.setIdAdministrador(rs.getInt("idAdministrador"));             
                 administradores.add(administrador);
             }
         } catch (SQLException e) {
@@ -154,7 +151,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             if (rs.next()) {
                 administrador = new Administrador();
                 administrador.setIdAdministrador(rs.getInt("idAdministrador"));
-              //  administrador.setCostoConsulta(rs.getDouble("costoConsulta"));          
+                 
             }
 
         } catch (SQLException e) {
