@@ -43,6 +43,7 @@ BEGIN
     DECLARE last_insert_id INT;
 
     INSERT INTO Persona (
+		dni,
         nombre, 
         apellido, 
         correoElectronico, 
@@ -53,6 +54,7 @@ BEGIN
         idComunicacion
     ) 
     VALUES (
+		_dni,
         _nombre, 
         _apellido, 
         _correoElectronico, 
@@ -167,7 +169,7 @@ CREATE PROCEDURE MEDICO_INSERTAR (
     IN _numColegiatura VARCHAR(50),
     IN _horaInicioTrabajo TIME,
     IN _horaFinTrabajo TIME,
-    IN _diasLaborales ENUM(),
+    IN _diasLaborales VARCHAR(200),
     IN _anhosEXP INT,
     IN _activo TINYINT
 )
@@ -428,7 +430,7 @@ CREATE PROCEDURE ADMIN_INSERTAR (
     IN _direccion VARCHAR(100),
     IN _fechaNacimiento DATE,
     IN _genero CHAR(1),
-    IN _idComunicacion INT,
+    IN _idComunicacion INT
 )
 BEGIN
     DECLARE last_insert_id INT;
@@ -457,10 +459,10 @@ BEGIN
     SET last_insert_id = @@last_insert_id;
     
     INSERT INTO Auxiliar (
-        idpersona, 
+        idpersona
     ) 
     VALUES (
-        last_insert_id, 
+        last_insert_id
     );
     
 END $$
