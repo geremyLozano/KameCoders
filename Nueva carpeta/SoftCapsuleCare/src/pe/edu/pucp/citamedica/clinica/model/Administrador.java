@@ -6,6 +6,9 @@ public class Administrador extends Persona {
     private static int contador = 0;
     
     private int idAdministrador;
+    
+    public Administrador() {
+    }
 
     public Administrador(String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
                    Date fechaNacimiento, char genero, String DNI) {
