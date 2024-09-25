@@ -2,7 +2,10 @@ package pe.edu.pucp.citamedica.paciente.model;
 
 import java.util.Date;
 
-public abstract class Persona {  // Marcamos la clase como abstracta
+public class Persona {  // Marcamos la clase como abstracta
+    
+    private static int contador = 0;
+    private int idPersona;
     private String nombre;
     private String apellido;
     private String correoElectronico;
@@ -17,6 +20,7 @@ public abstract class Persona {  // Marcamos la clase como abstracta
 
     public Persona(String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
                    Date fechaNacimiento, char genero, String DNI) {
+        this.idPersona = ++contador;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correoElectronico = correoElectronico;
@@ -26,8 +30,14 @@ public abstract class Persona {  // Marcamos la clase como abstracta
         this.genero = genero;
         this.DNI = DNI;
     }
-    //nombre,apellido,correoElectronico,numTelefono,direcccion,fechaNacimiento,genero,DNI
-    // Getters y Setters
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -93,5 +103,7 @@ public abstract class Persona {  // Marcamos la clase como abstracta
     }
 
     // Declaramos el método como abstracto ya que Persona es abstracta
-    public abstract void actualizarInformacion();
+    public void actualizarInformacion(){
+        
+    }
 }
