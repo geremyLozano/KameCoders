@@ -92,7 +92,6 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
             rs = st.executeQuery(sql);
             while(rs.next()){
                 ReporteMedico reporteMedico = new ReporteMedico();
-                reporteMedico.setIdReporteMedico(rs.getInt("idReporteMedico"));
                 reporteMedico.setDiagnostico(rs.getString("diagnostico"));
                 reporteMedico.setTratamiento(rs.getString("tratamiento"));
                 reporteMedico.setEnfermedad(rs.getString("enfermedad"));
