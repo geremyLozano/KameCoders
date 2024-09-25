@@ -81,15 +81,37 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int eliminar(int idAuxiliar) {
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call AUXILIAR_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
-            cst.setInt(1, idAuxiliar);
-            resultado = cst.executeUpdate();
+        String sql = "DELETE FROM Auxiliar WHERE idAuxiliar = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
+                + "(SELECT idpersona FROM Auxiliar WHERE idAuxiliar = ?)";
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pstAuxiliar = con.prepareStatement(sql)) {
+
+            pstAuxiliar.setInt(1,idAuxiliar);
+            
+            resultado = pstAuxiliar.executeUpdate();
+
+            if (resultado > 0) {
+                System.out.println("Auxiliar eliminado correctamente.");
+                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
+                    pstPersona.setInt(1, idAuxiliar);
+                    int resultadoPersona = pstPersona.executeUpdate();
+                    if(resultadoPersona>0){
+                        System.out.println("Datos Persona del Auxiliar han sido eliminados");                     
+                    }else{
+                        System.out.println("No se encontro la persona asociada");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                System.out.println("No se encontró ningún paciente con ese ID.");
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return resultado;
     }
 
