@@ -33,5 +33,33 @@ public class ReporteMedico {
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
+
+    public int getIdReporteMedico() {
+        return idReporteMedico;
+    }
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+
+    public String getEnfermedad() {
+        return enfermedad;
+    }
+
+    public void setEnfermedad(String enfermedad) {
+        this.enfermedad = enfermedad;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
     
 }
