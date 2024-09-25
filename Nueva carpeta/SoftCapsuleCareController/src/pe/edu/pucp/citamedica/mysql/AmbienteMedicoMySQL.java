@@ -89,7 +89,21 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente",TipoAmbiente.class));
+                
+                
+                String tipoAmbienteString = rs.getString("tipoAmbiente");
+                try{
+                    
+                       TipoAmbiente tipo = TipoAmbiente.valueOf(tipoAmbienteString);        
+                       ambiente.setTipoAmbiente(tipo);
+                }catch(IllegalArgumentException e){
+                    System.out.println("error "+tipoAmbienteString);
+                }
+              
+                
+                
+                
+                
                 ambientes.add(ambiente);
             }
         } catch (SQLException e) {
@@ -120,7 +134,19 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente",TipoAmbiente.class));
+                
+                
+                
+              String tipoAmbienteString = rs.getString("tipoAmbiente");
+                try{
+                    
+                       TipoAmbiente tipo = TipoAmbiente.valueOf(tipoAmbienteString);        
+                       ambiente.setTipoAmbiente(tipo);
+                }catch(IllegalArgumentException e){
+                    System.out.println("error "+tipoAmbienteString);
+                }
+                
+                
             }
 
         } catch (SQLException e) {
