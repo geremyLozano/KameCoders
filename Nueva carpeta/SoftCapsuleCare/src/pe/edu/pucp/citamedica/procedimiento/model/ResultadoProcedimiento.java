@@ -3,7 +3,7 @@ import pe.edu.pucp.citamedica.procedimiento.model.EstadoResultado;
 import java.util.Date;
 
 public class ResultadoProcedimiento {
-    private String idResultado;  // Identificador único para el resultado del procedimiento
+    private int idResultado;  // Identificador único para el resultado del procedimiento
     private Procedimiento procedimiento;  // Referencia al Procedimiento que produjo este resultado
     private String observaciones;  // Cualquier comentario o detalle sobre el resultado
     private EstadoResultado estado;  // Completado, Pendiente, Inconcluso, etc.
@@ -13,7 +13,7 @@ public class ResultadoProcedimiento {
     }
 
     // Constructor
-    public ResultadoProcedimiento(String idResultado, Procedimiento procedimiento, String observaciones, String estado, Date fechaResultado) {
+    public ResultadoProcedimiento(int idResultado, Procedimiento procedimiento, String observaciones, String estado, Date fechaResultado) {
         this.idResultado = idResultado;
         this.procedimiento = procedimiento;
         this.observaciones = observaciones;
@@ -22,11 +22,11 @@ public class ResultadoProcedimiento {
     }
 
     // Getters y Setters
-    public String getIdResultado() {
+    public int getIdResultado() {
         return idResultado;
     }
 
-    public void setIdResultado(String idResultado) {
+    public void setIdResultado(int idResultado) {
         this.idResultado = idResultado;
     }
 

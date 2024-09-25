@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Procedimiento {
-    private String idProcedimiento;
+    private int idProcedimiento;
     private String nombre;
     private double costo;
     private ArrayList<ResultadoProcedimiento> resultados;
@@ -20,7 +20,7 @@ public class Procedimiento {
         this.resultados = new ArrayList<>();
     }
 
-    public Procedimiento(String idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo, Date fecha) {
+    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo, Date fecha) {
         this.idProcedimiento = idProcedimiento;
         this.nombre = nombre;
         this.costo = costo;
@@ -68,11 +68,11 @@ public class Procedimiento {
     }
 
 
-    public String getIdProcedimiento() {
+    public int getIdProcedimiento() {
         return idProcedimiento;
     }
 
-    public void setIdProcedimiento(String idProcedimiento) {
+    public void setIdProcedimiento(int idProcedimiento) {
         this.idProcedimiento = idProcedimiento;
     }
 
