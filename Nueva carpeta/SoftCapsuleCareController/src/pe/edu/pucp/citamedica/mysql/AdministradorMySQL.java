@@ -75,7 +75,32 @@ public class AdministradorMySQL implements AdministradorDAO{
 
     @Override
     public int eliminar(int idAdministrador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        int resultado = 0;
+        sql = "DELETE FROM Administrador WHERE idAdministrador = ?";
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1, idAdministrador);
+
+            resultado = pst.executeUpdate();
+
+            // Verificar si el registro fue eliminado
+            if (resultado > 0) {
+                System.out.println("Administrador eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró ningun Administrador con ese ID.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+        
+        
+        
     }
 
     @Override
