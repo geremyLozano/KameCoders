@@ -112,11 +112,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
                 
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
                 especialidad.setCostoConsulta(rs.getDouble("costoConsulta"));
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> bef43f378d4329cc4505c281b58d7979a13aaf29
                 // Añadir el objeto Medico a la lista
                 listaEspecialidad.add(especialidad);
             }
