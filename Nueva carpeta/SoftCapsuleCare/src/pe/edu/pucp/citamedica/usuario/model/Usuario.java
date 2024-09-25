@@ -1,13 +1,11 @@
 package pe.edu.pucp.citamedica.usuario.model;
 import pe.edu.pucp.citamedica.paciente.model.Persona;
 
-import java.util.Date;
-
 public class Usuario {
     private static int contador = 0;
 
     private int idUsuario;
-    private int username;
+    private String username;
     private String contrasenha;
     private Persona datosPersonales;
 
@@ -15,7 +13,7 @@ public class Usuario {
     }
 
     // Incluimos el campo apellido en el constructor
-    public Usuario(String contrasenha, Persona datosPersonales, int DNI) {
+    public Usuario(String contrasenha, Persona datosPersonales, String DNI) {
         // Llamamos al constructor de Persona pasando el apellido
         this.idUsuario = ++contador;
         this.username = DNI;  // Asignamos el DNI como username
@@ -23,15 +21,22 @@ public class Usuario {
         this.datosPersonales = datosPersonales;
     }
 
-    // Getters y Setters
-    public int getUsername() {
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(int username) {
+    public void setUsername(String username) {
         this.username = username;
     }
-
+    
     public String getContrasenha() {
         return contrasenha;
     }
