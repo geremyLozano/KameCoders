@@ -1,5 +1,4 @@
 package pe.edu.pucp.citamedica.consultas.model;
-import pe.edu.pucp.citamedica.paciente.model.Paciente;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +21,14 @@ public class HistorialMedico {
         this.fechaDeCreacion = fechaDeCreacion;
         this.numeroDocumentoIdentidadPaciente = numeroDocumentoIdentidadPaciente;
         this.citas = new ArrayList<>();
+    }
+
+    public int getIdHistorial() {
+        return idHistorial;
+    }
+
+    public void setIdHistorial(int idHistorial) {
+        this.idHistorial = idHistorial;
     }
 
     public Date getFechaDeCreacion() {

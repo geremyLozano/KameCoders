@@ -8,9 +8,17 @@ public class Administrador extends Persona {
     private int idAdministrador;
 
     public Administrador(String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
-                   Date fechaNacimiento, char genero, int DNI) {
+                   Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idAdministrador = ++contador;
+    }
+
+    public int getIdAdministrador() {
+        return idAdministrador;
+    }
+
+    public void setIdAdministrador(int idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
     public void gestionarRoles(){

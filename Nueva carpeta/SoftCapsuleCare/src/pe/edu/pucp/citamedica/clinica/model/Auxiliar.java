@@ -16,7 +16,7 @@ public class Auxiliar extends Persona{
 
     public Auxiliar(Especialidad especialidad, Medico medico, boolean activo,
         String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
-                   Date fechaNacimiento, char genero, int DNI) {
+                   Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idAuxiliar = ++contador;
         this.especialidad = especialidad;

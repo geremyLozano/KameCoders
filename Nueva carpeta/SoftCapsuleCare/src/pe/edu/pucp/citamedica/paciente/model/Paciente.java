@@ -25,7 +25,7 @@ public class Paciente extends Persona {
     public Paciente(boolean historialActivo, ArrayList<CitaMedica> citas, HistorialMedico historialMedico,
                     ArrayList<Comunicacion> comunicaciones, Aseguradora seguro, 
                     String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
-                   Date fechaNacimiento, char genero, int DNI) {
+                   Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idPaciente = ++contador;
         this.historialActivo = historialActivo;

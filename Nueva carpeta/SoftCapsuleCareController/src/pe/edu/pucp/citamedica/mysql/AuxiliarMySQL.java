@@ -51,7 +51,7 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
             
             sql = "INSERT into Auxiliar(dni,nombre) values(?,?)";
             cst = con.prepareCall(sql);
-            cst.setInt(1,auxiliar.getDNI());
+            cst.setString(1,auxiliar.getDNI());
             cst.setString(2, auxiliar.getNombre());
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
