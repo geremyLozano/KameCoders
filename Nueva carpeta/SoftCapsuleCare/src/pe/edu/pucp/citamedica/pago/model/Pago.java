@@ -1,13 +1,11 @@
 package pe.edu.pucp.citamedica.pago.model;
 
-import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
-import pe.edu.pucp.citamedica.paciente.model.Paciente;
 
 import java.util.Date;
 
 public class Pago {
     private int idPago;
-    private int DNI;
+    private String DNI;
     private double descuentoPorSeguro;
     private double montoParcial;
     private double montoTotal;
@@ -18,7 +16,7 @@ public class Pago {
     public Pago() {
     }
 
-    public Pago(int idPago, int DNI, double descuentoPorSeguro,double montoParcial, double montoTotal,Date fechaPago,
+    public Pago(int idPago, String DNI, double descuentoPorSeguro,double montoParcial, double montoTotal,Date fechaPago,
     String concepto,boolean estado) {
         this.idPago = idPago;
         this.DNI = DNI;
@@ -38,11 +36,11 @@ public class Pago {
         this.idPago = idPago;
     }
 
-    public int getDNI() {
+    public String getDNI() {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(String DNI) {
         this.DNI = DNI;
     }
 

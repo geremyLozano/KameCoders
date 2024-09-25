@@ -26,7 +26,7 @@ public class PagoMySQL implements PagoDAO{
             sql = "INSERT into Pago(DNI,descuentoPorSeguro,montoParcial,montoTotal,fechaPago,concepto,estado)"
                     + " values(?,?,?,?,?,?,?)";
             pst = con.prepareStatement(sql);
-            pst.setInt(1, pago.getDNI());
+            pst.setString(1, pago.getDNI());
             pst.setDouble(2, pago.getDescuentoPorSeguro());
             pst.setDouble(3, pago.getMontoParcial());
             pst.setDouble(4, pago.getMontoTotal());
@@ -83,7 +83,7 @@ public class PagoMySQL implements PagoDAO{
             while(rs.next()){
                 Pago pago = new Pago();
                 pago.setIdPago(rs.getInt("idPago"));
-                pago.setDNI(rs.getInt("DNI"));
+                pago.setDNI(rs.getString("DNI"));
                 pago.setDescuentoPorSeguro(rs.getDouble("descuentoPorSeguro"));
                 pago.setMontoParcial(rs.getDouble("montoParcial"));
                 pago.setMontoTotal(rs.getDouble("montoTotal"));
@@ -117,7 +117,7 @@ public class PagoMySQL implements PagoDAO{
             if (rs.next()) {
                 pago = new Pago();
                 pago.setIdPago(rs.getInt("idPago"));
-                pago.setDNI(rs.getInt("DNI"));
+                pago.setDNI(rs.getString("DNI"));
                 pago.setDescuentoPorSeguro(rs.getDouble("descuentoPorSeguro"));
                 pago.setMontoParcial(rs.getDouble("montoParcial"));
                 pago.setMontoTotal(rs.getDouble("montoTotal"));

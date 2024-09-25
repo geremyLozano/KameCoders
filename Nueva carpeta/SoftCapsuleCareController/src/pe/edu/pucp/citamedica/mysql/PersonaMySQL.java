@@ -46,7 +46,7 @@ public class PersonaMySQL implements PersonaDAO{
             
             sql = "INSERT into Usuario(username,contrasenha,idpersona) values(?,?,?)";
             pstUsuario = con.prepareStatement(sql);
-            pstUsuario.setInt(1, usuario.getUsername());
+            pstUsuario.setString(1, usuario.getUsername());
             pstUsuario.setString(2, usuario.getContrasenha());
             pstUsuario.setInt(3,idPersona);
             resultado = pstUsuario.executeUpdate();
