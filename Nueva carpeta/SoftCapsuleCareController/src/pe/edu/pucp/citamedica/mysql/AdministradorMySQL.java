@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.clinica.model.Administrador;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
+import java.sql.Statement;
 
 /**
  *
@@ -26,6 +27,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     private PreparedStatement pstAdministrador;
     
      private ResultSet rs;
+      private Statement st;
     
     
     
@@ -105,12 +107,70 @@ public class AdministradorMySQL implements AdministradorDAO{
 
     @Override
     public ArrayList<Administrador> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+         ArrayList<Administrador> administradores = new ArrayList<>();
+        try {
+            con = DBManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "SELECT idAdministrador FROM Administrador ";
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                Administrador administrador = new Administrador();
+                administrador.setIdAdministrador(rs.getInt("idAdministrador"));
+                //administrador.setIdAdministrador(rs.getInt("idAdministrador")));
+                
+               
+                administradores.add(administrador);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return administradores;
+        
+        
+        
+        
     }
 
     @Override
     public Administrador obtenerPorId(int idAdministrador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        
+        Administrador administrador = null;
+        String sql = "SELECT * FROM Administrador WHERE idAdministrador = ?";
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1, idAdministrador);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                administrador = new Administrador();
+                administrador.setIdAdministrador(rs.getInt("idAdministrador"));
+              //  administrador.setCostoConsulta(rs.getDouble("costoConsulta"));          
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return administrador;
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     
