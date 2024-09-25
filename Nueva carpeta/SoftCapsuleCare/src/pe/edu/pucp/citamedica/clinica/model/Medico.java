@@ -1,6 +1,5 @@
 package pe.edu.pucp.citamedica.clinica.model;
 import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
-import pe.edu.pucp.citamedica.consultas.model.ReporteMedico;
 import pe.edu.pucp.citamedica.paciente.model.Persona;
 import java.time.LocalTime;
 import java.util.ArrayList;

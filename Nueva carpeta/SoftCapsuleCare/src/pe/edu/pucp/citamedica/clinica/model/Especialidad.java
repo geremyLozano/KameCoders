@@ -15,13 +15,7 @@ public class Especialidad {
         this.nombre = nombre;
         this.costoConsulta = costoConsulta;
     }
-<<<<<<< HEAD
-
-=======
     
-    public Especialidad(){}
-    
->>>>>>> bef43f378d4329cc4505c281b58d7979a13aaf29
     public void setIdEspecialidad(int idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
     }
