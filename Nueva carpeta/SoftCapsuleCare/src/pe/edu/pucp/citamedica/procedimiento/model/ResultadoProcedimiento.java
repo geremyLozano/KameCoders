@@ -1,5 +1,5 @@
 package pe.edu.pucp.citamedica.procedimiento.model;
-import pe.edu.pucp.citamedica.procedimientos.model.EstadoResultado;
+import pe.edu.pucp.citamedica.procedimiento.model.EstadoResultado;
 import java.util.Date;
 
 public class ResultadoProcedimiento {
