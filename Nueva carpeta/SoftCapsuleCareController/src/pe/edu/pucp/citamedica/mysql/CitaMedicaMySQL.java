@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import pe.edu.pucp.citamedica.consultas.model.EstadoCita;
 import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
@@ -87,22 +88,183 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
     @Override
     public int modificar(CitaMedica citaMedica) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        int resultado = 0;
+        Connection con = null;
+        PreparedStatement pstCitaMedica = null;
+        String sql = "UPDATE cita_medica SET estado = ?, fecha = ?, hora = ? WHERE idCitaMedica = ?";
+
+        try {
+            // Obtener la conexión desde el DBManager o tu gestor de conexiones.
+            con = DBManager.getInstance().getConnection();
+
+            // Preparar la consulta SQL.
+            pstCitaMedica = con.prepareStatement(sql);
+
+            // Establecer los valores para los parámetros de la consulta.
+            pstCitaMedica.setString(1, citaMedica.getEstado().name());
+            pstCitaMedica.setDate(2, new java.sql.Date(citaMedica.getFecha().getTime()));
+            pstCitaMedica.setTime(3, java.sql.Time.valueOf(citaMedica.getHora()));
+            pstCitaMedica.setString(4, citaMedica.getId());
+
+            // Ejecutar la consulta.
+            resultado = pstCitaMedica.executeUpdate();
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL.
+            System.out.println("Error al modificar cita médica: " + e.getMessage());
+        } finally {
+            // Cerrar recursos de base de datos.
+            try {
+                if (pstCitaMedica != null) pstCitaMedica.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
+        }
+        return resultado;
+    }                   
+
 
     @Override
     public int eliminar(int idCitaMedica) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        int resultado = 0;
+        Connection con = null;
+        CallableStatement cst = null;
+        String sql = "{call CITA_MEDICA_ELIMINAR(?)}";  // Procedimiento almacenado
 
+        try {
+            // Obtener la conexión a la base de datos
+            con = DBManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+
+            // Establecer el valor del parámetro (ID de la cita médica)
+            cst.setInt(1, idCitaMedica);
+
+            // Ejecutar la consulta
+            resultado = cst.executeUpdate();
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL
+            System.out.println("Error al eliminar cita médica: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
+        }
+
+        // Devolver el resultado
+        return resultado;
+    }
+    
     @Override
     public ArrayList<CitaMedica> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    ArrayList<CitaMedica> citasMedicas = new ArrayList<>();
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    String sql = "SELECT idCitaMedica, fecha, hora, estado FROM cita_medica";
+
+    try {
+        // Obtener la conexión a la base de datos
+        con = DBManager.getInstance().getConnection();
+        
+        // Crear el Statement para ejecutar la consulta
+        st = con.createStatement();
+        
+        // Ejecutar la consulta y obtener el resultado
+        rs = st.executeQuery(sql);
+        
+        // Procesar los resultados
+        while (rs.next()) {
+            CitaMedica citaMedica = new CitaMedica();
+            
+            // Asignar valores a los atributos de CitaMedica desde el ResultSet
+            citaMedica.setId(rs.getString("idCitaMedica"));
+            citaMedica.setFecha(rs.getDate("fecha"));
+            citaMedica.setHora(rs.getTime("hora").toLocalTime());
+            // Convertir el valor del estado de String a EstadoCita
+            String estadoStr = rs.getString("estado");
+            EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());  // Conversión a enum
+            citaMedica.setEstado(estado);
+            
+            // Añadir la CitaMedica a la lista
+            citasMedicas.add(citaMedica);
+        }
+    } catch (SQLException e) {
+        // Manejar cualquier excepción de SQL
+        System.out.println("Error al listar citas médicas: " + e.getMessage());
+    } finally {
+        // Cerrar los recursos de base de datos
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+        }
     }
+
+    // Devolver la lista de citas médicas
+    return citasMedicas;
+}
+
 
     @Override
     public CitaMedica obtenerPorId(int idCitaMedica) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    CitaMedica citaMedica = null;
+    Connection con = null;
+    PreparedStatement pstCitaMedica = null;
+    ResultSet rs = null;
+    String sql = "SELECT idCitaMedica, fecha, hora, estado FROM cita_medica WHERE idCitaMedica = ?";
+
+    try {
+        // Obtener la conexión a la base de datos
+        con = DBManager.getInstance().getConnection();
+        
+        // Preparar la consulta SQL
+        pstCitaMedica = con.prepareStatement(sql);
+        pstCitaMedica.setInt(1, idCitaMedica);
+        
+        // Ejecutar la consulta
+        rs = pstCitaMedica.executeQuery();
+        
+        // Si se encuentra el registro
+        if (rs.next()) {
+            citaMedica = new CitaMedica();
+            
+            // Asignar valores desde el ResultSet a la CitaMedica
+            citaMedica.setId(rs.getString("idCitaMedica"));
+            citaMedica.setFecha(rs.getDate("fecha"));
+            citaMedica.setHora(rs.getTime("hora").toLocalTime());
+            
+            // Convertir el estado (asumiendo que es un enum)
+            String estadoStr = rs.getString("estado");
+            EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());
+            citaMedica.setEstado(estado);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al obtener cita médica: " + e.getMessage());
+    } finally {
+        // Cerrar los recursos
+        try {
+            if (rs != null) rs.close();
+            if (pstCitaMedica != null) pstCitaMedica.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+        }
     }
+    
+    // Devolver la cita médica o null si no se encontró
+    return citaMedica;
+}
+
     
 }
