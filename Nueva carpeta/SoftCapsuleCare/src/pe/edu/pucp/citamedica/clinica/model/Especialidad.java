@@ -12,6 +12,13 @@ public class Especialidad {
         this.nombre = nombre;
         this.costoConsulta = costoConsulta;
     }
+    
+    public Especialidad(){}
+    
+    public void setIdEspecialidad(int idEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
+    }
+    
     public int getIdEspecialidad(){
         return idEspecialidad;
     }
