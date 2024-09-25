@@ -1,5 +1,4 @@
 package pe.edu.pucp.citamedica.mysql;
-import pe.edu.pucp.citamedica.clinica.model.Especialidad;
 import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.CallableStatement;
@@ -9,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.Time;
 import pe.edu.pucp.citamedica.clinica.model.Especialidad;
 
 public class EspecialidadMySQL implements EspecialidadDAO {

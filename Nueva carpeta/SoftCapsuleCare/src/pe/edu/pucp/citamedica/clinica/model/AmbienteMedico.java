@@ -1,6 +1,4 @@
 package pe.edu.pucp.citamedica.clinica.model;
-import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
-import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
 
 public class AmbienteMedico {
     private static int contador = 0;

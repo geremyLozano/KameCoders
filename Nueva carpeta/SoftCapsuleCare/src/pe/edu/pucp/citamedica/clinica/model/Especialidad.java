@@ -7,13 +7,14 @@ public class Especialidad {
     private String nombre;
     private double costoConsulta;
 
+    public Especialidad() {
+    }
+ 
     public Especialidad(String nombre, double costoConsulta) {
         this.idEspecialidad = ++contador;
         this.nombre = nombre;
         this.costoConsulta = costoConsulta;
     }
-    
-    public Especialidad(){}
     
     public void setIdEspecialidad(int idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
