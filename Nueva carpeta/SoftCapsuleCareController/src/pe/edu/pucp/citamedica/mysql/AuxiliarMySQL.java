@@ -14,6 +14,7 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
     private PreparedStatement pstPersona;
     private PreparedStatement pstAuxiliar;
+    private PreparedStatement pstGetPersona;
     private CallableStatement cst;
     private Statement st;
     private String sql;
@@ -81,31 +82,50 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int eliminar(int idAuxiliar) {
         int resultado = 0;
-        String sql = "DELETE FROM Auxiliar WHERE idAuxiliar = ?";
-        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
-                + "(SELECT idpersona FROM Auxiliar WHERE idAuxiliar = ?)";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstAuxiliar = con.prepareStatement(sql)) {
-
-            pstAuxiliar.setInt(1,idAuxiliar);
-            
-            resultado = pstAuxiliar.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Auxiliar eliminado correctamente.");
-                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
-                    pstPersona.setInt(1, idAuxiliar);
-                    int resultadoPersona = pstPersona.executeUpdate();
-                    if(resultadoPersona>0){
-                        System.out.println("Datos Persona del Auxiliar han sido eliminados");                     
-                    }else{
-                        System.out.println("No se encontro la persona asociada");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        String sqlAuxiliar = "DELETE FROM Auxiliar WHERE idAuxiliar = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = ? ";
+        String sqlGetPersona = "SELECT idpersona FROM Medico WHERE idAuxiliar = ?";
+        try (Connection con = DBManager.getInstance().getConnection()) {
+            int idPersona = 0;
+            try(PreparedStatement pstGetPersona = con.prepareStatement(sqlGetPersona)){
+                pstGetPersona.setInt(1, idAuxiliar);
+                ResultSet rsN = pstGetPersona.executeQuery();
+                if(rsN.next()){
+                    idPersona = rsN.getInt("idpersona");
+                }else{
+                    System.out.println("No se encontro ningun auxiliar con ese ID");
+                    return resultado;
                 }
-            } else {
-                System.out.println("No se encontró ningún paciente con ese ID.");
+            }
+            
+            // Primero eliminar el registro de Paciente
+            try (PreparedStatement pstAuxiliar = con.prepareStatement(sqlAuxiliar)) {
+                pstAuxiliar.setInt(1, idAuxiliar);
+                resultado = pstAuxiliar.executeUpdate();
+                
+                if (resultado > 0) {
+                    System.out.println("Datos del Auxiliar han sido eliminados.");
+
+                    // Luego eliminar el registro de Persona asociado
+                    try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)) {
+                        pstPersona.setInt(1, idPersona);
+                        resultado = pstPersona.executeUpdate();
+
+                        if (resultado > 0) {
+                            System.out.println("Datos de la Persona han sido eliminados.");
+                        } else {
+                            System.out.println("No se encontró la persona asociada.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+                    System.out.println("No se encontró ningún paciente con ese ID.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
 
         } catch (SQLException e) {

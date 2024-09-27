@@ -17,6 +17,7 @@ public class MedicoMySQL implements MedicoDAO {
     private Statement st;
     private PreparedStatement pstPersona;
     private PreparedStatement pstMedico;
+    private PreparedStatement pstGetPersona;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
@@ -99,7 +100,7 @@ public class MedicoMySQL implements MedicoDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            System.out.println(e.getMessage());  // Imprimir la excepción si ocurre un error
         }
 
         return resultado;
@@ -108,31 +109,50 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public int eliminar(int idMedico) {
         int resultado = 0;
-        String sql = "DELETE FROM Medico WHERE idMedico = ?";
-        String sqlPersona = "DELETE FROM Persona WHERE idPersona = "
-                + "(SELECT idpersona FROM Medico WHERE idMedico = ?)";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstMedico = con.prepareStatement(sql)) {
-
-            pstMedico.setInt(1,idMedico);
-            
-            resultado = pstMedico.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Medico eliminado correctamente.");
-                try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)){
-                    pstPersona.setInt(1, idMedico);
-                    int resultadoPersona = pstPersona.executeUpdate();
-                    if(resultadoPersona>0){
-                        System.out.println("Datos Persona del Medico han sido eliminados");                     
-                    }else{
-                        System.out.println("No se encontro la persona asociada");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        String sqlMedico = "DELETE FROM Medico WHERE idMedico = ?";
+        String sqlPersona = "DELETE FROM Persona WHERE idPersona = ?";
+        String sqlGetPersona = "SELECT idpersona FROM Medico WHERE idMedico = ?";
+        try (Connection con = DBManager.getInstance().getConnection()) {
+            int idPersona = 0;
+            try(PreparedStatement pstGetPersona = con.prepareStatement(sqlGetPersona)){
+                pstGetPersona.setInt(1, idMedico);
+                ResultSet rsN = pstGetPersona.executeQuery();
+                if(rsN.next()){
+                    idPersona = rsN.getInt("idpersona");
+                }else{
+                    System.out.println("No se encontro ningun medico con ese ID");
+                    return resultado;
                 }
-            } else {
-                System.out.println("No se encontró ningún paciente con ese ID.");
+            }
+            
+            // Primero eliminar el registro de Paciente
+            try (PreparedStatement pstMedico = con.prepareStatement(sqlMedico)) {
+                pstMedico.setInt(1, idMedico);
+                resultado = pstMedico.executeUpdate();
+                
+                if (resultado > 0) {
+                    System.out.println("Datos del Medico han sido eliminados.");
+
+                    // Luego eliminar el registro de Persona asociado
+                    try (PreparedStatement pstPersona = con.prepareStatement(sqlPersona)) {
+                        pstPersona.setInt(1, idPersona);
+                        resultado = pstPersona.executeUpdate();
+
+                        if (resultado > 0) {
+                            System.out.println("Datos de la Persona han sido eliminados.");
+                        } else {
+                            System.out.println("No se encontró la persona asociada.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+                    System.out.println("No se encontró ningún paciente con ese ID.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
 
         } catch (SQLException e) {
