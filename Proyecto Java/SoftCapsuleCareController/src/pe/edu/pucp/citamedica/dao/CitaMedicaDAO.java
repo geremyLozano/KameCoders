@@ -1,7 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
+import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 
 public interface CitaMedicaDAO {
     int insertar(CitaMedica citaMedica);

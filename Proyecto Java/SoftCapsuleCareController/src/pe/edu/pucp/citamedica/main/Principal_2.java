@@ -2,8 +2,8 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import pe.edu.pucp.citamedica.consultas.model.HistorialMedico;
 import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
+import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
 import pe.edu.pucp.citamedica.mysql.HistorialMedicoMySQL;
 
 public class Principal_2 {

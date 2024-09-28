@@ -5,7 +5,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
+import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 
 /**
  *

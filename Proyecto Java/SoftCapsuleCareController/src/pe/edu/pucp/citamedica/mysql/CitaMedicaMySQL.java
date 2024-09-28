@@ -1,9 +1,7 @@
 package pe.edu.pucp.citamedica.mysql;
 
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.consultas.model.CitaMedica;
 import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
@@ -11,8 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import pe.edu.pucp.citamedica.consultas.model.EstadoCita;
-import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
+import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
+import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
+import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 public class CitaMedicaMySQL implements CitaMedicaDAO {

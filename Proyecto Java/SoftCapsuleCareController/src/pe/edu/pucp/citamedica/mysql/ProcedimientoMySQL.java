@@ -6,15 +6,14 @@ package pe.edu.pucp.citamedica.mysql;
 
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
-import pe.edu.pucp.citamedica.procedimiento.model.Procedimiento;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import pe.edu.pucp.citamedica.procedimientos.model.TipoProcedimiento;
+import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
+import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 

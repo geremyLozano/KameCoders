@@ -1,5 +1,4 @@
 package pe.edu.pucp.citamedica.mysql;
-import pe.edu.pucp.citamedica.pago.model.Pago;
 import pe.edu.pucp.citamedica.dao.PagoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import pe.edu.pucp.citamedica.model.procedimiento.Pago;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 public class PagoMySQL implements PagoDAO{

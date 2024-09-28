@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import pe.edu.pucp.citamedica.procedimiento.model.ResultadoProcedimiento;
-import pe.edu.pucp.citamedica.procedimiento.model.EstadoResultado;
+import pe.edu.pucp.citamedica.model.procedimiento.EstadoResultado;
+import pe.edu.pucp.citamedica.model.procedimiento.ResultadoProcedimiento;
 
 public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
     private Connection con;

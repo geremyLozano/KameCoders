@@ -1,7 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.procedimiento.model.ResultadoProcedimiento;
+import pe.edu.pucp.citamedica.model.procedimiento.ResultadoProcedimiento;
 
 
 public interface ResultadoProcedimientoDAO {

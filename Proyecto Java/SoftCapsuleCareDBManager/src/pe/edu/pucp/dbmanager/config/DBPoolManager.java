@@ -1,17 +1,17 @@
-
 package pe.edu.pucp.dbmanager.config;
-/*import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.SQLException;
-import org.apache.commons.dbcp2.BasicDataSource;*/
+import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DBPoolManager {
-    /*private static DBPoolManager dbManager;
+    private static DBPoolManager dbManager;
     private BasicDataSource dataSource;
-    private final String host = "pruebadb.c5s044w8ei2l.us-east-1.rds.amazonaws.com";
+    private Connection con;
+    private final String host = "pruebaprog3.c7qeiwgs42xd.us-east-1.rds.amazonaws.com";
     private final String port = "3306";
-    private final String db = "tienda";
+    private final String db = "mydb";
     private final String username = "admin";
-    private final String password = "12345678";
+    private final String password = "pucpprogra3#";
     
     private DBPoolManager(){
         connectToDatabase();
@@ -46,5 +46,5 @@ public class DBPoolManager {
              dbManager = new DBPoolManager();
         }
         return dbManager;
-    } */
+    }      
 }

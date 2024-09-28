@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.consultas.model.HistorialMedico;
 import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
+import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 public class HistorialMedicoMySQL implements HistorialMedicoDAO{

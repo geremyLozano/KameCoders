@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.consultas.model.ReporteMedico;
 import pe.edu.pucp.citamedica.dao.ReporteMedicoDAO;
+import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 public class ReporteMedicoMySQL implements ReporteMedicoDAO{

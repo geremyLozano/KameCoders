@@ -1,7 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.pago.model.Pago;
+import pe.edu.pucp.citamedica.model.procedimiento.Pago;
 
 public interface PagoDAO {
     int insertar(Pago pago);

@@ -1,6 +1,6 @@
 package pe.edu.pucp.citamedica.dao;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.consultas.model.ReporteMedico;
+import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
 
 public interface ReporteMedicoDAO {
     int insertar(ReporteMedico reporteMedico);

@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.comunicacion.model.Comunicacion;
-import pe.edu.pucp.citamedica.comunicacion.model.TipoComunicacion;
 import pe.edu.pucp.citamedica.dao.ComunicacionDAO;
+import pe.edu.pucp.citamedica.model.comunicacion.Comunicacion;
+import pe.edu.pucp.citamedica.model.comunicacion.TipoComunicacion;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
 public class ComunicacionMySQL implements ComunicacionDAO{
