@@ -16,6 +16,7 @@ public class Paciente extends Persona {
     private HistorialMedico historialMedico;
     private ArrayList<Comunicacion> comunicaciones;
     private Aseguradora seguro;
+    private boolean activo;
 
     public Paciente() {
         this.idPaciente = ++contador;
@@ -33,6 +34,7 @@ public class Paciente extends Persona {
         this.historialMedico = historialMedico;
         this.comunicaciones = comunicaciones;
         this.seguro = seguro;
+        this.activo = true;
     }
 
     // Getters y Setters
@@ -98,4 +100,14 @@ public class Paciente extends Persona {
     public void cancelarCita(int idCitaMedica) {
         // Lógica para cancelar una cita médica
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
 }

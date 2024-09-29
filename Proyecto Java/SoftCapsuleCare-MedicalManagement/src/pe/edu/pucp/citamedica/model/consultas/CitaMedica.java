@@ -24,6 +24,7 @@ public class CitaMedica {
     private ArrayList<Procedimiento>procedimientos;
     private int numeroAmbiente;
     private Pago pago;
+    private boolean activo;
 
     public CitaMedica() {
         procedimientos = new ArrayList<>();
@@ -44,6 +45,7 @@ public class CitaMedica {
         this.procedimientos = procedimientos;
         this.numeroAmbiente = numeroAmbiente;
         this.pago = pago;
+        this.activo = true;
     }
 
     public Pago getPago() {
@@ -166,4 +168,11 @@ public class CitaMedica {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 }
