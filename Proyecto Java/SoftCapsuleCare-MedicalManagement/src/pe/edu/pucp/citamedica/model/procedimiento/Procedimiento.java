@@ -15,6 +15,7 @@ public class Procedimiento {
     private String requisitosPrevios;
     private TipoProcedimiento tipo;
     private Date fecha;
+    private boolean activo;
 
     public Procedimiento() {
         this.resultados = new ArrayList<>();
@@ -29,6 +30,7 @@ public class Procedimiento {
         this.requisitosPrevios = requisitosPrevios;
         this.tipo = tipo;
         this.fecha = fecha;
+        this.activo = true;
     }
 
     public ArrayList<ResultadoProcedimiento> getResultados() {
@@ -91,5 +93,15 @@ public class Procedimiento {
     public void setCosto(double costo) {
         this.costo = costo;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
     
 }

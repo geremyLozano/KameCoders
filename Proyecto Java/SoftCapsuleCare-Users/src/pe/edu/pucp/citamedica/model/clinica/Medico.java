@@ -36,7 +36,7 @@ public class Medico extends Persona{
         this.ahosExp = ahosExp;
         this.citas = new ArrayList<>();
         this.diasLaborales = new ArrayList<>();
-        this.activo = activo;
+        this.activo = true;
     }
     
     public int getIdMedico(){

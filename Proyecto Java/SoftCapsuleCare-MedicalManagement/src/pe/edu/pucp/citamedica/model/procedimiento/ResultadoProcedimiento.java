@@ -8,6 +8,7 @@ public class ResultadoProcedimiento {
     private String observaciones;  // Cualquier comentario o detalle sobre el resultado
     private EstadoResultado estado;  // Completado, Pendiente, Inconcluso, etc.
     private Date fechaResultado;  // Fecha en la que se obtuvieron los resultados
+    private boolean activo;
 
     public ResultadoProcedimiento(){
     }
@@ -19,6 +20,7 @@ public class ResultadoProcedimiento {
         this.observaciones = observaciones;
         this.estado = EstadoResultado.Inconcluso;
         this.fechaResultado = fechaResultado;
+        this.activo = true;
     }
 
     // Getters y Setters
@@ -61,4 +63,13 @@ public class ResultadoProcedimiento {
     public void setFechaResultado(Date fechaResultado) {
         this.fechaResultado = fechaResultado;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
 }

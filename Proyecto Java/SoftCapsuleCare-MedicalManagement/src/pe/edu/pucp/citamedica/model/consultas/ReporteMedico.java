@@ -12,6 +12,7 @@ public class ReporteMedico {
     private String tratamiento;
     private String enfermedad;
     private Date fecha;
+    private boolean activo;
 
     public ReporteMedico() {
     }
@@ -22,6 +23,7 @@ public class ReporteMedico {
         this.tratamiento = tratamiento;
         this.enfermedad = enfermedad;
         this.fecha = fecha;
+        this.activo = true;
     }
 
 
@@ -59,6 +61,14 @@ public class ReporteMedico {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
 }
