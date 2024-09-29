@@ -71,10 +71,16 @@ public class Principal_2 {
 //                    "   historialActivo:"+p.getHistorialActivo());
 //            System.out.println("---------------------------------");
 //        }
-        int eliminado = pac.eliminar(18);
-        if(eliminado>0)
-            System.out.println("Paciente eliminado correctamente");
-        else
-            System.out.println("Error con el eliminado");
+//        int eliminado = pac.eliminar(18);
+//        if(eliminado>0)
+//            System.out.println("Paciente eliminado correctamente");
+//        else
+//            System.out.println("Error con el eliminado");
+        Paciente p = pac.obtenerPorId(20);
+        String fecha = sdf.format(p.getFechaNacimiento());
+        System.out.println("IdPaciente: "+p.getIdPaciente() + "  DNI:"+p.getDNI()+"   "
+                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha+
+                    "   historialActivo:"+p.getHistorialActivo());
     }
 }

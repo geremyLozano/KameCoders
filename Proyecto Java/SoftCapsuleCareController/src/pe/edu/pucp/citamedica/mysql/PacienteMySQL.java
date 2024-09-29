@@ -119,17 +119,21 @@ public class PacienteMySQL implements PacienteDAO{
         Paciente paciente = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT idPaciente, activo FROM Paciente WHERE idPaciente = ?";
-            pstPaciente = con.prepareStatement(sql);
-            pstPaciente.setInt(1, idPaciente);
-            rs = pstPaciente.executeQuery();
-
+            st = con.createStatement();
+            sql = "{CALL PacienteListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPaciente);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 paciente = new Paciente();
-                paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setHistorialActivo(rs.getBoolean("activo"));
+                paciente.setIdPaciente(rs.getInt("idPersona"));
+                paciente.setDNI(rs.getString("DNI"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setApellido(rs.getString("apellido"));
+                paciente.setCorreoElectronico(rs.getString("correoElectronico"));
+                paciente.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                paciente.setHistorialActivo(rs.getBoolean("historialActivo"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
