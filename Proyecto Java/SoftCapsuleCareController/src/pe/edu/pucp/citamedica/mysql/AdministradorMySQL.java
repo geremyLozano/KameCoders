@@ -10,6 +10,9 @@ import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import java.sql.Statement;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 /**
  *
@@ -27,45 +30,37 @@ public class AdministradorMySQL implements AdministradorDAO{
     private PreparedStatement pstAdministrador;
     
      private ResultSet rs;
-      private Statement st;
-    
-    
-    
-    
+     private Statement st;
+   
     @Override
-    public int insertar(Administrador administrador) {
-        
-        int resultado = 0;
+    public int insertar(Administrador administrador, Usuario usuario, Persona persona) {
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL InsertarAdministrador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, usuario.getContrasenha());
+            cst.setString(5, persona.getDNI());
+            cst.setString(6, persona.getNombre());
+            cst.setString(7, persona.getApellido());
+            cst.setString(8, persona.getCorreoElectronico());
+            cst.setInt(9, persona.getNumTelefono());
+            cst.setString(10, persona.getDireccion());
+            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(persona.getGenero()));
+        
+            resultado = cst.executeUpdate();
             
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, administrador.getNombre());
-            pstPersona.setString(2, administrador.getApellido());
-            pstPersona.setString(3, administrador.getCorreoElectronico());
-            pstPersona.setInt(4, administrador.getNumTelefono());
-            pstPersona.setString(5, administrador.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(administrador.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.setString(7, String.valueOf(administrador.getGenero()));
-            pstPersona.executeUpdate();
-            
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idPersona = 0;
-            if(rs.next()){
-                idPersona = rs.getInt(1);
-            }
-            
-             sql = "INSERT INTO Administrador(idpersona) "
-                    + "values(?)";
-            pstAdministrador = con.prepareStatement(sql);
-            pstAdministrador.setInt(1, idPersona);
-           
-            resultado = pstAdministrador.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            persona.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
+            administrador.setIdAdministrador(persona.getIdPersona());
+            administrador.setActivo(true);
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
