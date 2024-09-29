@@ -12,6 +12,7 @@ public class Comunicacion {
     private String contenido;
     private Date fechaComunicacion;
     private boolean activo;
+    private int idPaciente;
     
     public Comunicacion() {
     }
@@ -23,7 +24,15 @@ public class Comunicacion {
         this.fechaComunicacion = fechaComunicacion;
         this.activo = true;
     }
+    
+    public int getIdPaciente() {
+        return idPaciente;
+    }
 
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
     public void setIdComunicacion(int idComunicacion) {
         this.idComunicacion = idComunicacion;
     }
