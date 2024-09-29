@@ -19,7 +19,6 @@ public class Pago {
     public Pago(int idPago, double descuentoPorSeguro,double montoParcial, double montoTotal,Date fechaPago,
     String concepto,boolean estado) {
         this.idPago = idPago;
-        this.DNI = DNI;
         this.descuentoPorSeguro = descuentoPorSeguro;
         this.montoParcial = montoParcial;
         this.montoTotal = montoTotal;

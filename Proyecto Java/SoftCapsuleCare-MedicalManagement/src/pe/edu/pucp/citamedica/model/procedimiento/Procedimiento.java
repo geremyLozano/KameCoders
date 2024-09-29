@@ -1,9 +1,5 @@
 package pe.edu.pucp.citamedica.model.procedimiento;
 
-import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
-import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
-import pe.edu.pucp.citamedica.model.procedimiento.ResultadoProcedimiento;
-import java.util.Date;
 import java.util.ArrayList;
 
 public class Procedimiento {
@@ -27,7 +23,7 @@ public class Procedimiento {
         this.resultados = new ArrayList<>();
         this.descripcion = descripcion;
         this.requisitosPrevios = requisitosPrevios;
-        this.tipo = tipo;
+        this.tipoProcedimiento = tipo;
         this.activo = true;
     }
 
@@ -52,11 +48,11 @@ public class Procedimiento {
     }
 
     public TipoProcedimiento getTipo() {
-        return tipo;
+        return tipoProcedimiento;
     }
 
     public void setTipo(TipoProcedimiento tipo) {
-        this.tipo = tipo;
+        this.tipoProcedimiento = tipo;
     }
 
     public int getIdProcedimiento() {

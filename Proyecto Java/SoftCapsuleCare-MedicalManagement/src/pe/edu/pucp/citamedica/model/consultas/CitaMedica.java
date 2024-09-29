@@ -1,12 +1,7 @@
 package pe.edu.pucp.citamedica.model.consultas;
 
-import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
-import pe.edu.pucp.citamedica.model.procedimiento.Pago;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
-import pe.edu.pucp.citamedica.model.clinica.Medico;
-import pe.edu.pucp.citamedica.model.usuario.Paciente;
 
 
 public class CitaMedica {
@@ -26,6 +21,9 @@ public class CitaMedica {
     private int idPago;
     private boolean activo;
 
+    public CitaMedica() {
+    }
+    
     public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, boolean activo) {
         this.idCitaMedica = idCitaMedica;
         this.tipo = tipo;
