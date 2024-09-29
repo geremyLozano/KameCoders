@@ -27,7 +27,7 @@ public class PacienteMySQL implements PacienteDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL InsertarPaciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL PacienteInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
@@ -68,21 +68,13 @@ public class PacienteMySQL implements PacienteDAO{
     @Override
     public int eliminar(int idPaciente) {
         int resultado = 0;
-        String sql = "DELETE FROM Paciente WHERE idPaciente = ?";
+        try{
 
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstPaciente = con.prepareStatement(sql)) {
-
-            pstPaciente.setInt(1, idPaciente);
-
-            resultado = pstPaciente.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("Paciente eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningún paciente con ese ID.");
-            }
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call PacienteEliminar(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idPaciente);
+            resultado = cst.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -97,7 +89,7 @@ public class PacienteMySQL implements PacienteDAO{
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "{CALL Paciente_Listar}";
+            sql = "{CALL PacienteListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
             while(rs.next()){
@@ -155,7 +147,7 @@ public class PacienteMySQL implements PacienteDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL ModificarPaciente(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL PacienteModificar(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, paciente.getIdPaciente());
             cst.setString(2, paciente.getDNI());
