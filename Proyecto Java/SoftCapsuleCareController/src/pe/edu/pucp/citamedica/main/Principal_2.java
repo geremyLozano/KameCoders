@@ -2,6 +2,7 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
@@ -20,23 +21,23 @@ public class Principal_2 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         
-        Persona persona = new Persona();
-        persona.setDNI("MODIFICARV7");
-        persona.setNombre("Conexion2");
-        persona.setApellido("probando");
-        persona.setCorreoElectronico("prueba2@hotmail.com");
-        persona.setNumTelefono(123312);
-        persona.setDireccion("Av.Brasil 123");
-        persona.setFechaNacimiento(sdf.parse("23-10-2000"));
-        persona.setGenero('M');
-        
-        Usuario usuario = new Usuario();
-        usuario.setUsername("MODIFICARV7");
-        usuario.setContrasenha("admin123");
-        
-        Paciente paciente = new Paciente();
+//        Persona persona = new Persona();
+//        persona.setDNI("MODIFICARV7");
+//        persona.setNombre("Conexion2");
+//        persona.setApellido("probando");
+//        persona.setCorreoElectronico("prueba2@hotmail.com");
+//        persona.setNumTelefono(123312);
+//        persona.setDireccion("Av.Brasil 123");
+//        persona.setFechaNacimiento(sdf.parse("23-10-2000"));
+//        persona.setGenero('M');
+//        
+//        Usuario usuario = new Usuario();
+//        usuario.setUsername("MODIFICARV7");
+//        usuario.setContrasenha("admin123");
+//        
+//        Paciente paciente = new Paciente();
         PacienteDAO pac = new PacienteMySQL();
-        int resultado = pac.insertar(paciente, usuario, persona);
+//        int resultado = pac.insertar(paciente, usuario, persona);
 
 //        Auxiliar auxiliar = new Auxiliar();
 //        AuxiliarDAO aux = new AuxiliarMySQL();
@@ -45,20 +46,30 @@ public class Principal_2 {
 //        Administrador administrador = new Administrador();
 //        AdministradorDAO admin = new AdministradorMySQL();
 //        int resultado = admin.insertar(administrador, usuario, persona);
-        if(resultado>0)
-            System.out.println("Se creo el usuario correctamente");
-        else
-            System.out.println("Error en la creacion");
+//        if(resultado>0)
+//            System.out.println("Se creo el usuario correctamente");
+//        else
+//            System.out.println("Error en la creacion");
+//        
+//        Scanner lectura = new Scanner(System.in);
+//        String dato = lectura.next();
+//        paciente.setHistorialActivo(true);
+//        paciente.setNombre("modificarEXITOSO");
+//        int mod = pac.modificar(paciente);
+//        if(mod>0)
+//            System.out.println("Se modifico correctamente");
+//        else
+//            System.out.println("Error al modificar");
         
-        Scanner lectura = new Scanner(System.in);
-        String dato = lectura.next();
-        paciente.setHistorialActivo(true);
-        paciente.setNombre("modificarEXITOSO");
-        int mod = pac.modificar(paciente);
-        if(mod>0)
-            System.out.println("Se modifico correctamente");
-        else
-            System.out.println("Error al modificar");
         
+        ArrayList<Paciente>lista=pac.listarTodos();
+        for(Paciente p:lista){
+            String fecha = sdf.format(p.getFechaNacimiento());
+            System.out.println("IdPaciente: "+p.getIdPaciente() + "  DNI:"+p.getDNI()+"   "
+                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha+
+                    "   historialActivo:"+p.getHistorialActivo());
+            System.out.println("---------------------------------");
+        }
     }
 }
