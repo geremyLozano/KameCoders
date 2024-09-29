@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
-public abstract class AuxiliarMySQL implements AuxiliarDAO{
+public class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
     private PreparedStatement pstPersona;
     private PreparedStatement pstAuxiliar;
@@ -20,42 +23,34 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Auxiliar auxiliar){
-        int resultado = 0;
+    public int insertar(Auxiliar auxiliar, Usuario usuario, Persona persona){
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, auxiliar.getNombre());
-            pstPersona.setString(2, auxiliar.getApellido());
-            pstPersona.setString(3, auxiliar.getCorreoElectronico());
-            pstPersona.setInt(4, auxiliar.getNumTelefono());
-            pstPersona.setString(5, auxiliar.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(auxiliar.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.executeUpdate();
-            
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idAuxiliar = 0;
-            if(rs.next()){
-                idAuxiliar = rs.getInt(1);
-            }
-            
-            sql = "{INSERT INTO Auxiliar(idAuxiliar,activo) "
-                    + "values(?,?)}";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setInt(1, idAuxiliar);
-            pstAuxiliar.setBoolean(2, auxiliar.isActivo());
-            resultado = pstAuxiliar.executeUpdate();
-            
-            sql = "INSERT into Auxiliar(dni,nombre) values(?,?)";
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL InsertarAuxiliar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
-            cst.setString(1,auxiliar.getDNI());
-            cst.setString(2, auxiliar.getNombre());
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, usuario.getContrasenha());
+            cst.setString(5, persona.getDNI());
+            cst.setString(6, persona.getNombre());
+            cst.setString(7, persona.getApellido());
+            cst.setString(8, persona.getCorreoElectronico());
+            cst.setInt(9, persona.getNumTelefono());
+            cst.setString(10, persona.getDireccion());
+            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(persona.getGenero()));
+        
             resultado = cst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            
+            persona.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
+            auxiliar.setIdAuxiliar(persona.getIdPersona());
+            auxiliar.setActivo(true);
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }

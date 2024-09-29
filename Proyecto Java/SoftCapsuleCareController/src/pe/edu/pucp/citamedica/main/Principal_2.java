@@ -2,19 +2,22 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
+import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
+import pe.edu.pucp.citamedica.mysql.AuxiliarMySQL;
 import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
 
 
 public class Principal_2 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        PacienteDAO pac = new PacienteMySQL();
+        
         Persona persona = new Persona();
-        persona.setDNI("5050505");
+        persona.setDNI("5656");
         persona.setNombre("Conexion2");
         persona.setApellido("probando");
         persona.setCorreoElectronico("prueba2@hotmail.com");
@@ -24,14 +27,18 @@ public class Principal_2 {
         persona.setGenero('M');
         
         Usuario usuario = new Usuario();
-        usuario.setUsername("5050505");
+        usuario.setUsername("5656");
         usuario.setContrasenha("admin123");
         
-        Paciente paciente = new Paciente();
-        
-        int resultado = pac.insertar(paciente, usuario, persona);
+//        Paciente paciente = new Paciente();
+//        PacienteDAO pac = new PacienteMySQL();
+//        int resultado = pac.insertar(paciente, usuario, persona);
+
+        Auxiliar auxiliar = new Auxiliar();
+        AuxiliarDAO aux = new AuxiliarMySQL();
+        int resultado = aux.insertar(auxiliar, usuario, persona);
         if(resultado>0)
-            System.out.println("Se creo el paciente correctamente");
+            System.out.println("Se creo el usuario correctamente");
         else
             System.out.println("Error en la creacion");
         
