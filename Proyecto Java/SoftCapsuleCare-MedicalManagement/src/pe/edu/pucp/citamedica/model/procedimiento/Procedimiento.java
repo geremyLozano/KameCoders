@@ -13,15 +13,14 @@ public class Procedimiento {
     private ArrayList<ResultadoProcedimiento> resultados;
     private String descripcion;
     private String requisitosPrevios;
-    private TipoProcedimiento tipo;
-    private Date fecha;
+    private TipoProcedimiento tipoProcedimiento;
     private boolean activo;
 
     public Procedimiento() {
         this.resultados = new ArrayList<>();
     }
 
-    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo, Date fecha) {
+    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo) {
         this.idProcedimiento = idProcedimiento;
         this.nombre = nombre;
         this.costo = costo;
@@ -29,7 +28,6 @@ public class Procedimiento {
         this.descripcion = descripcion;
         this.requisitosPrevios = requisitosPrevios;
         this.tipo = tipo;
-        this.fecha = fecha;
         this.activo = true;
     }
 
@@ -60,15 +58,6 @@ public class Procedimiento {
     public void setTipo(TipoProcedimiento tipo) {
         this.tipo = tipo;
     }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
 
     public int getIdProcedimiento() {
         return idProcedimiento;
