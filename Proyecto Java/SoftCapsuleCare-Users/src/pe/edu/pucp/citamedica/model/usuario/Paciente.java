@@ -17,7 +17,7 @@ public class Paciente extends Persona {
     private ArrayList<Comunicacion> comunicaciones;
     private Aseguradora seguro;
     private boolean activo;
-
+    
     public Paciente() {
         this.idPaciente = ++contador;
         this.citas = new ArrayList<>();

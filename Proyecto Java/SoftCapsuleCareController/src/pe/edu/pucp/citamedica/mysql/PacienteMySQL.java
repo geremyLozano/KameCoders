@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
@@ -43,14 +41,23 @@ public class PacienteMySQL implements PacienteDAO{
             cst.setString(10, persona.getDireccion());
             cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
             cst.setString(12, String.valueOf(persona.getGenero()));
-        
+           
             resultado = cst.executeUpdate();
             
             persona.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
+            
             paciente.setIdPaciente(persona.getIdPersona());
+            paciente.setDNI(persona.getDNI());
+            paciente.setNombre(persona.getNombre());
+            paciente.setApellido(persona.getApellido());
+            paciente.setCorreoElectronico(persona.getCorreoElectronico());
+            paciente.setNumTelefono(persona.getNumTelefono());
+            paciente.setDireccion(persona.getDireccion());
+            paciente.setFechaNacimiento(persona.getFechaNacimiento());
+            paciente.setGenero(persona.getGenero());
             paciente.setActivo(true);
-            paciente.setHistorialActivo(true);
+            paciente.setHistorialActivo(false);
         return resultado;
         }   catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -143,16 +150,26 @@ public class PacienteMySQL implements PacienteDAO{
 
     @Override
     public int modificar(Paciente paciente) {
-        int resultado = 0;
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "UPDATE paciente SET historialActivo = ? WHERE idPaciente = ?";
-            pstPaciente = con.prepareStatement(sql);
-            pstPaciente.setBoolean(1, paciente.getHistorialActivo());
-            pstPaciente.setInt(2, paciente.getIdPaciente());
-            resultado = pstPaciente.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL ModificarPaciente(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, paciente.getIdPaciente());
+            cst.setString(2, paciente.getDNI());
+            cst.setString(3, paciente.getNombre());
+            cst.setString(4, paciente.getApellido());
+            cst.setString(5, paciente.getCorreoElectronico());
+            cst.setInt(6, paciente.getNumTelefono());
+            cst.setString(7, paciente.getDireccion());
+            cst.setDate(8, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(paciente.getGenero()));
+        
+            resultado = cst.executeUpdate();
+            
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }   
