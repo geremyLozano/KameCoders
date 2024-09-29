@@ -11,6 +11,7 @@ public class HistorialMedico {
     private Date fechaDeCreacion;
     private String numeroDocumentoIdentidadPaciente;
     private ArrayList<CitaMedica>citas;
+    private boolean activo;
 
     public HistorialMedico() {
         citas = new ArrayList<>();
@@ -21,6 +22,7 @@ public class HistorialMedico {
         this.fechaDeCreacion = fechaDeCreacion;
         this.numeroDocumentoIdentidadPaciente = numeroDocumentoIdentidadPaciente;
         this.citas = new ArrayList<>();
+        this.activo = true;
     }
 
     public int getIdHistorial() {
@@ -53,6 +55,14 @@ public class HistorialMedico {
 
     public void setCitas(ArrayList<CitaMedica> citas) {
         this.citas = citas;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     

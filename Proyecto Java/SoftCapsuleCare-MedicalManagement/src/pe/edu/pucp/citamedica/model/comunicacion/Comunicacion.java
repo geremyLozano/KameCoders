@@ -11,7 +11,8 @@ public class Comunicacion {
     private TipoComunicacion tipo;
     private String contenido;
     private Date fechaComunicacion;
-
+    private boolean activo;
+    
     public Comunicacion() {
     }
 
@@ -20,6 +21,7 @@ public class Comunicacion {
         this.tipo = tipo;
         this.contenido = contenido;
         this.fechaComunicacion = fechaComunicacion;
+        this.activo = true;
     }
 
     public void setIdComunicacion(int idComunicacion) {
@@ -61,5 +63,12 @@ public class Comunicacion {
         return "Comunicacion{" + "idComunicacion=" + idComunicacion + ", tipo=" + tipo + ", contenido=" + contenido + ", fechaComunicacion=" + formateado + '}';
     }
     
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     
 }

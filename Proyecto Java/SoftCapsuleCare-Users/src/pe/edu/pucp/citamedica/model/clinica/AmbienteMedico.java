@@ -8,6 +8,7 @@ public class AmbienteMedico {
     private String ubicacion;
     private int capacidad;
     private TipoAmbiente tipoAmbiente;
+    private boolean activo;
 
     public AmbienteMedico() {
     }
@@ -20,6 +21,7 @@ public class AmbienteMedico {
         this.ubicacion = ubicacion;
         this.capacidad = capacidad;
         this.tipoAmbiente = tipoAmbiente;
+        this.activo = true;
     }
 
     public TipoAmbiente getTipoAmbiente() {
@@ -62,11 +64,18 @@ public class AmbienteMedico {
         return idAmbiente;
     }
 
-    /**
-     * @param idAmbiente the idAmbiente to set
-     */
     public void setIdAmbiente(int idAmbiente) {
         this.idAmbiente = idAmbiente;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
     
 }

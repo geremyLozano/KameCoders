@@ -19,7 +19,7 @@ public class Aseguradora {
         this.telefono = telefono;
         this.tipoSeguro = tipoSeguro;
         this.porcentajeDescuento = porcentajeDescuento;
-        this.activo = activo;
+        this.activo = true;
     }
 
     public double getPorcentajeDescuento() {

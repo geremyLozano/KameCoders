@@ -25,7 +25,7 @@ public class Pago {
         this.montoTotal = montoTotal;
         this.fechaPago = fechaPago;
         this.concepto = concepto;
-        this.estado = false;
+        this.estado = true;
     }
 
     public int getIdPago() {
