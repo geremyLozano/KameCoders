@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Time;
+import java.util.stream.Collectors;
+import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 
 public class MedicoMySQL implements MedicoDAO {
@@ -23,38 +25,48 @@ public class MedicoMySQL implements MedicoDAO {
     
     @Override
     public int insertar(Medico medico) {
+
+
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?)";
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, medico.getNombre());
-            pstPersona.setString(2, medico.getApellido());
-            pstPersona.setString(3, medico.getCorreoElectronico());
-            pstPersona.setInt(4, medico.getNumTelefono());
-            pstPersona.setString(5, medico.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.executeUpdate();
             
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idPersona = 0;
-            if(rs.next()){
-                idPersona = rs.getInt(1);
-            }
             
-            sql = "INSERT INTO Medico(especialidad,numColegiatura,horaInicioTrabajo,"
-                    + "horaFinTrabajo, ahosExp, activo) "
-                    + "values(?,?,?,?,?,?)";
+            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            
+            
             pstMedico = con.prepareStatement(sql);
-            pstMedico.setInt(1, medico.getEspecialidad().getIdEspecialidad());
-            pstMedico.setString(2, medico.getNumColegiatura());
-            pstMedico.setTime(3,Time.valueOf(medico.getHoraInicioTrabajo()));
-            pstMedico.setTime(4,Time.valueOf(medico.getHoraFinTrabajo()));
-            pstMedico.setInt(5,medico.getAhosExp());
-            pstMedico.setBoolean(6,medico.isActivo());
             
+            
+            pstMedico.setString(1, medico.getDNI());
+            pstMedico.setString(2, medico.getNombre());
+            pstMedico.setString(3, medico.getApellido());
+            pstMedico.setString(4, medico.getCorreoElectronico());
+            pstMedico.setInt(5, medico.getNumTelefono());
+            pstMedico.setString(6, medico.getDireccion());
+            java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
+            pstMedico.setDate(7,sqlDate);
+           
+            pstMedico.setString(8, String.valueOf(medico.getGenero()));
+            
+            pstMedico.setString(9, medico.getNumColegiatura());
+            pstMedico.setTime(10,Time.valueOf(medico.getHoraInicioTrabajo()));
+            pstMedico.setTime(11,Time.valueOf(medico.getHoraFinTrabajo()));
+            
+            
+            String diasLaboralesString = medico.getDiasLaborales().stream()
+                .map(DiaSemana::name) // Obtener el nombre del enum
+                .collect(Collectors.joining(",")); // Unirlos con coma
+            
+            
+            pstMedico.setString(12, diasLaboralesString);       
+            pstMedico.setInt(13,medico.getAhosExp());
+            pstMedico.setBoolean(14,medico.isActivo());
+            
+      
+            pstMedico.executeUpdate();
+            
+           
             resultado = pstMedico.executeUpdate();
             
         } catch (SQLException e) {
@@ -65,6 +77,9 @@ public class MedicoMySQL implements MedicoDAO {
             System.out.print("Error general" + e.getMessage());
         }
         return resultado;
+
+
+
     }
 
     @Override
