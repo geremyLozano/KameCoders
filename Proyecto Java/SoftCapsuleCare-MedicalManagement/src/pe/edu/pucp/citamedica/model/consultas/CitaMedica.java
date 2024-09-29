@@ -13,47 +13,46 @@ public class CitaMedica {
     private String idCitaMedica;
     private TipoCita tipo;
     private EstadoCita estado;
+    private int idPaciente;
+    private int idreporteMedico; //String DNI_paciente;
+    private int idHistorialMedico;
+    private int idMedico;
     private Date fecha;
     private LocalTime hora;
-    private Medico medico;
-    private Paciente paciente; //String DNI_paciente;
     private String plataforma;
     private String enlace;
     private LocalTime duracion;
-    private ReporteMedico reporte;
-    private ArrayList<Procedimiento>procedimientos;
     private int numeroAmbiente;
-    private Pago pago;
-    private boolean activo;
+    private int idPago;
+    private int activo;
 
-    public CitaMedica() {
-        procedimientos = new ArrayList<>();
-    }
-    //Dentro de CitaMedica, parametro String DNI_paciente
-    public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, Medico medico, Paciente paciente, String plataforma, String enlace, LocalTime duracion, ReporteMedico reporte, ArrayList<Procedimiento> procedimientos, int numeroAmbiente, Pago pago) {
+    public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, int activo) {
         this.idCitaMedica = idCitaMedica;
         this.tipo = tipo;
         this.estado = estado;
         this.fecha = fecha;
         this.hora = hora;
-        this.medico = medico;
-        this.paciente = paciente; // this.DNI_paciente = DNI_paciente;
         this.plataforma = plataforma;
         this.enlace = enlace;
         this.duracion = duracion;
-        this.reporte = reporte;
-        this.procedimientos = procedimientos;
         this.numeroAmbiente = numeroAmbiente;
-        this.pago = pago;
-        this.activo = true;
+        this.activo = activo;
     }
 
-    public Pago getPago() {
-        return pago;
+    public String getIdCitaMedica() {
+        return idCitaMedica;
     }
 
-    public void setPago(Pago pago) {
-        this.pago = pago;
+    public void setIdCitaMedica(String idCitaMedica) {
+        this.idCitaMedica = idCitaMedica;
+    }
+
+    public TipoCita getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoCita tipo) {
+        this.tipo = tipo;
     }
 
     public EstadoCita getEstado() {
@@ -64,16 +63,52 @@ public class CitaMedica {
         this.estado = estado;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    //public void setDNI_paciente(String DNI_paciente) {
-    //    this.DNI_paciente = DNI_paciente;
-    //}
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public int getIdreporteMedico() {
+        return idreporteMedico;
+    }
+
+    public void setIdreporteMedico(int idreporteMedico) {
+        this.idreporteMedico = idreporteMedico;
+    }
+
+    public int getIdHistorialMedico() {
+        return idHistorialMedico;
+    }
+
+    public void setIdHistorialMedico(int idHistorialMedico) {
+        this.idHistorialMedico = idHistorialMedico;
+    }
+
+    public int getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(int idMedico) {
+        this.idMedico = idMedico;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
 
     public String getPlataforma() {
@@ -100,22 +135,6 @@ public class CitaMedica {
         this.duracion = duracion;
     }
 
-    public ReporteMedico getReporte() {
-        return reporte;
-    }
-
-    public void setReporte(ReporteMedico reporte) {
-        this.reporte = reporte;
-    }
-
-    public ArrayList<Procedimiento> getProcedimientos() {
-        return procedimientos;
-    }
-
-    public void setProcedimientos(ArrayList<Procedimiento> procedimientos) {
-        this.procedimientos = procedimientos;
-    }
-
     public int getNumeroAmbiente() {
         return numeroAmbiente;
     }
@@ -124,55 +143,20 @@ public class CitaMedica {
         this.numeroAmbiente = numeroAmbiente;
     }
 
-    public String getId() {
-        return idCitaMedica;
+    public int getIdPago() {
+        return idPago;
     }
 
-    public void setId(String idCitaMedica) {
-        this.idCitaMedica = idCitaMedica;
+    public void setIdPago(int idPago) {
+        this.idPago = idPago;
     }
 
-    public TipoCita getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoCita tipo) {
-        this.tipo = tipo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public void setInt(int idPersona) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    public boolean isActivo() {
+    public int getActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(int activo) {
         this.activo = activo;
     }
+
 }
