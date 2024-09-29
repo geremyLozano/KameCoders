@@ -24,9 +24,9 @@ public class CitaMedica {
     private LocalTime duracion;
     private int numeroAmbiente;
     private int idPago;
-    private int activo;
+    private boolean activo;
 
-    public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, int activo) {
+    public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, boolean activo) {
         this.idCitaMedica = idCitaMedica;
         this.tipo = tipo;
         this.estado = estado;
@@ -151,11 +151,11 @@ public class CitaMedica {
         this.idPago = idPago;
     }
 
-    public int getActivo() {
+    public boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(int activo) {
+    public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
