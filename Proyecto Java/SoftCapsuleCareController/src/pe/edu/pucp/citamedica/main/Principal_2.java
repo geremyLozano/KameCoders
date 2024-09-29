@@ -2,26 +2,33 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
-import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
-import pe.edu.pucp.citamedica.mysql.HistorialMedicoMySQL;
+import pe.edu.pucp.citamedica.dao.PersonaDAO;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
+import pe.edu.pucp.citamedica.mysql.PersonaMySQL;
+
 
 public class Principal_2 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        HistorialMedico historial = new HistorialMedico();
-        historial.setFechaDeCreacion(sdf.parse("12-03-2019"));
-        historial.setNumeroDocumentoIdentidadPaciente("44444");
-        HistorialMedicoDAO hist = new HistorialMedicoMySQL();
-        int resultado = hist.insertar(historial);
-        if(resultado != 0)
-            System.out.println("Ingreso correctamente");
+        PersonaDAO pers = new PersonaMySQL();
+        Persona persona = new Persona();
+        persona.setDNI("54321");
+        persona.setNombre("Conexion2");
+        persona.setApellido("probando");
+        persona.setCorreoElectronico("prueba2@hotmail.com");
+        persona.setNumTelefono(123312);
+        persona.setDireccion("Av.Brasil 123");
+        persona.setFechaNacimiento(sdf.parse("23-10-2000"));
+        persona.setGenero('M');
+        Usuario usuario = new Usuario();
+        usuario.setUsername("54321");
+        usuario.setContrasenha("admin123");
+        int resultado = pers.insertar(persona, usuario);
+        if(resultado>0)
+            System.out.println("Se creo el usuario correctamente");
         else
-            System.out.println("Ocurrio un error al insertar");
-//        int valor = hist.modificar(historial);
-//        if(valor != 0)
-//            System.out.println("Ingreso correctamente");
-//        else
-//            System.out.println("Ocurrio un error al insertar");
+            System.out.println("Error en la creacion");
+        
     }
 }

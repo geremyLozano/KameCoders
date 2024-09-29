@@ -28,7 +28,7 @@ public class DBPoolManager {
             //pool connection configuration
             dataSource.setInitialSize(3); 
             dataSource.setMaxTotal(10);            
-            dataSource.setMaxOpenPreparedStatements(100);
+            dataSource.setMaxOpenPreparedStatements(50);
             System.out.println("....conexion realizada...");
         }catch(ClassNotFoundException ex){
             System.out.println(ex.getMessage());

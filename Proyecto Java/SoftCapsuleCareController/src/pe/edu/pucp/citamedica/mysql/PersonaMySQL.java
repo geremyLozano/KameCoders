@@ -5,16 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.util.Date;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 
 public class PersonaMySQL implements PersonaDAO{
     private Connection con;
     private Statement st;
-    private PreparedStatement pstPersona;
+    private PreparedStatement pst;
     private PreparedStatement pstUsuario;
     private CallableStatement cst;
     private String sql;
@@ -24,36 +26,29 @@ public class PersonaMySQL implements PersonaDAO{
     public int insertar(Persona persona,Usuario usuario){
         int resultado  =0;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero,dni) values(?,?,?,?,?,?,?,?)";
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, persona.getNombre());
-            pstPersona.setString(2, persona.getApellido());
-            pstPersona.setString(3, persona.getCorreoElectronico());
-            pstPersona.setInt(4, persona.getNumTelefono());
-            pstPersona.setString(5, persona.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(persona.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.setString(7, String.valueOf(persona.getGenero()));
-            pstPersona.setString(8, persona.getDNI());
-            pstPersona.executeUpdate();
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL InsertarPersona(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, usuario.getContrasenha());
+            cst.setString(5, persona.getDNI());
+            cst.setString(6, persona.getNombre());
+            cst.setString(7, persona.getApellido());
+            cst.setString(8, persona.getCorreoElectronico());
+            cst.setInt(9, persona.getNumTelefono());
+            cst.setString(10, persona.getDireccion());
+            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(persona.getGenero()));
+        
+            resultado = cst.executeUpdate();
             
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idPersona = 0;
-            if(rs.next()){
-                idPersona = rs.getInt(1);
-            }
-            
-            sql = "INSERT into Usuario(username,contrasenha,idpersona) values(?,?,?)";
-            pstUsuario = con.prepareStatement(sql);
-            pstUsuario.setString(1, usuario.getUsername());
-            pstUsuario.setString(2, usuario.getContrasenha());
-            pstUsuario.setInt(3,idPersona);
-            resultado = pstUsuario.executeUpdate();
+            persona.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
             
         } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return resultado;
     }
@@ -65,20 +60,20 @@ public class PersonaMySQL implements PersonaDAO{
                 + "direccion = ?, fechaNacimiento = ?, genero = ? " + " WHERE idPersona = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement pstPersona = con.prepareStatement(sql)) {
+             PreparedStatement cst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
-            pstPersona.setString(1, persona.getDNI());
-            pstPersona.setString(2, persona.getApellido());
-            pstPersona.setString(3, persona.getCorreoElectronico());
-            pstPersona.setInt(4, persona.getNumTelefono());
-            pstPersona.setString(5, persona.getDireccion());
+            cst.setString(1, persona.getDNI());
+            cst.setString(2, persona.getApellido());
+            cst.setString(3, persona.getCorreoElectronico());
+            cst.setInt(4, persona.getNumTelefono());
+            cst.setString(5, persona.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(persona.getFechaNacimiento().getTime());
-            pstPersona.setDate(6, sqlDate);
-            pstPersona.setString(7, String.valueOf(persona.getGenero()));
-            pstPersona.setInt(8, persona.getIdPersona());
+            cst.setDate(6, sqlDate);
+            cst.setString(7, String.valueOf(persona.getGenero()));
+            cst.setInt(8, persona.getIdPersona());
             // Ejecutar la consulta de actualización
-            resultado = pstPersona.executeUpdate();
+            resultado = cst.executeUpdate();
 
             // Verificar si la modificación fue exitosa
             if (resultado > 0) {
@@ -100,11 +95,11 @@ public class PersonaMySQL implements PersonaDAO{
         sql = "DELETE FROM Persona WHERE idPersona = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstPersona = con.prepareStatement(sql)) {
+             PreparedStatement cst = con.prepareStatement(sql)) {
 
-            pstPersona.setInt(1, idPersona);
+            cst.setInt(1, idPersona);
 
-            resultado = pstPersona.executeUpdate();
+            resultado = cst.executeUpdate();
 
             // Verificar si el registro fue eliminado
             if (resultado > 0) {
@@ -125,8 +120,8 @@ public class PersonaMySQL implements PersonaDAO{
         ArrayList<Persona> listaPersona = new ArrayList<>();
         sql = "SELECT * FROM Persona";
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstPersona = con.prepareStatement(sql);
-             ResultSet rs = pstPersona.executeQuery()) {
+             PreparedStatement cst = con.prepareStatement(sql);
+             ResultSet rs = cst.executeQuery()) {
 
             // Iterar sobre cada registro en el ResultSet
             while (rs.next()) {
@@ -162,10 +157,10 @@ public class PersonaMySQL implements PersonaDAO{
         sql = "SELECT * FROM Persona WHERE idPersona = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstPersona = con.prepareStatement(sql)) {
+             PreparedStatement cst = con.prepareStatement(sql)) {
 
-            pstPersona.setInt(1, idPersona);
-            rs = pstPersona.executeQuery();
+            cst.setInt(1, idPersona);
+            rs = cst.executeQuery();
 
             if (rs.next()) {
                 persona = new Persona();
