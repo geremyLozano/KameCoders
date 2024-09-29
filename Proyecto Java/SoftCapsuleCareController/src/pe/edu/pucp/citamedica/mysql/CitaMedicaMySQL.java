@@ -42,29 +42,29 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         java.sql.Date sqlDate = new java.sql.Date(cita.getFecha().getTime());
         pstCitaMedica.setDate(3, sqlDate);
         pstCitaMedica.setTime(4, java.sql.Time.valueOf(cita.getHora())); // Conversion de LocalTime a java.sql.Time
-        pstCitaMedica.setInt(5, cita.getMedico().getIdMedico()); // Asumiendo que Medico tiene un id
-        pstCitaMedica.setInt(6, cita.getPaciente().getIdPaciente()); // Asumiendo que Paciente tiene un id
+        pstCitaMedica.setInt(5, cita.getIdMedico()); // Asumiendo que Medico tiene un id
+        pstCitaMedica.setInt(6, cita.getIdPaciente()); // Asumiendo que Paciente tiene un id
         pstCitaMedica.setString(7, cita.getPlataforma());
         pstCitaMedica.setString(8, cita.getEnlace());
         pstCitaMedica.setTime(9, java.sql.Time.valueOf(cita.getDuracion())); // Conversion de LocalTime a java.sql.Time
         pstCitaMedica.setInt(10, cita.getNumeroAmbiente());
-        pstCitaMedica.setInt(11, cita.getPago().getIdPago()); // Asumiendo que Pago tiene un id
+        pstCitaMedica.setInt(11, cita.getIdPago()); // Asumiendo que Pago tiene un id
         
         // Ejecutamos la inserción y obtenemos las llaves generadas
         pstCitaMedica.executeUpdate();
         rs = pstCitaMedica.getGeneratedKeys();
         if (rs.next()) {
-            cita.setId(rs.getString(1)); // Guardamos el ID generado de la cita en el objeto
+            cita.setIdCitaMedica(rs.getString(1)); // Guardamos el ID generado de la cita en el objeto
         }
         
         // Inserción adicional para los procedimientos asociados a la cita médica
-        sql = "INSERT INTO ProcedimientoCita(idCitaMedica, idProcedimiento) VALUES (?, ?)";
-        for (Procedimiento proc : cita.getProcedimientos()) {
-            pstProcedimiento = con.prepareStatement(sql);
-            pstProcedimiento.setString(1, cita.getId());
-            pstProcedimiento.setInt(2, proc.getIdProcedimiento()); // Asumiendo que Procedimiento tiene un id
-            pstProcedimiento.executeUpdate();
-        }
+//        sql = "INSERT INTO ProcedimientoCita(idCitaMedica, idProcedimiento) VALUES (?, ?)";
+//        for (Procedimiento proc : cita.getProcedimientos()) {
+//            pstProcedimiento = con.prepareStatement(sql);
+//            pstProcedimiento.setString(1, cita.getId());
+//            pstProcedimiento.setInt(2, proc.getIdProcedimiento()); // Asumiendo que Procedimiento tiene un id
+//            pstProcedimiento.executeUpdate();
+//        }
 
         resultado = 1; // Si todo sale bien, retornamos un valor que indica éxito
     } catch (SQLException e) {
@@ -103,7 +103,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             pstCitaMedica.setString(1, citaMedica.getEstado().name());
             pstCitaMedica.setDate(2, new java.sql.Date(citaMedica.getFecha().getTime()));
             pstCitaMedica.setTime(3, java.sql.Time.valueOf(citaMedica.getHora()));
-            pstCitaMedica.setString(4, citaMedica.getId());
+            pstCitaMedica.setString(4, citaMedica.getIdCitaMedica());
 
             // Ejecutar la consulta.
             resultado = pstCitaMedica.executeUpdate();
@@ -184,7 +184,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             CitaMedica citaMedica = new CitaMedica();
             
             // Asignar valores a los atributos de CitaMedica desde el ResultSet
-            citaMedica.setId(rs.getString("idCitaMedica"));
+            citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
             citaMedica.setFecha(rs.getDate("fecha"));
             citaMedica.setHora(rs.getTime("hora").toLocalTime());
             // Convertir el valor del estado de String a EstadoCita
@@ -238,7 +238,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             citaMedica = new CitaMedica();
             
             // Asignar valores desde el ResultSet a la CitaMedica
-            citaMedica.setId(rs.getString("idCitaMedica"));
+            citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
             citaMedica.setFecha(rs.getDate("fecha"));
             citaMedica.setHora(rs.getTime("hora").toLocalTime());
             
