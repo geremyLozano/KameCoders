@@ -5,43 +5,42 @@ import java.util.Date;
 
 public class Pago {
     private int idPago;
-    private String DNI;
     private double descuentoPorSeguro;
     private double montoParcial;
     private double montoTotal;
     private Date fechaPago;
     private String concepto;
     private boolean estado;
+    private int idPaciente;
 
     public Pago() {
     }
 
-    public Pago(int idPago, String DNI, double descuentoPorSeguro,double montoParcial, double montoTotal,Date fechaPago,
+    public Pago(int idPago, double descuentoPorSeguro,double montoParcial, double montoTotal,Date fechaPago,
     String concepto,boolean estado) {
         this.idPago = idPago;
-        this.DNI = DNI;
         this.descuentoPorSeguro = descuentoPorSeguro;
         this.montoParcial = montoParcial;
         this.montoTotal = montoTotal;
         this.fechaPago = fechaPago;
         this.concepto = concepto;
-        this.estado = false;
+        this.estado = true;
     }
 
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
     public int getIdPago() {
         return idPago;
     }
 
     public void setIdPago(int idPago) {
         this.idPago = idPago;
-    }
-
-    public String getDNI() {
-        return DNI;
-    }
-
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
     }
 
     public double getDescuentoPorSeguro() {

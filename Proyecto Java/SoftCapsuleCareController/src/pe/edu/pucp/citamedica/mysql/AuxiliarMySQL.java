@@ -8,9 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import pe.edu.pucp.citamedica.model.clinica.Especialidad;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
-public abstract class AuxiliarMySQL implements AuxiliarDAO{
+public class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
     private PreparedStatement pstPersona;
     private PreparedStatement pstAuxiliar;
@@ -20,60 +24,70 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Auxiliar auxiliar){
-        int resultado = 0;
+    public int insertar(Auxiliar auxiliariliar, Usuario usuario, Persona persona){
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?))";
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, auxiliar.getNombre());
-            pstPersona.setString(2, auxiliar.getApellido());
-            pstPersona.setString(3, auxiliar.getCorreoElectronico());
-            pstPersona.setInt(4, auxiliar.getNumTelefono());
-            pstPersona.setString(5, auxiliar.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(auxiliar.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.executeUpdate();
-            
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idAuxiliar = 0;
-            if(rs.next()){
-                idAuxiliar = rs.getInt(1);
-            }
-            
-            sql = "{INSERT INTO Auxiliar(idAuxiliar,activo) "
-                    + "values(?,?)}";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setInt(1, idAuxiliar);
-            pstAuxiliar.setBoolean(2, auxiliar.isActivo());
-            resultado = pstAuxiliar.executeUpdate();
-            
-            sql = "INSERT into Auxiliar(dni,nombre) values(?,?)";
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
-            cst.setString(1,auxiliar.getDNI());
-            cst.setString(2, auxiliar.getNombre());
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, usuario.getContrasenha());
+            cst.setString(5, persona.getDNI());
+            cst.setString(6, persona.getNombre());
+            cst.setString(7, persona.getApellido());
+            cst.setString(8, persona.getCorreoElectronico());
+            cst.setInt(9, persona.getNumTelefono());
+            cst.setString(10, persona.getDireccion());
+            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(persona.getGenero()));
+        
             resultado = cst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            
+            persona.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
+            auxiliariliar.setIdAuxiliar(persona.getIdPersona());
+            auxiliariliar.setDNI(persona.getDNI());
+            auxiliariliar.setNombre(persona.getNombre());
+            auxiliariliar.setApellido(persona.getApellido());
+            auxiliariliar.setCorreoElectronico(persona.getCorreoElectronico());
+            auxiliariliar.setNumTelefono(persona.getNumTelefono());
+            auxiliariliar.setDireccion(persona.getDireccion());
+            auxiliariliar.setFechaNacimiento(persona.getFechaNacimiento());
+            auxiliariliar.setGenero(persona.getGenero());
+            auxiliariliar.setActivo(true);
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
     
     @Override
-    public int modificar(Auxiliar auxiliar) {
-        int resultado = 0;
+    public int modificar(Auxiliar auxiliariliar) {
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-
-            sql = "UPDATE auxiliar SET activo = ? WHERE idAuxiliar = ?";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setBoolean(1, auxiliar.isActivo());
-            pstAuxiliar.setInt(2, auxiliar.getIdAuxiliar());
-            resultado = pstAuxiliar.executeUpdate();  
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, auxiliariliar.getIdAuxiliar());
+            cst.setString(2, auxiliariliar.getDNI());
+            cst.setString(3, auxiliariliar.getNombre());
+            cst.setString(4, auxiliariliar.getApellido());
+            cst.setString(5, auxiliariliar.getCorreoElectronico());
+            cst.setInt(6, auxiliariliar.getNumTelefono());
+            cst.setString(7, auxiliariliar.getDireccion());
+            cst.setDate(8, new java.sql.Date(auxiliariliar.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(auxiliariliar.getGenero()));
+            cst.setInt(10, 1);
+            cst.setBoolean(11, auxiliariliar.isActivo());
             
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            resultado = cst.executeUpdate();
+            
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
@@ -81,10 +95,10 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int eliminar(int idAuxiliar) {
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call AUXILIAR_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call AuxiliarEliminar(?)}";
+            cst = con.prepareCall(sql);  
             cst.setInt(1, idAuxiliar);
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
@@ -95,20 +109,25 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
 
     @Override
     public ArrayList<Auxiliar> listarTodos() {
-        ArrayList<Auxiliar> auxiliares = new ArrayList<>();
+        ArrayList<Auxiliar> auxiliariliares = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT idAuxiliar,nombre,apellido FROM paciente WHERE "
-                    + "activo = 1";
-            rs = st.executeQuery(sql);
+            sql = "{CALL AuxiliarListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
                 Auxiliar auxiliar = new Auxiliar();
-                auxiliar.setIdAuxiliar(rs.getInt("idAuxiliar"));
+                Especialidad esp = new Especialidad();
+                auxiliar.setIdAuxiliar(rs.getInt("idPersona"));
+                auxiliar.setDNI(rs.getString("DNI"));
                 auxiliar.setNombre(rs.getString("nombre"));
                 auxiliar.setApellido(rs.getString("apellido"));
-                auxiliar.setActivo(true);
-                auxiliares.add(auxiliar);
+                esp.setNombre(rs.getString("especialidad"));
+                auxiliar.setEspecialidad(esp);
+                auxiliar.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                auxiliar.setActivo(rs.getBoolean("activo"));
+                auxiliariliares.add(auxiliar);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -119,7 +138,7 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return auxiliares;
+        return auxiliariliares;
     }
 
     @Override
@@ -127,17 +146,23 @@ public abstract class AuxiliarMySQL implements AuxiliarDAO{
         Auxiliar auxiliar = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT idAuxiliar, activo FROM Auxiliar WHERE idAuxiliar = ?";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setInt(1, idAuxiliar);
-            rs = pstAuxiliar.executeQuery();
-
+            st = con.createStatement();
+            sql = "{CALL AuxiliarListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idAuxiliar);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 auxiliar = new Auxiliar();
-                auxiliar.setIdAuxiliar(rs.getInt("idAuxiliar"));
+                Especialidad esp = new Especialidad();
+                auxiliar.setIdAuxiliar(rs.getInt("idPersona"));
+                auxiliar.setDNI(rs.getString("DNI"));
+                auxiliar.setNombre(rs.getString("nombre"));
+                auxiliar.setApellido(rs.getString("apellido"));
+                esp.setNombre(rs.getString("especialidad"));
+                auxiliar.setEspecialidad(esp);
+                auxiliar.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 auxiliar.setActivo(rs.getBoolean("activo"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

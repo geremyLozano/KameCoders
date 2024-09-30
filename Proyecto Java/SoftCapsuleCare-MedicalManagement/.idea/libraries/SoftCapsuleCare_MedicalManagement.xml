@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SoftCapsuleCare-MedicalManagement">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/SoftCapsuleCare-MedicalManagement.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

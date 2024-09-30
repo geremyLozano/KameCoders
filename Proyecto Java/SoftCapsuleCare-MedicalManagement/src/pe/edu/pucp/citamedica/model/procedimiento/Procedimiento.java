@@ -1,9 +1,5 @@
 package pe.edu.pucp.citamedica.model.procedimiento;
 
-import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
-import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
-import pe.edu.pucp.citamedica.model.procedimiento.ResultadoProcedimiento;
-import java.util.Date;
 import java.util.ArrayList;
 
 public class Procedimiento {
@@ -13,22 +9,22 @@ public class Procedimiento {
     private ArrayList<ResultadoProcedimiento> resultados;
     private String descripcion;
     private String requisitosPrevios;
-    private TipoProcedimiento tipo;
-    private Date fecha;
+    private TipoProcedimiento tipoProcedimiento;
+    private boolean activo;
 
     public Procedimiento() {
         this.resultados = new ArrayList<>();
     }
 
-    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo, Date fecha) {
+    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo) {
         this.idProcedimiento = idProcedimiento;
         this.nombre = nombre;
         this.costo = costo;
         this.resultados = new ArrayList<>();
         this.descripcion = descripcion;
         this.requisitosPrevios = requisitosPrevios;
-        this.tipo = tipo;
-        this.fecha = fecha;
+        this.tipoProcedimiento = tipo;
+        this.activo = true;
     }
 
     public ArrayList<ResultadoProcedimiento> getResultados() {
@@ -52,21 +48,12 @@ public class Procedimiento {
     }
 
     public TipoProcedimiento getTipo() {
-        return tipo;
+        return tipoProcedimiento;
     }
 
     public void setTipo(TipoProcedimiento tipo) {
-        this.tipo = tipo;
+        this.tipoProcedimiento = tipo;
     }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
 
     public int getIdProcedimiento() {
         return idProcedimiento;
@@ -91,5 +78,15 @@ public class Procedimiento {
     public void setCosto(double costo) {
         this.costo = costo;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
     
 }

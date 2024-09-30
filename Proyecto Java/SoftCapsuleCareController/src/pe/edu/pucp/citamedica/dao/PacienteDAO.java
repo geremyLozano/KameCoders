@@ -1,9 +1,11 @@
 package pe.edu.pucp.citamedica.dao;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
 
 public interface PacienteDAO{
-    int insertar(Paciente paciente);
+    int insertar(Paciente paciente, Usuario usuario, Persona persona);
     int modificar(Paciente paciente);
     int eliminar(int idPaciente);
     ArrayList<Paciente> listarTodos();

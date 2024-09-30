@@ -55,10 +55,6 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
             pst.setInt(6,idAmbienteMedico);
             
             
-            java.sql.Date sqlDate = new java.sql.Date(procedimiento.getFecha().getTime());
-            
-            pst.setDate(7,sqlDate);
-            
             pst.executeUpdate();
                         
             resultado = pst.executeUpdate();
@@ -97,9 +93,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
             pst.setString(3,procedimiento.getDescripcion());
             pst.setString(4,procedimiento.getRequisitosPrevios());
             pst.setString(5,procedimiento.getTipo().name());
-            
-            java.sql.Date sqlDate = new java.sql.Date(procedimiento.getFecha().getTime());        
-            pst.setDate(6,sqlDate);
+
                    
             pst.setInt(7,procedimiento.getIdProcedimiento());
             
@@ -177,11 +171,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
                 procedimiento.setRequisitosPrevios(rs.getString("requisitosPrevios"));              
                 TipoProcedimiento tipo = TipoProcedimiento.valueOf("tipoProcedimiento");
                 procedimiento.setTipo(tipo);
-                 
- 
-                procedimiento.setFecha(rs.getDate("fecha"));
-                
-                
+
                
                 listaProcedimiento.add(procedimiento);
             }
@@ -219,12 +209,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
                 procedimiento.setRequisitosPrevios(rs.getString("requisitosPrevios"));              
                 TipoProcedimiento tipo = TipoProcedimiento.valueOf("tipoProcedimiento");
                 procedimiento.setTipo(tipo);
-                 
- 
-                procedimiento.setFecha(rs.getDate("fecha"));       
-                
-                
-                
+
             }
 
         } catch (SQLException e) {
@@ -232,20 +217,9 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         }
 
         return procedimiento;
-        
-        
-        
+     
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }

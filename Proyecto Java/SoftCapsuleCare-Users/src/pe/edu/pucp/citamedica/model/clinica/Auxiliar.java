@@ -21,7 +21,7 @@ public class Auxiliar extends Persona{
         this.idAuxiliar = ++contador;
         this.especialidad = especialidad;
         this.medico = medico;
-        this.activo = activo;
+        this.activo = true;
     }
     public int getIdAuxiliar(){
         return idAuxiliar;

@@ -6,6 +6,7 @@ public class Administrador extends Persona {
     private static int contador = 0;
     
     private int idAdministrador;
+    private boolean activo;
     
     public Administrador() {
     }
@@ -14,6 +15,7 @@ public class Administrador extends Persona {
                    Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idAdministrador = ++contador;
+        this.activo = true;
     }
 
     public int getIdAdministrador() {
@@ -36,4 +38,14 @@ public class Administrador extends Persona {
     public void actualizarInformacion() {
         
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
 }

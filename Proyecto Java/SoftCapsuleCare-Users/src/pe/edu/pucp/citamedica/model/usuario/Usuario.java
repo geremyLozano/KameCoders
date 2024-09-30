@@ -8,6 +8,7 @@ public class Usuario {
     private String username;
     private String contrasenha;
     private Persona datosPersonales;
+    private boolean activo;
 
     public Usuario() {
     }
@@ -19,6 +20,7 @@ public class Usuario {
         this.username = DNI;  // Asignamos el DNI como username
         this.contrasenha = contrasenha;
         this.datosPersonales = datosPersonales;
+        this.activo = true;
     }
 
     public int getIdUsuario() {
@@ -52,8 +54,17 @@ public class Usuario {
     public void setDatosPersonales(Persona datosPersonales) {
         this.datosPersonales = datosPersonales;
     }
+    
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
     public void actualizarInformacion() {
         // Implementar lógica de actualización
     }
+
 }

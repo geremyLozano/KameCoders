@@ -10,114 +10,124 @@ import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import java.sql.Statement;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 /**
  *
  * @author Usuario
  */
 public class AdministradorMySQL implements AdministradorDAO{
-
-    
+ 
     private Connection con;
-    //private PreparedStatement pst;
     private String sql;
     private CallableStatement cst;
-    
-    private PreparedStatement pstPersona;
-    private PreparedStatement pstAdministrador;
-    
-     private ResultSet rs;
-      private Statement st;
-    
-    
-    
-    
+    private ResultSet rs;
+    private Statement st;
+   
     @Override
-    public int insertar(Administrador administrador) {
-        
-        int resultado = 0;
+    public int insertar(Administrador administrador, Usuario usuario, Persona persona) {
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Persona(nombre,apellido,correoElectronico,numTelefono,"
-                    + "direccion,fechaNacimiento,genero) values(?,?,?,?,?,?,?)";
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AdministradorInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, usuario.getContrasenha());
+            cst.setString(5, persona.getDNI());
+            cst.setString(6, persona.getNombre());
+            cst.setString(7, persona.getApellido());
+            cst.setString(8, persona.getCorreoElectronico());
+            cst.setInt(9, persona.getNumTelefono());
+            cst.setString(10, persona.getDireccion());
+            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(persona.getGenero()));
+        
+            resultado = cst.executeUpdate();
             
-            pstPersona = con.prepareStatement(sql);
-            pstPersona.setString(1, administrador.getNombre());
-            pstPersona.setString(2, administrador.getApellido());
-            pstPersona.setString(3, administrador.getCorreoElectronico());
-            pstPersona.setInt(4, administrador.getNumTelefono());
-            pstPersona.setString(5, administrador.getDireccion());
-            java.sql.Date sqlDate = new java.sql.Date(administrador.getFechaNacimiento().getTime());
-            pstPersona.setDate(6,sqlDate);
-            pstPersona.setString(7, String.valueOf(administrador.getGenero()));
-            pstPersona.executeUpdate();
-            
-            rs = pstPersona.getGeneratedKeys();//Obtengo el IDPERSONA GENERADO
-            int idPersona = 0;
-            if(rs.next()){
-                idPersona = rs.getInt(1);
-            }
-            
-             sql = "INSERT INTO Administrador(idpersona) "
-                    + "values(?)";
-            pstAdministrador = con.prepareStatement(sql);
-            pstAdministrador.setInt(1, idPersona);
-           
-            resultado = pstAdministrador.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            persona.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
+            administrador.setIdAdministrador(persona.getIdPersona());
+            administrador.setDNI(persona.getDNI());
+            administrador.setNombre(persona.getNombre());
+            administrador.setApellido(persona.getApellido());
+            administrador.setCorreoElectronico(persona.getCorreoElectronico());
+            administrador.setNumTelefono(persona.getNumTelefono());
+            administrador.setDireccion(persona.getDireccion());
+            administrador.setFechaNacimiento(persona.getFechaNacimiento());
+            administrador.setGenero(persona.getGenero());
+            administrador.setActivo(true);
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
 
     @Override
     public int modificar(Administrador administrador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int resultado = -1;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AdministradorModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, administrador.getIdAdministrador());
+            cst.setString(2, administrador.getDNI());
+            cst.setString(3, administrador.getNombre());
+            cst.setString(4, administrador.getApellido());
+            cst.setString(5, administrador.getCorreoElectronico());
+            cst.setInt(6, administrador.getNumTelefono());
+            cst.setString(7, administrador.getDireccion());
+            cst.setDate(8, new java.sql.Date(administrador.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(administrador.getGenero()));
+            cst.setBoolean(10, administrador.isActivo());
+        
+            resultado = cst.executeUpdate();
+            
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
     public int eliminar(int idAdministrador) {
-        
         int resultado = 0;
-        sql = "DELETE FROM Administrador WHERE idAdministrador = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pst = con.prepareStatement(sql)) {
-
-            pst.setInt(1, idAdministrador);
-
-            resultado = pst.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("Administrador eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningun Administrador con ese ID.");
-            }
-
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call AdministradorEliminar(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idAdministrador);
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-
         return resultado;
-        
-        
-        
     }
 
     @Override
     public ArrayList<Administrador> listarTodos() {
-        
          ArrayList<Administrador> administradores = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT idAdministrador FROM Administrador ";
-            rs = st.executeQuery(sql);
+            sql = "{CALL AdministradorListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
-                Administrador administrador = new Administrador();
-                administrador.setIdAdministrador(rs.getInt("idAdministrador"));             
-                administradores.add(administrador);
+                Administrador admin = new Administrador();
+                admin.setIdAdministrador(rs.getInt("idPersona"));
+                admin.setDNI(rs.getString("DNI"));
+                admin.setNombre(rs.getString("nombre"));
+                admin.setApellido(rs.getString("apellido"));
+                admin.setCorreoElectronico(rs.getString("correoElectronico"));
+                admin.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                admin.setActivo(rs.getBoolean("activo"));
+                administradores.add(admin);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -128,51 +138,38 @@ public class AdministradorMySQL implements AdministradorDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return administradores;
-        
-        
-        
-        
+        return administradores;        
     }
 
     @Override
     public Administrador obtenerPorId(int idAdministrador) {
-        
-        
         Administrador administrador = null;
-        String sql = "SELECT * FROM Administrador WHERE idAdministrador = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pst = con.prepareStatement(sql)) {
-
-            pst.setInt(1, idAdministrador);
-            ResultSet rs = pst.executeQuery();
-
+        try {
+            con = DBManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL AdministradorListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idAdministrador);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 administrador = new Administrador();
-                administrador.setIdAdministrador(rs.getInt("idAdministrador"));
-                 
+                administrador.setIdAdministrador(rs.getInt("idPersona"));
+                administrador.setDNI(rs.getString("DNI"));
+                administrador.setNombre(rs.getString("nombre"));
+                administrador.setApellido(rs.getString("apellido"));
+                administrador.setCorreoElectronico(rs.getString("correoElectronico"));
+                administrador.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                administrador.setActivo(rs.getBoolean("activo"));
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-
         return administrador;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    
+    }   
 }
