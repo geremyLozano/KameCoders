@@ -94,10 +94,10 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int eliminar(int idAuxiliar) {
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call AUXILIAR_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call AuxiliarEliminar(?)}";
+            cst = con.prepareCall(sql);  
             cst.setInt(1, idAuxiliar);
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
