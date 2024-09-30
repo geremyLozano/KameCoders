@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBManager;
@@ -112,16 +113,21 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT idAuxiliar,nombre,apellido FROM paciente WHERE "
-                    + "activo = 1";
-            rs = st.executeQuery(sql);
+            sql = "{CALL AuxiliarListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
-                Auxiliar auxiliar = new Auxiliar();
-                auxiliar.setIdAuxiliar(rs.getInt("idAuxiliar"));
-                auxiliar.setNombre(rs.getString("nombre"));
-                auxiliar.setApellido(rs.getString("apellido"));
-                auxiliar.setActivo(true);
-                auxiliares.add(auxiliar);
+                Auxiliar aux = new Auxiliar();
+                Especialidad esp = new Especialidad();
+                aux.setIdAuxiliar(rs.getInt("idPersona"));
+                aux.setDNI(rs.getString("DNI"));
+                aux.setNombre(rs.getString("nombre"));
+                aux.setApellido(rs.getString("apellido"));
+                esp.setNombre(rs.getString("especialidad"));
+                aux.setEspecialidad(esp);
+                aux.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                aux.setActivo(rs.getBoolean("activo"));
+                auxiliares.add(aux);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

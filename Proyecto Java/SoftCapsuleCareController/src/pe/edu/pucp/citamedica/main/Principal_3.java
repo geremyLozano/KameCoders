@@ -2,6 +2,7 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
@@ -42,10 +43,18 @@ public class Principal_3 {
 //        else
 //            System.out.println("ERROR al modificar");
         AuxiliarDAO ad = new AuxiliarMySQL();
-        int valor = ad.eliminar(26);
-        if(valor>0)
-            System.out.println("Eliminado correctamente");
-        else
-            System.out.println("Error al eliminar");
+//        int valor = ad.eliminar(26);
+//        if(valor>0)
+//            System.out.println("Eliminado correctamente");
+//        else
+//            System.out.println("Error al eliminar");
+        ArrayList<Auxiliar>aux=ad.listarTodos();
+        for(Auxiliar p:aux){
+            String fecha = sdf.format(p.getFechaNacimiento());
+            System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
+                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+                    "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
+            System.out.println("---------------------------------");
+        }
     }
 }
