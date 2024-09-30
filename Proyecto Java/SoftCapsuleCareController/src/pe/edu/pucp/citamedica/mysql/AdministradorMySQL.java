@@ -19,18 +19,12 @@ import pe.edu.pucp.dbmanager.config.DBPoolManager;
  * @author Usuario
  */
 public class AdministradorMySQL implements AdministradorDAO{
-
-    
+ 
     private Connection con;
-    //private PreparedStatement pst;
     private String sql;
     private CallableStatement cst;
-    
-    private PreparedStatement pstPersona;
-    private PreparedStatement pstAdministrador;
-    
-     private ResultSet rs;
-     private Statement st;
+    private ResultSet rs;
+    private Statement st;
    
     @Override
     public int insertar(Administrador administrador, Usuario usuario, Persona persona) {
@@ -104,13 +98,11 @@ public class AdministradorMySQL implements AdministradorDAO{
     public int eliminar(int idAdministrador) {
         int resultado = 0;
         try{
-
             con = DBPoolManager.getInstance().getConnection();
             sql = "{call AdministradorEliminar(?)}";
             cst = con.prepareCall(sql);  
             cst.setInt(1, idAdministrador);
             resultado = cst.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

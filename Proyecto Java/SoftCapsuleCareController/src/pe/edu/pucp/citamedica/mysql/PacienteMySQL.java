@@ -16,8 +16,6 @@ import pe.edu.pucp.dbmanager.config.DBPoolManager;
 public class PacienteMySQL implements PacienteDAO{
     private Connection con;
     private Statement st;
-    private PreparedStatement pstPersona;
-    private PreparedStatement pstPaciente;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
