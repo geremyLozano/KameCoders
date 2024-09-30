@@ -21,23 +21,28 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(AmbienteMedico ambiente){
+    public int insertar(AmbienteMedico ambiente) {
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into AmbienteMedico(numPiso,ubicacion,capacidad,tipoAmbiente)"
-                    + " values(?,?,?,?)";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, ambiente.getNumPiso());
-            pst.setString(2,ambiente.getUbicacion());
-            pst.setInt(3, ambiente.getCapacidad());
-            pst.setString(4,ambiente.getTipoAmbiente().toString());
-            resultado = pst.executeUpdate();
+
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_insertar_ambiente_medico(?, ?, ?, ?)}";
+            CallableStatement cst = con.prepareCall(sql);
+            // Pasar los parámetros al procedimiento almacenado
+            cst.setInt(1, ambiente.getNumPiso());
+            cst.setString(2, ambiente.getUbicacion());
+            cst.setInt(3, ambiente.getCapacidad());
+            cst.setString(4, ambiente.getTipoAmbiente().toString());
+
+            // Ejecutar el procedimiento
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return resultado;
     }
+
     
     @Override
     public int modificar(AmbienteMedico ambiente){
