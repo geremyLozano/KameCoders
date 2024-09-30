@@ -24,7 +24,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Auxiliar auxiliar, Usuario usuario, Persona persona){
+    public int insertar(Auxiliar auxiliariliar, Usuario usuario, Persona persona){
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -47,16 +47,16 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             
             persona.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
-            auxiliar.setIdAuxiliar(persona.getIdPersona());
-            auxiliar.setDNI(persona.getDNI());
-            auxiliar.setNombre(persona.getNombre());
-            auxiliar.setApellido(persona.getApellido());
-            auxiliar.setCorreoElectronico(persona.getCorreoElectronico());
-            auxiliar.setNumTelefono(persona.getNumTelefono());
-            auxiliar.setDireccion(persona.getDireccion());
-            auxiliar.setFechaNacimiento(persona.getFechaNacimiento());
-            auxiliar.setGenero(persona.getGenero());
-            auxiliar.setActivo(true);
+            auxiliariliar.setIdAuxiliar(persona.getIdPersona());
+            auxiliariliar.setDNI(persona.getDNI());
+            auxiliariliar.setNombre(persona.getNombre());
+            auxiliariliar.setApellido(persona.getApellido());
+            auxiliariliar.setCorreoElectronico(persona.getCorreoElectronico());
+            auxiliariliar.setNumTelefono(persona.getNumTelefono());
+            auxiliariliar.setDireccion(persona.getDireccion());
+            auxiliariliar.setFechaNacimiento(persona.getFechaNacimiento());
+            auxiliariliar.setGenero(persona.getGenero());
+            auxiliariliar.setActivo(true);
         return resultado;
         }   catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -65,23 +65,23 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     }
     
     @Override
-    public int modificar(Auxiliar auxiliar) {
+    public int modificar(Auxiliar auxiliariliar) {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
-            cst.setInt(1, auxiliar.getIdAuxiliar());
-            cst.setString(2, auxiliar.getDNI());
-            cst.setString(3, auxiliar.getNombre());
-            cst.setString(4, auxiliar.getApellido());
-            cst.setString(5, auxiliar.getCorreoElectronico());
-            cst.setInt(6, auxiliar.getNumTelefono());
-            cst.setString(7, auxiliar.getDireccion());
-            cst.setDate(8, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
-            cst.setString(9, String.valueOf(auxiliar.getGenero()));
+            cst.setInt(1, auxiliariliar.getIdAuxiliar());
+            cst.setString(2, auxiliariliar.getDNI());
+            cst.setString(3, auxiliariliar.getNombre());
+            cst.setString(4, auxiliariliar.getApellido());
+            cst.setString(5, auxiliariliar.getCorreoElectronico());
+            cst.setInt(6, auxiliariliar.getNumTelefono());
+            cst.setString(7, auxiliariliar.getDireccion());
+            cst.setDate(8, new java.sql.Date(auxiliariliar.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(auxiliariliar.getGenero()));
             cst.setInt(10, 1);
-            cst.setBoolean(11, auxiliar.isActivo());
+            cst.setBoolean(11, auxiliariliar.isActivo());
             
             resultado = cst.executeUpdate();
             
@@ -109,7 +109,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
     @Override
     public ArrayList<Auxiliar> listarTodos() {
-        ArrayList<Auxiliar> auxiliares = new ArrayList<>();
+        ArrayList<Auxiliar> auxiliariliares = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
@@ -117,17 +117,17 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
             while(rs.next()){
-                Auxiliar aux = new Auxiliar();
+                Auxiliar auxiliar = new Auxiliar();
                 Especialidad esp = new Especialidad();
-                aux.setIdAuxiliar(rs.getInt("idPersona"));
-                aux.setDNI(rs.getString("DNI"));
-                aux.setNombre(rs.getString("nombre"));
-                aux.setApellido(rs.getString("apellido"));
+                auxiliar.setIdAuxiliar(rs.getInt("idPersona"));
+                auxiliar.setDNI(rs.getString("DNI"));
+                auxiliar.setNombre(rs.getString("nombre"));
+                auxiliar.setApellido(rs.getString("apellido"));
                 esp.setNombre(rs.getString("especialidad"));
-                aux.setEspecialidad(esp);
-                aux.setFechaNacimiento(rs.getDate("fechaNacimiento"));
-                aux.setActivo(rs.getBoolean("activo"));
-                auxiliares.add(aux);
+                auxiliar.setEspecialidad(esp);
+                auxiliar.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                auxiliar.setActivo(rs.getBoolean("activo"));
+                auxiliariliares.add(auxiliar);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -138,7 +138,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return auxiliares;
+        return auxiliariliares;
     }
 
     @Override
@@ -146,17 +146,23 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         Auxiliar auxiliar = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT idAuxiliar, activo FROM Auxiliar WHERE idAuxiliar = ?";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setInt(1, idAuxiliar);
-            rs = pstAuxiliar.executeQuery();
-
+            st = con.createStatement();
+            sql = "{CALL AuxiliarListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idAuxiliar);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 auxiliar = new Auxiliar();
-                auxiliar.setIdAuxiliar(rs.getInt("idAuxiliar"));
+                Especialidad esp = new Especialidad();
+                auxiliar.setIdAuxiliar(rs.getInt("idPersona"));
+                auxiliar.setDNI(rs.getString("DNI"));
+                auxiliar.setNombre(rs.getString("nombre"));
+                auxiliar.setApellido(rs.getString("apellido"));
+                esp.setNombre(rs.getString("especialidad"));
+                auxiliar.setEspecialidad(esp);
+                auxiliar.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 auxiliar.setActivo(rs.getBoolean("activo"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

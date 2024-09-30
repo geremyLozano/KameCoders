@@ -48,13 +48,20 @@ public class Principal_3 {
 //            System.out.println("Eliminado correctamente");
 //        else
 //            System.out.println("Error al eliminar");
-        ArrayList<Auxiliar>aux=ad.listarTodos();
-        for(Auxiliar p:aux){
-            String fecha = sdf.format(p.getFechaNacimiento());
-            System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
-                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
-                    "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
-            System.out.println("---------------------------------");
-        }
+//        ArrayList<Auxiliar>aux=ad.listarTodos();
+//        for(Auxiliar p:aux){
+//            String fecha = sdf.format(p.getFechaNacimiento());
+//            System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
+//                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+//                    "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
+//            System.out.println("---------------------------------");
+//        }
+        Auxiliar p=ad.obtenerPorId(25);
+        String fecha = sdf.format(p.getFechaNacimiento());
+        System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
+                + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+                "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
+        System.out.println("---------------------------------");
+        
     }
 }
