@@ -2,6 +2,7 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
@@ -12,7 +13,7 @@ public class Principal_3 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Persona persona = new Persona();
-        persona.setDNI("unaytreinta");
+        persona.setDNI("16:07");
         persona.setNombre("Conexion2");
         persona.setApellido("probando");
         persona.setCorreoElectronico("prueba2@hotmail.com");
@@ -22,7 +23,7 @@ public class Principal_3 {
         persona.setGenero('M');
         
         Usuario usuario = new Usuario();
-        usuario.setUsername("unaytreinta");
+        usuario.setUsername("16:07");
         usuario.setContrasenha("admin123");
         
         Auxiliar aux = new Auxiliar();
@@ -32,5 +33,13 @@ public class Principal_3 {
             System.out.println("Auxiliar ingreso correctamente");
         else
             System.out.println("Error en la creacion");
+        Scanner in = new Scanner(System.in);
+        String dato = in.next();
+        aux.setNombre("AUXILIARMODIFICADO");
+        int valor = ad.modificar(aux);
+        if(valor>0)
+            System.out.println("Modificado correctamente");
+        else
+            System.out.println("ERROR al modificar");
     }
 }

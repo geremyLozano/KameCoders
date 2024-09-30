@@ -47,6 +47,14 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             persona.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             auxiliar.setIdAuxiliar(persona.getIdPersona());
+            auxiliar.setDNI(persona.getDNI());
+            auxiliar.setNombre(persona.getNombre());
+            auxiliar.setApellido(persona.getApellido());
+            auxiliar.setCorreoElectronico(persona.getCorreoElectronico());
+            auxiliar.setNumTelefono(persona.getNumTelefono());
+            auxiliar.setDireccion(persona.getDireccion());
+            auxiliar.setFechaNacimiento(persona.getFechaNacimiento());
+            auxiliar.setGenero(persona.getGenero());
             auxiliar.setActivo(true);
         return resultado;
         }   catch (SQLException e) {
@@ -57,18 +65,28 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     
     @Override
     public int modificar(Auxiliar auxiliar) {
-        int resultado = 0;
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-
-            sql = "UPDATE auxiliar SET activo = ? WHERE idAuxiliar = ?";
-            pstAuxiliar = con.prepareStatement(sql);
-            pstAuxiliar.setBoolean(1, auxiliar.isActivo());
-            pstAuxiliar.setInt(2, auxiliar.getIdAuxiliar());
-            resultado = pstAuxiliar.executeUpdate();  
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, auxiliar.getIdAuxiliar());
+            cst.setString(2, auxiliar.getDNI());
+            cst.setString(3, auxiliar.getNombre());
+            cst.setString(4, auxiliar.getApellido());
+            cst.setString(5, auxiliar.getCorreoElectronico());
+            cst.setInt(6, auxiliar.getNumTelefono());
+            cst.setString(7, auxiliar.getDireccion());
+            cst.setDate(8, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(auxiliar.getGenero()));
+            cst.setInt(10, 1);
+            cst.setBoolean(11, auxiliar.isActivo());
             
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            resultado = cst.executeUpdate();
+            
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }

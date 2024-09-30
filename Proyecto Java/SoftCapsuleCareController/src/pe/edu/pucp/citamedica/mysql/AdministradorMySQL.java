@@ -83,7 +83,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             cst.setString(7, administrador.getDireccion());
             cst.setDate(8, new java.sql.Date(administrador.getFechaNacimiento().getTime()));
             cst.setString(9, String.valueOf(administrador.getGenero()));
-            cst.setBoolean(10, true); //administrador.getActivo;
+            cst.setBoolean(10, administrador.isActivo());
         
             resultado = cst.executeUpdate();
             
