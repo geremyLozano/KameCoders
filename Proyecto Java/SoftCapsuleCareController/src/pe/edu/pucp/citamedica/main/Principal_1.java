@@ -2,6 +2,7 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
@@ -43,6 +44,14 @@ public class Principal_1 {
 //            System.out.println("Administrador modificado correctamente");
 //        else
 //            System.out.println("Error en la modificacion");
-        ad.eliminar(24);
+//        ad.eliminar(24);
+        ArrayList<Administrador>lista=ad.listarTodos();
+        for(Administrador p:lista){
+            String fecha = sdf.format(p.getFechaNacimiento());
+            System.out.println("IdPaciente: "+p.getIdAdministrador()+ "  DNI:"+p.getDNI()+"   "
+                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
+            System.out.println("---------------------------------");
+        }
     }
 }

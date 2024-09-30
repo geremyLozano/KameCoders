@@ -93,6 +93,7 @@ public class PacienteMySQL implements PacienteDAO{
             while(rs.next()){
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(rs.getInt("idPersona"));
+                paciente.setDNI(rs.getString("DNI"));
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setApellido(rs.getString("apellido"));
                 paciente.setCorreoElectronico(rs.getString("correoElectronico"));

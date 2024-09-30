@@ -106,26 +106,28 @@ public class AdministradorMySQL implements AdministradorDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return resultado;
-        
-        
-        
     }
 
     @Override
     public ArrayList<Administrador> listarTodos() {
-        
          ArrayList<Administrador> administradores = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT idAdministrador FROM Administrador ";
-            rs = st.executeQuery(sql);
+            sql = "{CALL AdministradorListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
-                Administrador administrador = new Administrador();
-                administrador.setIdAdministrador(rs.getInt("idAdministrador"));             
-                administradores.add(administrador);
+                Administrador admin = new Administrador();
+                admin.setIdAdministrador(rs.getInt("idPersona"));
+                admin.setDNI(rs.getString("DNI"));
+                admin.setNombre(rs.getString("nombre"));
+                admin.setApellido(rs.getString("apellido"));
+                admin.setCorreoElectronico(rs.getString("correoElectronico"));
+                admin.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                admin.setActivo(rs.getBoolean("activo"));
+                administradores.add(admin);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -136,11 +138,7 @@ public class AdministradorMySQL implements AdministradorDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return administradores;
-        
-        
-        
-        
+        return administradores;        
     }
 
     @Override
