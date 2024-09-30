@@ -45,13 +45,19 @@ public class Principal_1 {
 //        else
 //            System.out.println("Error en la modificacion");
 //        ad.eliminar(24);
-        ArrayList<Administrador>lista=ad.listarTodos();
-        for(Administrador p:lista){
+//        ArrayList<Administrador>lista=ad.listarTodos();
+//        for(Administrador p:lista){
+//            String fecha = sdf.format(p.getFechaNacimiento());
+//            System.out.println("IdPaciente: "+p.getIdAdministrador()+ "  DNI:"+p.getDNI()+"   "
+//                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+//                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
+//            System.out.println("---------------------------------");
+//        }
+        Administrador p = ad.obtenerPorId(23);
             String fecha = sdf.format(p.getFechaNacimiento());
             System.out.println("IdPaciente: "+p.getIdAdministrador()+ "  DNI:"+p.getDNI()+"   "
                     + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
                     "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
             System.out.println("---------------------------------");
-        }
     }
 }

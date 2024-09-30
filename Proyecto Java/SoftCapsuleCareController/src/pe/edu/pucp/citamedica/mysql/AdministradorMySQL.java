@@ -143,42 +143,33 @@ public class AdministradorMySQL implements AdministradorDAO{
 
     @Override
     public Administrador obtenerPorId(int idAdministrador) {
-        
-        
         Administrador administrador = null;
-        String sql = "SELECT * FROM Administrador WHERE idAdministrador = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pst = con.prepareStatement(sql)) {
-
-            pst.setInt(1, idAdministrador);
-            ResultSet rs = pst.executeQuery();
-
+        try {
+            con = DBManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL AdministradorListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idAdministrador);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 administrador = new Administrador();
-                administrador.setIdAdministrador(rs.getInt("idAdministrador"));
-                 
+                administrador.setIdAdministrador(rs.getInt("idPersona"));
+                administrador.setDNI(rs.getString("DNI"));
+                administrador.setNombre(rs.getString("nombre"));
+                administrador.setApellido(rs.getString("apellido"));
+                administrador.setCorreoElectronico(rs.getString("correoElectronico"));
+                administrador.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                administrador.setActivo(rs.getBoolean("activo"));
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-
         return administrador;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    
+    }   
 }
