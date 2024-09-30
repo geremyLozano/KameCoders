@@ -57,6 +57,14 @@ public class AdministradorMySQL implements AdministradorDAO{
             persona.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             administrador.setIdAdministrador(persona.getIdPersona());
+            administrador.setDNI(persona.getDNI());
+            administrador.setNombre(persona.getNombre());
+            administrador.setApellido(persona.getApellido());
+            administrador.setCorreoElectronico(persona.getCorreoElectronico());
+            administrador.setNumTelefono(persona.getNumTelefono());
+            administrador.setDireccion(persona.getDireccion());
+            administrador.setFechaNacimiento(persona.getFechaNacimiento());
+            administrador.setGenero(persona.getGenero());
             administrador.setActivo(true);
         return resultado;
         }   catch (SQLException e) {
@@ -67,31 +75,44 @@ public class AdministradorMySQL implements AdministradorDAO{
 
     @Override
     public int modificar(Administrador administrador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int resultado = -1;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL AdministradorModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, administrador.getIdAdministrador());
+            cst.setString(2, administrador.getDNI());
+            cst.setString(3, administrador.getNombre());
+            cst.setString(4, administrador.getApellido());
+            cst.setString(5, administrador.getCorreoElectronico());
+            cst.setInt(6, administrador.getNumTelefono());
+            cst.setString(7, administrador.getDireccion());
+            cst.setDate(8, new java.sql.Date(administrador.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(administrador.getGenero()));
+            cst.setBoolean(10, true); //administrador.getActivo;
+        
+            resultado = cst.executeUpdate();
+            
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
     public int eliminar(int idAdministrador) {
-        
         int resultado = 0;
-        sql = "DELETE FROM Administrador WHERE idAdministrador = ?";
+        try{
 
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pst = con.prepareStatement(sql)) {
-
-            pst.setInt(1, idAdministrador);
-
-            resultado = pst.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("Administrador eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningun Administrador con ese ID.");
-            }
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call AdministradorEliminar(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idAdministrador);
+            resultado = cst.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return resultado;

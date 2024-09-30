@@ -151,7 +151,7 @@ public class PacienteMySQL implements PacienteDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL PacienteModificar(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL PacienteModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, paciente.getIdPaciente());
             cst.setString(2, paciente.getDNI());
@@ -162,6 +162,8 @@ public class PacienteMySQL implements PacienteDAO{
             cst.setString(7, paciente.getDireccion());
             cst.setDate(8, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
             cst.setString(9, String.valueOf(paciente.getGenero()));
+            cst.setBoolean(10, paciente.getHistorialActivo());
+            cst.setBoolean(11, true);//paciente.getActivo();
         
             resultado = cst.executeUpdate();
             
