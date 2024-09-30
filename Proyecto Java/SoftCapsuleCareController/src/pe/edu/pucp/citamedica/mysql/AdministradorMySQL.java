@@ -37,7 +37,7 @@ public class AdministradorMySQL implements AdministradorDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL InsertarAdministrador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL AdministradorInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
