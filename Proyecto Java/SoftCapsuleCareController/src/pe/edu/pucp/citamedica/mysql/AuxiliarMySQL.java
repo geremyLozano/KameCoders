@@ -27,7 +27,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL InsertarAuxiliar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
