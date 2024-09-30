@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.model.usuario.Aseguradora;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AseguradoraMySQL implements AseguradoraDAO{
     private Connection con;
