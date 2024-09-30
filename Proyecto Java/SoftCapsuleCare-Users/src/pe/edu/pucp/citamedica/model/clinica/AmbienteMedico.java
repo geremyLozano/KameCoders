@@ -4,7 +4,6 @@ public class AmbienteMedico {
     private static int contador = 0;
 
     private int idAmbiente;
-    private int gaaa; 
     private int numPiso;
     private String ubicacion;
     private int capacidad;
