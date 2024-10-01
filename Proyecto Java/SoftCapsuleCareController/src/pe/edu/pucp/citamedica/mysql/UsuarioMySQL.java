@@ -22,17 +22,17 @@ public class UsuarioMySQL implements UsuarioDAO{
     @Override
     public int insertar(Usuario usuario) {
         int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Usuario(username,contrasenha,idpersona) values(?,?,?)";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, usuario.getUsername());
-            pst.setString(2, usuario.getContrasenha());
-            pst.setInt(3,usuario.getDatosPersonales().getIdPersona());
-            resultado = pst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
-        }
+//        try {
+//            con = DBManager.getInstance().getConnection();
+//            sql = "INSERT into Usuario(username,contrasenha,idpersona) values(?,?,?)";
+//            pst = con.prepareStatement(sql);
+//            pst.setString(1, usuario.getUsername());
+//            pst.setString(2, usuario.getContrasenha());
+//            pst.setInt(3,usuario.getDatosPersonales().getIdPersona());
+//            resultado = pst.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.print(e.getMessage());
+//        }
         return resultado;
     }
 
