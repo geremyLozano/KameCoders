@@ -23,7 +23,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Especialidad(nombre,costoConsulta) values(?,?)";
+            sql = "CALL ESPECIALIDAD_INSERTAR(?,?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, especialidad.getNombre());
             pst.setDouble(2, especialidad.getCostoConsulta());
@@ -44,14 +44,16 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public int modificar(Especialidad especialidad) {
         int resultado = 0;
-        sql = "UPDATE Especialidad SET nombre = ?, costoConsulta = ? WHERE idEspecialidad = ?";
+        sql = "CALL ESPECIALIDAD_ACTUALIZAR(?,?,?,?)";
 
         try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
-            pst.setString(1,especialidad.getNombre());
-            pst.setDouble(2,especialidad.getCostoConsulta());
+            pst.setInt(1,especialidad.getIdEspecialidad());
+            pst.setString(2,especialidad.getNombre());
+            pst.setDouble(3,especialidad.getCostoConsulta());
+            pst.setBoolean(4,especialidad.isActivo());
             
             // Ejecutar la consulta de actualización
             resultado = pst.executeUpdate();
@@ -73,7 +75,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public int eliminar(int idEspecialidad) {
         int resultado = 0;
-        sql = "DELETE FROM Especialidad WHERE idEspecialidad = ?";
+        sql = "CALL ESPECIALIDAD_ELIMINAR(?)";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
@@ -100,7 +102,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public ArrayList<Especialidad> listarTodos() {
         ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
-        String sql = "SELECT * FROM Especialidad";
+        String sql = "CALL ESPECIALIDAD_LISTAR_TODAS()";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
@@ -126,7 +128,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public Especialidad obtenerPorId(int idEspecialidad) {
         Especialidad especialidad = null;
-        String sql = "SELECT * FROM Especialidad WHERE idEspecialidad = ?";
+        String sql = "CALL ESPECIALIDAD_BUSCARPORID(?)";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
