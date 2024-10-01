@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import pe.edu.pucp.citamedica.model.procedimiento.Pago;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class PagoMySQL implements PagoDAO{
     private Connection con;
@@ -20,22 +22,26 @@ public class PagoMySQL implements PagoDAO{
     
     @Override
     public int insertar(Pago pago){
-        int resultado = 0;
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Pago(DNI,descuentoPorSeguro,montoParcial,montoTotal,fechaPago,concepto,estado)"
-                    + " values(?,?,?,?,?,?,?)";
-            pst = con.prepareStatement(sql);
-            pst.setDouble(2, pago.getDescuentoPorSeguro());
-            pst.setDouble(3, pago.getMontoParcial());
-            pst.setDouble(4, pago.getMontoTotal());
-            java.sql.Date sqlDate = new java.sql.Date(pago.getFechaPago().getTime());
-            pst.setDate(5,sqlDate);
-            pst.setString(6,pago.getConcepto());
-            pst.setBoolean(7,pago.getEstado());
-            resultado = pst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL PagoInsertar(?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.setDouble(2, pago.getDescuentoPorSeguro());
+            cst.setDouble(3, pago.getMontoParcial());
+            cst.setDouble(4, pago.getMontoTotal());
+            cst.setString(5, pago.getConcepto());
+            cst.setInt(6, pago.getIdPaciente());
+        
+            resultado = cst.executeUpdate();
+            
+            pago.setIdPago(cst.getInt(1));
+            pago.setEstado(true);
+            pago.setFechaPago(java.sql.Date.valueOf(LocalDate.now()));
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
