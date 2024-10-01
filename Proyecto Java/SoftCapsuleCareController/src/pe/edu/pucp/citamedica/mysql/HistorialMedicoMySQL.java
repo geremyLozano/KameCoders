@@ -31,6 +31,8 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.setInt(2, historial.getIdPaciente());
             resultado = cst.executeUpdate();
+            historial.setIdHistorial(cst.getInt(1));
+            historial.setActivo(true);
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
         }catch( Exception e){
@@ -73,56 +75,45 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     @Override
     public int eliminar(int idHistorial) {
         int resultado = 0;
-        sql = "DELETE FROM HistorialMedico WHERE idHistorialMedico = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstHistorial = con.prepareStatement(sql)) {
-
-            pstHistorial.setInt(1, idHistorial);
-
-            resultado = pstHistorial.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("La fila de la tabla HistorialMedico se ha eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningun historial medico con ese ID.");
-            }
-
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call HistorialMedicoEliminar(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idHistorial);
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-
         return resultado;
     }
 
     @Override
     public ArrayList<HistorialMedico> listarTodos() {
         ArrayList<HistorialMedico> listaHistorial = new ArrayList<>();
-        String sql = "SELECT * FROM HistorialMedico";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstHistorial = con.prepareStatement(sql);
-             ResultSet rs = pstHistorial.executeQuery()) {
-
-            // Iterar sobre cada registro en el ResultSet
-            while (rs.next()) {
-                // Crear un nuevo objeto HistorialMedico
-                HistorialMedico historial = new HistorialMedico();
-                historial.setIdHistorial(rs.getInt("idHistorialMedico"));
-                historial.setIdPaciente(rs.getInt("numeroDocumentoIdentidadPaciente"));
-                //Obtener la fecha de la base de datos
-                java.sql.Date sqlDate = rs.getDate("fechaCreacion");
-                //Convertir java.sql.Date a java.util.Date
-                java.util.Date fecha = new java.util.Date(sqlDate.getTime());
-                historial.setFechaDeCreacion(fecha);
-                //Añadir el objeto HistorialMedico a la lista
-                listaHistorial.add(historial);
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
+            while(rs.next()){
+                HistorialMedico hist = new HistorialMedico();
+                hist.setIdHistorial(rs.getInt("idHistorialMedico"));
+                hist.setFechaDeCreacion(rs.getDate("fechaCreacion"));
+                hist.setActivo(rs.getBoolean("activo"));
+                hist.setIdPaciente(rs.getInt("idPaciente"));
+                listaHistorial.add(hist);
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();  // Manejar la excepción si ocurre un error
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-        return listaHistorial;  // Retornar la lista de médicos
+        return listaHistorial;
     }
 
     @Override

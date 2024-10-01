@@ -1,5 +1,6 @@
 package pe.edu.pucp.citamedica.model.consultas;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,4 +65,12 @@ public class HistorialMedico {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = sdf.format(fechaDeCreacion);
+        return "HistorialMedico{" + "idHistorial=" + idHistorial + ", fechaDeCreacion=" + fecha + ", idPaciente=" + idPaciente + ", activo=" + activo + '}';
+    }
+    
 }
