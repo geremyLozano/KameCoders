@@ -8,19 +8,26 @@ public class Usuario {
     private String username;
     private String contrasenha;
     private boolean activo;
+    private int idPersona;
 
     public Usuario() {
     }
 
-    // Incluimos el campo apellido en el constructor
-    public Usuario(String contrasenha, Persona datosPersonales, String DNI) {
-        // Llamamos al constructor de Persona pasando el apellido
+    public Usuario(int idUsuario, String username, String contrasenha, boolean activo, int idPersona) {
         this.idUsuario = ++contador;
-        this.username = DNI;  // Asignamos el DNI como username
+        this.username = username;
         this.contrasenha = contrasenha;
-        this.activo = true;
+        this.activo = activo;
+        this.idPersona = idPersona;
     }
 
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -56,5 +63,11 @@ public class Usuario {
     public void actualizarInformacion() {
         // Implementar lógica de actualización
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", username=" + username + ", contrasenha=" + contrasenha + ", idPersona=" + idPersona + '}';
+    }
+    
 
 }

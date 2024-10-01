@@ -74,15 +74,15 @@ public class UsuarioMySQL implements UsuarioDAO{
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
-            sql = "SELECT * FROM Usuario";
-            rs = st.executeQuery(sql);
+            sql = "{CALL UsuarioListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setContrasenha(rs.getString("contrasenha"));
-                int idPersona = rs.getInt("idpersona");
+                usuario.setIdPersona(rs.getInt("idPersona"));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
