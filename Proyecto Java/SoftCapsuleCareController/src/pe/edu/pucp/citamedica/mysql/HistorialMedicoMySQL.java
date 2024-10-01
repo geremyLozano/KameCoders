@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     
@@ -24,19 +25,15 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     public int insertar(HistorialMedico historial) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into HistorialMedico(fechaCreacion,numeroDocumentoIdentidadPaciente) "
-                    + "values(?,?)";
-            pst = con.prepareStatement(sql);
-            java.sql.Date sqlDate = new java.sql.Date(historial.getFechaDeCreacion().getTime());
-            pst.setDate(1, sqlDate);
-            pst.setString(2, historial.getNumeroDocumentoIdentidadPaciente());
-            resultado = pst.executeUpdate();
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL HistorialMedicoInsertar(?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.setInt(2, historial.getIdPaciente());
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
         }catch( Exception e){
-            e.printStackTrace();
             System.out.print("Error general" + e.getMessage());
         }
         return resultado;
@@ -54,7 +51,7 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
             // Configuramos los valores a modificar en el PreparedStatement
             java.sql.Date sqlDate = new java.sql.Date(historial.getFechaDeCreacion().getTime());
             pstHistorial.setDate(1, sqlDate);
-            pstHistorial.setString(2, historial.getNumeroDocumentoIdentidadPaciente());
+            pstHistorial.setInt(2, historial.getIdPaciente());
             pstHistorial.setInt(3, historial.getIdHistorial());
             // Ejecutar la consulta de actualización
             resultado = pstHistorial.executeUpdate();
@@ -112,7 +109,7 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
                 // Crear un nuevo objeto HistorialMedico
                 HistorialMedico historial = new HistorialMedico();
                 historial.setIdHistorial(rs.getInt("idHistorialMedico"));
-                historial.setNumeroDocumentoIdentidadPaciente(rs.getString("numeroDocumentoIdentidadPaciente"));
+                historial.setIdPaciente(rs.getInt("numeroDocumentoIdentidadPaciente"));
                 //Obtener la fecha de la base de datos
                 java.sql.Date sqlDate = rs.getDate("fechaCreacion");
                 //Convertir java.sql.Date a java.util.Date
@@ -142,7 +139,7 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
             if (rs.next()) {
                 historial = new HistorialMedico();
                 historial.setIdHistorial(rs.getInt("idHistorialMedico"));
-                historial.setNumeroDocumentoIdentidadPaciente(rs.getString("numeroDocumentoIdentidadPaciente"));
+//                historial.setNumeroDocumentoIdentidadPaciente(rs.getString("numeroDocumentoIdentidadPaciente"));
                 java.sql.Date sqlDate = rs.getDate("fechaCreacion");
                 //Convertir java.sql.Date a java.util.Date
                 java.util.Date fecha = new java.util.Date(sqlDate.getTime());

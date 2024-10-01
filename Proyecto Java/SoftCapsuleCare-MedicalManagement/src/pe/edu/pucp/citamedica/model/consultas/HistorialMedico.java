@@ -9,7 +9,7 @@ public class HistorialMedico {
 
     private int idHistorial;
     private Date fechaDeCreacion;
-    private String numeroDocumentoIdentidadPaciente;
+    private int idPaciente;
     private ArrayList<CitaMedica>citas;
     private boolean activo;
 
@@ -17,10 +17,10 @@ public class HistorialMedico {
         citas = new ArrayList<>();
     }
 
-    public HistorialMedico(Date fechaDeCreacion, String numeroDocumentoIdentidadPaciente, ArrayList<CitaMedica> citas) {
+    public HistorialMedico(Date fechaDeCreacion, int idPaciente, ArrayList<CitaMedica> citas) {
         this.idHistorial = ++contador;
         this.fechaDeCreacion = fechaDeCreacion;
-        this.numeroDocumentoIdentidadPaciente = numeroDocumentoIdentidadPaciente;
+        this.idPaciente = idPaciente;
         this.citas = new ArrayList<>();
         this.activo = true;
     }
@@ -41,12 +41,12 @@ public class HistorialMedico {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    public String getNumeroDocumentoIdentidadPaciente() {
-        return numeroDocumentoIdentidadPaciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setNumeroDocumentoIdentidadPaciente(String numeroDocumentoIdentidadPaciente) {
-        this.numeroDocumentoIdentidadPaciente = numeroDocumentoIdentidadPaciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public ArrayList<CitaMedica> getCitas() {
@@ -64,6 +64,4 @@ public class HistorialMedico {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
-    
 }

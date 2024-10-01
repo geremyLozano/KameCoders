@@ -112,7 +112,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     public ArrayList<Administrador> listarTodos() {
          ArrayList<Administrador> administradores = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             st = con.createStatement();
             sql = "{CALL AdministradorListar}";
             cst = con.prepareCall(sql);
@@ -144,7 +144,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     public Administrador obtenerPorId(int idAdministrador) {
         Administrador administrador = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             st = con.createStatement();
             sql = "{CALL AdministradorListarPorID(?)}";
             cst = con.prepareCall(sql);
