@@ -1,12 +1,12 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class EspecialidadMySQL implements EspecialidadDAO {
     private Connection con;
@@ -18,7 +18,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     public int insertar(Especialidad especialidad) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL ESPECIALIDAD_INSERTAR(?,?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, especialidad.getNombre());
@@ -42,7 +42,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         int resultado = 0;
         sql = "CALL ESPECIALIDAD_ACTUALIZAR(?,?,?,?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
+        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
@@ -75,7 +75,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         int resultado = 0;
         sql = "CALL ESPECIALIDAD_ELIMINAR(?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1, idEspecialidad);
@@ -101,7 +101,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     public ArrayList<Especialidad> listarTodos() {
         ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
         sql = "CALL ESPECIALIDAD_LISTAR_TODAS()";
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
@@ -128,7 +128,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         Especialidad especialidad = null;
         sql = "CALL ESPECIALIDAD_BUSCARPORID(?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1, idEspecialidad);
