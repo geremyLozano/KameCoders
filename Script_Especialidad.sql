@@ -32,16 +32,6 @@ DELIMITER ;
 --ESPECIALIDAD_ELIMINAR
 
 DELIMITER //
-CREATE PROCEDURE ESPECIALIDAD_ELIMINAR()
-BEGIN
-    UPDATE Especialidad
-    SET activo = 0;
-END //
-DELIMITER ;
-
---LISTAR TODOS
-
-DELIMITER //
 CREATE PROCEDURE ESPECIALIDAD_ELIMINAR(
     IN p_idEspecialidad INT
 )
@@ -51,6 +41,15 @@ BEGIN
     WHERE idEspecialidad = p_idEspecialidad;
 END //
 DELIMITER ;
+
+--LISTAR TODOS
+
+CREATE DEFINER=`admin`@`%` PROCEDURE `ESPECIALIDAD_LISTAR_TODAS`()
+ BEGIN
+     SELECT idEspecialidad, nombre, costoConsulta, activo
+     FROM Especialidad
+     WHERE activo = 1;
+ END
 
 --ESPECIALIDAD BUSCAR POR ID
 

@@ -26,13 +26,13 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into Comunicacion(tipoComunicacion,contenido,fechaComunicacion) "
-                    + "values(?,?,?)";
+            sql = "CALL COMUNICACION_INSERTAR(?,?,?,?)";
             pstComunica = con.prepareStatement(sql);
             pstComunica.setString(1, comunicacion.getTipo().name());
             pstComunica.setString(2, comunicacion.getContenido());
             java.sql.Date sqlDate = new java.sql.Date(comunicacion.getFechaComunicacion().getTime());
             pstComunica.setDate(3, sqlDate);
+            pstComunica.setInt(4,comunicacion.getIdPaciente());
             resultado = pstComunica.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -43,18 +43,19 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     @Override
     public int modificar(Comunicacion comunicacion) {
         int resultado = 0;
-        sql = "UPDATE Comunicacion SET tipoComunicacion = ?, contenido = ?, "
-                + "fechaComunicacion = ? " + " WHERE idComunicacion = ?";
+        sql = "CALL COMUNICACION_ACTUALIZAR(?,?,?,?,?,?)";
 
         try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement pstComunica = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
-            pstComunica.setString(1, comunicacion.getTipo().name());
-            pstComunica.setString(2, comunicacion.getContenido());
+            pstComunica.setInt(1,comunicacion.getIdComunicacion());
+            pstComunica.setString(2, comunicacion.getTipo().name());
+            pstComunica.setString(3, comunicacion.getContenido());
             java.sql.Date sqlDate = new java.sql.Date(comunicacion.getFechaComunicacion().getTime());
-            pstComunica.setDate(3, sqlDate);
-            pstComunica.setInt(4, comunicacion.getIdComunicacion());
+            pstComunica.setDate(4, sqlDate);
+            pstComunica.setBoolean(5,comunicacion.isActivo());
+            pstComunica.setInt(6, comunicacion.getIdPaciente());
             // Ejecutar la consulta de actualización
             resultado = pstComunica.executeUpdate();
 
@@ -75,7 +76,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     @Override
     public int eliminar(int idComunicacion) {
         int resultado = 0;
-        sql = "DELETE FROM Comunicacion WHERE idComunicacion = ?";
+        sql = "CALL COMUNICACION_ELIMINAR(?)";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstComunica = con.prepareStatement(sql)) {
@@ -101,7 +102,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     @Override
     public ArrayList<Comunicacion> listarTodos() {
         ArrayList<Comunicacion> listaComunicacion = new ArrayList<>();
-        String sql = "SELECT * FROM Comunicacion";
+        String sql = "CALL COMUNICACION_LISTAR_TODOS()";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstComunicacion = con.prepareStatement(sql);
              ResultSet rs = pstComunicacion.executeQuery()) {
@@ -120,7 +121,8 @@ public class ComunicacionMySQL implements ComunicacionDAO{
                 //Convertir java.sql.Date a java.util.Date
                 java.util.Date fecha = new java.util.Date(sqlDate.getTime());
                 comunica.setFechaComunicacion(fecha);
-
+                comunica.setActivo(rs.getBoolean("activo"));
+                comunica.setIdPaciente(rs.getInt("idPaciente"));
                 //Añadir el objeto Comunicacion a la lista
                 listaComunicacion.add(comunica);
             }
@@ -134,7 +136,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     @Override
     public Comunicacion obtenerPorId(int idComunicacion) {
         Comunicacion comunica = null;
-        sql = "SELECT * FROM Comunicacion WHERE idComunicacion = ?";
+        sql = "CALL COMUNICACION_BUSCARPORID(?)";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstComunicacion = con.prepareStatement(sql)) {
@@ -153,6 +155,8 @@ public class ComunicacionMySQL implements ComunicacionDAO{
                 //Convertir java.sql.Date a java.util.Date
                 java.util.Date fecha = new java.util.Date(sqlDate.getTime());
                 comunica.setFechaComunicacion(fecha);
+                comunica.setActivo(rs.getBoolean("activo"));
+                comunica.setIdPaciente(rs.getInt("idPaciente"));
             }
 
         } catch (SQLException e) {
