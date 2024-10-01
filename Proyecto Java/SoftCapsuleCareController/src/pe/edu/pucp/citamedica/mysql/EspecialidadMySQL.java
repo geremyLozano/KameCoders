@@ -1,20 +1,16 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
 import pe.edu.pucp.dbmanager.config.DBManager;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 
 public class EspecialidadMySQL implements EspecialidadDAO {
     private Connection con;
-    private Statement st;
     private PreparedStatement pst;
-    private CallableStatement cst;
     private String sql;
     private ResultSet rs;
     
@@ -66,7 +62,9 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            // Imprimir la excepción si ocurre un error
+            System.out.println(e.getMessage());
+            
         }
 
         return resultado;
@@ -92,7 +90,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return resultado;
@@ -102,7 +100,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public ArrayList<Especialidad> listarTodos() {
         ArrayList<Especialidad> listaEspecialidad = new ArrayList<>();
-        String sql = "CALL ESPECIALIDAD_LISTAR_TODAS()";
+        sql = "CALL ESPECIALIDAD_LISTAR_TODAS()";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
@@ -120,7 +118,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();  // Manejar la excepción si ocurre un error
+            System.out.println(e.getMessage());
         }
         return listaEspecialidad;  // Retornar la lista de médicos
     }
@@ -128,13 +126,13 @@ public class EspecialidadMySQL implements EspecialidadDAO {
     @Override
     public Especialidad obtenerPorId(int idEspecialidad) {
         Especialidad especialidad = null;
-        String sql = "CALL ESPECIALIDAD_BUSCARPORID(?)";
+        sql = "CALL ESPECIALIDAD_BUSCARPORID(?)";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1, idEspecialidad);
-            ResultSet rs = pst.executeQuery();
+            rs = pst.executeQuery();
 
             if (rs.next()) {
                 especialidad = new Especialidad();
@@ -143,7 +141,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return especialidad;

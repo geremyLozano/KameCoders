@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ReporteMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class ReporteMedicoMySQL implements ReporteMedicoDAO{
     private Connection con;
@@ -32,8 +33,14 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
         }
 
         try {
+<<<<<<< HEAD
             con = DBManager.getInstance().getConnection();
             sql = "CALL sp_insertar_reporte_medico(?, ?, ?, ?, ?)"; // Agregando un parámetro más
+=======
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "INSERT into ReporteMedico(diagnostico,tratamiento,enfermedad,fecha,"
+                    + "values(?,?,?,?)";
+>>>>>>> f1490b13908dc5bf7c97ca000ec7d2a91e846996
             pst = con.prepareStatement(sql);
 
             // Configuramos los parámetros del reporte médico
@@ -107,6 +114,13 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
     @Override
     public int eliminar(int idReporteMedico) {
         int resultado = 0;
+<<<<<<< HEAD
+=======
+        sql = "DELETE FROM ReporteMedico WHERE idReporteMedico = ?";
+
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+>>>>>>> f1490b13908dc5bf7c97ca000ec7d2a91e846996
 
         try {
             con = DBManager.getInstance().getConnection();

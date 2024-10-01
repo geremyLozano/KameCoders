@@ -1,11 +1,9 @@
 package pe.edu.pucp.citamedica.mysql;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ComunicacionDAO;
 import pe.edu.pucp.citamedica.model.comunicacion.Comunicacion;
@@ -15,9 +13,7 @@ import pe.edu.pucp.dbmanager.config.DBManager;
 public class ComunicacionMySQL implements ComunicacionDAO{
     
     private Connection con;
-    private Statement st;
     private PreparedStatement pstComunica;
-    private CallableStatement cst;
     private String sql;
     private ResultSet rs;
     
@@ -65,11 +61,11 @@ public class ComunicacionMySQL implements ComunicacionDAO{
             } else {
                 System.out.println("No se encontró ningún médico con ese ID.");
             }
-
+            
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            System.out.println(e.getMessage());
         }
-
+        
         return resultado;
     }
 
@@ -102,7 +98,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     @Override
     public ArrayList<Comunicacion> listarTodos() {
         ArrayList<Comunicacion> listaComunicacion = new ArrayList<>();
-        String sql = "CALL COMUNICACION_LISTAR_TODOS()";
+        sql = "{CALL COMUNICACION_LISTAR_TODOS()}";
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstComunicacion = con.prepareStatement(sql);
              ResultSet rs = pstComunicacion.executeQuery()) {
@@ -128,7 +124,8 @@ public class ComunicacionMySQL implements ComunicacionDAO{
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();  // Manejar la excepción si ocurre un error
+            // Manejar la excepción si ocurre un error
+            System.out.println(e.getMessage());
         }
         return listaComunicacion;  // Retornar la lista de comunicacion
     }
@@ -160,7 +157,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return comunica;

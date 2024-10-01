@@ -1,22 +1,17 @@
 package pe.edu.pucp.citamedica.mysql;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import pe.edu.pucp.citamedica.dao.AseguradoraDAO;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.model.usuario.Aseguradora;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AseguradoraMySQL implements AseguradoraDAO{
     private Connection con;
-    private PreparedStatement pst;
     private CallableStatement cst;
-    private Statement st;
     private String sql;
     private ResultSet rs;
 
@@ -33,7 +28,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
             cst.setDouble(4, aseguradora.getPorcentajeDescuento());
             cst.setBoolean(5, aseguradora.isActivo());
             resultado = cst.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return resultado;
@@ -51,7 +46,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
             cst.setDouble(4, aseguradora.getPorcentajeDescuento());
             cst.setBoolean(5, aseguradora.isActivo());
             resultado = cst.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         } 
         return resultado;
@@ -66,7 +61,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
             cst = con.prepareCall(sql);
             cst.setInt(1, idAseguradora);
             resultado = cst.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return resultado;
@@ -76,7 +71,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
     public ArrayList<Aseguradora> listarTodos(){
         ArrayList<Aseguradora> aseguradoras = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{call ASEGURADORA_LISTAR_TODAS()}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -90,7 +85,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
                 aseguradora.setActivo(rs.getBoolean("activo"));
                 aseguradoras.add(aseguradora);
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } 
         return aseguradoras;
@@ -118,7 +113,7 @@ public class AseguradoraMySQL implements AseguradoraDAO{
                 System.out.println("No se encontro la Aseguradora");
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         } 
         return aseguradora;

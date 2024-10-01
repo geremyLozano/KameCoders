@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     
@@ -21,29 +22,27 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(HistorialMedico historial) {
+    public int insertar(HistorialMedico historialorial) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "INSERT into HistorialMedico(fechaCreacion,numeroDocumentoIdentidadPaciente) "
-                    + "values(?,?)";
-            pst = con.prepareStatement(sql);
-            java.sql.Date sqlDate = new java.sql.Date(historial.getFechaDeCreacion().getTime());
-            pst.setDate(1, sqlDate);
-            pst.setString(2, historial.getNumeroDocumentoIdentidadPaciente());
-            resultado = pst.executeUpdate();
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL HistorialMedicoInsertar(?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.setInt(2, historialorial.getIdPaciente());
+            resultado = cst.executeUpdate();
+            historialorial.setIdHistorial(cst.getInt(1));
+            historialorial.setActivo(true);
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
         }catch( Exception e){
-            e.printStackTrace();
             System.out.print("Error general" + e.getMessage());
         }
         return resultado;
     }
 
     @Override
-    public int modificar(HistorialMedico historial) {
+    public int modificar(HistorialMedico historialorial) {
         int resultado = 0;
         sql = "UPDATE HistorialMedico SET fechaCreacion = ?, "
                 + "numeroDocumentoIdentidadPaciente = ? " + " WHERE idHistorialMedico = ?";
@@ -52,10 +51,10 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
              PreparedStatement pstHistorial = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
-            java.sql.Date sqlDate = new java.sql.Date(historial.getFechaDeCreacion().getTime());
+            java.sql.Date sqlDate = new java.sql.Date(historialorial.getFechaDeCreacion().getTime());
             pstHistorial.setDate(1, sqlDate);
-            pstHistorial.setString(2, historial.getNumeroDocumentoIdentidadPaciente());
-            pstHistorial.setInt(3, historial.getIdHistorial());
+            pstHistorial.setInt(2, historialorial.getIdPaciente());
+            pstHistorial.setInt(3, historialorial.getIdHistorial());
             // Ejecutar la consulta de actualización
             resultado = pstHistorial.executeUpdate();
 
@@ -63,7 +62,7 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
             if (resultado > 0) {
                 System.out.println("HistorialMedico modificado correctamente.");
             } else {
-                System.out.println("No se encontró ningún historial con ese ID.");
+                System.out.println("No se encontró ningún historialorial con ese ID.");
             }
 
         } catch (SQLException e) {
@@ -76,56 +75,45 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     @Override
     public int eliminar(int idHistorial) {
         int resultado = 0;
-        sql = "DELETE FROM HistorialMedico WHERE idHistorialMedico = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstHistorial = con.prepareStatement(sql)) {
-
-            pstHistorial.setInt(1, idHistorial);
-
-            resultado = pstHistorial.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("La fila de la tabla HistorialMedico se ha eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningun historial medico con ese ID.");
-            }
-
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call HistorialMedicoEliminar(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idHistorial);
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-
         return resultado;
     }
 
     @Override
     public ArrayList<HistorialMedico> listarTodos() {
         ArrayList<HistorialMedico> listaHistorial = new ArrayList<>();
-        String sql = "SELECT * FROM HistorialMedico";
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstHistorial = con.prepareStatement(sql);
-             ResultSet rs = pstHistorial.executeQuery()) {
-
-            // Iterar sobre cada registro en el ResultSet
-            while (rs.next()) {
-                // Crear un nuevo objeto HistorialMedico
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
+            while(rs.next()){
                 HistorialMedico historial = new HistorialMedico();
                 historial.setIdHistorial(rs.getInt("idHistorialMedico"));
-                historial.setNumeroDocumentoIdentidadPaciente(rs.getString("numeroDocumentoIdentidadPaciente"));
-                //Obtener la fecha de la base de datos
-                java.sql.Date sqlDate = rs.getDate("fechaCreacion");
-                //Convertir java.sql.Date a java.util.Date
-                java.util.Date fecha = new java.util.Date(sqlDate.getTime());
-                historial.setFechaDeCreacion(fecha);
-                //Añadir el objeto HistorialMedico a la lista
+                historial.setFechaDeCreacion(rs.getDate("fechaCreacion"));
+                historial.setActivo(rs.getBoolean("activo"));
+                historial.setIdPaciente(rs.getInt("idPaciente"));
                 listaHistorial.add(historial);
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();  // Manejar la excepción si ocurre un error
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-        return listaHistorial;  // Retornar la lista de médicos
+        return listaHistorial;
     }
 
     @Override
@@ -133,24 +121,23 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         HistorialMedico historial = null;
         sql = "SELECT * FROM HistorialMedico WHERE idHistorialMedico = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstHistorial = con.prepareStatement(sql)) {
-
-            pstHistorial.setInt(1, idHistorial);
-            rs = pstHistorial.executeQuery();
-
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idHistorial);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 historial = new HistorialMedico();
                 historial.setIdHistorial(rs.getInt("idHistorialMedico"));
-                historial.setNumeroDocumentoIdentidadPaciente(rs.getString("numeroDocumentoIdentidadPaciente"));
-                java.sql.Date sqlDate = rs.getDate("fechaCreacion");
-                //Convertir java.sql.Date a java.util.Date
-                java.util.Date fecha = new java.util.Date(sqlDate.getTime());
-                historial.setFechaDeCreacion(fecha);
+                historial.setFechaDeCreacion(rs.getDate("fechaCreacion"));
+                historial.setActivo(rs.getBoolean("activo"));
+                historial.setIdPaciente(rs.getInt("idPaciente"));
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return historial;

@@ -10,9 +10,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Time;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
+
+
+
+
+
 
 public class MedicoMySQL implements MedicoDAO {
     private Connection con;
@@ -22,6 +28,28 @@ public class MedicoMySQL implements MedicoDAO {
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
+    
+    
+    
+//     public int insertar(AmbienteMedico ambiente){
+//        int resultado = 0;
+//        try {
+//            con = DBManager.getInstance().getConnection();
+//            sql = "INSERT into AmbienteMedico(numPiso,ubicacion,capacidad,tipoAmbiente)"
+//                    + " values(?,?,?,?)";
+//            pst = con.prepareStatement(sql);
+//            pst.setInt(1, ambiente.getNumPiso());
+//            pst.setString(2,ambiente.getUbicacion());
+//            pst.setInt(3, ambiente.getCapacidad());
+//            pst.setString(4,ambiente.getTipoAmbiente().toString());
+//            resultado = pst.executeUpdate();
+//        } catch (SQLException e) {
+//            System.out.print(e.getMessage());
+//        }
+//        return resultado;
+//    }
+    
+    
     
     @Override
     public int insertar(Medico medico) {
@@ -64,10 +92,12 @@ public class MedicoMySQL implements MedicoDAO {
             pstMedico.setBoolean(14,medico.isActivo());
             
       
-            pstMedico.executeUpdate();
+            
+            resultado = pstMedico.executeUpdate();
+          
             
            
-            resultado = pstMedico.executeUpdate();
+           // resultado = pstMedico.executeUpdate();
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,6 +107,9 @@ public class MedicoMySQL implements MedicoDAO {
             System.out.print("Error general" + e.getMessage());
         }
         return resultado;
+        
+        
+        
 
 
 
@@ -84,65 +117,84 @@ public class MedicoMySQL implements MedicoDAO {
 
     @Override
     public int modificar(Medico medico) {
+        
+        
+       
         int resultado = 0;
-        sql = "UPDATE Medico SET nombre = ?, especialidad = ?, "
-                + "numColegiatura = ?, horaInicioTrabajo = ?, "
-                + "horaFinTrabajo = ?, aniosExp = ?, activo = ?"
-                + " WHERE idMedico = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement pstMedico = con.prepareStatement(sql)) {
-
-            // Configuramos los valores a modificar en el PreparedStatement
-            pstMedico.setString(1, medico.getNombre());
-            pstMedico.setString(2, medico.getEspecialidad().getNombre());
-            pstMedico.setString(3, medico.getNumColegiatura());
-            pstMedico.setTime(4, Time.valueOf(medico.getHoraInicioTrabajo()));  // Convertir LocalTime a Time
-            pstMedico.setTime(5, Time.valueOf(medico.getHoraFinTrabajo()));    // Convertir LocalTime a Time
-            pstMedico.setInt(6, medico.getAhosExp());
-            pstMedico.setBoolean(7, medico.isActivo());
-            pstMedico.setInt(8, medico.getIdMedico());  // ID del médico a modificar
-
-            // Ejecutar la consulta de actualización
+        try {
+            con = DBManager.getInstance().getConnection();
+            
+            
+            sql = "{CALL ActualizarMedico(?,?,?,?,?,?,?)}";
+            
+            
+            pstMedico = con.prepareStatement(sql);
+            
+            pstMedico.setInt(1, medico.getIdMedico());           
+            pstMedico.setString(2, medico.getNumColegiatura());
+            pstMedico.setTime(3,Time.valueOf(medico.getHoraInicioTrabajo()));
+            pstMedico.setTime(4,Time.valueOf(medico.getHoraFinTrabajo()));
+            
+            
+            String diasLaboralesString = medico.getDiasLaborales().stream()
+                .map(DiaSemana::name) // Obtener el nombre del enum
+                .collect(Collectors.joining(",")); // Unirlos con coma
+            
+            
+            pstMedico.setString(5, diasLaboralesString);       
+            pstMedico.setInt(6,medico.getAhosExp());
+            pstMedico.setBoolean(7,medico.isActivo());
+            
+      
+            
             resultado = pstMedico.executeUpdate();
-
-            // Verificar si la modificación fue exitosa
-            if (resultado > 0) {
-                System.out.println("Médico modificado correctamente.");
-            } else {
-                System.out.println("No se encontró ningún médico con ese ID.");
-            }
-
+          
+            
+           
+           // resultado = pstMedico.executeUpdate();
+            
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            e.printStackTrace();
+            System.out.print("Error en la base de datos: " + e.getMessage());
+        }catch( Exception e){
+            e.printStackTrace();
+            System.out.print("Error general" + e.getMessage());
         }
-
         return resultado;
+        
+        
+        
+
     }
 
     @Override
     public int eliminar(int idMedico) {
+       
         int resultado = 0;
-        sql = "DELETE FROM Medico WHERE idMedico = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pstMedico = con.prepareStatement(sql)) {
-
-            pstMedico.setInt(1, idMedico);
-
+        try {
+            con = DBManager.getInstance().getConnection();
+            
+            
+            sql = "{CALL EliminarMedico(?)}";
+            
+            
+            pstMedico = con.prepareStatement(sql);
+            
+            pstMedico.setInt(1, idMedico);           
+                  
             resultado = pstMedico.executeUpdate();
-
-            // Verificar si el registro fue eliminado
-            if (resultado > 0) {
-                System.out.println("Médico eliminado correctamente.");
-            } else {
-                System.out.println("No se encontró ningún médico con ese ID.");
-            }
-
+          
+            
+           
+           // resultado = pstMedico.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.print("Error en la base de datos: " + e.getMessage());
+        }catch( Exception e){
+            e.printStackTrace();
+            System.out.print("Error general" + e.getMessage());
         }
-
         return resultado;
     }
 
@@ -150,7 +202,11 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public ArrayList<Medico> listarTodos() {
         ArrayList<Medico> listaMedicos = new ArrayList<>();
-        String sql = "SELECT * FROM Medico";
+        
+        
+        
+        String sql = "{CALL ListarMedicos()}";
+        
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql);
              ResultSet rs = pstMedico.executeQuery()) {
@@ -160,19 +216,46 @@ public class MedicoMySQL implements MedicoDAO {
                 // Crear un nuevo objeto Medico
                 Medico medico = new Medico();
                 medico.setIdMedico(rs.getInt("idMedico"));
-                medico.setNombre(rs.getString("nombre"));
+              
 
-                Especialidad especialidad = new Especialidad(medico.getEspecialidad().getNombre(),
-                medico.getEspecialidad().getCostoConsulta());
-                especialidad.setNombre(rs.getString("nombreEspecialidad"));
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
                 medico.setEspecialidad(especialidad);
 
                 // Asignar otros atributos del Medico
                 medico.setNumColegiatura(rs.getString("numColegiatura"));
                 medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
-                medico.setAhosExp(rs.getInt("aniosExp"));
-                medico.setActivo(rs.getBoolean("activo"));
+                
+                
+                
+                String diasLaboralesString = rs.getString("diasLaborales"); // Este sería el valor de la base de datos
+
+                // Crear un ArrayList<DiaLaborable>
+                ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
+
+                // Dividir la cadena y convertir a enum
+                Arrays.stream(diasLaboralesString.split(","))
+                      .map(String::trim) // Eliminar espacios en blanco, si los hay
+                      .forEach(dia -> {
+                          try {
+                              diasLaborables.add(DiaSemana.valueOf(dia));
+                          } catch (IllegalArgumentException e) {
+                              System.out.println("Día no válido: " + dia);
+                          }
+                      });
+
+                medico.setDiasLaborales(diasLaborables);
+                
+                
+                
+                
+                
+                
+                
+                
+                medico.setAhosExp(rs.getInt("anhosExp"));
+               // medico.setActivo(rs.getBoolean("activo"));
 
                 // Añadir el objeto Medico a la lista
                 listaMedicos.add(medico);
@@ -198,22 +281,43 @@ public class MedicoMySQL implements MedicoDAO {
             if (rs.next()) {
                 medico = new Medico();
                 medico.setIdMedico(rs.getInt("idMedico"));
-                medico.setNombre(rs.getString("nombre"));
+               
 
-                // Crear la instancia de Especialidad y asignar los valores
-                Especialidad especialidad = new Especialidad(medico.getEspecialidad().getNombre(),
-                medico.getEspecialidad().getCostoConsulta());
-                especialidad.setNombre(rs.getString("nombreEspecialidad"));   
-
-                // Asignar la especialidad al médico
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
                 medico.setEspecialidad(especialidad);
+                
 
                 // Asignar otros atributos del médico
                 medico.setNumColegiatura(rs.getString("numColegiatura"));
                 medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
-                medico.setAhosExp(rs.getInt("aniosExp"));
-                medico.setActivo(rs.getBoolean("activo"));
+                
+                
+                
+                
+                
+                String diasLaboralesString = rs.getString("diasLaborales"); // Este sería el valor de la base de datos
+
+                // Crear un ArrayList<DiaLaborable>
+                ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
+
+                // Dividir la cadena y convertir a enum
+                Arrays.stream(diasLaboralesString.split(","))
+                      .map(String::trim) // Eliminar espacios en blanco, si los hay
+                      .forEach(dia -> {
+                          try {
+                              diasLaborables.add(DiaSemana.valueOf(dia));
+                          } catch (IllegalArgumentException e) {
+                              System.out.println("Día no válido: " + dia);
+                          }
+                      });
+
+                medico.setDiasLaborales(diasLaborables);
+                
+                
+                medico.setAhosExp(rs.getInt("anhosExp"));
+              //  medico.setActivo(rs.getBoolean("activo"));
             }
 
         } catch (SQLException e) {

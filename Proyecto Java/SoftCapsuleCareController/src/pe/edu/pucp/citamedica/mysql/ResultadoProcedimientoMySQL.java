@@ -128,6 +128,4 @@ public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
         }
         return resultado;
     }
-    
-    
 }
