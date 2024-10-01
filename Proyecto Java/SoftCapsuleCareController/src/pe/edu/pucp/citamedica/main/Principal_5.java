@@ -12,9 +12,11 @@ public class Principal_5 {
 //        med.setIdPaciente(17);
 //        System.out.println(hist.insertar(med)>0 ? "Historial medico creado":"Error con la creacion");
 //        System.out.println(hist.eliminar(2)!=0 ? "Historial medico eliminado":"Error con la eliminacion");
-        ArrayList<HistorialMedico>hst=hist.listarTodos();
-        for(HistorialMedico h:hst){
-            System.out.println(h.toString());
-        }
+//        ArrayList<HistorialMedico>hst=hist.listarTodos();
+//        for(HistorialMedico h:hst){
+//            System.out.println(h.toString());
+//        }
+        HistorialMedico h = hist.obtenerPorId(2);
+        System.out.println(h.toString());
     }
 }
