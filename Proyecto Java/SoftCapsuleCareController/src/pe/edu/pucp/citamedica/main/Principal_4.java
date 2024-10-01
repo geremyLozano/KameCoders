@@ -25,12 +25,17 @@ public class Principal_4 {
 //        int eliminado = pag.eliminar(3);
 //        System.out.println(eliminado>0 ? "Pago eliminado":"Error al eliminar");
 
-        ArrayList<Pago>pagos=pag.listarTodos();
-        for(Pago p:pagos){
-            String fecha = sdf.format(p.getFechaPago());
-            System.out.println("idPago:"+p.getIdPago()+"   descuento:"+p.getDescuentoPorSeguro()+
+//        ArrayList<Pago>pagos=pag.listarTodos();
+//        for(Pago p:pagos){
+//            String fecha = sdf.format(p.getFechaPago());
+//            System.out.println("idPago:"+p.getIdPago()+"   descuento:"+p.getDescuentoPorSeguro()+
+//                    "   montoParcial:"+p.getMontoParcial()+"     total:"+p.getMontoTotal()+
+//                    "   fecha:"+fecha+"    concepto:"+p.getConcepto()+"  idPaciente:"+p.getIdPaciente());
+//        }
+        Pago p = pag.obtenerPorId(2);
+        String fecha = sdf.format(p.getFechaPago());
+        System.out.println("idPago:"+p.getIdPago()+"   descuento:"+p.getDescuentoPorSeguro()+
                     "   montoParcial:"+p.getMontoParcial()+"     total:"+p.getMontoTotal()+
                     "   fecha:"+fecha+"    concepto:"+p.getConcepto()+"  idPaciente:"+p.getIdPaciente());
-        }
     }
 }

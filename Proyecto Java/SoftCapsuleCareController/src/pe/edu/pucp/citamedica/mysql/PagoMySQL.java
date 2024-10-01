@@ -99,11 +99,11 @@ public class PagoMySQL implements PagoDAO{
         Pago pago = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT * FROM Pago WHERE idPago = ?";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, idPago);
-            rs = pst.executeQuery();
-
+            st = con.createStatement();
+            sql = "{CALL PagoListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPago);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 pago = new Pago();
                 pago.setIdPago(rs.getInt("idPago"));
@@ -113,8 +113,8 @@ public class PagoMySQL implements PagoDAO{
                 pago.setFechaPago(rs.getDate("fechaPago"));
                 pago.setConcepto(rs.getString("concepto"));
                 pago.setEstado(rs.getBoolean("estado"));
+                pago.setIdPaciente(rs.getInt("idPaciente"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
