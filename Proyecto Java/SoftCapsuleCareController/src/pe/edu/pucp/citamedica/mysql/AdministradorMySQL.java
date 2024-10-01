@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import java.sql.Statement;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
@@ -23,7 +22,6 @@ public class AdministradorMySQL implements AdministradorDAO{
     private String sql;
     private CallableStatement cst;
     private ResultSet rs;
-    private Statement st;
    
     @Override
     public int insertar(Administrador administrador, Usuario usuario, Persona persona) {
@@ -113,7 +111,6 @@ public class AdministradorMySQL implements AdministradorDAO{
          ArrayList<Administrador> administradores = new ArrayList<>();
         try {
             con = DBPoolManager.getInstance().getConnection();
-            st = con.createStatement();
             sql = "{CALL AdministradorListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -145,7 +142,6 @@ public class AdministradorMySQL implements AdministradorDAO{
         Administrador administrador = null;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            st = con.createStatement();
             sql = "{CALL AdministradorListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idAdministrador);

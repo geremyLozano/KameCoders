@@ -1,22 +1,18 @@
 package pe.edu.pucp.citamedica.mysql;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import pe.edu.pucp.citamedica.dao.AmbienteMedicoDAO;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.model.clinica.AmbienteMedico;
 import pe.edu.pucp.citamedica.model.clinica.TipoAmbiente;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     private Connection con;
-    private PreparedStatement pst;
     private CallableStatement cst;
-    private Statement st;
     private String sql;
     private ResultSet rs;
     
@@ -24,10 +20,10 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     public int insertar(AmbienteMedico ambiente) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_insertar_ambiente_medico_activo(?, ?, ?, ?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_insertar_ambiente_medico_activo(?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
             // Pasar los parámetros al procedimiento almacenado
             cst.setInt(1, ambiente.getNumPiso());
             cst.setString(2, ambiente.getUbicacion());
@@ -46,11 +42,11 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     public int modificar(AmbienteMedico ambiente) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_actualizar_ambiente_medico(?, ?, ?, ?, ?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_actualizar_ambiente_medico(?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar los parámetros al procedimiento almacenado
             cst.setInt(1, ambiente.getIdAmbiente());
@@ -76,14 +72,14 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     public ArrayList<AmbienteMedico> listarTodos() {
         ArrayList<AmbienteMedico> ambientes = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_listar_todos_ambiente_medico()}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_listar_todos_ambiente_medico()}";
+            cst = con.prepareCall(sql);
 
             // Ejecutar el procedimiento y obtener el resultado
-            ResultSet rs = cst.executeQuery();
+            rs = cst.executeQuery();
 
             while (rs.next()) {
                 AmbienteMedico ambiente = new AmbienteMedico();
@@ -111,17 +107,17 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     public AmbienteMedico obtenerPorId(int idAmbienteMedico) {
         AmbienteMedico ambiente = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_obtener_ambiente_medico_por_id(?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_obtener_ambiente_medico_por_id(?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar el parámetro al procedimiento almacenado
             cst.setInt(1, idAmbienteMedico);
 
             // Ejecutar el procedimiento y obtener el resultado
-            ResultSet rs = cst.executeQuery();
+            rs = cst.executeQuery();
 
             if (rs.next()) {
                 ambiente = new AmbienteMedico();
@@ -158,11 +154,11 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     public int eliminar(int idAmbienteMedico) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_eliminar_logico_ambiente_medico(?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_eliminar_logico_ambiente_medico(?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar el parámetro al procedimiento almacenado
             cst.setInt(1, idAmbienteMedico);
@@ -184,7 +180,5 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
             }
         }
         return resultado;
-    }
-
-    
+    } 
 }
