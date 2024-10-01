@@ -47,7 +47,7 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         sql = "UPDATE HistorialMedico SET fechaCreacion = ?, "
                 + "numeroDocumentoIdentidadPaciente = ? " + " WHERE idHistorialMedico = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
+        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement pstHistorial = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
@@ -119,8 +119,6 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
     @Override
     public HistorialMedico obtenerPorId(int idHistorial) {
         HistorialMedico historial = null;
-        sql = "SELECT * FROM HistorialMedico WHERE idHistorialMedico = ?";
-
         try {
             con = DBPoolManager.getInstance().getConnection();
             st = con.createStatement();

@@ -3,7 +3,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.dbmanager.config.DBManager;
@@ -82,7 +81,7 @@ public class PacienteMySQL implements PacienteDAO{
     public ArrayList<Paciente> listarTodos() {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL PacienteListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -157,7 +156,7 @@ public class PacienteMySQL implements PacienteDAO{
             cst.setDate(8, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
             cst.setString(9, String.valueOf(paciente.getGenero()));
             cst.setBoolean(10, paciente.getHistorialActivo());
-            cst.setBoolean(11, true);//paciente.getActivo();
+            cst.setBoolean(11, paciente.isActivo());
         
             resultado = cst.executeUpdate();
             

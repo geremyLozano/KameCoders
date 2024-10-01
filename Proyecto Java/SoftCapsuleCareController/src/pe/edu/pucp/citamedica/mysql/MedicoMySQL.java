@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 
 
@@ -57,7 +58,7 @@ public class MedicoMySQL implements MedicoDAO {
 
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             
             
             sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
@@ -122,7 +123,7 @@ public class MedicoMySQL implements MedicoDAO {
        
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             
             
             sql = "{CALL ActualizarMedico(?,?,?,?,?,?,?)}";
@@ -172,7 +173,7 @@ public class MedicoMySQL implements MedicoDAO {
        
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             
             
             sql = "{CALL EliminarMedico(?)}";
@@ -205,9 +206,9 @@ public class MedicoMySQL implements MedicoDAO {
         
         
         
-        String sql = "{CALL ListarMedicos()}";
+        sql = "{CALL ListarMedicos()}";
         
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql);
              ResultSet rs = pstMedico.executeQuery()) {
 
@@ -270,9 +271,9 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public Medico obtenerPorId(int idMedico) {
         Medico medico = null;
-        String sql = "SELECT * FROM Medico WHERE idMedico = ?";
+        sql = "SELECT * FROM Medico WHERE idMedico = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql)) {
 
             pstMedico.setInt(1, idMedico);

@@ -2,20 +2,15 @@ package pe.edu.pucp.citamedica.mysql;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class UsuarioMySQL implements UsuarioDAO{
     private Connection con;
-    private Statement st;
-    private PreparedStatement pst;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
@@ -58,7 +53,7 @@ public class UsuarioMySQL implements UsuarioDAO{
     public int eliminar(int idUsuario) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{call UsuarioEliminar(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idUsuario);
@@ -73,7 +68,7 @@ public class UsuarioMySQL implements UsuarioDAO{
     public ArrayList<Usuario> listarTodos() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL UsuarioListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();

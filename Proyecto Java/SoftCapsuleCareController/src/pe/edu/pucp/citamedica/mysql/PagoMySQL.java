@@ -1,11 +1,9 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.dao.PagoDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import pe.edu.pucp.citamedica.model.procedimiento.Pago;
@@ -14,9 +12,7 @@ import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class PagoMySQL implements PagoDAO{
     private Connection con;
-    private PreparedStatement pst;
     private CallableStatement cst;
-    private Statement st;
     private String sql;
     private ResultSet rs;
     
@@ -50,7 +46,7 @@ public class PagoMySQL implements PagoDAO{
     public int eliminar(int idPago){
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{call PagoEliminar(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idPago);
@@ -65,8 +61,7 @@ public class PagoMySQL implements PagoDAO{
     public ArrayList<Pago> listarTodos(){
         ArrayList<Pago> pagos = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL PagoListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -98,8 +93,7 @@ public class PagoMySQL implements PagoDAO{
     public Pago obtenerPorId(int idPago){
         Pago pago = null;
         try {
-            con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL PagoListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idPago);

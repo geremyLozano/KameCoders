@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
-import java.sql.Statement;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;

@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ReporteMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
+
 public class ReporteMedicoMySQL implements ReporteMedicoDAO {
     private Connection con;
     private Statement st;
@@ -32,7 +32,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO {
         }
 
         try {
-            con = DBManager.getInstance().getConnection(); // Cambié a DBManager para mantener consistencia
+            con = DBPoolManager.getInstance().getConnection(); // Cambié a DBManager para mantener consistencia
             sql = "CALL sp_insertar_reporte_medico(?, ?, ?, ?, ?)"; // Procedimiento para insertar
             pst = con.prepareStatement(sql);
 
@@ -66,7 +66,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO {
         int resultado = 0;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL sp_modificar_reporte_medico(?, ?, ?, ?, ?)"; // Procedimiento para modificar
             pst = con.prepareStatement(sql);
 
@@ -104,7 +104,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO {
         int resultado = 0;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL sp_eliminar_logico_reporte_medico(?)"; // Procedimiento para eliminación lógica
             pst = con.prepareStatement(sql);
             pst.setInt(1, idReporteMedico);
@@ -136,7 +136,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO {
         ArrayList<ReporteMedico> reportesMedicos = new ArrayList<>();
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL sp_listar_todos_reportes_medicos()"; // Procedimiento para listar todos los reportes médicos
             st = con.createStatement();
             rs = st.executeQuery(sql);
@@ -171,7 +171,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO {
         ReporteMedico reporteMedico = null;
 
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL sp_obtener_reporte_medico_por_id(?)"; // Procedimiento para obtener reporte médico por ID
             pst = con.prepareStatement(sql);
             pst.setInt(1, idReporteMedico);
