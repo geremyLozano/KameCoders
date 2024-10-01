@@ -21,98 +21,107 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(AmbienteMedico ambiente){
+    public int insertar(AmbienteMedico ambiente) {
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into AmbienteMedico(numPiso,ubicacion,capacidad,tipoAmbiente)"
-                    + " values(?,?,?,?)";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, ambiente.getNumPiso());
-            pst.setString(2,ambiente.getUbicacion());
-            pst.setInt(3, ambiente.getCapacidad());
-            pst.setString(4,ambiente.getTipoAmbiente().toString());
-            resultado = pst.executeUpdate();
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_insertar_ambiente_medico_activo(?, ?, ?, ?)}";
+            CallableStatement cst = con.prepareCall(sql);
+            // Pasar los parámetros al procedimiento almacenado
+            cst.setInt(1, ambiente.getNumPiso());
+            cst.setString(2, ambiente.getUbicacion());
+            cst.setInt(3, ambiente.getCapacidad());
+            cst.setString(4, ambiente.getTipoAmbiente().toString());
+
+            // Ejecutar el procedimiento
+            resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
         return resultado;
     }
-    
+
     @Override
-    public int modificar(AmbienteMedico ambiente){
+    public int modificar(AmbienteMedico ambiente) {
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "UPDATE AmbienteMedico SET numPiso = ?,ubicacion = ?, "
-                    + "capacidad = ?, tipoAmbiente = ? WHERE idAmbienteMedico = ?";
-            pst = con.prepareStatement(sql);
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, ambiente.getNumPiso());
-            pst.setString(2,ambiente.getUbicacion());
-            pst.setInt(3, ambiente.getCapacidad());
-            pst.setString(4,ambiente.getTipoAmbiente().toString());
-            pst.setInt(5, ambiente.getIdAmbiente());
-            resultado = pst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return resultado;
-    }
-    
-    @Override
-    public int eliminar(int idAmbienteMedico){
-        int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "{call AMBIENTEMEDICO_ELIMINAR(?)}";
-            cst = con.prepareCall(sql);
-            cst.setInt(1, idAmbienteMedico);
+
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_actualizar_ambiente_medico(?, ?, ?, ?, ?)}";
+            CallableStatement cst = con.prepareCall(sql);
+
+            // Pasar los parámetros al procedimiento almacenado
+            cst.setInt(1, ambiente.getIdAmbiente());
+            cst.setInt(2, ambiente.getNumPiso());
+            cst.setString(3, ambiente.getUbicacion());
+            cst.setInt(4, ambiente.getCapacidad());
+            cst.setString(5, ambiente.getTipoAmbiente().toString());
+
+            // Ejecutar el procedimiento
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (e.getSQLState().equals("45000")) {
+                System.out.println("Error: " + e.getMessage());
+            } else {
+                System.out.println("Error general: " + e.getMessage());
+            }
         }
         return resultado;
     }
-    
+
+        
     @Override
-    public ArrayList<AmbienteMedico> listarTodos(){
+    public ArrayList<AmbienteMedico> listarTodos() {
         ArrayList<AmbienteMedico> ambientes = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
-            sql = "SELECT * FROM AmbienteMedico";
-            rs = st.executeQuery(sql);
-            while(rs.next()){
+
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_listar_todos_ambiente_medico()}";
+            CallableStatement cst = con.prepareCall(sql);
+
+            // Ejecutar el procedimiento y obtener el resultado
+            ResultSet rs = cst.executeQuery();
+
+            while (rs.next()) {
                 AmbienteMedico ambiente = new AmbienteMedico();
                 ambiente.setIdAmbiente(rs.getInt("idAmbienteMedico"));
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente",TipoAmbiente.class));
+                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
                 ambientes.add(ambiente);
             }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
-                con.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
         return ambientes;
     }
-    
+
     @Override
-    public AmbienteMedico obtenerPorId(int idAmbienteMedico){
+    public AmbienteMedico obtenerPorId(int idAmbienteMedico) {
         AmbienteMedico ambiente = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT * FROM AmbienteMedico WHERE idAmbienteMedico = ?";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, idAmbienteMedico);
-            rs = pst.executeQuery();
+
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_obtener_ambiente_medico_por_id(?)}";
+            CallableStatement cst = con.prepareCall(sql);
+
+            // Pasar el parámetro al procedimiento almacenado
+            cst.setInt(1, idAmbienteMedico);
+
+            // Ejecutar el procedimiento y obtener el resultado
+            ResultSet rs = cst.executeQuery();
 
             if (rs.next()) {
                 ambiente = new AmbienteMedico();
@@ -120,7 +129,17 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente",TipoAmbiente.class));
+                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
+
+                // Obtener el valor del campo activo
+                int activo = rs.getInt("activo");
+                if (activo == 1) {
+                    System.out.println("El ambiente médico está activo.");
+                } else {
+                    System.out.println("El ambiente médico está inactivo.");
+                }
+            } else {
+                System.out.println("No se encontró ningún ambiente médico con el ID proporcionado.");
             }
 
         } catch (SQLException e) {
@@ -134,6 +153,38 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
         }
         return ambiente;
     }
-    
+
+    @Override
+    public int eliminar(int idAmbienteMedico) {
+        int resultado = 0;
+        try {
+            con = DBManager.getInstance().getConnection();
+
+            // Llamar al procedimiento almacenado
+            String sql = "{CALL sp_eliminar_logico_ambiente_medico(?)}";
+            CallableStatement cst = con.prepareCall(sql);
+
+            // Pasar el parámetro al procedimiento almacenado
+            cst.setInt(1, idAmbienteMedico);
+
+            // Ejecutar el procedimiento
+            resultado = cst.executeUpdate();
+
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("45000")) {
+                System.out.println("Error: " + e.getMessage());
+            } else {
+                System.out.println("Error general: " + e.getMessage());
+            }
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return resultado;
+    }
+
     
 }
