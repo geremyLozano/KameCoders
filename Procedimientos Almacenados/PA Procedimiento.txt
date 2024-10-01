@@ -8,8 +8,7 @@ CREATE PROCEDURE sp_insertar_procedimiento(
     IN p_descripcion VARCHAR(200),
     IN p_requisitosPrevios VARCHAR(200),
     IN p_tipoProcedimiento VARCHAR(50),
-    IN p_idAmbienteMedico INT,
-    IN p_fecha DATE
+    IN p_idAmbienteMedico INT
 )
 BEGIN
     -- Verificar si el ambiente médico está activo
@@ -23,13 +22,14 @@ BEGIN
             SET MESSAGE_TEXT = 'El procedimiento ya existe en el ambiente médico';
         ELSE
             -- Insertar el nuevo procedimiento
-            INSERT INTO Procedimiento (nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento, idAmbienteMedico, fecha, activo)
-            VALUES (p_nombre, p_costo, p_descripcion, p_requisitosPrevios, p_tipoProcedimiento, p_idAmbienteMedico, p_fecha, 1);
+            INSERT INTO Procedimiento (nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento, idAmbienteMedico, activo)
+            VALUES (p_nombre, p_costo, p_descripcion, p_requisitosPrevios, p_tipoProcedimiento, p_idAmbienteMedico, 1);
         END IF;
     END IF;
 END //
 
 DELIMITER ;
+
 
 
 -- Archivo: sp_modificar_procedimiento.sql
@@ -42,8 +42,7 @@ CREATE PROCEDURE sp_modificar_procedimiento(
     IN p_costo DOUBLE,
     IN p_descripcion VARCHAR(200),
     IN p_requisitosPrevios VARCHAR(200),
-    IN p_tipoProcedimiento VARCHAR(50),
-    IN p_fecha DATE
+    IN p_tipoProcedimiento VARCHAR(50)
 )
 BEGIN
     DECLARE v_idAmbienteMedico INT;
@@ -67,8 +66,7 @@ BEGIN
                 costo = p_costo,
                 descripcion = p_descripcion,
                 requisitosPrevios = p_requisitosPrevios,
-                tipoProcedimiento = p_tipoProcedimiento,
-                fecha = p_fecha
+                tipoProcedimiento = p_tipoProcedimiento
             WHERE idProcedimiento = p_idProcedimiento;
         END IF;
     END IF;
@@ -76,6 +74,36 @@ END //
 
 DELIMITER ;
 
+
+-- Archivo: sp_listar_todos_procedimientos.sql
+
+DELIMITER //
+
+CREATE PROCEDURE sp_listar_todos_procedimientos()
+BEGIN
+    -- Seleccionar todos los procedimientos que están activos
+    SELECT idProcedimiento, nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento
+    FROM Procedimiento
+    WHERE activo = 1;
+END //
+
+DELIMITER ;
+
+
+-- Archivo: sp_obtener_procedimiento_por_id.sql
+DELIMITER //
+
+CREATE PROCEDURE sp_obtener_procedimiento_por_id(
+    IN p_idProcedimiento INT
+)
+BEGIN
+    -- Seleccionar el procedimiento por ID
+    SELECT idProcedimiento, nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento, activo
+    FROM Procedimiento
+    WHERE idProcedimiento = p_idProcedimiento;
+END //
+
+DELIMITER ;
 
 
 -- Archivo: sp_eliminar_logico_procedimiento.sql
@@ -101,39 +129,14 @@ END //
 
 DELIMITER ;
 
+/*
+CALL sp_insertar_procedimiento('Consulta General', 150.00, 'Consulta de rutina', 'Ninguno', 'TIPO_A', 1);
+CALL sp_insertar_procedimiento('Cirugía Menor', 500.00, 'Cirugía ambulatoria', 'Ayuno de 8 horas', 'TIPO_B', 1);
+CALL sp_insertar_procedimiento('Examen de Laboratorio', 100.00, 'Análisis de sangre completo', 'Ayuno de 12 horas', 'TIPO_A', 1);
 
-
--- Archivo: sp_listar_todos_procedimientos.sql
-
-DELIMITER //
-
-CREATE PROCEDURE sp_listar_todos_procedimientos()
-BEGIN
-    -- Seleccionar todos los procedimientos que están activos
-    SELECT idProcedimiento, nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento
-    FROM Procedimiento
-    WHERE activo = 1;
-END //
-
-DELIMITER ;
-
-
--- Archivo: sp_obtener_procedimiento_por_id.sql
-
-DELIMITER //
-
-CREATE PROCEDURE sp_obtener_procedimiento_por_id(
-    IN p_idProcedimiento INT
-)
-BEGIN
-    -- Seleccionar el procedimiento por ID
-    SELECT idProcedimiento, nombre, costo, descripcion, requisitosPrevios, tipoProcedimiento, activo
-    FROM Procedimiento
-    WHERE idProcedimiento = p_idProcedimiento;
-END //
-
-DELIMITER ;
-
-
-
+CALL sp_modificar_procedimiento(2, 'Cirugía Mayor', 750.00, 'Cirugía de mayor complejidad', 'Ayuno de 12 horas', 'TIPO_B');
+CALL sp_eliminar_logico_procedimiento(3);
+CALL sp_listar_todos_procedimientos();
+CALL sp_obtener_procedimiento_por_id(2);
+*/
 
