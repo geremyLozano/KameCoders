@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AuxiliarMySQL implements AuxiliarDAO{

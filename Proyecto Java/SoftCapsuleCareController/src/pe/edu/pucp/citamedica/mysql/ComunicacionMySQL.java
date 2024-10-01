@@ -9,6 +9,7 @@ import pe.edu.pucp.citamedica.dao.ComunicacionDAO;
 import pe.edu.pucp.citamedica.model.comunicacion.Comunicacion;
 import pe.edu.pucp.citamedica.model.comunicacion.TipoComunicacion;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class ComunicacionMySQL implements ComunicacionDAO{
     
@@ -21,7 +22,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     public int insertar(Comunicacion comunicacion) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "CALL COMUNICACION_INSERTAR(?,?,?,?)";
             pstComunica = con.prepareStatement(sql);
             pstComunica.setString(1, comunicacion.getTipo().name());
@@ -41,7 +42,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         int resultado = 0;
         sql = "CALL COMUNICACION_ACTUALIZAR(?,?,?,?,?,?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
+        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement pstComunica = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
@@ -74,7 +75,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         int resultado = 0;
         sql = "CALL COMUNICACION_ELIMINAR(?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstComunica = con.prepareStatement(sql)) {
 
             pstComunica.setInt(1, idComunicacion);
@@ -99,7 +100,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
     public ArrayList<Comunicacion> listarTodos() {
         ArrayList<Comunicacion> listaComunicacion = new ArrayList<>();
         sql = "{CALL COMUNICACION_LISTAR_TODOS()}";
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstComunicacion = con.prepareStatement(sql);
              ResultSet rs = pstComunicacion.executeQuery()) {
 
@@ -135,7 +136,7 @@ public class ComunicacionMySQL implements ComunicacionDAO{
         Comunicacion comunica = null;
         sql = "CALL COMUNICACION_BUSCARPORID(?)";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstComunicacion = con.prepareStatement(sql)) {
 
             pstComunicacion.setInt(1, idComunicacion);
