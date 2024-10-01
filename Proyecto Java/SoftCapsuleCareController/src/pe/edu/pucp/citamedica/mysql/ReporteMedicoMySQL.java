@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ReporteMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class ReporteMedicoMySQL implements ReporteMedicoDAO{
     private Connection con;
@@ -21,7 +22,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
     public int insertar(ReporteMedico reporteMedico) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "INSERT into ReporteMedico(diagnostico,tratamiento,enfermedad,fecha,"
                     + "values(?,?,?,?)";
             pst = con.prepareStatement(sql);
