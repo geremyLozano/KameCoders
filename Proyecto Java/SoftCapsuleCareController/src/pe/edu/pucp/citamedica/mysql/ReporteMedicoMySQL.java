@@ -10,20 +10,19 @@ import pe.edu.pucp.citamedica.dao.ReporteMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.ReporteMedico;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
-
-public class ReporteMedicoMySQL implements ReporteMedicoDAO{
+public class ReporteMedicoMySQL implements ReporteMedicoDAO {
     private Connection con;
     private Statement st;
     private PreparedStatement pst;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
-    
+
     @Override
     public int insertar(ReporteMedico reporteMedico) {
         int resultado = 0;
 
-        // Suponiendo que ya tienes un método para obtener la CitaMedica relacionada de alguna manera
+        // Suponiendo que ya tienes un método para obtener la CitaMedica relacionada
         int idCitaMedica = reporteMedico.getIdCitaMedica(); // Obtén el ID de la cita médica adecuada
 
         // Verificar que el ID de Cita Médica sea válido
@@ -33,14 +32,8 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
         }
 
         try {
-<<<<<<< HEAD
-            con = DBManager.getInstance().getConnection();
-            sql = "CALL sp_insertar_reporte_medico(?, ?, ?, ?, ?)"; // Agregando un parámetro más
-=======
-            con = DBPoolManager.getInstance().getConnection();
-            sql = "INSERT into ReporteMedico(diagnostico,tratamiento,enfermedad,fecha,"
-                    + "values(?,?,?,?)";
->>>>>>> f1490b13908dc5bf7c97ca000ec7d2a91e846996
+            con = DBManager.getInstance().getConnection(); // Cambié a DBManager para mantener consistencia
+            sql = "CALL sp_insertar_reporte_medico(?, ?, ?, ?, ?)"; // Procedimiento para insertar
             pst = con.prepareStatement(sql);
 
             // Configuramos los parámetros del reporte médico
@@ -48,7 +41,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
             pst.setString(2, reporteMedico.getTratamiento());
             pst.setString(3, reporteMedico.getEnfermedad());
             pst.setDate(4, new java.sql.Date(reporteMedico.getFecha().getTime())); // Convertimos java.util.Date a java.sql.Date
-            pst.setInt(5, idCitaMedica);  // Aquí pasas el ID de Cita Médica
+            pst.setInt(5, idCitaMedica);  // Pasamos el ID de Cita Médica
 
             // Ejecutar la inserción
             resultado = pst.executeUpdate();
@@ -56,7 +49,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
         } catch (SQLException e) {
             System.out.println("Error en la inserción del reporte médico: " + e.getMessage());
         } finally {
-            // Cerrar la conexión y otros recursos si es necesario
+            // Cerrar la conexión y otros recursos
             try {
                 if (pst != null) pst.close();
                 if (con != null) con.close();
@@ -67,13 +60,14 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
 
         return resultado;
     }
+
     @Override
     public int modificar(ReporteMedico reporteMedico) {
         int resultado = 0;
 
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "CALL sp_modificar_reporte_medico(?, ?, ?, ?, ?)";
+            sql = "CALL sp_modificar_reporte_medico(?, ?, ?, ?, ?)"; // Procedimiento para modificar
             pst = con.prepareStatement(sql);
 
             // Configuramos los parámetros del reporte médico
@@ -81,71 +75,54 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
             pst.setString(2, reporteMedico.getDiagnostico());
             pst.setString(3, reporteMedico.getTratamiento());
             pst.setString(4, reporteMedico.getEnfermedad());
-
-            // Convertimos java.util.Date a java.sql.Date
-            pst.setDate(5, new java.sql.Date(reporteMedico.getFecha().getTime()));
+            pst.setDate(5, new java.sql.Date(reporteMedico.getFecha().getTime())); // Convertimos java.util.Date a java.sql.Date
 
             // Ejecutamos la actualización
             resultado = pst.executeUpdate();
 
-            // Verificar si la actualización fue exitosa
             if (resultado > 0) {
                 System.out.println("Reporte médico modificado correctamente.");
             } else {
                 System.out.println("No se encontró el reporte médico con el ID proporcionado.");
             }
-
         } catch (SQLException e) {
-            // Capturamos el error en caso de que el procedimiento lanzara una excepción
             System.out.println("Error al modificar el reporte médico: " + e.getMessage());
         } finally {
             try {
-                if (pst != null) pst.close(); // Cerrar PreparedStatement
-                if (con != null) con.close(); // Cerramos la conexión en el bloque finally
+                if (pst != null) pst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
             }
         }
 
         return resultado;
     }
 
-
     @Override
     public int eliminar(int idReporteMedico) {
         int resultado = 0;
-<<<<<<< HEAD
-=======
-        sql = "DELETE FROM ReporteMedico WHERE idReporteMedico = ?";
-
-        try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement pst = con.prepareStatement(sql)) {
->>>>>>> f1490b13908dc5bf7c97ca000ec7d2a91e846996
 
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "CALL sp_eliminar_logico_reporte_medico(?)";
+            sql = "CALL sp_eliminar_logico_reporte_medico(?)"; // Procedimiento para eliminación lógica
             pst = con.prepareStatement(sql);
             pst.setInt(1, idReporteMedico);
 
             // Ejecutar la eliminación lógica
             resultado = pst.executeUpdate();
 
-            // Verificar si la eliminación lógica fue exitosa
             if (resultado > 0) {
                 System.out.println("Reporte médico eliminado (lógicamente) correctamente.");
             } else {
                 System.out.println("No se encontró ningún ReporteMedico con ese ID o ya está inactivo.");
             }
-
         } catch (SQLException e) {
-            // Capturamos el error y mostramos el mensaje
             System.out.println("Error al eliminar el ReporteMedico: " + e.getMessage());
         } finally {
-            // Cerrar recursos en el bloque finally
             try {
-                if (pst != null) pst.close(); // Cerrar PreparedStatement
-                if (con != null) con.close(); // Cerrar conexión
+                if (pst != null) pst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar los recursos: " + ex.getMessage());
             }
@@ -160,34 +137,27 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
 
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "CALL sp_listar_todos_reportes_medicos()";
+            sql = "CALL sp_listar_todos_reportes_medicos()"; // Procedimiento para listar todos los reportes médicos
             st = con.createStatement();
             rs = st.executeQuery(sql);
 
-            // Iteramos sobre los resultados
             while (rs.next()) {
-                // Creamos el objeto ReporteMedico usando el constructor y los valores obtenidos de la base de datos
                 ReporteMedico reporteMedico = new ReporteMedico(
                     rs.getString("diagnostico"),
                     rs.getString("tratamiento"),
                     rs.getString("enfermedad"),
-                    new java.util.Date(rs.getDate("fecha").getTime()),  // Convertimos java.sql.Date a java.util.Date
+                    new java.util.Date(rs.getDate("fecha").getTime()), // Convertimos java.sql.Date a java.util.Date
                     rs.getInt("idCitaMedica") // Incluimos el ID de la cita médica
                 );
-
-                // Agregamos el reporte a la lista
                 reportesMedicos.add(reporteMedico);
             }
-
         } catch (SQLException e) {
-            // Capturamos y mostramos cualquier error SQL
             System.out.println("Error al listar los reportes médicos: " + e.getMessage());
         } finally {
-            // Cerrar recursos en el bloque finally
             try {
-                if (rs != null) rs.close(); // Cerrar ResultSet
-                if (st != null) st.close(); // Cerrar Statement
-                if (con != null) con.close(); // Cerrar conexión
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar los recursos: " + ex.getMessage());
             }
@@ -196,21 +166,19 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
         return reportesMedicos;
     }
 
-
     @Override
     public ReporteMedico obtenerPorId(int idReporteMedico) {
         ReporteMedico reporteMedico = null;
 
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "CALL sp_obtener_reporte_medico_por_id(?)";
+            sql = "CALL sp_obtener_reporte_medico_por_id(?)"; // Procedimiento para obtener reporte médico por ID
             pst = con.prepareStatement(sql);
             pst.setInt(1, idReporteMedico);
 
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                // Utilizar el constructor para crear el objeto ReporteMedico
                 reporteMedico = new ReporteMedico(
                     rs.getString("diagnostico"),
                     rs.getString("tratamiento"),
@@ -221,15 +189,13 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
             } else {
                 System.out.println("No se encontró el reporte médico con el ID proporcionado.");
             }
-
         } catch (SQLException e) {
             System.out.println("Error al obtener el reporte médico: " + e.getMessage());
         } finally {
-            // Cerrar recursos en el bloque finally
             try {
-                if (rs != null) rs.close(); // Cerrar ResultSet
-                if (pst != null) pst.close(); // Cerrar PreparedStatement
-                if (con != null) con.close(); // Cerrar conexión
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar los recursos: " + ex.getMessage());
             }
@@ -237,6 +203,4 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
 
         return reporteMedico;
     }
-
-
 }
