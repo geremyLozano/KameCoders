@@ -116,6 +116,19 @@ END //
 DELIMITER ;
 
 
+/*
+CALL sp_insertar_ambiente_medico(1, 'Ubicación A', 100, 'Consultorio');
+CALL sp_insertar_ambiente_medico(2, 'Ubicación B', 50, 'Laboratorio');
+CALL sp_insertar_ambiente_medico(3, 'Ubicación C', 200, 'Quirófano');
+SELECT * FROM AmbienteMedico;
+CALL sp_eliminar_logico_ambiente_medico(2);
+SELECT * FROM AmbienteMedico WHERE idAmbienteMedico = 2;
+SELECT * FROM AmbienteMedico WHERE activo = 1;
+CALL sp_actualizar_ambiente_medico(1, 5, 'Nueva Ubicación X', 150, 'Nuevo Tipo');
+SELECT * FROM AmbienteMedico WHERE idAmbienteMedico = 1;
+CALL sp_listar_todos_ambiente_medico();
+*/
+
 
 
 
