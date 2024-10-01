@@ -45,29 +45,13 @@ public class PagoMySQL implements PagoDAO{
         }
         return resultado;
     }
-    
-    @Override
-    public int modificar(Pago pago){
-        int resultado = 0;
-        try {
-            con = DBManager.getInstance().getConnection();
-            sql = "UPDATE Pago SET estado = ? WHERE idPago = ?";
-            pst = con.prepareStatement(sql);
-            pst.setBoolean(1, pago.getEstado());
-            pst.setInt(2, pago.getIdPago());
-            resultado = pst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return resultado;
-    }
-    
+        
     @Override
     public int eliminar(int idPago){
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{call PAGO_ELIMINAR(?)}";
+            sql = "{call PagoEliminar(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idPago);
             resultado = cst.executeUpdate();
@@ -83,8 +67,9 @@ public class PagoMySQL implements PagoDAO{
         try {
             con = DBManager.getInstance().getConnection();
             st = con.createStatement();
-            sql = "SELECT * FROM Pago";
-            rs = st.executeQuery(sql);
+            sql = "{CALL PagoListar}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
             while(rs.next()){
                 Pago pago = new Pago();
                 pago.setIdPago(rs.getInt("idPago"));
@@ -94,6 +79,7 @@ public class PagoMySQL implements PagoDAO{
                 pago.setFechaPago(rs.getDate("fechaPago"));
                 pago.setConcepto(rs.getString("concepto"));
                 pago.setEstado(rs.getBoolean("estado"));
+                pago.setIdPaciente(rs.getInt("idPaciente"));
                 pagos.add(pago);
             }
         } catch (SQLException e) {
@@ -113,11 +99,11 @@ public class PagoMySQL implements PagoDAO{
         Pago pago = null;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "SELECT * FROM Pago WHERE idPago = ?";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, idPago);
-            rs = pst.executeQuery();
-
+            st = con.createStatement();
+            sql = "{CALL PagoListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPago);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 pago = new Pago();
                 pago.setIdPago(rs.getInt("idPago"));
@@ -127,8 +113,8 @@ public class PagoMySQL implements PagoDAO{
                 pago.setFechaPago(rs.getDate("fechaPago"));
                 pago.setConcepto(rs.getString("concepto"));
                 pago.setEstado(rs.getBoolean("estado"));
+                pago.setIdPaciente(rs.getInt("idPaciente"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
