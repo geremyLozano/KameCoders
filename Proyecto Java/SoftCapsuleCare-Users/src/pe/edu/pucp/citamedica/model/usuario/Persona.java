@@ -14,7 +14,6 @@ public class Persona {  // Marcamos la clase como abstracta
     private Date fechaNacimiento;
     private char genero; // M O F
     private String DNI;
-    private boolean activo;
 
     public Persona() {
     }
@@ -30,7 +29,6 @@ public class Persona {  // Marcamos la clase como abstracta
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
         this.DNI = DNI;
-        this.activo = true;
     }
 
     public int getIdPersona() {
@@ -102,14 +100,6 @@ public class Persona {  // Marcamos la clase como abstracta
 
     public void setDNI(String DNI) {
         this.DNI = DNI;
-    }
-    
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
     }
 
     // Declaramos el método como abstracto ya que Persona es abstracta

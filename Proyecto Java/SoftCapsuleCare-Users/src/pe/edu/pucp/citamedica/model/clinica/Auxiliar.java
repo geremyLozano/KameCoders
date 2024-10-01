@@ -8,19 +8,17 @@ public class Auxiliar extends Persona{
 
     private int idAuxiliar;
     private Especialidad especialidad;
-    private Medico medico;
     private boolean activo;
 
     public Auxiliar() {
     }
 
-    public Auxiliar(Especialidad especialidad, Medico medico, boolean activo,
+    public Auxiliar(Especialidad especialidad, boolean activo,
         String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
                    Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idAuxiliar = ++contador;
         this.especialidad = especialidad;
-        this.medico = medico;
         this.activo = true;
     }
     public int getIdAuxiliar(){
@@ -32,14 +30,6 @@ public class Auxiliar extends Persona{
 
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
     }
 
     public boolean isActivo() {
