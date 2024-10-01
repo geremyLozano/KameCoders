@@ -15,7 +15,7 @@ public class Paciente extends Persona {
     private ArrayList<CitaMedica> citas;
     private HistorialMedico historialMedico;
     private ArrayList<Comunicacion> comunicaciones;
-    private Aseguradora seguro;
+    private ArrayList<Aseguradora> seguros; 
     private boolean activo;
     
     public Paciente() {
@@ -24,7 +24,7 @@ public class Paciente extends Persona {
     }
 
     public Paciente(boolean historialActivo, ArrayList<CitaMedica> citas, HistorialMedico historialMedico,
-                    ArrayList<Comunicacion> comunicaciones, Aseguradora seguro, 
+                    ArrayList<Comunicacion> comunicaciones, ArrayList<Aseguradora> seguros, 
                     String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
                    Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
@@ -33,7 +33,7 @@ public class Paciente extends Persona {
         this.citas = citas != null ? citas : new ArrayList<>();
         this.historialMedico = historialMedico;
         this.comunicaciones = comunicaciones;
-        this.seguro = seguro;
+        this.seguros = seguros;
         this.activo = true;
     }
 
@@ -80,12 +80,12 @@ public class Paciente extends Persona {
         this.comunicaciones = comunicaciones;
     }
 
-    public Aseguradora getSeguro() {
-        return seguro;
+    public ArrayList<Aseguradora> getSeguros() {
+        return seguros;
     }
 
-    public void setSeguro(Aseguradora seguro) {
-        this.seguro = seguro;
+    public void setAesugradora(ArrayList<Aseguradora> seguros) {
+        this.seguros = seguros;
     }
 
     @Override
