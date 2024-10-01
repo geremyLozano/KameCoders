@@ -8,9 +8,10 @@ import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
 public class Principal_6 {
     public static void main(String[] args) {
         UsuarioDAO usu = new UsuarioMySQL();
-        Usuario u = new Usuario();
-        u.setIdUsuario(2);
-        u.setContrasenha("cincoydiez");
-        System.out.println(usu.modificar(u)>0 ? "Usuario modificado":"Error al modificar");
+//        Usuario u = new Usuario();
+//        u.setIdUsuario(2);
+//        u.setContrasenha("cincoydiez");
+//        System.out.println(usu.modificar(u)>0 ? "Usuario modificado":"Error al modificar");
+        System.out.println(usu.eliminar(3)>0 ? "Usuario eliminado":"Error al eliminar");
     }
 }

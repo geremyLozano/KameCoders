@@ -59,7 +59,7 @@ public class UsuarioMySQL implements UsuarioDAO{
         int resultado = 0;
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "{call USUARIO_ELIMINAR(?)}";
+            sql = "{call UsuarioEliminar(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idUsuario);
             resultado = cst.executeUpdate();
