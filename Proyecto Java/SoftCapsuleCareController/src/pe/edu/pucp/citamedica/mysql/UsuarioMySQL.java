@@ -101,20 +101,18 @@ public class UsuarioMySQL implements UsuarioDAO{
     public Usuario obtenerPorId(int idUsuario) {
        Usuario usuario = null;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, idUsuario);
-            rs = pst.executeQuery();
-
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL UsuarioListarPorID(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idUsuario);
+            rs = cst.executeQuery();
             if (rs.next()) {
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setContrasenha(rs.getString("contrasenha"));
-                int idPersona = rs.getInt("idpersona");
+                usuario.setIdPersona(rs.getInt("idPersona"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

@@ -14,9 +14,10 @@ public class Principal_6 {
 //        u.setContrasenha("cincoydiez");
 //        System.out.println(usu.modificar(u)>0 ? "Usuario modificado":"Error al modificar");
 //        System.out.println(usu.eliminar(3)>0 ? "Usuario eliminado":"Error al eliminar");
-        ArrayList<Usuario>us=usu.listarTodos();
-        for(Usuario u:us){
-            System.out.println(u.toString());
-        }
+//        ArrayList<Usuario>us=usu.listarTodos();
+//        for(Usuario u:us){
+//            System.out.println(u.toString());
+//        }
+        System.out.println(usu.obtenerPorId(1).toString());
     }
 }

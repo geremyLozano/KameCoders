@@ -106,7 +106,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     public ArrayList<Auxiliar> listarTodos() {
         ArrayList<Auxiliar> auxiliariliares = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -139,7 +139,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     public Auxiliar obtenerPorId(int idAuxiliar) {
         Auxiliar auxiliar = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idAuxiliar);
