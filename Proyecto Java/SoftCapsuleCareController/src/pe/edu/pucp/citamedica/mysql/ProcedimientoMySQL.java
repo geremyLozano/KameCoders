@@ -1,20 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.citamedica.mysql;
 
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
-import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 
 /**
@@ -24,8 +19,6 @@ import pe.edu.pucp.dbmanager.config.DBManager;
 public class ProcedimientoMySQL implements ProcedimientoDAO{
     
     private Connection con;
-    private Statement st;
-    private PreparedStatement pst;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
@@ -34,11 +27,11 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     public int insertar(Procedimiento procedimiento, int idAmbienteMedico) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_insertar_procedimiento(?, ?, ?, ?, ?, ?, ?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_insertar_procedimiento(?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar los parámetros al procedimiento almacenado
             cst.setString(1, procedimiento.getNombre());
@@ -74,11 +67,11 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     public int modificar(Procedimiento procedimiento) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_modificar_procedimiento(?, ?, ?, ?, ?, ?, ?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_modificar_procedimiento(?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar los parámetros al procedimiento almacenado
             cst.setInt(1, procedimiento.getIdProcedimiento());
@@ -120,11 +113,11 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     public int eliminar(int idProcedimiento) {
         int resultado = 0;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_eliminar_logico_procedimiento(?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_eliminar_logico_procedimiento(?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar el ID del procedimiento al procedimiento almacenado
             cst.setInt(1, idProcedimiento);
@@ -159,12 +152,12 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     public ArrayList<Procedimiento> listarTodos() {
         ArrayList<Procedimiento> listaProcedimiento = new ArrayList<>();
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_listar_todos_procedimientos()}";
-            CallableStatement cst = con.prepareCall(sql);
-            ResultSet rs = cst.executeQuery();
+            sql = "{CALL sp_listar_todos_procedimientos()}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
 
             // Iterar sobre cada registro en el ResultSet
             while (rs.next()) {
@@ -186,7 +179,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (con != null) con.close();
@@ -202,17 +195,17 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     public Procedimiento obtenerPorId(int idProcedimiento) {
         Procedimiento procedimiento = null;
         try {
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Llamar al procedimiento almacenado
-            String sql = "{CALL sp_obtener_procedimiento_por_id(?)}";
-            CallableStatement cst = con.prepareCall(sql);
+            sql = "{CALL sp_obtener_procedimiento_por_id(?)}";
+            cst = con.prepareCall(sql);
 
             // Pasar el parámetro (ID del procedimiento)
             cst.setInt(1, idProcedimiento);
 
             // Ejecutar la consulta
-            ResultSet rs = cst.executeQuery();
+            rs = cst.executeQuery();
 
             // Verificar si se obtuvo algún resultado
             if (rs.next()) {
@@ -241,7 +234,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (con != null) con.close();
@@ -252,7 +245,4 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
 
         return procedimiento;
     }
-
-   
-    
 }

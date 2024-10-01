@@ -2,11 +2,9 @@ package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
 import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
@@ -16,10 +14,7 @@ import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
-    private PreparedStatement pstPersona;
-    private PreparedStatement pstAuxiliar;
     private CallableStatement cst;
-    private Statement st;
     private String sql;
     private ResultSet rs;
     
@@ -112,7 +107,6 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         ArrayList<Auxiliar> auxiliariliares = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
             sql = "{CALL AuxiliarListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -146,7 +140,6 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         Auxiliar auxiliar = null;
         try {
             con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
             sql = "{CALL AuxiliarListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idAuxiliar);

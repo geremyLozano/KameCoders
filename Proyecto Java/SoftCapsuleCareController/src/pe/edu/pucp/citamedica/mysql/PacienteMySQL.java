@@ -1,7 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +14,6 @@ import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class PacienteMySQL implements PacienteDAO{
     private Connection con;
-    private Statement st;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
@@ -67,7 +65,6 @@ public class PacienteMySQL implements PacienteDAO{
     public int eliminar(int idPaciente) {
         int resultado = 0;
         try{
-
             con = DBPoolManager.getInstance().getConnection();
             sql = "{call PacienteEliminar(?)}";
             cst = con.prepareCall(sql);  
@@ -86,7 +83,6 @@ public class PacienteMySQL implements PacienteDAO{
         ArrayList<Paciente> pacientes = new ArrayList<>();
         try {
             con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
             sql = "{CALL PacienteListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
@@ -117,8 +113,7 @@ public class PacienteMySQL implements PacienteDAO{
     public Paciente obtenerPorId(int idPaciente) {
         Paciente paciente = null;
         try {
-            con = DBManager.getInstance().getConnection();
-            st = con.createStatement();
+            con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL PacienteListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idPaciente);

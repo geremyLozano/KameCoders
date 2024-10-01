@@ -58,7 +58,7 @@ public class ReporteMedicoMySQL implements ReporteMedicoDAO{
     @Override
     public int eliminar(int idReporteMedico) {
         int resultado = 0;
-        String sql = "DELETE FROM ReporteMedico WHERE idReporteMedico = ?";
+        sql = "DELETE FROM ReporteMedico WHERE idReporteMedico = ?";
 
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
