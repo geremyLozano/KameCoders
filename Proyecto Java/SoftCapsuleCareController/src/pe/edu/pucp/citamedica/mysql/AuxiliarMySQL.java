@@ -173,7 +173,5 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             }
         }
         return auxiliar;
-    }
-
-    
+    }  
 }
