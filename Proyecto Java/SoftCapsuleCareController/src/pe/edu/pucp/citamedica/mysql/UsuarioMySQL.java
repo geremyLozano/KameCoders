@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class UsuarioMySQL implements UsuarioDAO{
     private Connection con;
@@ -38,18 +39,17 @@ public class UsuarioMySQL implements UsuarioDAO{
 
     @Override
     public int modificar(Usuario usuario) {
-        int resultado = 0;
+        int resultado = -1;
         try {
-            con = DBManager.getInstance().getConnection();
-            sql = "UPDATE Usuario SET username = ?, contrasenha = ?"
-                    + " WHERE idUsuario = ?";
-            pst = con.prepareStatement(sql);
-            pst.setString(1,usuario.getUsername());
-            pst.setString(2,usuario.getContrasenha());
-            pst.setInt(3,usuario.getIdUsuario());
-            resultado = pst.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL UsuarioModificar(?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, usuario.getIdUsuario());
+            cst.setString(2, usuario.getContrasenha());
+            resultado = cst.executeUpdate();
+        return resultado;
+        }   catch (SQLException e) {
+                System.out.println(e.getMessage());
         }
         return resultado;
     }
