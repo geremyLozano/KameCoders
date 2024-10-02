@@ -1,0 +1,50 @@
+//Procedimientos almacenados de Aseguradora
+
+CREATE DEFINER=`admin`@`%` PROCEDURE `ASEGURADORA_BUSCARPORID`(
+    IN p_idAseguradora INT
+)
+BEGIN
+    SELECT * FROM Aseguradora WHERE idAseguradora = p_idAseguradora;
+END
+--
+CREATE DEFINER=`admin`@`%` PROCEDURE `ASEGURADORA_ELIMINAR`(
+    IN p_idAseguradora INT
+)
+BEGIN
+    UPDATE Aseguradora Set activo = 0 WHERE idAseguradora = p_idAseguradora;
+END
+--
+CREATE DEFINER=`admin`@`%` PROCEDURE `ASEGURADORA_INSERTAR`(
+    OUT p_idAseguradora INT,
+    IN p_direccion VARCHAR(255),
+    IN p_telefono INT,
+    IN p_tipoSeguro VARCHAR(255),
+    IN p_porcentajeDescuento DOUBLE,
+    IN p_activo BOOLEAN
+)
+BEGIN
+    INSERT INTO Aseguradora  (direccion, telefono, tipoSeguro, porcentajeDescuento, activo)
+    VALUES (p_direccion, p_telefono, p_tipoSeguro, p_porcentajeDescuento, p_activo);
+    SET p_idAseguradora = @@last_insert_id;
+END
+--
+CREATE DEFINER=`admin`@`%` PROCEDURE `ASEGURADORA_LISTAR_TODAS`()
+BEGIN
+    SELECT idAseguradora, direccion, telefono, tipoSeguro, porcentajeDescuento FROM Aseguradora
+    WHERE activo = 1;
+END
+--
+CREATE DEFINER=`admin`@`%` PROCEDURE `ASEGURADORA_MODIFICAR`(
+    IN p_idAseguradora INT,
+    IN p_direccion VARCHAR(255),
+    IN p_telefono INT,
+    IN p_tipoSeguro VARCHAR(255),
+    IN p_porcentajeDescuento DOUBLE,
+    IN p_activo BOOLEAN
+)
+BEGIN
+    UPDATE Aseguradora SET direccion = p_direccion, telefono = p_telefono, tipoSeguro = p_tipoSeguro,
+							porcentajeDescuento = p_porcentajeDescuento, activo = p_activo
+    WHERE idAseguradora = p_idAseguradora;
+END
+
