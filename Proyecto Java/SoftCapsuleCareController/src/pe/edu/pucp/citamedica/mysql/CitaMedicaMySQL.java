@@ -22,114 +22,93 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     private Statement st;
     private String sql;
     private ResultSet rs;
-    
     @Override
     public int insertar(CitaMedica cita) {
-        
-    int resultado = 0;
-    try {
-        con = DBManager.getInstance().getConnection();
-        
-        // SQL para insertar los datos de la cita médica
-        sql = "INSERT INTO CitaMedica(tipo, estado, fecha, hora, idMedico, idPaciente, plataforma, enlace, duracion, numeroAmbiente, idPago) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        pstCitaMedica = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        
-        // Seteamos los parámetros para la inserción
-        pstCitaMedica.setString(1, cita.getTipo().name()); // Asumiendo que TipoCita es un enum
-        pstCitaMedica.setString(2, cita.getEstado().name()); // Asumiendo que EstadoCita es un enum
-        java.sql.Date sqlDate = new java.sql.Date(cita.getFecha().getTime());
-        pstCitaMedica.setDate(3, sqlDate);
-        pstCitaMedica.setTime(4, java.sql.Time.valueOf(cita.getHora())); // Conversion de LocalTime a java.sql.Time
-        pstCitaMedica.setInt(5, cita.getIdMedico()); // Asumiendo que Medico tiene un id
-        pstCitaMedica.setInt(6, cita.getIdPaciente()); // Asumiendo que Paciente tiene un id
-        pstCitaMedica.setString(7, cita.getPlataforma());
-        pstCitaMedica.setString(8, cita.getEnlace());
-        pstCitaMedica.setTime(9, java.sql.Time.valueOf(cita.getDuracion())); // Conversion de LocalTime a java.sql.Time
-        pstCitaMedica.setInt(10, cita.getNumeroAmbiente());
-        pstCitaMedica.setInt(11, cita.getIdPago()); // Asumiendo que Pago tiene un id
-        
-        // Ejecutamos la inserción y obtenemos las llaves generadas
-        pstCitaMedica.executeUpdate();
-        rs = pstCitaMedica.getGeneratedKeys();
-        if (rs.next()) {
-            cita.setIdCitaMedica(rs.getString(1)); // Guardamos el ID generado de la cita en el objeto
-        }
-        
-        // Inserción adicional para los procedimientos asociados a la cita médica
-//        sql = "INSERT INTO ProcedimientoCita(idCitaMedica, idProcedimiento) VALUES (?, ?)";
-//        for (Procedimiento proc : cita.getProcedimientos()) {
-//            pstProcedimiento = con.prepareStatement(sql);
-//            pstProcedimiento.setString(1, cita.getId());
-//            pstProcedimiento.setInt(2, proc.getIdProcedimiento()); // Asumiendo que Procedimiento tiene un id
-//            pstProcedimiento.executeUpdate();
-//        }
+        int resultado = 0;
 
-        resultado = 1; // Si todo sale bien, retornamos un valor que indica éxito
-    } catch (SQLException e) {
-        System.out.println("Error al insertar la cita médica: " + e.getMessage());
-    } finally {
-        // Cerramos los recursos (Connection, PreparedStatement, ResultSet) en el bloque finally
         try {
-            if (rs != null) rs.close();
-            if (pstCitaMedica != null) pstCitaMedica.close();
-            if (pstProcedimiento != null) pstProcedimiento.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            System.out.println("Error al cerrar recursos: " + e.getMessage());
-        }
-    }
-    return resultado;
-}
+            con = DBManager.getInstance().getConnection();
 
-    
+            // Llamamos al procedimiento almacenado
+            String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+
+            // Seteamos los parámetros del procedimiento
+            cst.setString(1, cita.getTipo().name()); // TipoCita es un enum
+            cst.setString(2, cita.getEstado().name()); // EstadoCita es un enum
+            cst.setDate(3, new java.sql.Date(cita.getFecha().getTime()));
+            cst.setTime(4, java.sql.Time.valueOf(cita.getHora()));
+            cst.setInt(5, cita.getIdMedico());
+            cst.setInt(6, cita.getIdPaciente());
+            cst.setString(7, cita.getPlataforma());
+            cst.setString(8, cita.getEnlace());
+            cst.setTime(9, java.sql.Time.valueOf(cita.getDuracion()));
+            cst.setInt(10, cita.getNumeroAmbiente());
+            cst.setInt(11, cita.getIdPago());
+
+            // Ejecutamos el procedimiento
+            cst.execute();
+            resultado = 1; // Si todo va bien, retornamos éxito
+
+        } catch (SQLException e) {
+            System.out.println("Error al insertar la cita médica: " + e.getMessage());
+        } finally {
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return resultado;
+    }
+
 
     @Override
     public int modificar(CitaMedica citaMedica) {
         int resultado = 0;
         Connection con = null;
-        PreparedStatement pstCitaMedica = null;
-        String sql = "UPDATE cita_medica SET estado = ?, fecha = ?, hora = ? WHERE idCitaMedica = ?";
+        CallableStatement cst = null;
+        String sql = "{CALL sp_modificar_cita_medica(?, ?, ?, ?)}";
 
         try {
-            // Obtener la conexión desde el DBManager o tu gestor de conexiones.
+            // Obtener la conexión desde el DBManager.
             con = DBManager.getInstance().getConnection();
 
-            // Preparar la consulta SQL.
-            pstCitaMedica = con.prepareStatement(sql);
+            // Preparar la llamada al procedimiento almacenado.
+            cst = con.prepareCall(sql);
 
-            // Establecer los valores para los parámetros de la consulta.
-            pstCitaMedica.setString(1, citaMedica.getEstado().name());
-            pstCitaMedica.setDate(2, new java.sql.Date(citaMedica.getFecha().getTime()));
-            pstCitaMedica.setTime(3, java.sql.Time.valueOf(citaMedica.getHora()));
-            pstCitaMedica.setString(4, citaMedica.getIdCitaMedica());
+            // Establecer los parámetros para el procedimiento.
+            cst.setInt(1, Integer.parseInt(citaMedica.getIdCitaMedica()));  // Convertir el ID si es String
+            cst.setString(2, citaMedica.getEstado().name());                 // Asumimos que EstadoCita es un enum
+            cst.setDate(3, new java.sql.Date(citaMedica.getFecha().getTime()));
+            cst.setTime(4, java.sql.Time.valueOf(citaMedica.getHora()));
 
-            // Ejecutar la consulta.
-            resultado = pstCitaMedica.executeUpdate();
+            // Ejecutar el procedimiento almacenado.
+            resultado = cst.executeUpdate();
 
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL.
-            System.out.println("Error al modificar cita médica: " + e.getMessage());
+            // Manejar cualquier excepción SQL.
+            System.out.println("Error al modificar la cita médica: " + e.getMessage());
         } finally {
-            // Cerrar recursos de base de datos.
+            // Cerrar los recursos de base de datos.
             try {
-                if (pstCitaMedica != null) pstCitaMedica.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException e) {
                 System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
         return resultado;
-    }                   
-
+    }
 
     @Override
     public int eliminar(int idCitaMedica) {
         int resultado = 0;
         Connection con = null;
         CallableStatement cst = null;
-        String sql = "{call CITA_MEDICA_ELIMINAR(?)}";  // Procedimiento almacenado
+        String sql = "{CALL sp_eliminar_cita_medica(?)}";  // Procedimiento almacenado
 
         try {
             // Obtener la conexión a la base de datos
@@ -160,110 +139,111 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         // Devolver el resultado
         return resultado;
     }
+
     
     @Override
     public ArrayList<CitaMedica> listarTodos() {
-    ArrayList<CitaMedica> citasMedicas = new ArrayList<>();
-    Connection con = null;
-    Statement st = null;
-    ResultSet rs = null;
-    String sql = "SELECT idCitaMedica, fecha, hora, estado FROM cita_medica";
+        ArrayList<CitaMedica> citasMedicas = new ArrayList<>();
+        Connection con = null;
+        CallableStatement cst = null;
+        ResultSet rs = null;
+        String sql = "{CALL sp_listar_todas_citas()}";  // Procedimiento almacenado
 
-    try {
-        // Obtener la conexión a la base de datos
-        con = DBManager.getInstance().getConnection();
-        
-        // Crear el Statement para ejecutar la consulta
-        st = con.createStatement();
-        
-        // Ejecutar la consulta y obtener el resultado
-        rs = st.executeQuery(sql);
-        
-        // Procesar los resultados
-        while (rs.next()) {
-            CitaMedica citaMedica = new CitaMedica();
-            
-            // Asignar valores a los atributos de CitaMedica desde el ResultSet
-            citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
-            citaMedica.setFecha(rs.getDate("fecha"));
-            citaMedica.setHora(rs.getTime("hora").toLocalTime());
-            // Convertir el valor del estado de String a EstadoCita
-            String estadoStr = rs.getString("estado");
-            EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());  // Conversión a enum
-            citaMedica.setEstado(estado);
-            
-            // Añadir la CitaMedica a la lista
-            citasMedicas.add(citaMedica);
-        }
-    } catch (SQLException e) {
-        // Manejar cualquier excepción de SQL
-        System.out.println("Error al listar citas médicas: " + e.getMessage());
-    } finally {
-        // Cerrar los recursos de base de datos
         try {
-            if (rs != null) rs.close();
-            if (st != null) st.close();
-            if (con != null) con.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            // Obtener la conexión a la base de datos
+            con = DBManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+
+            // Ejecutar la consulta
+            rs = cst.executeQuery();
+
+            // Procesar los resultados
+            while (rs.next()) {
+                CitaMedica citaMedica = new CitaMedica();
+
+                // Asignar valores a los atributos de CitaMedica desde el ResultSet
+                citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
+                citaMedica.setFecha(rs.getDate("fecha"));
+                citaMedica.setHora(rs.getTime("hora").toLocalTime());
+
+                // Convertir el valor del estado de String a EstadoCita
+                String estadoStr = rs.getString("estadoCita");
+                EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());  // Conversión a enum
+                citaMedica.setEstado(estado);
+
+                // Añadir la CitaMedica a la lista
+                citasMedicas.add(citaMedica);
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL
+            System.out.println("Error al listar citas médicas: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
+
+        // Devolver la lista de citas médicas
+        return citasMedicas;
     }
-
-    // Devolver la lista de citas médicas
-    return citasMedicas;
-}
-
 
     @Override
     public CitaMedica obtenerPorId(int idCitaMedica) {
-    CitaMedica citaMedica = null;
-    Connection con = null;
-    PreparedStatement pstCitaMedica = null;
-    ResultSet rs = null;
-    String sql = "SELECT idCitaMedica, fecha, hora, estado FROM cita_medica WHERE idCitaMedica = ?";
+        CitaMedica citaMedica = null;
+        Connection con = null;
+        CallableStatement cst = null;
+        ResultSet rs = null;
+        String sql = "{CALL sp_obtener_cita_medica_por_id(?)}";  // Procedimiento almacenado
 
-    try {
-        // Obtener la conexión a la base de datos
-        con = DBManager.getInstance().getConnection();
-        
-        // Preparar la consulta SQL
-        pstCitaMedica = con.prepareStatement(sql);
-        pstCitaMedica.setInt(1, idCitaMedica);
-        
-        // Ejecutar la consulta
-        rs = pstCitaMedica.executeQuery();
-        
-        // Si se encuentra el registro
-        if (rs.next()) {
-            citaMedica = new CitaMedica();
-            
-            // Asignar valores desde el ResultSet a la CitaMedica
-            citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
-            citaMedica.setFecha(rs.getDate("fecha"));
-            citaMedica.setHora(rs.getTime("hora").toLocalTime());
-            
-            // Convertir el estado (asumiendo que es un enum)
-            String estadoStr = rs.getString("estado");
-            EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());
-            citaMedica.setEstado(estado);
-        }
-
-    } catch (SQLException e) {
-        System.out.println("Error al obtener cita médica: " + e.getMessage());
-    } finally {
-        // Cerrar los recursos
         try {
-            if (rs != null) rs.close();
-            if (pstCitaMedica != null) pstCitaMedica.close();
-            if (con != null) con.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            // Obtener la conexión a la base de datos
+            con = DBManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idCitaMedica);  // Establecer el parámetro de entrada (ID de la cita)
+
+            // Ejecutar la consulta
+            rs = cst.executeQuery();
+
+            // Si se encuentra el registro
+            if (rs.next()) {
+                citaMedica = new CitaMedica();
+
+                // Asignar valores desde el ResultSet a la CitaMedica
+                citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
+                citaMedica.setFecha(rs.getDate("fecha"));
+                citaMedica.setHora(rs.getTime("hora").toLocalTime());
+
+                // Convertir el estado de la cita (asumiendo que es un enum)
+                String estadoStr = rs.getString("estadoCita");
+                EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());
+                citaMedica.setEstado(estado);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener cita médica: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
+
+        // Devolver la cita médica o null si no se encontró
+        return citaMedica;
     }
-    
-    // Devolver la cita médica o null si no se encontró
-    return citaMedica;
-}
 
     
 }
