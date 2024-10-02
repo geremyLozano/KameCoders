@@ -13,27 +13,27 @@ import pe.edu.pucp.citamedica.mysql.AuxiliarMySQL;
 public class Principal_3 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        Persona persona = new Persona();
-//        persona.setDNI("16:07");
-//        persona.setNombre("Conexion2");
-//        persona.setApellido("probando");
-//        persona.setCorreoElectronico("prueba2@hotmail.com");
-//        persona.setNumTelefono(123312);
-//        persona.setDireccion("Av.Brasil 123");
-//        persona.setFechaNacimiento(sdf.parse("23-10-2000"));
-//        persona.setGenero('M');
-//        
-//        Usuario usuario = new Usuario();
-//        usuario.setUsername("16:07");
-//        usuario.setContrasenha("admin123");
-//        
-//        Auxiliar aux = new Auxiliar();
-//        AuxiliarDAO ad = new AuxiliarMySQL();
-//        int resultado = ad.insertar(aux, usuario, persona);
-//        if(resultado>0)
-//            System.out.println("Auxiliar ingreso correctamente");
-//        else
-//            System.out.println("Error en la creacion");
+        Auxiliar aux = new Auxiliar();
+        aux.setDNI("16:07");
+        aux.setNombre("Conexion2");
+        aux.setApellido("probando");
+        aux.setCorreoElectronico("prueba2@hotmail.com");
+        aux.setNumTelefono(123312);
+        aux.setDireccion("Av.Brasil 123");
+        aux.setFechaNacimiento(sdf.parse("23-10-2000"));
+        aux.setGenero('M');
+        
+        Usuario usuario = new Usuario();
+        usuario.setUsername("16:07");
+        usuario.setContrasenha("admin123");
+        
+        AuxiliarDAO ad = new AuxiliarMySQL();
+        int resultado = ad.insertar(aux, usuario);
+        if(resultado>0)
+            System.out.println("Auxiliar ingreso correctamente");
+        else
+            System.out.println("Error en la creacion");
+
 //        Scanner in = new Scanner(System.in);
 //        String dato = in.next();
 //        aux.setNombre("AUXILIARMODIFICADO");
@@ -42,7 +42,7 @@ public class Principal_3 {
 //            System.out.println("Modificado correctamente");
 //        else
 //            System.out.println("ERROR al modificar");
-        AuxiliarDAO ad = new AuxiliarMySQL();
+//        AuxiliarDAO ad = new AuxiliarMySQL();
 //        int valor = ad.eliminar(26);
 //        if(valor>0)
 //            System.out.println("Eliminado correctamente");
@@ -56,12 +56,12 @@ public class Principal_3 {
 //                    "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
 //            System.out.println("---------------------------------");
 //        }
-        Auxiliar p=ad.obtenerPorId(25);
-        String fecha = sdf.format(p.getFechaNacimiento());
-        System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
-                + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
-                "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
-        System.out.println("---------------------------------");
+//        Auxiliar p=ad.obtenerPorId(25);
+//        String fecha = sdf.format(p.getFechaNacimiento());
+//        System.out.println("IdPaciente: "+p.getIdAuxiliar()+ "  DNI:"+p.getDNI()+"   "
+//                + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+//                "   Especialidad:"+p.getEspecialidad().getNombre()+"   FechaNacimiento:"+fecha);
+//        System.out.println("---------------------------------");
         
     }
 }

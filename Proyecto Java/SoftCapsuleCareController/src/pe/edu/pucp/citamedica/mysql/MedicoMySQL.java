@@ -1,7 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -14,23 +14,23 @@ import pe.edu.pucp.citamedica.mysql.AdministradorMySQL;
 public class Principal_1 {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Persona persona = new Persona();
-        persona.setDNI("unaytreina");
-        persona.setNombre("Conexion2");
-        persona.setApellido("probando");
-        persona.setCorreoElectronico("prueba2@hotmail.com");
-        persona.setNumTelefono(123312);
-        persona.setDireccion("Av.Brasil 123");
-        persona.setFechaNacimiento(sdf.parse("23-10-2000"));
-        persona.setGenero('M');
+        Administrador admin = new Administrador();
+        admin.setDNI("44444");
+        admin.setNombre("Conexion2");
+        admin.setApellido("probando");
+        admin.setCorreoElectronico("prueba2@hotmail.com");
+        admin.setNumTelefono(123312);
+        admin.setDireccion("Av.Brasil 123");
+        admin.setFechaNacimiento(sdf.parse("23-10-2000"));
+        admin.setGenero('M');
         
         Usuario usuario = new Usuario();
-        usuario.setUsername("unaytreina");
+        usuario.setUsername("44444");
         usuario.setContrasenha("admin123");
         
-        Administrador admin = new Administrador();
+        
         AdministradorDAO ad = new AdministradorMySQL();
-        int resultado = ad.insertar(admin, usuario, persona);
+        int resultado = ad.insertar(admin, usuario);
         if(resultado>0)
             System.out.println("Administrador ingreso correctamente");
         else
@@ -53,11 +53,11 @@ public class Principal_1 {
 //                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
 //            System.out.println("---------------------------------");
 //        }
-        Administrador p = ad.obtenerPorId(23);
-            String fecha = sdf.format(p.getFechaNacimiento());
-            System.out.println("IdPaciente: "+p.getIdAdministrador()+ "  DNI:"+p.getDNI()+"   "
-                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
-                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
-            System.out.println("---------------------------------");
+//        Administrador p = ad.obtenerPorId(23);
+//            String fecha = sdf.format(p.getFechaNacimiento());
+//            System.out.println("IdPaciente: "+p.getIdAdministrador()+ "  DNI:"+p.getDNI()+"   "
+//                    + "Nombre:"+p.getNombre()+"   Apellido:"+p.getApellido()+
+//                    "   Correo:"+p.getCorreoElectronico()+"   FechaNacimiento:"+fecha);
+//            System.out.println("---------------------------------");
     }
 }

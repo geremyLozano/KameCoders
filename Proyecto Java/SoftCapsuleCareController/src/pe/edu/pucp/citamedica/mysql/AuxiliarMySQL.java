@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
-import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -18,7 +17,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Auxiliar auxiliariliar, Usuario usuario, Persona persona){
+    public int insertar(Auxiliar auxiliar, Usuario usuario){
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -28,29 +27,29 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
             cst.setString(3, usuario.getUsername());
             cst.setString(4, usuario.getContrasenha());
-            cst.setString(5, persona.getDNI());
-            cst.setString(6, persona.getNombre());
-            cst.setString(7, persona.getApellido());
-            cst.setString(8, persona.getCorreoElectronico());
-            cst.setInt(9, persona.getNumTelefono());
-            cst.setString(10, persona.getDireccion());
-            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
-            cst.setString(12, String.valueOf(persona.getGenero()));
+            cst.setString(5, auxiliar.getDNI());
+            cst.setString(6, auxiliar.getNombre());
+            cst.setString(7, auxiliar.getApellido());
+            cst.setString(8, auxiliar.getCorreoElectronico());
+            cst.setInt(9, auxiliar.getNumTelefono());
+            cst.setString(10, auxiliar.getDireccion());
+            cst.setDate(11, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(auxiliar.getGenero()));
         
             resultado = cst.executeUpdate();
             
-            persona.setIdPersona(cst.getInt(1));
+            auxiliar.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
-            auxiliariliar.setIdAuxiliar(persona.getIdPersona());
-            auxiliariliar.setDNI(persona.getDNI());
-            auxiliariliar.setNombre(persona.getNombre());
-            auxiliariliar.setApellido(persona.getApellido());
-            auxiliariliar.setCorreoElectronico(persona.getCorreoElectronico());
-            auxiliariliar.setNumTelefono(persona.getNumTelefono());
-            auxiliariliar.setDireccion(persona.getDireccion());
-            auxiliariliar.setFechaNacimiento(persona.getFechaNacimiento());
-            auxiliariliar.setGenero(persona.getGenero());
-            auxiliariliar.setActivo(true);
+            auxiliar.setIdAuxiliar(auxiliar.getIdPersona());
+            auxiliar.setDNI(auxiliar.getDNI());
+            auxiliar.setNombre(auxiliar.getNombre());
+            auxiliar.setApellido(auxiliar.getApellido());
+            auxiliar.setCorreoElectronico(auxiliar.getCorreoElectronico());
+            auxiliar.setNumTelefono(auxiliar.getNumTelefono());
+            auxiliar.setDireccion(auxiliar.getDireccion());
+            auxiliar.setFechaNacimiento(auxiliar.getFechaNacimiento());
+            auxiliar.setGenero(auxiliar.getGenero());
+            auxiliar.setActivo(true);
         return resultado;
         }   catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -59,23 +58,23 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     }
     
     @Override
-    public int modificar(Auxiliar auxiliariliar) {
+    public int modificar(Auxiliar auxiliar) {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
-            cst.setInt(1, auxiliariliar.getIdAuxiliar());
-            cst.setString(2, auxiliariliar.getDNI());
-            cst.setString(3, auxiliariliar.getNombre());
-            cst.setString(4, auxiliariliar.getApellido());
-            cst.setString(5, auxiliariliar.getCorreoElectronico());
-            cst.setInt(6, auxiliariliar.getNumTelefono());
-            cst.setString(7, auxiliariliar.getDireccion());
-            cst.setDate(8, new java.sql.Date(auxiliariliar.getFechaNacimiento().getTime()));
-            cst.setString(9, String.valueOf(auxiliariliar.getGenero()));
+            cst.setInt(1, auxiliar.getIdAuxiliar());
+            cst.setString(2, auxiliar.getDNI());
+            cst.setString(3, auxiliar.getNombre());
+            cst.setString(4, auxiliar.getApellido());
+            cst.setString(5, auxiliar.getCorreoElectronico());
+            cst.setInt(6, auxiliar.getNumTelefono());
+            cst.setString(7, auxiliar.getDireccion());
+            cst.setDate(8, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
+            cst.setString(9, String.valueOf(auxiliar.getGenero()));
             cst.setInt(10, 1);
-            cst.setBoolean(11, auxiliariliar.isActivo());
+            cst.setBoolean(11, auxiliar.isActivo());
             
             resultado = cst.executeUpdate();
             
@@ -103,7 +102,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
     @Override
     public ArrayList<Auxiliar> listarTodos() {
-        ArrayList<Auxiliar> auxiliariliares = new ArrayList<>();
+        ArrayList<Auxiliar> auxiliares = new ArrayList<>();
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarListar}";
@@ -120,7 +119,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 auxiliar.setEspecialidad(esp);
                 auxiliar.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 auxiliar.setActivo(rs.getBoolean("activo"));
-                auxiliariliares.add(auxiliar);
+                auxiliares.add(auxiliar);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -131,7 +130,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return auxiliariliares;
+        return auxiliares;
     }
 
     @Override

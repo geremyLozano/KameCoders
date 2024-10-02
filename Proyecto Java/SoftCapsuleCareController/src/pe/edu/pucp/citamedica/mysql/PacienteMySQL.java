@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
-import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -18,7 +17,7 @@ public class PacienteMySQL implements PacienteDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Paciente paciente, Usuario usuario, Persona persona) {
+    public int insertar(Paciente paciente, Usuario usuario) {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -28,29 +27,29 @@ public class PacienteMySQL implements PacienteDAO{
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
             cst.setString(3, usuario.getUsername());
             cst.setString(4, usuario.getContrasenha());
-            cst.setString(5, persona.getDNI());
-            cst.setString(6, persona.getNombre());
-            cst.setString(7, persona.getApellido());
-            cst.setString(8, persona.getCorreoElectronico());
-            cst.setInt(9, persona.getNumTelefono());
-            cst.setString(10, persona.getDireccion());
-            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
-            cst.setString(12, String.valueOf(persona.getGenero()));
+            cst.setString(5, paciente.getDNI());
+            cst.setString(6, paciente.getNombre());
+            cst.setString(7, paciente.getApellido());
+            cst.setString(8, paciente.getCorreoElectronico());
+            cst.setInt(9, paciente.getNumTelefono());
+            cst.setString(10, paciente.getDireccion());
+            cst.setDate(11, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(paciente.getGenero()));
            
             resultado = cst.executeUpdate();
             
-            persona.setIdPersona(cst.getInt(1));
+            paciente.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             
-            paciente.setIdPaciente(persona.getIdPersona());
-            paciente.setDNI(persona.getDNI());
-            paciente.setNombre(persona.getNombre());
-            paciente.setApellido(persona.getApellido());
-            paciente.setCorreoElectronico(persona.getCorreoElectronico());
-            paciente.setNumTelefono(persona.getNumTelefono());
-            paciente.setDireccion(persona.getDireccion());
-            paciente.setFechaNacimiento(persona.getFechaNacimiento());
-            paciente.setGenero(persona.getGenero());
+            paciente.setIdPaciente(paciente.getIdPersona());
+            paciente.setDNI(paciente.getDNI());
+            paciente.setNombre(paciente.getNombre());
+            paciente.setApellido(paciente.getApellido());
+            paciente.setCorreoElectronico(paciente.getCorreoElectronico());
+            paciente.setNumTelefono(paciente.getNumTelefono());
+            paciente.setDireccion(paciente.getDireccion());
+            paciente.setFechaNacimiento(paciente.getFechaNacimiento());
+            paciente.setGenero(paciente.getGenero());
             paciente.setActivo(true);
             paciente.setHistorialActivo(false);
         return resultado;

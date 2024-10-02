@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
-import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -23,7 +22,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     private ResultSet rs;
    
     @Override
-    public int insertar(Administrador administrador, Usuario usuario, Persona persona) {
+    public int insertar(Administrador administrador, Usuario usuario) {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -33,28 +32,28 @@ public class AdministradorMySQL implements AdministradorDAO{
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
             cst.setString(3, usuario.getUsername());
             cst.setString(4, usuario.getContrasenha());
-            cst.setString(5, persona.getDNI());
-            cst.setString(6, persona.getNombre());
-            cst.setString(7, persona.getApellido());
-            cst.setString(8, persona.getCorreoElectronico());
-            cst.setInt(9, persona.getNumTelefono());
-            cst.setString(10, persona.getDireccion());
-            cst.setDate(11, new java.sql.Date(persona.getFechaNacimiento().getTime()));
-            cst.setString(12, String.valueOf(persona.getGenero()));
+            cst.setString(5, administrador.getDNI());
+            cst.setString(6, administrador.getNombre());
+            cst.setString(7, administrador.getApellido());
+            cst.setString(8, administrador.getCorreoElectronico());
+            cst.setInt(9, administrador.getNumTelefono());
+            cst.setString(10, administrador.getDireccion());
+            cst.setDate(11, new java.sql.Date(administrador.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(administrador.getGenero()));
         
             resultado = cst.executeUpdate();
             
-            persona.setIdPersona(cst.getInt(1));
+            administrador.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
-            administrador.setIdAdministrador(persona.getIdPersona());
-            administrador.setDNI(persona.getDNI());
-            administrador.setNombre(persona.getNombre());
-            administrador.setApellido(persona.getApellido());
-            administrador.setCorreoElectronico(persona.getCorreoElectronico());
-            administrador.setNumTelefono(persona.getNumTelefono());
-            administrador.setDireccion(persona.getDireccion());
-            administrador.setFechaNacimiento(persona.getFechaNacimiento());
-            administrador.setGenero(persona.getGenero());
+            administrador.setIdAdministrador(administrador.getIdPersona());
+            administrador.setDNI(administrador.getDNI());
+            administrador.setNombre(administrador.getNombre());
+            administrador.setApellido(administrador.getApellido());
+            administrador.setCorreoElectronico(administrador.getCorreoElectronico());
+            administrador.setNumTelefono(administrador.getNumTelefono());
+            administrador.setDireccion(administrador.getDireccion());
+            administrador.setFechaNacimiento(administrador.getFechaNacimiento());
+            administrador.setGenero(administrador.getGenero());
             administrador.setActivo(true);
         return resultado;
         }   catch (SQLException e) {
