@@ -271,7 +271,7 @@ public class MedicoMySQL implements MedicoDAO {
     @Override
     public Medico obtenerPorId(int idMedico) {
         Medico medico = null;
-        sql = "SELECT * FROM Medico WHERE idMedico = ?";
+        sql = "{CALL ObtenerMedicoPorId(?)}";
 
         try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement pstMedico = con.prepareStatement(sql)) {
