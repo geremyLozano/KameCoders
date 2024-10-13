@@ -2,6 +2,7 @@ package pe.edu.pucp.citamedica.main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
@@ -10,6 +11,7 @@ import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
+import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
@@ -25,17 +27,26 @@ public class Principal_2 {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         
         Medico med = new Medico();
-        med.setDNI("12121212");
-        med.setNombre("Conexion2");
-        med.setApellido("probando");
+        med.setDNI("543534");
+        med.setNombre("Alonso");
+        med.setApellido("Perez");
         med.setCorreoElectronico("prueba2@hotmail.com");
         med.setNumTelefono(123312);
         med.setDireccion("Av.Brasil 123");
         med.setFechaNacimiento(sdf.parse("23-10-2000"));
         med.setGenero('M');
-        
+        med.setNumColegiatura("43242");
+        med.setHoraFinTrabajo(LocalTime.of(14, 30));
+        med.setHoraInicioTrabajo(LocalTime.of(20, 0));
+        ArrayList<DiaSemana> diasLaborales = new ArrayList<>();
+        diasLaborales.add(DiaSemana.Lunes);
+        diasLaborales.add(DiaSemana.Martes);
+        diasLaborales.add(DiaSemana.Miercoles);
+        med.setDiasLaborales(diasLaborales);
+        med.setAhosExp(5);
+        med.setActivo(true);
 //        Paciente paciente = new Paciente();
-        PacienteDAO pac = new PacienteMySQL();
+//        PacienteDAO pac = new PacienteMySQL();
         MedicoDAO m = new MedicoMySQL();
         int resultado = m.insertar(med);
 
