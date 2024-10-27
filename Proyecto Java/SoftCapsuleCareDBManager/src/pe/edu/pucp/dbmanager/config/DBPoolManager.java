@@ -7,7 +7,7 @@ public class DBPoolManager {
     private static DBPoolManager dbManager;
     private BasicDataSource dataSource;
     private Connection con;
-    private final String host = "pruebaprog3.c7qeiwgs42xd.us-east-1.rds.amazonaws.com";
+    private final String host = "examenparcial.cpsopevx2pq7.us-east-1.rds.amazonaws.com";
     private final String port = "3306";
     private final String db = "mydb";
     private final String username = "admin";
