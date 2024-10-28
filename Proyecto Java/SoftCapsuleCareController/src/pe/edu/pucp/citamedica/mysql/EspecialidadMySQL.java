@@ -110,6 +110,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
                 // Crear un nuevo objeto 
                 Especialidad especialidad = new Especialidad();
                 
+                especialidad.setNombre(rs.getString("nombre"));
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
                 especialidad.setCostoConsulta(rs.getDouble("costoConsulta"));
 
