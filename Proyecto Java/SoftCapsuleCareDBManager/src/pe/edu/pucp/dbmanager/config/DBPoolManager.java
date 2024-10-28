@@ -101,6 +101,7 @@ public class DBPoolManager {
                 case Double decimal -> cs.setDouble(key, decimal);
                 case Boolean booleano -> cs.setBoolean(key, booleano);
                 case java.util.Date fecha -> cs.setDate(key, new java.sql.Date(fecha.getTime()));
+                case Character caracter -> cs.setString(key, String.valueOf(caracter));
                 case byte[] bytes -> cs.setBytes(key, bytes);
                 default -> {
 			cs.setString(key, value.toString());

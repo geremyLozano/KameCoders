@@ -3,10 +3,14 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
+import java.sql.Date; // Para java.sql.Date
+import java.util.Calendar; // Para Calendar
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -20,6 +24,7 @@ public class PacienteMySQL implements PacienteDAO{
     public int insertar(Paciente paciente, Usuario usuario) {
         int resultado = -1;
         try {
+            java.sql.Date fechaNacimientoHardcodeada = Date.valueOf("1990-01-01");
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL PacienteInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
@@ -34,6 +39,7 @@ public class PacienteMySQL implements PacienteDAO{
             cst.setInt(9, paciente.getNumTelefono());
             cst.setString(10, paciente.getDireccion());
             cst.setDate(11, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
+//            cst.setDate(11, fechaNacimientoHardcodeada);
             cst.setString(12, String.valueOf(paciente.getGenero()));
            
             resultado = cst.executeUpdate();
@@ -57,6 +63,26 @@ public class PacienteMySQL implements PacienteDAO{
                 System.out.println(e.getMessage());
         }
         return resultado;
+        
+//        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+//        parametrosEntrada.put("p_username", usuario.getUsername());
+//        parametrosEntrada.put("p_contrasena", usuario.getContrasenha());
+//        parametrosEntrada.put("p_DNI", paciente.getDNI());
+//        parametrosEntrada.put("p_nombre_persona", paciente.getNombre());
+//        parametrosEntrada.put("p_apellido_persona", paciente.getApellido());
+//        parametrosEntrada.put("p_correo_electronico", paciente.getCorreoElectronico());
+//        parametrosEntrada.put("p_num_telefono", paciente.getNumTelefono());
+////        parametrosEntrada.put("p_direccion", paciente.getDireccion());
+//        parametrosEntrada.put("p_fecha_nacimiento", paciente.getFechaNacimiento());
+//        parametrosEntrada.put("p_genero", paciente.getGenero());
+//
+//        HashMap<String, Object> parametrosSalida = new HashMap<>();
+//        parametrosSalida.put("p_id_persona_pk", Types.INTEGER);
+//        parametrosSalida.put("p_id_usuario_pk", Types.INTEGER);
+//        
+//        DBPoolManager.getInstance().ejecutarProcedimiento("PacienteInsertar", parametrosEntrada,
+//                parametrosSalida);
+//        return (int) parametrosSalida.get("p_id_persona_pk");
     }
 
     @Override
