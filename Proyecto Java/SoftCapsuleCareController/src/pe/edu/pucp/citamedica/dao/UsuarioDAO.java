@@ -9,4 +9,5 @@ public interface UsuarioDAO {
     int eliminar(int idUsuario);
     ArrayList<Usuario> listarTodos();
     Usuario obtenerPorId(int idUsuario);
+    Usuario ExisteUsuario(String username, String contrasenha);
 }

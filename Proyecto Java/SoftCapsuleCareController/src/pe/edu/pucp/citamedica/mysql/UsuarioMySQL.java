@@ -119,4 +119,33 @@ public class UsuarioMySQL implements UsuarioDAO{
         }
         return usuario;
     }
+
+    @Override
+    public Usuario ExisteUsuario(String username, String contrasenha) {
+        Usuario usuario = null;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL ExisteUsuario(?,?)}";
+            cst = con.prepareCall(sql);
+            cst.setString(1, username);
+            cst.setString(2, contrasenha);
+            rs = cst.executeQuery();
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setUsername(rs.getString("username"));
+                usuario.setContrasenha(rs.getString("contrasenha"));
+                usuario.setIdPersona(rs.getInt("idPersona"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return usuario;
+    }
 }
