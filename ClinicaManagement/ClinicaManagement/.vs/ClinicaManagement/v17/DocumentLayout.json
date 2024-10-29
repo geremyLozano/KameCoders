@@ -1,0 +1,181 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\github ta\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrologin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrologin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrologin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrologin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\principal.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\principal.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\public\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\public\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\principal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\principal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\master\\plantilla.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\master\\plantilla.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\master\\login.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\master\\login.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DA3E56B-492F-4132-B7E1-90EB8A9D9A7A}|ClinicaDA\\ClinicaDA.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicada\\dao\\medicodao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DA3E56B-492F-4132-B7E1-90EB8A9D9A7A}|ClinicaDA\\ClinicaDA.csproj|solutionrelative:clinicada\\dao\\medicodao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\pacientes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\pacientes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52A117B1-529D-4686-A2EA-FD566EAD1722}|ClinicaDBManager\\ClinicaDBManager.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\clinicadbmanager\\dbpoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52A117B1-529D-4686-A2EA-FD566EAD1722}|ClinicaDBManager\\ClinicaDBManager.csproj|solutionrelative:clinicadbmanager\\dbpoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Principal.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\Principal.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\Principal.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-27T21:47:07.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Pacientes.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Pacientes.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\Pacientes.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Pacientes.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\Pacientes.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-26T16:24:38.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegistroLogin.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-26T16:19:19.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegistroLogin.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAApwJIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T21:26:51.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Principal.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\Principal.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\Principal.aspx.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T22:37:27.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Login.Master",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Login.Master",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Master\\Login.Master",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Login.Master",
+              "RelativeToolTip": "ClinicaWeb\\Master\\Login.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-26T16:16:16.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Plantilla.Master",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Master\\Plantilla.Master",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
+              "RelativeToolTip": "ClinicaWeb\\Master\\Plantilla.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-13T01:10:06.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Public\\css\\style.css",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Public\\css\\style.css",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Public\\css\\style.css",
+              "RelativeToolTip": "ClinicaWeb\\Public\\css\\style.css",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAABgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-26T16:48:25.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DBPoolManager.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaDBManager\\DBPoolManager.cs",
+              "RelativeDocumentMoniker": "ClinicaDBManager\\DBPoolManager.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaDBManager\\DBPoolManager.cs",
+              "RelativeToolTip": "ClinicaDBManager\\DBPoolManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T22:24:33.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MedicoDAO.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaDA\\DAO\\MedicoDAO.cs",
+              "RelativeDocumentMoniker": "ClinicaDA\\DAO\\MedicoDAO.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\GitHub TA\\ClinicaManagement\\ClinicaManagement\\ClinicaDA\\DAO\\MedicoDAO.cs",
+              "RelativeToolTip": "ClinicaDA\\DAO\\MedicoDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T21:38:17.62Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

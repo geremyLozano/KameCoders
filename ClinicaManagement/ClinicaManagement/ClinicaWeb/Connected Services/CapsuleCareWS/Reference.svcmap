@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f63af563-cd07-491a-9af1-bcad408697da" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/SoftCapsuleCareWSBL/archivo.disco" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PacienteWS.wsdl" MetadataType="Wsdl" ID="39016488-adce-477d-8e36-d230a3356631" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/PacienteWS?WSDL" />
+    <MetadataFile FileName="UsuarioWS.xsd" MetadataType="Schema" ID="3ac7ee82-1a19-449a-b8a3-87d95427902a" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?xsd=1" />
+    <MetadataFile FileName="EspecialidadWS.xsd" MetadataType="Schema" ID="29ee9642-fff4-493f-9749-d2320b6d611e" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/EspecialidadWS?xsd=1" />
+    <MetadataFile FileName="AdministradorWS.xsd" MetadataType="Schema" ID="468ee216-864a-46ed-9011-43e475aa8691" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AdministradorWS?xsd=1" />
+    <MetadataFile FileName="MedicoWS.xsd" MetadataType="Schema" ID="1c6282dd-c8ac-48a1-99d5-cb26e6ea57c3" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/MedicoWS?xsd=1" />
+    <MetadataFile FileName="AuxiliarWS.xsd" MetadataType="Schema" ID="f3eaf08c-512d-4cac-a2b3-4634f73f94d0" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?xsd=1" />
+    <MetadataFile FileName="UsuarioWS.wsdl" MetadataType="Wsdl" ID="32ee9aae-037e-4b82-a78a-a16c436d6d37" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?WSDL" />
+    <MetadataFile FileName="AdministradorWS.wsdl" MetadataType="Wsdl" ID="78d3d5f8-9754-43be-a1ea-8f4fd2b8562f" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AdministradorWS?WSDL" />
+    <MetadataFile FileName="archivo.disco" MetadataType="Disco" ID="128c56f0-c3e4-4d3b-a569-4e44a235024b" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/archivo.disco" />
+    <MetadataFile FileName="EspecialidadWS.wsdl" MetadataType="Wsdl" ID="850682b1-b8da-48e0-bc55-b40168ac9714" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/EspecialidadWS?WSDL" />
+    <MetadataFile FileName="AuxiliarWS.wsdl" MetadataType="Wsdl" ID="7d30f057-0266-4050-819b-785164b3d9fc" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?WSDL" />
+    <MetadataFile FileName="PacienteWS.xsd" MetadataType="Schema" ID="c9784d62-c2cb-4473-a248-af4909fc9c3f" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/PacienteWS?xsd=1" />
+    <MetadataFile FileName="MedicoWS.wsdl" MetadataType="Wsdl" ID="d679c6c5-f653-40c1-8a9a-c535254d1bce" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/MedicoWS?WSDL" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
