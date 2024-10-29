@@ -1,0 +1,12 @@
+D:\prog3\c#\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.dll
+D:\prog3\c#\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.pdb
+D:\prog3\c#\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.AssemblyReference.cache
+D:\prog3\c#\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
+D:\prog3\c#\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
+D:\prog3\c#\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.dll
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.pdb
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
+C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb

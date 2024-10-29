@@ -1,0 +1,992 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClinicaWeb</RootNamespace>
+    <AssemblyName>ClinicaWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44351</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\archivo.disco" />
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPacienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarMedicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.especialidad.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.usuario.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.verificarUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CapsuleCareWS\configuration91.svcinfo" />
+    <None Include="Connected Services\CapsuleCareWS\configuration.svcinfo" />
+    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\MedicoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\MedicoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Public\css\bootstrap-grid.css" />
+    <Content Include="Public\css\bootstrap-grid.min.css" />
+    <Content Include="Public\css\bootstrap-grid.rtl.css" />
+    <Content Include="Public\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Public\css\bootstrap-reboot.css" />
+    <Content Include="Public\css\bootstrap-reboot.min.css" />
+    <Content Include="Public\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Public\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Public\css\bootstrap-utilities.css" />
+    <Content Include="Public\css\bootstrap-utilities.min.css" />
+    <Content Include="Public\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Public\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Public\css\bootstrap.css" />
+    <Content Include="Public\css\bootstrap.min.css" />
+    <Content Include="Public\css\bootstrap.rtl.css" />
+    <Content Include="Public\css\bootstrap.rtl.min.css" />
+    <Content Include="Public\css\site.css" />
+    <Content Include="Public\css\style.css" />
+    <Content Include="Public\fonts\css\all.css" />
+    <Content Include="Public\fonts\css\all.min.css" />
+    <Content Include="Public\fonts\css\brands.css" />
+    <Content Include="Public\fonts\css\brands.min.css" />
+    <Content Include="Public\fonts\css\fontawesome.css" />
+    <Content Include="Public\fonts\css\fontawesome.min.css" />
+    <Content Include="Public\fonts\css\regular.css" />
+    <Content Include="Public\fonts\css\regular.min.css" />
+    <Content Include="Public\fonts\css\solid.css" />
+    <Content Include="Public\fonts\css\solid.min.css" />
+    <Content Include="Public\fonts\css\svg-with-js.css" />
+    <Content Include="Public\fonts\css\svg-with-js.min.css" />
+    <Content Include="Public\fonts\css\v4-font-face.css" />
+    <Content Include="Public\fonts\css\v4-font-face.min.css" />
+    <Content Include="Public\fonts\css\v4-shims.css" />
+    <Content Include="Public\fonts\css\v4-shims.min.css" />
+    <Content Include="Public\fonts\css\v5-font-face.css" />
+    <Content Include="Public\fonts\css\v5-font-face.min.css" />
+    <Content Include="Public\images\pucp.png" />
+    <Content Include="Public\js\app.js" />
+    <Content Include="Public\js\bootstrap.bundle.js" />
+    <Content Include="Public\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\js\bootstrap.esm.js" />
+    <Content Include="Public\js\bootstrap.esm.min.js" />
+    <Content Include="Public\js\bootstrap.js" />
+    <Content Include="Public\js\bootstrap.min.js" />
+    <Content Include="Master\Plantilla.Master" />
+    <Content Include="Master\Login.Master" />
+    <None Include="Connected Services\CapsuleCareWS\PacienteWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\PacienteWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\UsuarioWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\UsuarioWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Public\js\jquery-3.7.1.intellisense.js" />
+    <Content Include="Public\js\jquery-3.7.1.js" />
+    <Content Include="Public\js\jquery-3.7.1.min.js" />
+    <Content Include="Public\js\jquery-3.7.1.slim.js" />
+    <Content Include="Public\js\jquery-3.7.1.slim.min.js" />
+    <Content Include="template\css\style.css" />
+    <Content Include="template\docs\documentation.html" />
+    <Content Include="template\docs\documentation.js" />
+    <Content Include="template\gulpfile.js" />
+    <Content Include="template\images\auth\lockscreen-bg.jpg" />
+    <Content Include="template\images\auth\login-bg.jpg" />
+    <Content Include="template\images\auth\register-bg.jpg" />
+    <Content Include="template\images\faces\face1.jpg" />
+    <Content Include="template\images\faces\face13.jpg" />
+    <Content Include="template\images\faces\face2.jpg" />
+    <Content Include="template\images\faces\face28.png" />
+    <Content Include="template\images\faces\face3.jpg" />
+    <Content Include="template\images\faces\face4.jpg" />
+    <Content Include="template\images\faces\face5.jpg" />
+    <Content Include="template\images\faces\face6.jpg" />
+    <Content Include="template\images\faces\face7.jpg" />
+    <Content Include="template\images\favicon.png" />
+    <Content Include="template\images\logo-dark.svg" />
+    <Content Include="template\images\logo-mini.svg" />
+    <Content Include="template\images\logo.svg" />
+    <Content Include="template\js\chart.js" />
+    <Content Include="template\js\dashboard.js" />
+    <Content Include="template\js\file-upload.js" />
+    <Content Include="template\js\hoverable-collapse.js" />
+    <Content Include="template\js\off-canvas.js" />
+    <Content Include="template\js\select2.js" />
+    <Content Include="template\js\template.js" />
+    <Content Include="template\js\typeahead.js" />
+    <Content Include="template\pages\charts\chartjs.html" />
+    <Content Include="template\pages\forms\basic_elements.html" />
+    <Content Include="template\pages\icons\feather-icons.html" />
+    <Content Include="template\pages\samples\lock-screen.html" />
+    <Content Include="template\pages\samples\login-2.html" />
+    <Content Include="template\pages\samples\login.html" />
+    <Content Include="template\pages\samples\register-2.html" />
+    <Content Include="template\pages\samples\register.html" />
+    <Content Include="template\pages\tables\basic-table.html" />
+    <Content Include="template\pages\ui-features\buttons.html" />
+    <Content Include="template\pages\ui-features\typography.html" />
+    <Content Include="template\partials\_footer.html" />
+    <Content Include="template\partials\_navbar.html" />
+    <Content Include="template\partials\_sidebar.html" />
+    <Content Include="template\vendors\base\vendor.bundle.base.css" />
+    <Content Include="template\vendors\base\vendor.bundle.base.js" />
+    <Content Include="template\vendors\chart.js\Chart.min.js" />
+    <Content Include="template\vendors\feather\feather.css" />
+    <Content Include="template\vendors\feather\fonts\feather-webfont.svg" />
+    <Content Include="template\vendors\flag-icon-css\css\flag-icon.min.css" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ad.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ae.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\af.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ag.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ai.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\al.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\am.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ao.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\aq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ar.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\as.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\at.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\au.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\aw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ax.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\az.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ba.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\be.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\br.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\by.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\bz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ca.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ch.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ci.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ck.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\co.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\cz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\de.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\dj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\dk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\dm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\do.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\dz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ec.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ee.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\eg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\eh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\er.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\es-ct.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\es.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\et.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\eu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\fr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ga.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gb-eng.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gb-nir.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gb-sct.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gb-wls.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ge.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\gy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\hk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\hm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\hn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\hr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ht.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\hu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\id.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ie.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\il.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\im.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\in.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\io.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\iq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ir.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\is.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\it.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\je.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\jm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\jo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\jp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ke.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ki.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\km.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ky.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\kz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\la.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\li.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ls.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\lv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ly.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ma.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\md.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\me.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ml.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ms.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\my.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\mz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\na.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ne.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ng.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ni.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\no.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\np.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\nz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\om.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pe.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ph.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ps.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\pw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\py.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\qa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\re.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ro.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\rs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ru.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\rw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\se.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\si.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\so.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ss.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\st.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\sz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\td.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\th.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\to.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\tz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ua.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ug.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\um.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\un.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\us.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\uy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\uz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\va.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\vc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ve.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\vg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\vi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\vn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\vu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\wf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ws.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\xk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\ye.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\yt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\za.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\zm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\1x1\zw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ad.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ae.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\af.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ag.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ai.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\al.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\am.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ao.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\aq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ar.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\as.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\at.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\au.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\aw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ax.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\az.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ba.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\be.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\br.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\by.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\bz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ca.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ch.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ci.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ck.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\co.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\cz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\de.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\dj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\dk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\dm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\do.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\dz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ec.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ee.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\eg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\eh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\er.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\es-ct.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\es.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\et.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\eu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\fr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ga.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gb-eng.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gb-nir.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gb-sct.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gb-wls.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ge.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\gy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\hk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\hm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\hn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\hr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ht.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\hu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\id.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ie.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\il.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\im.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\in.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\io.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\iq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ir.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\is.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\it.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\je.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\jm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\jo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\jp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ke.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ki.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\km.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ky.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\kz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\la.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\li.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ls.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\lv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ly.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ma.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\md.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\me.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ml.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mo.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mp.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mq.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ms.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\my.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\mz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\na.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ne.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ng.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ni.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\no.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\np.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\nz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\om.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pe.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ph.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ps.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\pw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\py.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\qa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\re.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ro.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\rs.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ru.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\rw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sa.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sb.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sd.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\se.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sh.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\si.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\so.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ss.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\st.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sx.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\sz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\td.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\th.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tj.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tl.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\to.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tr.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tv.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tw.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\tz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ua.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ug.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\um.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\un.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\us.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\uy.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\uz.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\va.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\vc.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ve.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\vg.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\vi.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\vn.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\vu.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\wf.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ws.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\xk.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\ye.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\yt.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\za.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\zm.svg" />
+    <Content Include="template\vendors\flag-icon-css\flags\4x3\zw.svg" />
+    <Content Include="template\vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="template\vendors\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="template\vendors\jquery-bar-rating\fontawesome-stars-o.css" />
+    <Content Include="template\vendors\jquery-bar-rating\fontawesome-stars.css" />
+    <Content Include="template\vendors\jquery-bar-rating\jquery.barrating.min.js" />
+    <Content Include="template\vendors\jquery-file-upload\jquery.uploadfile.min.js" />
+    <Content Include="template\vendors\jquery-file-upload\uploadfile.css" />
+    <Content Include="template\vendors\jquery.repeater\jquery.repeater.min.js" />
+    <Content Include="template\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="template\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="template\vendors\progressbar.js\progressbar.min.js" />
+    <Content Include="template\vendors\select2-bootstrap-theme\select2-bootstrap.min.css" />
+    <Content Include="template\vendors\select2\select2.min.css" />
+    <Content Include="template\vendors\select2\select2.min.js" />
+    <Content Include="template\vendors\typeahead.js\typeahead.bundle.min.js" />
+    <Content Include="Views\Medicos.aspx" />
+    <Content Include="Views\Pacientes.aspx" />
+    <Content Include="Views\Principal.aspx" />
+    <Content Include="Views\RegistroLogin.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\CapsuleCareWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Plantilla.Master.cs">
+      <DependentUpon>Plantilla.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Plantilla.Master.designer.cs">
+      <DependentUpon>Plantilla.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Medicos.aspx.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Medicos.aspx.designer.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pacientes.aspx.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pacientes.aspx.designer.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Principal.aspx.cs">
+      <DependentUpon>Principal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Principal.aspx.designer.cs">
+      <DependentUpon>Principal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroLogin.aspx.cs">
+      <DependentUpon>RegistroLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroLogin.aspx.designer.cs">
+      <DependentUpon>RegistroLogin.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="template\.DS_Store" />
+    <Content Include="template\css\.DS_Store" />
+    <Content Include="template\css\maps\.DS_Store" />
+    <Content Include="template\css\maps\style.css.map" />
+    <Content Include="template\fonts\.DS_Store" />
+    <Content Include="template\fonts\karla\.DS_Store" />
+    <Content Include="template\fonts\karla\Karla-Bold.eot" />
+    <Content Include="template\fonts\karla\Karla-Bold.ttf" />
+    <Content Include="template\fonts\karla\Karla-Bold.woff" />
+    <Content Include="template\fonts\karla\Karla-Bold.woff2" />
+    <Content Include="template\fonts\karla\Karla-Regular.eot" />
+    <Content Include="template\fonts\karla\Karla-Regular.ttf" />
+    <Content Include="template\fonts\karla\Karla-Regular.woff" />
+    <Content Include="template\fonts\karla\Karla-Regular.woff2" />
+    <Content Include="template\images\.DS_Store" />
+    <Content Include="template\images\auth\.DS_Store" />
+    <Content Include="template\images\faces\.DS_Store" />
+    <Content Include="template\js\.DS_Store" />
+    <Content Include="template\package.json" />
+    <Content Include="template\pages\.DS_Store" />
+    <Content Include="template\pages\charts\.DS_Store" />
+    <Content Include="template\pages\forms\.DS_Store" />
+    <Content Include="template\pages\icons\.DS_Store" />
+    <Content Include="template\pages\samples\.DS_Store" />
+    <Content Include="template\pages\tables\.DS_Store" />
+    <Content Include="template\pages\ui-features\.DS_Store" />
+    <Content Include="template\partials\.DS_Store" />
+    <Content Include="template\scss\.DS_Store" />
+    <Content Include="template\scss\common.scss" />
+    <Content Include="template\scss\components\.DS_Store" />
+    <Content Include="template\scss\components\plugin-overrides\.DS_Store" />
+    <Content Include="template\scss\components\plugin-overrides\_jquery-file-upload.scss" />
+    <Content Include="template\scss\components\plugin-overrides\_progressbar-js.scss" />
+    <Content Include="template\scss\components\plugin-overrides\_rating.scss" />
+    <Content Include="template\scss\components\plugin-overrides\_select2.scss" />
+    <Content Include="template\scss\components\plugin-overrides\_typeahead.scss" />
+    <Content Include="template\scss\components\_bootstrap-progress.scss" />
+    <Content Include="template\scss\components\_buttons.scss" />
+    <Content Include="template\scss\components\_cards.scss" />
+    <Content Include="template\scss\components\_checkbox-radio.scss" />
+    <Content Include="template\scss\components\_dropdown.scss" />
+    <Content Include="template\scss\components\_forms.scss" />
+    <Content Include="template\scss\components\_icons.scss" />
+    <Content Include="template\scss\components\_lists.scss" />
+    <Content Include="template\scss\components\_preview.scss" />
+    <Content Include="template\scss\components\_tables.scss" />
+    <Content Include="template\scss\components\_toggle-switch.scss" />
+    <Content Include="template\scss\landing-screens\_auth.scss" />
+    <Content Include="template\scss\mixins\.DS_Store" />
+    <Content Include="template\scss\mixins\_animation.scss" />
+    <Content Include="template\scss\mixins\_blockqoute.scss" />
+    <Content Include="template\scss\mixins\_buttons.scss" />
+    <Content Include="template\scss\mixins\_cards.scss" />
+    <Content Include="template\scss\mixins\_misc.scss" />
+    <Content Include="template\scss\style.scss" />
+    <Content Include="template\scss\_background.scss" />
+    <Content Include="template\scss\_dashboard.scss" />
+    <Content Include="template\scss\_demo.scss" />
+    <Content Include="template\scss\_fonts.scss" />
+    <Content Include="template\scss\_footer.scss" />
+    <Content Include="template\scss\_functions.scss" />
+    <Content Include="template\scss\_layouts.scss" />
+    <Content Include="template\scss\_misc.scss" />
+    <Content Include="template\scss\_navbar.scss" />
+    <Content Include="template\scss\_reset.scss" />
+    <Content Include="template\scss\_sidebar.scss" />
+    <Content Include="template\scss\_typography.scss" />
+    <Content Include="template\scss\_utilities.scss" />
+    <Content Include="template\scss\_variables.scss" />
+    <Content Include="template\scss\_vertical-wrapper.scss" />
+    <Content Include="template\vendors\.DS_Store" />
+    <Content Include="template\vendors\base\bootstrap.min.js.map" />
+    <Content Include="template\vendors\feather\fonts\feather-webfont.eot" />
+    <Content Include="template\vendors\feather\fonts\feather-webfont.ttf" />
+    <Content Include="template\vendors\feather\fonts\feather-webfont.woff" />
+    <Content Include="template\vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="template\vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="template\vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="template\vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="template\vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="template\vendors\jquery-bar-rating\jquery.barrating.min.js.map" />
+    <Content Include="template\vendors\mdi\css\materialdesignicons.min.css.map" />
+    <Content Include="template\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="template\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="template\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="template\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="Public\css\bootstrap-grid.css.map" />
+    <Content Include="Public\css\bootstrap-grid.min.css.map" />
+    <Content Include="Public\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Public\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Public\css\bootstrap-reboot.css.map" />
+    <Content Include="Public\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Public\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Public\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Public\css\bootstrap-utilities.css.map" />
+    <Content Include="Public\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Public\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Public\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Public\css\bootstrap.css.map" />
+    <Content Include="Public\css\bootstrap.min.css.map" />
+    <Content Include="Public\css\bootstrap.rtl.css.map" />
+    <Content Include="Public\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Public\fonts\webfonts\fa-brands-400.ttf" />
+    <Content Include="Public\fonts\webfonts\fa-brands-400.woff2" />
+    <Content Include="Public\fonts\webfonts\fa-regular-400.ttf" />
+    <Content Include="Public\fonts\webfonts\fa-regular-400.woff2" />
+    <Content Include="Public\fonts\webfonts\fa-solid-900.ttf" />
+    <Content Include="Public\fonts\webfonts\fa-solid-900.woff2" />
+    <Content Include="Public\fonts\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Public\fonts\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Public\js\bootstrap.bundle.js.map" />
+    <Content Include="Public\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Public\js\bootstrap.esm.js.map" />
+    <Content Include="Public\js\bootstrap.esm.min.js.map" />
+    <Content Include="Public\js\bootstrap.js.map" />
+    <Content Include="Public\js\bootstrap.min.js.map" />
+    <Content Include="Public\js\jquery-3.7.1.min.map" />
+    <Content Include="Public\js\jquery-3.7.1.slim.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClinicaDA\ClinicaDA.csproj">
+      <Project>{2da3e56b-492f-4132-b7e1-90eb8a9d9a7a}</Project>
+      <Name>ClinicaDA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClinicaModel\ClinicaModel.csproj">
+      <Project>{0cfa5184-e93e-4b56-b5b9-7ee81cd975bc}</Project>
+      <Name>ClinicaModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CapsuleCareWS\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>27497</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44351/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
