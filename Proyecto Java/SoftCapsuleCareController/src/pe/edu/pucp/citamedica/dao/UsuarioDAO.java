@@ -10,4 +10,5 @@ public interface UsuarioDAO {
     ArrayList<Usuario> listarTodos();
     Usuario obtenerPorId(int idUsuario);
     Usuario ExisteUsuario(String username, String contrasenha);
+    Usuario VerificarUsuario(String username);
 }
