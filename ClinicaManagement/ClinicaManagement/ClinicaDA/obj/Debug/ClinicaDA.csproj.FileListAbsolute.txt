@@ -29,3 +29,18 @@ C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.csproj.Up2Date
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.dll
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaDA.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaDA.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaDBManager.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaModel.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\System.Memory.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\System.Buffers.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaDBManager.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\bin\Debug\ClinicaModel.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.csproj.AssemblyReference.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.csproj.Up2Date
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDA\obj\Debug\ClinicaDA.pdb

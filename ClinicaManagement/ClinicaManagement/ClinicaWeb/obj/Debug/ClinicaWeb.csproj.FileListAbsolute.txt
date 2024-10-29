@@ -138,3 +138,24 @@ C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.csproj.Up2Date
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.dll
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaWeb.dll.config
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaWeb.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaWeb.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaDA.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaModel.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\MySql.Data.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaDBManager.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\System.Memory.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\System.Numerics.Vectors.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\System.Buffers.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaDA.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaModel.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\bin\ClinicaDBManager.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.csproj.AssemblyReference.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.csproj.Up2Date
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaWeb\obj\Debug\ClinicaWeb.pdb
