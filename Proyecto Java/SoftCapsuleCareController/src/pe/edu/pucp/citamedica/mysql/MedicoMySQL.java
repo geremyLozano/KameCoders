@@ -60,7 +60,7 @@ public class MedicoMySQL implements MedicoDAO {
             con = DBPoolManager.getInstance().getConnection();
             
             
-            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             
             
             pstMedico = con.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class MedicoMySQL implements MedicoDAO {
             pstMedico.setString(12, diasLaboralesString);       
             pstMedico.setInt(13,medico.getAhosExp());
             pstMedico.setBoolean(14,medico.isActivo());
-            
+            pstMedico.setInt(15,medico.getEspecialidad().getIdEspecialidad());
       
             
             resultado = pstMedico.executeUpdate();
