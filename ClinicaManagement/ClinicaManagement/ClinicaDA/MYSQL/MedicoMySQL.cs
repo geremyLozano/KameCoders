@@ -155,5 +155,72 @@ namespace ClinicaDA.MYSQL
             throw new NotImplementedException();
         }
 
+        public List<Medico> obtenerPorEspecialidad(string especialidad)
+        {
+            List<Medico> resultado = new List<Medico>();
+
+            try
+            {
+                // Definir el parámetro de entrada como array
+                MySqlParameter[] parameters = new MySqlParameter[1];
+                parameters[0] = new MySqlParameter("p_nombreEspecialidad", especialidad);
+
+                // Ejecutar el procedimiento almacenado
+                MySqlDataReader reader = DBPoolManager.Instance.EjecutarProcedimientoDatos("SeleccionarMedicoPorEspecialidad", parameters);
+
+                // Verificar si hay resultados
+                if (reader == null) return resultado;
+
+                // Leer los resultados obtenidos del procedimiento
+                while (reader.Read())
+                {
+                    Medico medico = new Medico();
+
+                    // Asignar los valores al objeto Medico
+                    medico.IdMedico = reader.GetInt32("idMedico");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("nombre")))
+                        medico.Nombre = reader.GetString("nombre");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("apellido")))
+                        medico.Apellido = reader.GetString("apellido");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("numColegiatura")))
+                        medico.NumColegiatura = reader.GetString("numColegiatura");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("horaInicioTrabajo")))
+                        medico.HoraInicio = reader.GetTimeSpan("horaInicioTrabajo");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("horaFinTrabajo")))
+                        medico.HoraFin = reader.GetTimeSpan("horaFinTrabajo");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("diasLaborales")))
+                        medico.DiasLaborales = reader.GetString("diasLaborales");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("anhosExp")))
+                        medico.AnhosExp = reader.GetInt32("anhosExp");
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("activo")))
+                        medico.Activo = reader.GetBoolean("activo");
+
+                    // Añadir el objeto Medico a la lista de resultados
+                    resultado.Add(medico);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw; // Lanzar la excepción hacia afuera
+            }
+            finally
+            {
+                DBPoolManager.Instance.CloseConnection(); // Cerrar la conexión
+            }
+
+            return resultado;
+        }
+
+
+
+
     }
 }
