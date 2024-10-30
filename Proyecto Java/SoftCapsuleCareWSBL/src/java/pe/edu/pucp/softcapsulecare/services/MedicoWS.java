@@ -3,6 +3,7 @@ package pe.edu.pucp.softcapsulecare.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
@@ -21,4 +22,12 @@ public class MedicoWS {
         int resultado = medicoDAO.insertar(medico);
         return resultado;
     }
+    
+    @WebMethod(operationName = "buscarPorEspecialidad")
+    public ArrayList<Medico> medicoInsertar(@WebParam(name = "especialidad") String especialidad) {
+        ArrayList<Medico> resultado = medicoDAO.listarPorEspecialidad(especialidad);
+        return resultado;
+    }
+    
+    
 }

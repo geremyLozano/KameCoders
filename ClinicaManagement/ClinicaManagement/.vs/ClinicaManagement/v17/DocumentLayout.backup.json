@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrarcitamedica-especialidad.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrarcitamedica-especialidad.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\user\\documents\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrocitamedica-especialidad.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrocitamedica-especialidad.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\user\\documents\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrarcitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrarcitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0CFA5184-E93E-4B56-B5B9-7EE81CD975BC}|ClinicaModel\\ClinicaModel.csproj|C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicamodel\\medico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0CFA5184-E93E-4B56-B5B9-7EE81CD975BC}|ClinicaModel\\ClinicaModel.csproj|solutionrelative:clinicamodel\\medico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\user\\documents\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrocitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrocitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,44 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Medico.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaModel\\Medico.cs",
-              "RelativeDocumentMoniker": "ClinicaModel\\Medico.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaModel\\Medico.cs",
-              "RelativeToolTip": "ClinicaModel\\Medico.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T06:05:23.614Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RegistrarCitaMedica-Especialidad.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx.cs",
-              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx.cs",
-              "RelativeToolTip": "ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx.cs",
-              "ViewState": "AgIAAKMAAAAAAAAAAAAwwKgAAAApAAAAAAAAAA==",
+              "Title": "RegistroCitaMedica-Especialidad.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T04:23:32.977Z",
+              "WhenOpened": "2024-10-30T01:05:45.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RegistrarCitaMedica-Especialidad.aspx",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx",
-              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx",
-              "RelativeToolTip": "ClinicaWeb\\Views\\RegistrarCitaMedica-Especialidad.aspx",
+              "Title": "RegistroCitaMedica-Especialidad.aspx",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx",
+              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-10-29T04:12:49.464Z",
+              "WhenOpened": "2024-10-30T01:04:14.083Z",
               "EditorCaption": ""
             }
           ]

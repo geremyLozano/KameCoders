@@ -16,11 +16,12 @@ public class Medico extends Persona{
     private int ahosExp;
     private ArrayList<CitaMedica>citas;
     private boolean activo;
-    private ArrayList<DiaSemana>diasLaborales;
-
+    //private ArrayList<DiaSemana>diasLaborales;
+    private String diasLaborales;
+    
     public Medico() {
         citas = new ArrayList<>();
-        diasLaborales = new ArrayList<>();
+        //diasLaborales = new ArrayList<>();
     }
 
     public Medico(Especialidad especialidad, String numColegiatura, LocalTime horaInicioTrabajo,
@@ -35,7 +36,7 @@ public class Medico extends Persona{
         this.horaFinTrabajo = horaFinTrabajo;
         this.ahosExp = ahosExp;
         this.citas = new ArrayList<>();
-        this.diasLaborales = new ArrayList<>();
+        //this.diasLaborales = new ArrayList<>();
         this.activo = true;
     }
     
@@ -46,11 +47,19 @@ public class Medico extends Persona{
         this.idMedico = id;
     }
     
-    public ArrayList<DiaSemana> getDiasLaborales() {
-        return new ArrayList<DiaSemana>(diasLaborales);
+//    public ArrayList<DiaSemana> getDiasLaborales() {
+//        return new ArrayList<DiaSemana>(diasLaborales);
+//    }
+    
+    public String getDiasLaborales(){
+        return diasLaborales;
     }
 
-    public void setDiasLaborales(ArrayList<DiaSemana> diasLaborales) {
+//    public void setDiasLaborales(ArrayList<DiaSemana> diasLaborales) {
+//        this.diasLaborales = diasLaborales;
+//    }
+    
+    public void setDiasLaborales(String diasLaborales){
         this.diasLaborales = diasLaborales;
     }
 

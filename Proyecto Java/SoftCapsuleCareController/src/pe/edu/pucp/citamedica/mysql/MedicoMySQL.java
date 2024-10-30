@@ -82,12 +82,12 @@ public class MedicoMySQL implements MedicoDAO {
             pstMedico.setTime(11,Time.valueOf(medico.getHoraFinTrabajo()));
             
             
-            String diasLaboralesString = medico.getDiasLaborales().stream()
-                .map(DiaSemana::name) // Obtener el nombre del enum
-                .collect(Collectors.joining(",")); // Unirlos con coma
+//            String diasLaboralesString = medico.getDiasLaborales().stream()
+//                .map(DiaSemana::name) // Obtener el nombre del enum
+//                .collect(Collectors.joining(",")); // Unirlos con coma
+//            
             
-            
-            pstMedico.setString(12, diasLaboralesString);       
+            pstMedico.setString(12, medico.getDiasLaborales());       
             pstMedico.setInt(13,medico.getAhosExp());
             pstMedico.setBoolean(14,medico.isActivo());
             pstMedico.setInt(15,medico.getEspecialidad().getIdEspecialidad());
@@ -136,12 +136,12 @@ public class MedicoMySQL implements MedicoDAO {
             pstMedico.setTime(4,Time.valueOf(medico.getHoraFinTrabajo()));
             
             
-            String diasLaboralesString = medico.getDiasLaborales().stream()
-                .map(DiaSemana::name) // Obtener el nombre del enum
-                .collect(Collectors.joining(",")); // Unirlos con coma
+//            String diasLaboralesString = medico.getDiasLaborales().stream()
+//                .map(DiaSemana::name) // Obtener el nombre del enum
+//                .collect(Collectors.joining(",")); // Unirlos con coma
             
             
-            pstMedico.setString(5, diasLaboralesString);       
+            pstMedico.setString(5, medico.getDiasLaborales());       
             pstMedico.setInt(6,medico.getAhosExp());
             pstMedico.setBoolean(7,medico.isActivo());
             
@@ -232,20 +232,20 @@ public class MedicoMySQL implements MedicoDAO {
                 String diasLaboralesString = rs.getString("diasLaborales"); // Este sería el valor de la base de datos
 
                 // Crear un ArrayList<DiaLaborable>
-                ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
+//                ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
 
                 // Dividir la cadena y convertir a enum
-                Arrays.stream(diasLaboralesString.split(","))
-                      .map(String::trim) // Eliminar espacios en blanco, si los hay
-                      .forEach(dia -> {
-                          try {
-                              diasLaborables.add(DiaSemana.valueOf(dia));
-                          } catch (IllegalArgumentException e) {
-                              System.out.println("Día no válido: " + dia);
-                          }
-                      });
+//                Arrays.stream(diasLaboralesString.split(","))
+//                      .map(String::trim) // Eliminar espacios en blanco, si los hay
+//                      .forEach(dia -> {
+//                          try {
+//                              diasLaborables.add(DiaSemana.valueOf(dia));
+//                          } catch (IllegalArgumentException e) {
+//                              System.out.println("Día no válido: " + dia);
+//                          }
+//                      });
 
-                medico.setDiasLaborales(diasLaborables);
+                medico.setDiasLaborales(diasLaboralesString);
                 
                 
                 
@@ -300,20 +300,20 @@ public class MedicoMySQL implements MedicoDAO {
                 String diasLaboralesString = rs.getString("diasLaborales"); // Este sería el valor de la base de datos
 
                 // Crear un ArrayList<DiaLaborable>
-                ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
+                //ArrayList<DiaSemana> diasLaborables = new ArrayList<>();
 
                 // Dividir la cadena y convertir a enum
-                Arrays.stream(diasLaboralesString.split(","))
-                      .map(String::trim) // Eliminar espacios en blanco, si los hay
-                      .forEach(dia -> {
-                          try {
-                              diasLaborables.add(DiaSemana.valueOf(dia));
-                          } catch (IllegalArgumentException e) {
-                              System.out.println("Día no válido: " + dia);
-                          }
-                      });
+//                Arrays.stream(diasLaboralesString.split(","))
+//                      .map(String::trim) // Eliminar espacios en blanco, si los hay
+//                      .forEach(dia -> {
+//                          try {
+//                              diasLaborables.add(DiaSemana.valueOf(dia));
+//                          } catch (IllegalArgumentException e) {
+//                              System.out.println("Día no válido: " + dia);
+//                          }
+//                      });
 
-                medico.setDiasLaborales(diasLaborables);
+                medico.setDiasLaborales(diasLaboralesString);
                 
                 
                 medico.setAhosExp(rs.getInt("anhosExp"));
@@ -326,4 +326,52 @@ public class MedicoMySQL implements MedicoDAO {
 
         return medico;
     }
+    
+    @Override
+    public ArrayList<Medico> listarPorEspecialidad(String especialidad) {
+        ArrayList<Medico> listaMedicos = new ArrayList<>();
+
+        // Definir la consulta SQL usando el procedimiento almacenado
+        sql = "{CALL SeleccionarMedicoPorEspecialidad(?)}";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection();
+             PreparedStatement pstMedico = con.prepareStatement(sql)) {
+
+            // Establecer el parámetro para la especialidad
+            pstMedico.setString(1, especialidad);
+
+            // Ejecutar la consulta y obtener el resultado
+            ResultSet rs = pstMedico.executeQuery();
+
+            // Iterar sobre el ResultSet para construir la lista de médicos
+            while (rs.next()) {
+                Medico medico = new Medico();
+                medico.setIdMedico(rs.getInt("idMedico"));
+
+                // Crear y asignar el objeto Especialidad
+                Especialidad espe = new Especialidad();
+                espe.setNombre(especialidad);
+                medico.setEspecialidad(espe);
+
+                // Asignar otros atributos del médico
+                medico.setNumColegiatura(rs.getString("numColegiatura"));
+                medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
+                medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
+                medico.setDiasLaborales(rs.getString("diasLaborales"));
+                medico.setAhosExp(rs.getInt("anhosExp"));
+                medico.setActivo(rs.getBoolean("activo"));
+
+                // Añadir el médico a la lista
+                listaMedicos.add(medico);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejar la excepción si ocurre un error
+            System.out.println("Error en la base de datos: " + e.getMessage());
+        }
+
+        return listaMedicos; // Retornar la lista de médicos filtrada por especialidad
+    }
+
+    
 }

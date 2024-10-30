@@ -756,7 +756,7 @@
     <Content Include="Views\Pacientes.aspx" />
     <Content Include="Views\Principal.aspx" />
     <Content Include="Views\RegistroLogin.aspx" />
-    <Content Include="Views\RegistrarCitaMedica-Especialidad.aspx" />
+    <Content Include="Views\RegistroCitaMedica-Especialidad.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -808,12 +808,12 @@
     <Compile Include="Views\RegistroLogin.aspx.designer.cs">
       <DependentUpon>RegistroLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegistrarCitaMedica-Especialidad.aspx.cs">
-      <DependentUpon>RegistrarCitaMedica-Especialidad.aspx</DependentUpon>
+    <Compile Include="Views\RegistroCitaMedica-Especialidad.aspx.cs">
+      <DependentUpon>RegistroCitaMedica-Especialidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\RegistrarCitaMedica-Especialidad.aspx.designer.cs">
-      <DependentUpon>RegistrarCitaMedica-Especialidad.aspx</DependentUpon>
+    <Compile Include="Views\RegistroCitaMedica-Especialidad.aspx.designer.cs">
+      <DependentUpon>RegistroCitaMedica-Especialidad.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

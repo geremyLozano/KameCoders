@@ -38,11 +38,11 @@ public class Principal_2 {
         med.setNumColegiatura("43242");
         med.setHoraFinTrabajo(LocalTime.of(14, 30));
         med.setHoraInicioTrabajo(LocalTime.of(20, 0));
-        ArrayList<DiaSemana> diasLaborales = new ArrayList<>();
-        diasLaborales.add(DiaSemana.Lunes);
-        diasLaborales.add(DiaSemana.Martes);
-        diasLaborales.add(DiaSemana.Miercoles);
-        med.setDiasLaborales(diasLaborales);
+//        ArrayList<DiaSemana> diasLaborales = new ArrayList<>();
+//        diasLaborales.add(DiaSemana.Lunes);
+//        diasLaborales.add(DiaSemana.Martes);
+//        diasLaborales.add(DiaSemana.Miercoles);
+        med.setDiasLaborales("Lunes-Martes-Miercoles");
         med.setAhosExp(5);
         med.setActivo(true);
 //        Paciente paciente = new Paciente();
