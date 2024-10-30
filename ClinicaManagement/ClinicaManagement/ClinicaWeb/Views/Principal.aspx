@@ -51,6 +51,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="card shadow-sm mb-4 rounded">
+                        <div class="card-body">
+                            <h2 class="card-title">Historial medico</h2>
+                            <p class="card-text">Registro detallado de tu salud que incluye diagnósticos , alergias ,etc.</p>
+                            <a class="btn btn-secondary" href="HistorialMedico.aspx" role="button">Ver historial medico</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>

@@ -32,9 +32,11 @@
     <MetadataFile FileName="PagoWS.xsd" MetadataType="Schema" ID="c2179988-b8e9-45b0-9e8d-9322256a7f98" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?xsd=1" />
     <MetadataFile FileName="PagoWS.wsdl" MetadataType="Wsdl" ID="e433ad69-872f-42a7-a987-9e60f8bd4461" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?WSDL" />
     <MetadataFile FileName="archivo.disco" MetadataType="Disco" ID="5b3ab041-ac92-4c62-85fd-41761f7fcc17" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/archivo.disco" />
+    <MetadataFile FileName="HistorialMedicoWS.xsd" MetadataType="Schema" ID="d0212a91-b056-4831-ab21-0bfe8335df5e" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/HistorialMedicoWS?xsd=1" />
     <MetadataFile FileName="EspecialidadWS.wsdl" MetadataType="Wsdl" ID="fefc5c2e-ea00-4107-8573-09abd494c72d" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/EspecialidadWS?WSDL" />
-    <MetadataFile FileName="AuxiliarWS.wsdl" MetadataType="Wsdl" ID="bd7dadd2-a0c5-48a0-a62c-8e9de7a7b45d" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?WSDL" />
     <MetadataFile FileName="PacienteWS.xsd" MetadataType="Schema" ID="791239f9-a12e-49f7-98c6-8f7c57875218" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/PacienteWS?xsd=1" />
+    <MetadataFile FileName="HistorialMedicoWS.wsdl" MetadataType="Wsdl" ID="33dc8418-fd6c-4418-96eb-bba726f166d6" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/HistorialMedicoWS?WSDL" />
+    <MetadataFile FileName="AuxiliarWS.wsdl" MetadataType="Wsdl" ID="bd7dadd2-a0c5-48a0-a62c-8e9de7a7b45d" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?WSDL" />
     <MetadataFile FileName="AdministradorWS.wsdl" MetadataType="Wsdl" ID="b8d7b85b-7d72-46b8-bcee-6e72c88011c0" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/AdministradorWS?WSDL" />
     <MetadataFile FileName="MedicoWS.wsdl" MetadataType="Wsdl" ID="26909146-b56f-42de-a836-ac526f602ee1" SourceId="1" SourceUrl="http://localhost:8080/SoftCapsuleCareWSBL/MedicoWS?WSDL" />
   </Metadata>

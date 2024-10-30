@@ -723,7 +723,15 @@ namespace ClinicaWeb.CapsuleCareWS {
         
         private bool activoField;
         
+        private string alergiasField;
+        
+        private double alturaField;
+        
+        private string cirugiasPreviasField;
+        
         private citaMedica[] citasField;
+        
+        private string enferPreExistField;
         
         private System.DateTime fechaDeCreacionField;
         
@@ -732,6 +740,12 @@ namespace ClinicaWeb.CapsuleCareWS {
         private int idHistorialField;
         
         private int idPacienteField;
+        
+        private double pesoField;
+        
+        private string tipoSangreField;
+        
+        private string vacunasField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -746,7 +760,43 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("citas", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string alergias {
+            get {
+                return this.alergiasField;
+            }
+            set {
+                this.alergiasField = value;
+                this.RaisePropertyChanged("alergias");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public double altura {
+            get {
+                return this.alturaField;
+            }
+            set {
+                this.alturaField = value;
+                this.RaisePropertyChanged("altura");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string cirugiasPrevias {
+            get {
+                return this.cirugiasPreviasField;
+            }
+            set {
+                this.cirugiasPreviasField = value;
+                this.RaisePropertyChanged("cirugiasPrevias");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("citas", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=4)]
         public citaMedica[] citas {
             get {
                 return this.citasField;
@@ -758,7 +808,19 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string enferPreExist {
+            get {
+                return this.enferPreExistField;
+            }
+            set {
+                this.enferPreExistField = value;
+                this.RaisePropertyChanged("enferPreExist");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
         public System.DateTime fechaDeCreacion {
             get {
                 return this.fechaDeCreacionField;
@@ -782,7 +844,7 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public int idHistorial {
             get {
                 return this.idHistorialField;
@@ -794,7 +856,7 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public int idPaciente {
             get {
                 return this.idPacienteField;
@@ -802,6 +864,42 @@ namespace ClinicaWeb.CapsuleCareWS {
             set {
                 this.idPacienteField = value;
                 this.RaisePropertyChanged("idPaciente");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public double peso {
+            get {
+                return this.pesoField;
+            }
+            set {
+                this.pesoField = value;
+                this.RaisePropertyChanged("peso");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string tipoSangre {
+            get {
+                return this.tipoSangreField;
+            }
+            set {
+                this.tipoSangreField = value;
+                this.RaisePropertyChanged("tipoSangre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string vacunas {
+            get {
+                return this.vacunasField;
+            }
+            set {
+                this.vacunasField = value;
+                this.RaisePropertyChanged("vacunas");
             }
         }
         
@@ -1771,6 +1869,112 @@ namespace ClinicaWeb.CapsuleCareWS {
         public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> listarEspecialidadesAsync() {
             ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest inValue = new ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest();
             return ((ClinicaWeb.CapsuleCareWS.EspecialidadWS)(this)).listarEspecialidadesAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.HistorialMedicoWS")]
+    public interface HistorialMedicoWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse obtenerHistorialMedicoPorId(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> obtenerHistorialMedicoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerHistorialMedicoPorId", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerHistorialMedicoPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int idHistorialMedico;
+        
+        public obtenerHistorialMedicoPorIdRequest() {
+        }
+        
+        public obtenerHistorialMedicoPorIdRequest(int idHistorialMedico) {
+            this.idHistorialMedico = idHistorialMedico;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerHistorialMedicoPorIdResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerHistorialMedicoPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.historialMedico @return;
+        
+        public obtenerHistorialMedicoPorIdResponse() {
+        }
+        
+        public obtenerHistorialMedicoPorIdResponse(ClinicaWeb.CapsuleCareWS.historialMedico @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface HistorialMedicoWSChannel : ClinicaWeb.CapsuleCareWS.HistorialMedicoWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class HistorialMedicoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.HistorialMedicoWS>, ClinicaWeb.CapsuleCareWS.HistorialMedicoWS {
+        
+        public HistorialMedicoWSClient() {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HistorialMedicoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse ClinicaWeb.CapsuleCareWS.HistorialMedicoWS.obtenerHistorialMedicoPorId(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request) {
+            return base.Channel.obtenerHistorialMedicoPorId(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.historialMedico obtenerHistorialMedicoPorId(int idHistorialMedico) {
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest();
+            inValue.idHistorialMedico = idHistorialMedico;
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse retVal = ((ClinicaWeb.CapsuleCareWS.HistorialMedicoWS)(this)).obtenerHistorialMedicoPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> ClinicaWeb.CapsuleCareWS.HistorialMedicoWS.obtenerHistorialMedicoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request) {
+            return base.Channel.obtenerHistorialMedicoPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> obtenerHistorialMedicoPorIdAsync(int idHistorialMedico) {
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest();
+            inValue.idHistorialMedico = idHistorialMedico;
+            return ((ClinicaWeb.CapsuleCareWS.HistorialMedicoWS)(this)).obtenerHistorialMedicoPorIdAsync(inValue);
         }
     }
     
