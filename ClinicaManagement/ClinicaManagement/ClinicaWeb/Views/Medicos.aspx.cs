@@ -1,5 +1,6 @@
 ﻿using ClinicaDA.DAO;
 using ClinicaDA.MYSQL;
+using ClinicaWeb.CapsuleCareWS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace ClinicaWeb.Views
     public partial class Medicos : System.Web.UI.Page
     {
         protected MedicoDAO medicoDAO;
+        protected MedicoWSClient medico;
         protected void Page_Init(object sender, EventArgs e)
         {
             medicoDAO = new MedicoMySQL();

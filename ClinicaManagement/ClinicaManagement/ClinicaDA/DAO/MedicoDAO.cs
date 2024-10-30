@@ -11,6 +11,7 @@ namespace ClinicaDA.DAO
         List<Medico> listar();
         Medico obtenerPorId(int idMedico);
 
+        List<Medico> obtenerPorEspecialidad(string Especialidad);
         Usuario ExisteUsuario(string username, string contrasenha);
     }
 }

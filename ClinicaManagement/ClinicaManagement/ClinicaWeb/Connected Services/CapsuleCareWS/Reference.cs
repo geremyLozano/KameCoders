@@ -988,7 +988,7 @@ namespace ClinicaWeb.CapsuleCareWS {
         
         private int ahosExpField;
         
-        private System.Nullable<diaSemana>[] diasLaboralesField;
+        private string diasLaboralesField;
         
         private especialidad especialidadField;
         
@@ -1025,8 +1025,8 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("diasLaborales", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=2)]
-        public System.Nullable<diaSemana>[] diasLaborales {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string diasLaborales {
             get {
                 return this.diasLaboralesField;
             }
@@ -1095,31 +1095,6 @@ namespace ClinicaWeb.CapsuleCareWS {
                 this.RaisePropertyChanged("numColegiatura");
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
-    public enum diaSemana {
-        
-        /// <remarks/>
-        Lunes,
-        
-        /// <remarks/>
-        Martes,
-        
-        /// <remarks/>
-        Miercoles,
-        
-        /// <remarks/>
-        Jueves,
-        
-        /// <remarks/>
-        Sabado,
-        
-        /// <remarks/>
-        Domingo,
     }
     
     /// <remarks/>

@@ -10,3 +10,9 @@ C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
 C:\Users\hp\Desktop\Programacion 3\GitHub TA\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.pdb
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.AssemblyReference.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
+C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb

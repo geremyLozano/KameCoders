@@ -46,10 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\EspecialidadDAO.cs" />
+    <Compile Include="DAO\HistorialMedicoDAO.cs" />
     <Compile Include="DAO\MedicoDAO.cs" />
     <Compile Include="DAO\PacienteDAO.cs" />
+    <Compile Include="DAO\PagoDAO.cs" />
+    <Compile Include="MYSQL\EspecialidadMySQL.cs" />
+    <Compile Include="MYSQL\HistorialMedicoMySQL.cs" />
     <Compile Include="MYSQL\MedicoMySQL.cs" />
     <Compile Include="MYSQL\PacienteMySQL.cs" />
+    <Compile Include="MYSQL\PagoMySQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
