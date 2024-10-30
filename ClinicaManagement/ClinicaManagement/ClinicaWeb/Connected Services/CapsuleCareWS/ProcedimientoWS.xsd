@@ -52,22 +52,22 @@
       <xs:element minOccurs="0" name="return" type="tns:procedimiento" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="eliminarProcedimiento">
-    <xs:sequence>
-      <xs:element name="idProcedimiento" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarProcedimientoResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="modificarProcedimiento">
     <xs:sequence>
       <xs:element minOccurs="0" name="procedimiento" type="tns:procedimiento" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="modificarProcedimientoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProcedimiento">
+    <xs:sequence>
+      <xs:element name="idProcedimiento" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProcedimientoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
     </xs:sequence>
