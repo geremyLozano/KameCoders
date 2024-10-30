@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
-import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
+
 
 @WebService(serviceName = "ProcedimientoWS")
 public class ProcedimientoWS {
