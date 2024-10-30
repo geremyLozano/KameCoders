@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
               "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAM4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwM4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-30T06:22:12.294Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-10-30T06:22:08.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-30T06:22:08.565Z"
             },
             {
               "$type": "Document",
