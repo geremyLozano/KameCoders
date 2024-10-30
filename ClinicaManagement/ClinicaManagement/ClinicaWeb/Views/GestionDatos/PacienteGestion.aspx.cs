@@ -108,6 +108,7 @@ namespace ClinicaWeb.Views.GestionDatos
                 paciente.numTelefono = Int32.Parse(txtNum.Text);
                 paciente.direccion = txtDirreccion.Text;
                 paciente.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+                paciente.fechaNacimientoSpecified = true;
                 paciente.genero = Char.Parse(txtGenero.Text);
                 //paciente.historialActivo = chkHistorialActivo.Checked;
                 paciente.activo = chkActivo.Checked;
