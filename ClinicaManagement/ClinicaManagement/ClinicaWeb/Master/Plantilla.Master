@@ -148,9 +148,9 @@
         </div>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="Principal.aspx">
               <i class="icon-box menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Principal</span>
             </a>
           </li>
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="insertarPago" type="tns:insertarPago" />
+  <xs:element name="insertarPagoResponse" type="tns:insertarPagoResponse" />
+  <xs:complexType name="insertarPago">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pago" type="tns:pago" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pago">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="concepto" type="xs:string" />
+      <xs:element name="descuentoPorSeguro" type="xs:double" />
+      <xs:element name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaPago" type="xs:dateTime" />
+      <xs:element name="idPaciente" type="xs:int" />
+      <xs:element name="idPago" type="xs:int" />
+      <xs:element name="montoParcial" type="xs:double" />
+      <xs:element name="montoTotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarPagoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

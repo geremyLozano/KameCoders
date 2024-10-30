@@ -413,6 +413,150 @@ namespace ClinicaWeb.CapsuleCareWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
+    public partial class pago : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string conceptoField;
+        
+        private double descuentoPorSeguroField;
+        
+        private bool estadoField;
+        
+        private System.DateTime fechaPagoField;
+        
+        private bool fechaPagoFieldSpecified;
+        
+        private int idPacienteField;
+        
+        private int idPagoField;
+        
+        private double montoParcialField;
+        
+        private double montoTotalField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string concepto {
+            get {
+                return this.conceptoField;
+            }
+            set {
+                this.conceptoField = value;
+                this.RaisePropertyChanged("concepto");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public double descuentoPorSeguro {
+            get {
+                return this.descuentoPorSeguroField;
+            }
+            set {
+                this.descuentoPorSeguroField = value;
+                this.RaisePropertyChanged("descuentoPorSeguro");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public bool estado {
+            get {
+                return this.estadoField;
+            }
+            set {
+                this.estadoField = value;
+                this.RaisePropertyChanged("estado");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public System.DateTime fechaPago {
+            get {
+                return this.fechaPagoField;
+            }
+            set {
+                this.fechaPagoField = value;
+                this.RaisePropertyChanged("fechaPago");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaPagoSpecified {
+            get {
+                return this.fechaPagoFieldSpecified;
+            }
+            set {
+                this.fechaPagoFieldSpecified = value;
+                this.RaisePropertyChanged("fechaPagoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public int idPaciente {
+            get {
+                return this.idPacienteField;
+            }
+            set {
+                this.idPacienteField = value;
+                this.RaisePropertyChanged("idPaciente");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public int idPago {
+            get {
+                return this.idPagoField;
+            }
+            set {
+                this.idPagoField = value;
+                this.RaisePropertyChanged("idPago");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public double montoParcial {
+            get {
+                return this.montoParcialField;
+            }
+            set {
+                this.montoParcialField = value;
+                this.RaisePropertyChanged("montoParcial");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public double montoTotal {
+            get {
+                return this.montoTotalField;
+            }
+            set {
+                this.montoTotalField = value;
+                this.RaisePropertyChanged("montoTotal");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
     public partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
         
         private bool activoField;
@@ -816,8 +960,8 @@ namespace ClinicaWeb.CapsuleCareWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(medico))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(auxiliar))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(administrador))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(auxiliar))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(paciente))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
@@ -1103,6 +1247,43 @@ namespace ClinicaWeb.CapsuleCareWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
+    public partial class administrador : persona {
+        
+        private bool activoField;
+        
+        private int idAdministradorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool activo {
+            get {
+                return this.activoField;
+            }
+            set {
+                this.activoField = value;
+                this.RaisePropertyChanged("activo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idAdministrador {
+            get {
+                return this.idAdministradorField;
+            }
+            set {
+                this.idAdministradorField = value;
+                this.RaisePropertyChanged("idAdministrador");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
     public partial class auxiliar : persona {
         
         private bool activoField;
@@ -1144,43 +1325,6 @@ namespace ClinicaWeb.CapsuleCareWS {
             set {
                 this.idAuxiliarField = value;
                 this.RaisePropertyChanged("idAuxiliar");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
-    public partial class administrador : persona {
-        
-        private bool activoField;
-        
-        private int idAdministradorField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public bool activo {
-            get {
-                return this.activoField;
-            }
-            set {
-                this.activoField = value;
-                this.RaisePropertyChanged("activo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idAdministrador {
-            get {
-                return this.idAdministradorField;
-            }
-            set {
-                this.idAdministradorField = value;
-                this.RaisePropertyChanged("idAdministrador");
             }
         }
     }
@@ -1433,115 +1577,104 @@ namespace ClinicaWeb.CapsuleCareWS {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.AdministradorWS")]
-    public interface AdministradorWS {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.PagoWS")]
+    public interface PagoWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
-            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
-            "Response")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse insertarAdministrador(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request);
+        ClinicaWeb.CapsuleCareWS.insertarPagoResponse insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
-            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
-            "Response")]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAdministrador", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarAdministradorRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPago", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarPagoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.administrador admin;
+        public ClinicaWeb.CapsuleCareWS.pago pago;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.usuario usuario;
-        
-        public insertarAdministradorRequest() {
+        public insertarPagoRequest() {
         }
         
-        public insertarAdministradorRequest(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            this.admin = admin;
-            this.usuario = usuario;
+        public insertarPagoRequest(ClinicaWeb.CapsuleCareWS.pago pago) {
+            this.pago = pago;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAdministradorResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarAdministradorResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPagoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarPagoResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int @return;
         
-        public insertarAdministradorResponse() {
+        public insertarPagoResponse() {
         }
         
-        public insertarAdministradorResponse(int @return) {
+        public insertarPagoResponse(int @return) {
             this.@return = @return;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface AdministradorWSChannel : ClinicaWeb.CapsuleCareWS.AdministradorWS, System.ServiceModel.IClientChannel {
+    public interface PagoWSChannel : ClinicaWeb.CapsuleCareWS.PagoWS, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AdministradorWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.AdministradorWS>, ClinicaWeb.CapsuleCareWS.AdministradorWS {
+    public partial class PagoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.PagoWS>, ClinicaWeb.CapsuleCareWS.PagoWS {
         
-        public AdministradorWSClient() {
+        public PagoWSClient() {
         }
         
-        public AdministradorWSClient(string endpointConfigurationName) : 
+        public PagoWSClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public AdministradorWSClient(string endpointConfigurationName, string remoteAddress) : 
+        public PagoWSClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public AdministradorWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PagoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public AdministradorWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PagoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse ClinicaWeb.CapsuleCareWS.AdministradorWS.insertarAdministrador(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request) {
-            return base.Channel.insertarAdministrador(request);
+        ClinicaWeb.CapsuleCareWS.insertarPagoResponse ClinicaWeb.CapsuleCareWS.PagoWS.insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
+            return base.Channel.insertarPago(request);
         }
         
-        public int insertarAdministrador(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest();
-            inValue.admin = admin;
-            inValue.usuario = usuario;
-            ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse retVal = ((ClinicaWeb.CapsuleCareWS.AdministradorWS)(this)).insertarAdministrador(inValue);
+        public int insertarPago(ClinicaWeb.CapsuleCareWS.pago pago) {
+            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
+            inValue.pago = pago;
+            ClinicaWeb.CapsuleCareWS.insertarPagoResponse retVal = ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPago(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> ClinicaWeb.CapsuleCareWS.AdministradorWS.insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request) {
-            return base.Channel.insertarAdministradorAsync(request);
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> ClinicaWeb.CapsuleCareWS.PagoWS.insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
+            return base.Channel.insertarPagoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest();
-            inValue.admin = admin;
-            inValue.usuario = usuario;
-            return ((ClinicaWeb.CapsuleCareWS.AdministradorWS)(this)).insertarAdministradorAsync(inValue);
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.pago pago) {
+            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
+            inValue.pago = pago;
+            return ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPagoAsync(inValue);
         }
     }
     
@@ -1751,6 +1884,119 @@ namespace ClinicaWeb.CapsuleCareWS {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.AdministradorWS")]
+    public interface AdministradorWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
+            "Response")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse insertarAdministrador(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AdministradorWS/insertarAdministrador" +
+            "Response")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAdministrador", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarAdministradorRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.administrador admin;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.usuario usuario;
+        
+        public insertarAdministradorRequest() {
+        }
+        
+        public insertarAdministradorRequest(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            this.admin = admin;
+            this.usuario = usuario;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAdministradorResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarAdministradorResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarAdministradorResponse() {
+        }
+        
+        public insertarAdministradorResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface AdministradorWSChannel : ClinicaWeb.CapsuleCareWS.AdministradorWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AdministradorWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.AdministradorWS>, ClinicaWeb.CapsuleCareWS.AdministradorWS {
+        
+        public AdministradorWSClient() {
+        }
+        
+        public AdministradorWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AdministradorWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AdministradorWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AdministradorWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse ClinicaWeb.CapsuleCareWS.AdministradorWS.insertarAdministrador(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request) {
+            return base.Channel.insertarAdministrador(request);
+        }
+        
+        public int insertarAdministrador(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest();
+            inValue.admin = admin;
+            inValue.usuario = usuario;
+            ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse retVal = ((ClinicaWeb.CapsuleCareWS.AdministradorWS)(this)).insertarAdministrador(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> ClinicaWeb.CapsuleCareWS.AdministradorWS.insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest request) {
+            return base.Channel.insertarAdministradorAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse> insertarAdministradorAsync(ClinicaWeb.CapsuleCareWS.administrador admin, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAdministradorRequest();
+            inValue.admin = admin;
+            inValue.usuario = usuario;
+            return ((ClinicaWeb.CapsuleCareWS.AdministradorWS)(this)).insertarAdministradorAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.MedicoWS")]
     public interface MedicoWS {
         
@@ -1763,6 +2009,20 @@ namespace ClinicaWeb.CapsuleCareWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse")]
         System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRequest" +
+            "", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRespons" +
+            "e")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse buscarPorEspecialidad(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRequest" +
+            "", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRespons" +
+            "e")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse> buscarPorEspecialidadAsync(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1797,6 +2057,42 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         public insertarMedicoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPorEspecialidad", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarPorEspecialidadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string especialidad;
+        
+        public buscarPorEspecialidadRequest() {
+        }
+        
+        public buscarPorEspecialidadRequest(string especialidad) {
+            this.especialidad = especialidad;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="buscarPorEspecialidadResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class buscarPorEspecialidadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.medico[] @return;
+        
+        public buscarPorEspecialidadResponse() {
+        }
+        
+        public buscarPorEspecialidadResponse(ClinicaWeb.CapsuleCareWS.medico[] @return) {
             this.@return = @return;
         }
     }
@@ -1849,6 +2145,29 @@ namespace ClinicaWeb.CapsuleCareWS {
             ClinicaWeb.CapsuleCareWS.insertarMedicoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarMedicoRequest();
             inValue.medico = medico;
             return ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).insertarMedicoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse ClinicaWeb.CapsuleCareWS.MedicoWS.buscarPorEspecialidad(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request) {
+            return base.Channel.buscarPorEspecialidad(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.medico[] buscarPorEspecialidad(string especialidad) {
+            ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest inValue = new ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest();
+            inValue.especialidad = especialidad;
+            ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse retVal = ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).buscarPorEspecialidad(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse> ClinicaWeb.CapsuleCareWS.MedicoWS.buscarPorEspecialidadAsync(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request) {
+            return base.Channel.buscarPorEspecialidadAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse> buscarPorEspecialidadAsync(string especialidad) {
+            ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest inValue = new ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest();
+            inValue.especialidad = especialidad;
+            return ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).buscarPorEspecialidadAsync(inValue);
         }
     }
 }

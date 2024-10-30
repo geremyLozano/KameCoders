@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="buscarPorEspecialidad" type="tns:buscarPorEspecialidad" />
+  <xs:element name="buscarPorEspecialidadResponse" type="tns:buscarPorEspecialidadResponse" />
   <xs:element name="insertarMedico" type="tns:insertarMedico" />
   <xs:element name="insertarMedicoResponse" type="tns:insertarMedicoResponse" />
   <xs:complexType name="insertarMedico">
@@ -50,6 +52,16 @@
   <xs:complexType name="insertarMedicoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPorEspecialidad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarPorEspecialidadResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:medico" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

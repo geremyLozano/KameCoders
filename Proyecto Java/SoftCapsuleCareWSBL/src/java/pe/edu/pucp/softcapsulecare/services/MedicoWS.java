@@ -24,8 +24,9 @@ public class MedicoWS {
     }
     
     @WebMethod(operationName = "buscarPorEspecialidad")
-    public ArrayList<Medico> medicoInsertar(@WebParam(name = "especialidad") String especialidad) {
-        ArrayList<Medico> resultado = medicoDAO.listarPorEspecialidad(especialidad);
+    public ArrayList<Medico> listarPorEspecialidad(@WebParam(name = "especialidad") String especialidad) {
+        ArrayList<Medico> resultado = new ArrayList<Medico>();
+        resultado = medicoDAO.listarPorEspecialidad(especialidad);
         return resultado;
     }
     

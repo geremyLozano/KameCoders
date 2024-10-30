@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h2 class="card-title">Reservar cita</h2>
                             <p class="card-text">Agenda tu cita eligiendo al especialista, seleccionando la fecha y hora disponibles, y recibe tu consulta.</p>
-                            <a class="btn btn-secondary" href="#" role="button">Agendar cita</a>
+                            <a class="btn btn-secondary" href="RegistroCitaMedica-Especialidad.aspx" role="button">Agendar cita</a>
                         </div>
                     </div>
                 </div>

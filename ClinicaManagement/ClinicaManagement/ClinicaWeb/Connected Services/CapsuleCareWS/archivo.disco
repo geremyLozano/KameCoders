@@ -6,4 +6,5 @@
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/EspecialidadWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>

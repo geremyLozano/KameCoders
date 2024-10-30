@@ -69,28 +69,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\CapsuleCareWS\archivo.disco" />
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPacienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarMedicoResponse.datasource">
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.especialidad.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.especialidad.datasource">
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarMedicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPacienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse.datasource">
@@ -102,14 +94,19 @@
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.verificarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.medico.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CapsuleCareWS\configuration91.svcinfo" />
     <None Include="Connected Services\CapsuleCareWS\configuration.svcinfo" />
-    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CapsuleCareWS\MedicoWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\MedicoWS.xsd">
+    <None Include="Connected Services\CapsuleCareWS\PagoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\PagoWS.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CapsuleCareWS\Reference.svcmap">
@@ -162,6 +159,22 @@
     <Content Include="Public\js\bootstrap.min.js" />
     <Content Include="Master\Plantilla.Master" />
     <Content Include="Master\Login.Master" />
+    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\AuxiliarWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CapsuleCareWS\MedicoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\MedicoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CapsuleCareWS\PacienteWS.wsdl" />
     <None Include="Connected Services\CapsuleCareWS\PacienteWS.xsd">
       <SubType>Designer</SubType>

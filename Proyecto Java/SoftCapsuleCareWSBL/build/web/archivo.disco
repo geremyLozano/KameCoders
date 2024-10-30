@@ -11,4 +11,6 @@ ref="http://localhost:8080/SoftCapsuleCareWSBL/AuxiliarWS?WSDL"/>
 ref="http://localhost:8080/SoftCapsuleCareWSBL/EspecialidadWS?WSDL"/>
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
 ref="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?WSDL"/>
+<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+ref="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?WSDL"/>
 </discovery>
