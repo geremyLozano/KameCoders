@@ -9,4 +9,6 @@ public interface EspecialidadDAO{
     int eliminar(int idEspecialidad);
     ArrayList<Especialidad> listarTodos();
     Especialidad obtenerPorId(int idEspecialidad);
+    Especialidad obtenerPorId1(int idEspecialidad);
+    public int insertar1(Especialidad especialidad);
 }

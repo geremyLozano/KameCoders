@@ -69,8 +69,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.wsdl" />
     <None Include="Connected Services\CapsuleCareWS\archivo.disco" />
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.especialidad.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.historialMedico.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarAdministradorResponse.datasource">
@@ -85,43 +89,71 @@
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPacienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.usuario.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.verificarUsuarioResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPagoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.historialMedico.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse.datasource">
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.modificarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.usuario.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.validarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.verificarUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.eliminarEspecialidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarEspecialidad1Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarEspecialidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.modificarEspecialidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDEspecialidad1Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDEspecialidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.eliminarPacienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPaciente1Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarPacienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.modificarPacienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDPaciente1Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDPacienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.paciente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CapsuleCareWS\configuration91.svcinfo" />
     <None Include="Connected Services\CapsuleCareWS\configuration.svcinfo" />
-    <None Include="Connected Services\CapsuleCareWS\HistorialMedicoWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\HistorialMedicoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CapsuleCareWS\PagoWS.wsdl" />
-    <None Include="Connected Services\CapsuleCareWS\PagoWS.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\CapsuleCareWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -172,7 +204,6 @@
     <Content Include="Public\js\bootstrap.min.js" />
     <Content Include="Master\Plantilla.Master" />
     <Content Include="Master\Login.Master" />
-    <None Include="Connected Services\CapsuleCareWS\AdministradorWS.wsdl" />
     <None Include="Connected Services\CapsuleCareWS\AdministradorWS.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -184,6 +215,10 @@
     <None Include="Connected Services\CapsuleCareWS\EspecialidadWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CapsuleCareWS\HistorialMedicoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\HistorialMedicoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CapsuleCareWS\MedicoWS.wsdl" />
     <None Include="Connected Services\CapsuleCareWS\MedicoWS.xsd">
       <SubType>Designer</SubType>
@@ -192,10 +227,15 @@
     <None Include="Connected Services\CapsuleCareWS\PacienteWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CapsuleCareWS\PagoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\PagoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CapsuleCareWS\UsuarioWS.wsdl" />
     <None Include="Connected Services\CapsuleCareWS\UsuarioWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Master\Main.Master" />
     <None Include="Public\js\jquery-3.7.1.intellisense.js" />
     <Content Include="Public\js\jquery-3.7.1.js" />
     <Content Include="Public\js\jquery-3.7.1.min.js" />
@@ -778,6 +818,11 @@
     <Content Include="template\vendors\select2\select2.min.css" />
     <Content Include="template\vendors\select2\select2.min.js" />
     <Content Include="template\vendors\typeahead.js\typeahead.bundle.min.js" />
+    <Content Include="Views\GestionarDatos.aspx" />
+    <Content Include="Views\GestionDatos\Especialidad.aspx" />
+    <Content Include="Views\GestionDatos\EspecialidadGestion.aspx" />
+    <Content Include="Views\GestionDatos\PacienteGestion.aspx" />
+    <Content Include="Views\GestionDatos\PacienteLista.aspx" />
     <Content Include="Views\HistorialMedico.aspx" />
     <Content Include="Views\Medicos.aspx" />
     <Content Include="Views\Pacientes.aspx" />
@@ -799,6 +844,13 @@
     <Compile Include="Master\Login.Master.designer.cs">
       <DependentUpon>Login.Master</DependentUpon>
     </Compile>
+    <Compile Include="Master\Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
     <Compile Include="Master\Plantilla.Master.cs">
       <DependentUpon>Plantilla.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -807,6 +859,41 @@
       <DependentUpon>Plantilla.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\GestionarDatos.aspx.cs">
+      <DependentUpon>GestionarDatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionarDatos.aspx.designer.cs">
+      <DependentUpon>GestionarDatos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GestionDatos\Especialidad.aspx.cs">
+      <DependentUpon>Especialidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionDatos\Especialidad.aspx.designer.cs">
+      <DependentUpon>Especialidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GestionDatos\EspecialidadGestion.aspx.cs">
+      <DependentUpon>EspecialidadGestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionDatos\EspecialidadGestion.aspx.designer.cs">
+      <DependentUpon>EspecialidadGestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GestionDatos\PacienteGestion.aspx.cs">
+      <DependentUpon>PacienteGestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionDatos\PacienteGestion.aspx.designer.cs">
+      <DependentUpon>PacienteGestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GestionDatos\PacienteLista.aspx.cs">
+      <DependentUpon>PacienteLista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionDatos\PacienteLista.aspx.designer.cs">
+      <DependentUpon>PacienteLista.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\HistorialMedico.aspx.cs">
       <DependentUpon>HistorialMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

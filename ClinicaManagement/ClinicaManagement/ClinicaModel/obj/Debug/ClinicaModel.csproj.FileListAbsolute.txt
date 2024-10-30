@@ -22,3 +22,9 @@ C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\C
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.dll
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\bin\Debug\ClinicaModel.pdb
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.dll
+C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaModel\obj\Debug\ClinicaModel.pdb
