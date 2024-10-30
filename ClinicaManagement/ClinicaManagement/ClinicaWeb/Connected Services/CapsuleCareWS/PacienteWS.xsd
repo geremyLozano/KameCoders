@@ -70,10 +70,17 @@
   <xs:complexType name="historialMedico">
     <xs:sequence>
       <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="alergias" type="xs:string" />
+      <xs:element name="altura" type="xs:double" />
+      <xs:element minOccurs="0" name="cirugiasPrevias" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="unbounded" name="citas" nillable="true" type="tns:citaMedica" />
+      <xs:element minOccurs="0" name="enferPreExist" type="xs:string" />
       <xs:element minOccurs="0" name="fechaDeCreacion" type="xs:dateTime" />
       <xs:element name="idHistorial" type="xs:int" />
       <xs:element name="idPaciente" type="xs:int" />
+      <xs:element name="peso" type="xs:double" />
+      <xs:element minOccurs="0" name="tipoSangre" type="xs:string" />
+      <xs:element minOccurs="0" name="vacunas" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="usuario">

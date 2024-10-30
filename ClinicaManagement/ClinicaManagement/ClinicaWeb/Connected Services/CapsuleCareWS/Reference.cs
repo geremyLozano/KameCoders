@@ -557,6 +557,152 @@ namespace ClinicaWeb.CapsuleCareWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
+    public partial class procedimiento : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private bool activoField;
+        
+        private double costoField;
+        
+        private string descripcionField;
+        
+        private int idProcedimientoField;
+        
+        private string nombreField;
+        
+        private string requisitosPreviosField;
+        
+        private tipoProcedimiento tipoField;
+        
+        private bool tipoFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool activo {
+            get {
+                return this.activoField;
+            }
+            set {
+                this.activoField = value;
+                this.RaisePropertyChanged("activo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public double costo {
+            get {
+                return this.costoField;
+            }
+            set {
+                this.costoField = value;
+                this.RaisePropertyChanged("costo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string descripcion {
+            get {
+                return this.descripcionField;
+            }
+            set {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public int idProcedimiento {
+            get {
+                return this.idProcedimientoField;
+            }
+            set {
+                this.idProcedimientoField = value;
+                this.RaisePropertyChanged("idProcedimiento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string requisitosPrevios {
+            get {
+                return this.requisitosPreviosField;
+            }
+            set {
+                this.requisitosPreviosField = value;
+                this.RaisePropertyChanged("requisitosPrevios");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public tipoProcedimiento tipo {
+            get {
+                return this.tipoField;
+            }
+            set {
+                this.tipoField = value;
+                this.RaisePropertyChanged("tipo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool tipoSpecified {
+            get {
+                return this.tipoFieldSpecified;
+            }
+            set {
+                this.tipoFieldSpecified = value;
+                this.RaisePropertyChanged("tipoSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
+    public enum tipoProcedimiento {
+        
+        /// <remarks/>
+        Evaluacion_por_imagenes,
+        
+        /// <remarks/>
+        Laboratorio,
+        
+        /// <remarks/>
+        Chequeo_general,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
     public partial class usuario : object, System.ComponentModel.INotifyPropertyChanged {
         
         private bool activoField;
@@ -723,7 +869,15 @@ namespace ClinicaWeb.CapsuleCareWS {
         
         private bool activoField;
         
+        private string alergiasField;
+        
+        private double alturaField;
+        
+        private string cirugiasPreviasField;
+        
         private citaMedica[] citasField;
+        
+        private string enferPreExistField;
         
         private System.DateTime fechaDeCreacionField;
         
@@ -732,6 +886,12 @@ namespace ClinicaWeb.CapsuleCareWS {
         private int idHistorialField;
         
         private int idPacienteField;
+        
+        private double pesoField;
+        
+        private string tipoSangreField;
+        
+        private string vacunasField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -746,7 +906,43 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("citas", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string alergias {
+            get {
+                return this.alergiasField;
+            }
+            set {
+                this.alergiasField = value;
+                this.RaisePropertyChanged("alergias");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public double altura {
+            get {
+                return this.alturaField;
+            }
+            set {
+                this.alturaField = value;
+                this.RaisePropertyChanged("altura");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string cirugiasPrevias {
+            get {
+                return this.cirugiasPreviasField;
+            }
+            set {
+                this.cirugiasPreviasField = value;
+                this.RaisePropertyChanged("cirugiasPrevias");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("citas", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=4)]
         public citaMedica[] citas {
             get {
                 return this.citasField;
@@ -758,7 +954,19 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string enferPreExist {
+            get {
+                return this.enferPreExistField;
+            }
+            set {
+                this.enferPreExistField = value;
+                this.RaisePropertyChanged("enferPreExist");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
         public System.DateTime fechaDeCreacion {
             get {
                 return this.fechaDeCreacionField;
@@ -782,7 +990,7 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public int idHistorial {
             get {
                 return this.idHistorialField;
@@ -794,7 +1002,7 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public int idPaciente {
             get {
                 return this.idPacienteField;
@@ -802,6 +1010,42 @@ namespace ClinicaWeb.CapsuleCareWS {
             set {
                 this.idPacienteField = value;
                 this.RaisePropertyChanged("idPaciente");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public double peso {
+            get {
+                return this.pesoField;
+            }
+            set {
+                this.pesoField = value;
+                this.RaisePropertyChanged("peso");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string tipoSangre {
+            get {
+                return this.tipoSangreField;
+            }
+            set {
+                this.tipoSangreField = value;
+                this.RaisePropertyChanged("tipoSangre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string vacunas {
+            get {
+                return this.vacunasField;
+            }
+            set {
+                this.vacunasField = value;
+                this.RaisePropertyChanged("vacunas");
             }
         }
         
@@ -960,8 +1204,8 @@ namespace ClinicaWeb.CapsuleCareWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(medico))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(administrador))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(auxiliar))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(administrador))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(paciente))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
@@ -1247,43 +1491,6 @@ namespace ClinicaWeb.CapsuleCareWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
-    public partial class administrador : persona {
-        
-        private bool activoField;
-        
-        private int idAdministradorField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public bool activo {
-            get {
-                return this.activoField;
-            }
-            set {
-                this.activoField = value;
-                this.RaisePropertyChanged("activo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idAdministrador {
-            get {
-                return this.idAdministradorField;
-            }
-            set {
-                this.idAdministradorField = value;
-                this.RaisePropertyChanged("idAdministrador");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
     public partial class auxiliar : persona {
         
         private bool activoField;
@@ -1325,6 +1532,43 @@ namespace ClinicaWeb.CapsuleCareWS {
             set {
                 this.idAuxiliarField = value;
                 this.RaisePropertyChanged("idAuxiliar");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/")]
+    public partial class administrador : persona {
+        
+        private bool activoField;
+        
+        private int idAdministradorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool activo {
+            get {
+                return this.activoField;
+            }
+            set {
+                this.activoField = value;
+                this.RaisePropertyChanged("activo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idAdministrador {
+            get {
+                return this.idAdministradorField;
+            }
+            set {
+                this.idAdministradorField = value;
+                this.RaisePropertyChanged("idAdministrador");
             }
         }
     }
@@ -1577,313 +1821,6 @@ namespace ClinicaWeb.CapsuleCareWS {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.PagoWS")]
-    public interface PagoWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        ClinicaWeb.CapsuleCareWS.insertarPagoResponse insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPago", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarPagoRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.pago pago;
-        
-        public insertarPagoRequest() {
-        }
-        
-        public insertarPagoRequest(ClinicaWeb.CapsuleCareWS.pago pago) {
-            this.pago = pago;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPagoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarPagoResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public insertarPagoResponse() {
-        }
-        
-        public insertarPagoResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface PagoWSChannel : ClinicaWeb.CapsuleCareWS.PagoWS, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PagoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.PagoWS>, ClinicaWeb.CapsuleCareWS.PagoWS {
-        
-        public PagoWSClient() {
-        }
-        
-        public PagoWSClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public PagoWSClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public PagoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public PagoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClinicaWeb.CapsuleCareWS.insertarPagoResponse ClinicaWeb.CapsuleCareWS.PagoWS.insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
-            return base.Channel.insertarPago(request);
-        }
-        
-        public int insertarPago(ClinicaWeb.CapsuleCareWS.pago pago) {
-            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
-            inValue.pago = pago;
-            ClinicaWeb.CapsuleCareWS.insertarPagoResponse retVal = ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPago(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> ClinicaWeb.CapsuleCareWS.PagoWS.insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
-            return base.Channel.insertarPagoAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.pago pago) {
-            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
-            inValue.pago = pago;
-            return ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPagoAsync(inValue);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.EspecialidadWS")]
-    public interface EspecialidadWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
-            "quest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
-            "sponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse listarEspecialidades(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
-            "quest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
-            "sponse")]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> listarEspecialidadesAsync(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEspecialidades", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEspecialidadesRequest {
-        
-        public listarEspecialidadesRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEspecialidadesResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarEspecialidadesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.especialidad[] @return;
-        
-        public listarEspecialidadesResponse() {
-        }
-        
-        public listarEspecialidadesResponse(ClinicaWeb.CapsuleCareWS.especialidad[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface EspecialidadWSChannel : ClinicaWeb.CapsuleCareWS.EspecialidadWS, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EspecialidadWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.EspecialidadWS>, ClinicaWeb.CapsuleCareWS.EspecialidadWS {
-        
-        public EspecialidadWSClient() {
-        }
-        
-        public EspecialidadWSClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public EspecialidadWSClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public EspecialidadWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public EspecialidadWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse ClinicaWeb.CapsuleCareWS.EspecialidadWS.listarEspecialidades(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request) {
-            return base.Channel.listarEspecialidades(request);
-        }
-        
-        public ClinicaWeb.CapsuleCareWS.especialidad[] listarEspecialidades() {
-            ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest inValue = new ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest();
-            ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse retVal = ((ClinicaWeb.CapsuleCareWS.EspecialidadWS)(this)).listarEspecialidades(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> ClinicaWeb.CapsuleCareWS.EspecialidadWS.listarEspecialidadesAsync(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request) {
-            return base.Channel.listarEspecialidadesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> listarEspecialidadesAsync() {
-            ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest inValue = new ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest();
-            return ((ClinicaWeb.CapsuleCareWS.EspecialidadWS)(this)).listarEspecialidadesAsync(inValue);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.AuxiliarWS")]
-    public interface AuxiliarWS {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse insertarAuxiliar(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarResponse")]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAuxiliar", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarAuxiliarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.auxiliar auxiliar;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.usuario usuario;
-        
-        public insertarAuxiliarRequest() {
-        }
-        
-        public insertarAuxiliarRequest(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            this.auxiliar = auxiliar;
-            this.usuario = usuario;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAuxiliarResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarAuxiliarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public insertarAuxiliarResponse() {
-        }
-        
-        public insertarAuxiliarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface AuxiliarWSChannel : ClinicaWeb.CapsuleCareWS.AuxiliarWS, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AuxiliarWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.AuxiliarWS>, ClinicaWeb.CapsuleCareWS.AuxiliarWS {
-        
-        public AuxiliarWSClient() {
-        }
-        
-        public AuxiliarWSClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public AuxiliarWSClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public AuxiliarWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public AuxiliarWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse ClinicaWeb.CapsuleCareWS.AuxiliarWS.insertarAuxiliar(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request) {
-            return base.Channel.insertarAuxiliar(request);
-        }
-        
-        public int insertarAuxiliar(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest();
-            inValue.auxiliar = auxiliar;
-            inValue.usuario = usuario;
-            ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse retVal = ((ClinicaWeb.CapsuleCareWS.AuxiliarWS)(this)).insertarAuxiliar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> ClinicaWeb.CapsuleCareWS.AuxiliarWS.insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request) {
-            return base.Channel.insertarAuxiliarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
-            ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest();
-            inValue.auxiliar = auxiliar;
-            inValue.usuario = usuario;
-            return ((ClinicaWeb.CapsuleCareWS.AuxiliarWS)(this)).insertarAuxiliarAsync(inValue);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.AdministradorWS")]
     public interface AdministradorWS {
         
@@ -1997,18 +1934,826 @@ namespace ClinicaWeb.CapsuleCareWS {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.MedicoWS")]
-    public interface MedicoWS {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.ProcedimientoWS")]
+    public interface ProcedimientoWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimiento" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimiento" +
+            "Response")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        ClinicaWeb.CapsuleCareWS.insertarMedicoResponse insertarMedico(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request);
+        ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse eliminarProcedimiento(ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse")]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimiento" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimiento" +
+            "Response")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse> eliminarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimient" +
+            "oRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimient" +
+            "oResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse modificarProcedimiento(ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimient" +
+            "oRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimient" +
+            "oResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse> modificarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoP" +
+            "orIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoP" +
+            "orIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse obtenerProcedimientoPorId(ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoP" +
+            "orIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoP" +
+            "orIdResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse> obtenerProcedimientoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimiento" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimiento" +
+            "Response")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse insertarProcedimiento(ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimiento" +
+            "Request", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimiento" +
+            "Response")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse> insertarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosP" +
+            "orTipoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosP" +
+            "orTipoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse listarProcedimientosPorTipo(ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosP" +
+            "orTipoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosP" +
+            "orTipoResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse> listarProcedimientosPorTipoAsync(ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarProcedimiento", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarProcedimientoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int idProcedimiento;
+        
+        public eliminarProcedimientoRequest() {
+        }
+        
+        public eliminarProcedimientoRequest(int idProcedimiento) {
+            this.idProcedimiento = idProcedimiento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarProcedimientoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarProcedimientoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public eliminarProcedimientoResponse() {
+        }
+        
+        public eliminarProcedimientoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarProcedimiento", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarProcedimientoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.procedimiento procedimiento;
+        
+        public modificarProcedimientoRequest() {
+        }
+        
+        public modificarProcedimientoRequest(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento) {
+            this.procedimiento = procedimiento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarProcedimientoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarProcedimientoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public modificarProcedimientoResponse() {
+        }
+        
+        public modificarProcedimientoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerProcedimientoPorId", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerProcedimientoPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int idProcedimiento;
+        
+        public obtenerProcedimientoPorIdRequest() {
+        }
+        
+        public obtenerProcedimientoPorIdRequest(int idProcedimiento) {
+            this.idProcedimiento = idProcedimiento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerProcedimientoPorIdResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerProcedimientoPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.procedimiento @return;
+        
+        public obtenerProcedimientoPorIdResponse() {
+        }
+        
+        public obtenerProcedimientoPorIdResponse(ClinicaWeb.CapsuleCareWS.procedimiento @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarProcedimiento", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarProcedimientoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.procedimiento procedimiento;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int idAmbienteMedico;
+        
+        public insertarProcedimientoRequest() {
+        }
+        
+        public insertarProcedimientoRequest(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento, int idAmbienteMedico) {
+            this.procedimiento = procedimiento;
+            this.idAmbienteMedico = idAmbienteMedico;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarProcedimientoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarProcedimientoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarProcedimientoResponse() {
+        }
+        
+        public insertarProcedimientoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProcedimientosPorTipo", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarProcedimientosPorTipoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string tipoProcedimiento;
+        
+        public listarProcedimientosPorTipoRequest() {
+        }
+        
+        public listarProcedimientosPorTipoRequest(string tipoProcedimiento) {
+            this.tipoProcedimiento = tipoProcedimiento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarProcedimientosPorTipoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarProcedimientosPorTipoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.procedimiento[] @return;
+        
+        public listarProcedimientosPorTipoResponse() {
+        }
+        
+        public listarProcedimientosPorTipoResponse(ClinicaWeb.CapsuleCareWS.procedimiento[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ProcedimientoWSChannel : ClinicaWeb.CapsuleCareWS.ProcedimientoWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ProcedimientoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.ProcedimientoWS>, ClinicaWeb.CapsuleCareWS.ProcedimientoWS {
+        
+        public ProcedimientoWSClient() {
+        }
+        
+        public ProcedimientoWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ProcedimientoWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ProcedimientoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ProcedimientoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse ClinicaWeb.CapsuleCareWS.ProcedimientoWS.eliminarProcedimiento(ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest request) {
+            return base.Channel.eliminarProcedimiento(request);
+        }
+        
+        public int eliminarProcedimiento(int idProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest();
+            inValue.idProcedimiento = idProcedimiento;
+            ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse retVal = ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).eliminarProcedimiento(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse> ClinicaWeb.CapsuleCareWS.ProcedimientoWS.eliminarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest request) {
+            return base.Channel.eliminarProcedimientoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse> eliminarProcedimientoAsync(int idProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.eliminarProcedimientoRequest();
+            inValue.idProcedimiento = idProcedimiento;
+            return ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).eliminarProcedimientoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse ClinicaWeb.CapsuleCareWS.ProcedimientoWS.modificarProcedimiento(ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest request) {
+            return base.Channel.modificarProcedimiento(request);
+        }
+        
+        public int modificarProcedimiento(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento) {
+            ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest();
+            inValue.procedimiento = procedimiento;
+            ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse retVal = ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).modificarProcedimiento(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse> ClinicaWeb.CapsuleCareWS.ProcedimientoWS.modificarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest request) {
+            return base.Channel.modificarProcedimientoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse> modificarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento) {
+            ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.modificarProcedimientoRequest();
+            inValue.procedimiento = procedimiento;
+            return ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).modificarProcedimientoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse ClinicaWeb.CapsuleCareWS.ProcedimientoWS.obtenerProcedimientoPorId(ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest request) {
+            return base.Channel.obtenerProcedimientoPorId(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.procedimiento obtenerProcedimientoPorId(int idProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest();
+            inValue.idProcedimiento = idProcedimiento;
+            ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse retVal = ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).obtenerProcedimientoPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse> ClinicaWeb.CapsuleCareWS.ProcedimientoWS.obtenerProcedimientoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest request) {
+            return base.Channel.obtenerProcedimientoPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse> obtenerProcedimientoPorIdAsync(int idProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdRequest();
+            inValue.idProcedimiento = idProcedimiento;
+            return ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).obtenerProcedimientoPorIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse ClinicaWeb.CapsuleCareWS.ProcedimientoWS.insertarProcedimiento(ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest request) {
+            return base.Channel.insertarProcedimiento(request);
+        }
+        
+        public int insertarProcedimiento(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento, int idAmbienteMedico) {
+            ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest();
+            inValue.procedimiento = procedimiento;
+            inValue.idAmbienteMedico = idAmbienteMedico;
+            ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse retVal = ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).insertarProcedimiento(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse> ClinicaWeb.CapsuleCareWS.ProcedimientoWS.insertarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest request) {
+            return base.Channel.insertarProcedimientoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse> insertarProcedimientoAsync(ClinicaWeb.CapsuleCareWS.procedimiento procedimiento, int idAmbienteMedico) {
+            ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarProcedimientoRequest();
+            inValue.procedimiento = procedimiento;
+            inValue.idAmbienteMedico = idAmbienteMedico;
+            return ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).insertarProcedimientoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse ClinicaWeb.CapsuleCareWS.ProcedimientoWS.listarProcedimientosPorTipo(ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest request) {
+            return base.Channel.listarProcedimientosPorTipo(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.procedimiento[] listarProcedimientosPorTipo(string tipoProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest inValue = new ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest();
+            inValue.tipoProcedimiento = tipoProcedimiento;
+            ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse retVal = ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).listarProcedimientosPorTipo(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse> ClinicaWeb.CapsuleCareWS.ProcedimientoWS.listarProcedimientosPorTipoAsync(ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest request) {
+            return base.Channel.listarProcedimientosPorTipoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse> listarProcedimientosPorTipoAsync(string tipoProcedimiento) {
+            ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest inValue = new ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoRequest();
+            inValue.tipoProcedimiento = tipoProcedimiento;
+            return ((ClinicaWeb.CapsuleCareWS.ProcedimientoWS)(this)).listarProcedimientosPorTipoAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.EspecialidadWS")]
+    public interface EspecialidadWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
+            "quest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
+            "sponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse listarEspecialidades(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
+            "quest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> listarEspecialidadesAsync(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEspecialidades", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEspecialidadesRequest {
+        
+        public listarEspecialidadesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarEspecialidadesResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarEspecialidadesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.especialidad[] @return;
+        
+        public listarEspecialidadesResponse() {
+        }
+        
+        public listarEspecialidadesResponse(ClinicaWeb.CapsuleCareWS.especialidad[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface EspecialidadWSChannel : ClinicaWeb.CapsuleCareWS.EspecialidadWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class EspecialidadWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.EspecialidadWS>, ClinicaWeb.CapsuleCareWS.EspecialidadWS {
+        
+        public EspecialidadWSClient() {
+        }
+        
+        public EspecialidadWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public EspecialidadWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EspecialidadWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EspecialidadWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse ClinicaWeb.CapsuleCareWS.EspecialidadWS.listarEspecialidades(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request) {
+            return base.Channel.listarEspecialidades(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.especialidad[] listarEspecialidades() {
+            ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest inValue = new ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest();
+            ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse retVal = ((ClinicaWeb.CapsuleCareWS.EspecialidadWS)(this)).listarEspecialidades(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> ClinicaWeb.CapsuleCareWS.EspecialidadWS.listarEspecialidadesAsync(ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest request) {
+            return base.Channel.listarEspecialidadesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.listarEspecialidadesResponse> listarEspecialidadesAsync() {
+            ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest inValue = new ClinicaWeb.CapsuleCareWS.listarEspecialidadesRequest();
+            return ((ClinicaWeb.CapsuleCareWS.EspecialidadWS)(this)).listarEspecialidadesAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.HistorialMedicoWS")]
+    public interface HistorialMedicoWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse obtenerHistorialMedicoPorId(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/HistorialMedicoWS/obtenerHistorialMed" +
+            "icoPorIdResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> obtenerHistorialMedicoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerHistorialMedicoPorId", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerHistorialMedicoPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int idHistorialMedico;
+        
+        public obtenerHistorialMedicoPorIdRequest() {
+        }
+        
+        public obtenerHistorialMedicoPorIdRequest(int idHistorialMedico) {
+            this.idHistorialMedico = idHistorialMedico;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerHistorialMedicoPorIdResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerHistorialMedicoPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.historialMedico @return;
+        
+        public obtenerHistorialMedicoPorIdResponse() {
+        }
+        
+        public obtenerHistorialMedicoPorIdResponse(ClinicaWeb.CapsuleCareWS.historialMedico @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface HistorialMedicoWSChannel : ClinicaWeb.CapsuleCareWS.HistorialMedicoWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class HistorialMedicoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.HistorialMedicoWS>, ClinicaWeb.CapsuleCareWS.HistorialMedicoWS {
+        
+        public HistorialMedicoWSClient() {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HistorialMedicoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HistorialMedicoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse ClinicaWeb.CapsuleCareWS.HistorialMedicoWS.obtenerHistorialMedicoPorId(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request) {
+            return base.Channel.obtenerHistorialMedicoPorId(request);
+        }
+        
+        public ClinicaWeb.CapsuleCareWS.historialMedico obtenerHistorialMedicoPorId(int idHistorialMedico) {
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest();
+            inValue.idHistorialMedico = idHistorialMedico;
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse retVal = ((ClinicaWeb.CapsuleCareWS.HistorialMedicoWS)(this)).obtenerHistorialMedicoPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> ClinicaWeb.CapsuleCareWS.HistorialMedicoWS.obtenerHistorialMedicoPorIdAsync(ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest request) {
+            return base.Channel.obtenerHistorialMedicoPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse> obtenerHistorialMedicoPorIdAsync(int idHistorialMedico) {
+            ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest inValue = new ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdRequest();
+            inValue.idHistorialMedico = idHistorialMedico;
+            return ((ClinicaWeb.CapsuleCareWS.HistorialMedicoWS)(this)).obtenerHistorialMedicoPorIdAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.AuxiliarWS")]
+    public interface AuxiliarWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse insertarAuxiliar(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/AuxiliarWS/insertarAuxiliarResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAuxiliar", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarAuxiliarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.auxiliar auxiliar;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.usuario usuario;
+        
+        public insertarAuxiliarRequest() {
+        }
+        
+        public insertarAuxiliarRequest(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            this.auxiliar = auxiliar;
+            this.usuario = usuario;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarAuxiliarResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarAuxiliarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarAuxiliarResponse() {
+        }
+        
+        public insertarAuxiliarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface AuxiliarWSChannel : ClinicaWeb.CapsuleCareWS.AuxiliarWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AuxiliarWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.AuxiliarWS>, ClinicaWeb.CapsuleCareWS.AuxiliarWS {
+        
+        public AuxiliarWSClient() {
+        }
+        
+        public AuxiliarWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AuxiliarWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AuxiliarWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AuxiliarWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse ClinicaWeb.CapsuleCareWS.AuxiliarWS.insertarAuxiliar(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request) {
+            return base.Channel.insertarAuxiliar(request);
+        }
+        
+        public int insertarAuxiliar(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest();
+            inValue.auxiliar = auxiliar;
+            inValue.usuario = usuario;
+            ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse retVal = ((ClinicaWeb.CapsuleCareWS.AuxiliarWS)(this)).insertarAuxiliar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> ClinicaWeb.CapsuleCareWS.AuxiliarWS.insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest request) {
+            return base.Channel.insertarAuxiliarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarAuxiliarResponse> insertarAuxiliarAsync(ClinicaWeb.CapsuleCareWS.auxiliar auxiliar, ClinicaWeb.CapsuleCareWS.usuario usuario) {
+            ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarAuxiliarRequest();
+            inValue.auxiliar = auxiliar;
+            inValue.usuario = usuario;
+            return ((ClinicaWeb.CapsuleCareWS.AuxiliarWS)(this)).insertarAuxiliarAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.PagoWS")]
+    public interface PagoWS {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.insertarPagoResponse insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/PagoWS/insertarPagoResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPago", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarPagoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.pago pago;
+        
+        public insertarPagoRequest() {
+        }
+        
+        public insertarPagoRequest(ClinicaWeb.CapsuleCareWS.pago pago) {
+            this.pago = pago;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarPagoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarPagoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarPagoResponse() {
+        }
+        
+        public insertarPagoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface PagoWSChannel : ClinicaWeb.CapsuleCareWS.PagoWS, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PagoWSClient : System.ServiceModel.ClientBase<ClinicaWeb.CapsuleCareWS.PagoWS>, ClinicaWeb.CapsuleCareWS.PagoWS {
+        
+        public PagoWSClient() {
+        }
+        
+        public PagoWSClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PagoWSClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PagoWSClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PagoWSClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.insertarPagoResponse ClinicaWeb.CapsuleCareWS.PagoWS.insertarPago(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
+            return base.Channel.insertarPago(request);
+        }
+        
+        public int insertarPago(ClinicaWeb.CapsuleCareWS.pago pago) {
+            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
+            inValue.pago = pago;
+            ClinicaWeb.CapsuleCareWS.insertarPagoResponse retVal = ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPago(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> ClinicaWeb.CapsuleCareWS.PagoWS.insertarPagoAsync(ClinicaWeb.CapsuleCareWS.insertarPagoRequest request) {
+            return base.Channel.insertarPagoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarPagoResponse> insertarPagoAsync(ClinicaWeb.CapsuleCareWS.pago pago) {
+            ClinicaWeb.CapsuleCareWS.insertarPagoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarPagoRequest();
+            inValue.pago = pago;
+            return ((ClinicaWeb.CapsuleCareWS.PagoWS)(this)).insertarPagoAsync(inValue);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", ConfigurationName="CapsuleCareWS.MedicoWS")]
+    public interface MedicoWS {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRequest" +
@@ -2023,42 +2768,16 @@ namespace ClinicaWeb.CapsuleCareWS {
             "", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRespons" +
             "e")]
         System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse> buscarPorEspecialidadAsync(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarMedico", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarMedicoRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ClinicaWeb.CapsuleCareWS.medico medico;
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(persona))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        ClinicaWeb.CapsuleCareWS.insertarMedicoResponse insertarMedico(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request);
         
-        public insertarMedicoRequest() {
-        }
-        
-        public insertarMedicoRequest(ClinicaWeb.CapsuleCareWS.medico medico) {
-            this.medico = medico;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarMedicoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarMedicoResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public insertarMedicoResponse() {
-        }
-        
-        public insertarMedicoResponse(int @return) {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest", ReplyAction="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse")]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2097,6 +2816,42 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarMedico", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarMedicoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ClinicaWeb.CapsuleCareWS.medico medico;
+        
+        public insertarMedicoRequest() {
+        }
+        
+        public insertarMedicoRequest(ClinicaWeb.CapsuleCareWS.medico medico) {
+            this.medico = medico;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarMedicoResponse", WrapperNamespace="http://services.softcapsulecare.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarMedicoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softcapsulecare.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarMedicoResponse() {
+        }
+        
+        public insertarMedicoResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface MedicoWSChannel : ClinicaWeb.CapsuleCareWS.MedicoWS, System.ServiceModel.IClientChannel {
     }
@@ -2125,29 +2880,6 @@ namespace ClinicaWeb.CapsuleCareWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ClinicaWeb.CapsuleCareWS.insertarMedicoResponse ClinicaWeb.CapsuleCareWS.MedicoWS.insertarMedico(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request) {
-            return base.Channel.insertarMedico(request);
-        }
-        
-        public int insertarMedico(ClinicaWeb.CapsuleCareWS.medico medico) {
-            ClinicaWeb.CapsuleCareWS.insertarMedicoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarMedicoRequest();
-            inValue.medico = medico;
-            ClinicaWeb.CapsuleCareWS.insertarMedicoResponse retVal = ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).insertarMedico(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> ClinicaWeb.CapsuleCareWS.MedicoWS.insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request) {
-            return base.Channel.insertarMedicoAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.medico medico) {
-            ClinicaWeb.CapsuleCareWS.insertarMedicoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarMedicoRequest();
-            inValue.medico = medico;
-            return ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).insertarMedicoAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse ClinicaWeb.CapsuleCareWS.MedicoWS.buscarPorEspecialidad(ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest request) {
             return base.Channel.buscarPorEspecialidad(request);
         }
@@ -2168,6 +2900,29 @@ namespace ClinicaWeb.CapsuleCareWS {
             ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest inValue = new ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadRequest();
             inValue.especialidad = especialidad;
             return ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).buscarPorEspecialidadAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClinicaWeb.CapsuleCareWS.insertarMedicoResponse ClinicaWeb.CapsuleCareWS.MedicoWS.insertarMedico(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request) {
+            return base.Channel.insertarMedico(request);
+        }
+        
+        public int insertarMedico(ClinicaWeb.CapsuleCareWS.medico medico) {
+            ClinicaWeb.CapsuleCareWS.insertarMedicoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarMedicoRequest();
+            inValue.medico = medico;
+            ClinicaWeb.CapsuleCareWS.insertarMedicoResponse retVal = ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).insertarMedico(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> ClinicaWeb.CapsuleCareWS.MedicoWS.insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.insertarMedicoRequest request) {
+            return base.Channel.insertarMedicoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ClinicaWeb.CapsuleCareWS.insertarMedicoResponse> insertarMedicoAsync(ClinicaWeb.CapsuleCareWS.medico medico) {
+            ClinicaWeb.CapsuleCareWS.insertarMedicoRequest inValue = new ClinicaWeb.CapsuleCareWS.insertarMedicoRequest();
+            inValue.medico = medico;
+            return ((ClinicaWeb.CapsuleCareWS.MedicoWS)(this)).insertarMedicoAsync(inValue);
         }
     }
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="obtenerHistorialMedicoPorId" type="tns:obtenerHistorialMedicoPorId" />
+  <xs:element name="obtenerHistorialMedicoPorIdResponse" type="tns:obtenerHistorialMedicoPorIdResponse" />
+  <xs:complexType name="obtenerHistorialMedicoPorId">
+    <xs:sequence>
+      <xs:element name="idHistorialMedico" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerHistorialMedicoPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:historialMedico" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="historialMedico">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="alergias" type="xs:string" />
+      <xs:element name="altura" type="xs:double" />
+      <xs:element minOccurs="0" name="cirugiasPrevias" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="citas" nillable="true" type="tns:citaMedica" />
+      <xs:element minOccurs="0" name="enferPreExist" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDeCreacion" type="xs:dateTime" />
+      <xs:element name="idHistorial" type="xs:int" />
+      <xs:element name="idPaciente" type="xs:int" />
+      <xs:element name="peso" type="xs:double" />
+      <xs:element minOccurs="0" name="tipoSangre" type="xs:string" />
+      <xs:element minOccurs="0" name="vacunas" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="citaMedica">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="duracion" type="tns:localTime" />
+      <xs:element minOccurs="0" name="enlace" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoCita" />
+      <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="hora" type="tns:localTime" />
+      <xs:element minOccurs="0" name="idCitaMedica" type="xs:string" />
+      <xs:element name="idHistorialMedico" type="xs:int" />
+      <xs:element name="idMedico" type="xs:int" />
+      <xs:element name="idPaciente" type="xs:int" />
+      <xs:element name="idPago" type="xs:int" />
+      <xs:element name="idreporteMedico" type="xs:int" />
+      <xs:element name="numeroAmbiente" type="xs:int" />
+      <xs:element minOccurs="0" name="plataforma" type="xs:string" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipoCita" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localTime" final="extension restriction">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:simpleType name="estadoCita">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pendiente" />
+      <xs:enumeration value="Confirmada" />
+      <xs:enumeration value="Cancelada" />
+      <xs:enumeration value="Reprogramada" />
+      <xs:enumeration value="En_progreso" />
+      <xs:enumeration value="Completada" />
+      <xs:enumeration value="No_asistio" />
+      <xs:enumeration value="ASISTIDA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoCita">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Presencial" />
+      <xs:enumeration value="Virtual" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

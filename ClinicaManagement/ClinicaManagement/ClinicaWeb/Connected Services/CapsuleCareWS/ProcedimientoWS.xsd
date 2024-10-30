@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminarProcedimiento" type="tns:eliminarProcedimiento" />
+  <xs:element name="eliminarProcedimientoResponse" type="tns:eliminarProcedimientoResponse" />
+  <xs:element name="insertarProcedimiento" type="tns:insertarProcedimiento" />
+  <xs:element name="insertarProcedimientoResponse" type="tns:insertarProcedimientoResponse" />
+  <xs:element name="listarProcedimientosPorTipo" type="tns:listarProcedimientosPorTipo" />
+  <xs:element name="listarProcedimientosPorTipoResponse" type="tns:listarProcedimientosPorTipoResponse" />
+  <xs:element name="modificarProcedimiento" type="tns:modificarProcedimiento" />
+  <xs:element name="modificarProcedimientoResponse" type="tns:modificarProcedimientoResponse" />
+  <xs:element name="obtenerProcedimientoPorId" type="tns:obtenerProcedimientoPorId" />
+  <xs:element name="obtenerProcedimientoPorIdResponse" type="tns:obtenerProcedimientoPorIdResponse" />
+  <xs:complexType name="insertarProcedimiento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="procedimiento" type="tns:procedimiento" />
+      <xs:element name="idAmbienteMedico" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procedimiento">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="idProcedimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="requisitosPrevios" type="xs:string" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipoProcedimiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarProcedimientoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarProcedimientosPorTipo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tipoProcedimiento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarProcedimientosPorTipoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:procedimiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerProcedimientoPorId">
+    <xs:sequence>
+      <xs:element name="idProcedimiento" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerProcedimientoPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:procedimiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProcedimiento">
+    <xs:sequence>
+      <xs:element name="idProcedimiento" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarProcedimientoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarProcedimiento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="procedimiento" type="tns:procedimiento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarProcedimientoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoProcedimiento">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Evaluacion_por_imagenes" />
+      <xs:enumeration value="Laboratorio" />
+      <xs:enumeration value="Chequeo_general" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
