@@ -26,16 +26,6 @@
         function cerrarModal() {
             document.getElementById('modalCamposMedico').style.display = 'none';
         }
-
-        function mostrarError(mensaje) {
-            var lblError = document.getElementById('<%= lblErrorRegistro.ClientID %>');
-            if (lblError) {
-                lblError.innerHTML = mensaje;
-
-                lblError.style.display = 'block';
-            }
-        }
-
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LoginReg" runat="server">
@@ -54,34 +44,8 @@
                         <i class="fas fa-lock"></i>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Contraseña" />
                     </div>
-                    <a href="#" class="reset-password-link2" onclick="openModal2(); return false;">Restablecer contraseña</a>
                     <asp:Button ID="btnLogin" runat="server" Text="Ingresar" CssClass="btn solid" OnClick="btnLogin_Click"/>
-                    <asp:Label ID="lblErrorRegistro" runat="server" CssClass="error-message" Visible="false" Text="El DNI ingresado ya existe" />
                     <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"></asp:Label>
-                </div>
-
-                <!-- Modal de Restablecer Contraseña -->
-                <div id="resetPasswordModal2" class="modal2">
-                    <div class="modal-content2">
-                        <h3>Restablecer Contraseña</h3>
-                        <div class="modal-input-field2">
-                            <i class="fas fa-user"></i>
-                            <asp:TextBox ID="txtUsuarioReset" runat="server" CssClass="modal-input2" placeholder="Usuario" />
-                        </div>
-                        <div class="modal-input-field2">
-                            <i class="fas fa-lock"></i>
-                            <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" placeholder="Nueva contraseña" CssClass="modal-input2" />
-                        </div>
-                        <div class="modal-input-field2">
-                            <i class="fas fa-lock"></i>
-                            <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" placeholder="Confirmar contraseña" CssClass="modal-input2" />
-                        </div>
-                        <asp:Label ID="lblErrorRestablecer" runat="server" CssClass="error-message2" Visible="false"></asp:Label>
-                        <div class="modal-buttons2">
-                            <asp:Button ID="btnConfirmReset" runat="server" Text="CONFIRMAR" CssClass="btn-modal2 confirm2" OnClientClick="return validateReset();" OnClick="btnConfirmReset_Click" />
-                            <asp:Button ID="btnBack" runat="server" Text="VOLVER" CssClass="btn-modal2 back2" OnClientClick="closeModal2(); return false;" />   
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="sign-up-form">
@@ -119,7 +83,7 @@
                     <div class="form-row">
                         <div class="input-field">
                             <i class="fas fa-calendar"></i>
-                            <input id="dtpFechaNacimiento" runat="server" type="date" max=""/>
+                            <input id="dtpFechaNacimiento" runat="server" type="date"/>
                         </div>
                         <div class="select-field">
                             <i class="fas fa-venus-mars"></i>
@@ -127,6 +91,7 @@
                                 <asp:ListItem Text="Género" Value="" disabled Selected />
                                 <asp:ListItem Text="Masculino" Value="Masculino" />
                                 <asp:ListItem Text="Femenino" Value="Femenino" />
+                                <asp:ListItem Text="Otro" Value="otro" />
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -164,7 +129,7 @@
         <div id="modalCamposMedico" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close" onclick="cerrarModal()">&times;</span>
-                <h3 id="infoMedica">Información Médica</h3>
+                <h3>Información Médica</h3>
                 <div class="form-row">
                     <div class="input-field">
                         <i class="fas fa-id-badge"></i>
@@ -184,7 +149,8 @@
                 </div>
             </div>
         </div>
-                    <asp:Button ID="btnRegistro" runat="server" Text="Registrarse" CssClass="btn" OnClick="btnRegistro_Click" />
+
+                    <asp:Button ID="btnRegistro" runat="server" Text="Registrarse" CssClass="btn" OnClick="btnRegistro_Click"/>
                 </div>
             </div>
         </div>
@@ -207,8 +173,73 @@
                 <img src="/Public/images/register.svg" class="image" alt="" />
             </div>
         </div>
-       </div>
+    </div>
     <script src="/Public/js/app.js"></script>
-    <script src="/Public/js/loginReg.js"></script>
-    <link rel="stylesheet" href="/Public/css/modal.css">
+    <style>
+    /* Estilos del modal */
+
+    .full-width-field {
+        display: flex;
+        align-items: center;
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+
+    .full-width-field select {
+        width: 100%; /* Asegura que el dropdown se extienda a todo el ancho del contenedor */
+    }
+
+        select {
+            display: inline-block; /* Para alinear el select y el ícono */
+            vertical-align: middle;
+        }
+
+        .fas.fa-eye {
+            cursor: pointer;
+            font-size: 1.5em; /* Aumenta el tamaño del ícono para mejor visibilidad */
+            color: #333; /* Color oscuro para contraste con el fondo blanco */
+            font-weight: bold; /* Para hacerlo más "negrito" visualmente */
+            display: inline-flex; /* Asegura que el ícono esté centrado verticalmente */
+            align-items: center; /* Centra el ícono verticalmente */
+            justify-content: center; /* Centra el ícono horizontalmente */
+            margin-left: -5px; /* Espaciado a la izquierda del ícono */
+        }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
 </asp:Content>

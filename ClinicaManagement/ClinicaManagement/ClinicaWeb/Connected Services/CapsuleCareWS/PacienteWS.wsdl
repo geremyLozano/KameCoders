@@ -11,6 +11,7 @@
   <message name="eliminarPacienteResponse">
     <part name="parameters" element="tns:eliminarPacienteResponse" />
   </message>
+<<<<<<< HEAD
   <message name="modificarPaciente">
     <part name="parameters" element="tns:modificarPaciente" />
   </message>
@@ -47,11 +48,14 @@
   <message name="obtenerPorIDPaciente1Response">
     <part name="parameters" element="tns:obtenerPorIDPaciente1Response" />
   </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <portType name="PacienteWS">
     <operation name="eliminarPaciente">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/eliminarPacienteRequest" message="tns:eliminarPaciente" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/eliminarPacienteResponse" message="tns:eliminarPacienteResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="modificarPaciente">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteRequest" message="tns:modificarPaciente" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteResponse" message="tns:modificarPacienteResponse" />
@@ -76,6 +80,8 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Request" message="tns:obtenerPorIDPaciente1" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Response" message="tns:obtenerPorIDPaciente1Response" />
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </portType>
   <binding name="PacienteWSPortBinding" type="tns:PacienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -88,6 +94,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="modificarPaciente">
       <soap:operation soapAction="" />
       <input>
@@ -142,6 +149,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </binding>
   <service name="PacienteWS">
     <port name="PacienteWSPort" binding="tns:PacienteWSPortBinding">

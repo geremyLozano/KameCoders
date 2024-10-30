@@ -43,14 +43,3 @@ C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\C
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaD.2602BD1C.Up2Date
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.dll
 C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.pdb
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\ClinicaDBManager.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\ClinicaDBManager.pdb
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Memory.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Buffers.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.csproj.AssemblyReference.cache
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.csproj.CoreCompileInputs.cache
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaD.2602BD1C.Up2Date
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.dll
-C:\Users\hp\Desktop\Programacion 3\TA FINAL\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.pdb

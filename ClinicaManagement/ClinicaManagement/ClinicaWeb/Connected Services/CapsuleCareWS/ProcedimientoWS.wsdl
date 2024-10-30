@@ -5,57 +5,93 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/ProcedimientoWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< HEAD
   <message name="listarProcedimientosPorTipo">
     <part name="parameters" element="tns:listarProcedimientosPorTipo" />
   </message>
   <message name="listarProcedimientosPorTipoResponse">
     <part name="parameters" element="tns:listarProcedimientosPorTipoResponse" />
   </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <message name="eliminarProcedimiento">
     <part name="parameters" element="tns:eliminarProcedimiento" />
   </message>
   <message name="eliminarProcedimientoResponse">
     <part name="parameters" element="tns:eliminarProcedimientoResponse" />
   </message>
+<<<<<<< HEAD
   <message name="obtenerProcedimientoPorId">
     <part name="parameters" element="tns:obtenerProcedimientoPorId" />
   </message>
   <message name="obtenerProcedimientoPorIdResponse">
     <part name="parameters" element="tns:obtenerProcedimientoPorIdResponse" />
   </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <message name="modificarProcedimiento">
     <part name="parameters" element="tns:modificarProcedimiento" />
   </message>
   <message name="modificarProcedimientoResponse">
     <part name="parameters" element="tns:modificarProcedimientoResponse" />
   </message>
+<<<<<<< HEAD
+=======
+  <message name="obtenerProcedimientoPorId">
+    <part name="parameters" element="tns:obtenerProcedimientoPorId" />
+  </message>
+  <message name="obtenerProcedimientoPorIdResponse">
+    <part name="parameters" element="tns:obtenerProcedimientoPorIdResponse" />
+  </message>
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <message name="insertarProcedimiento">
     <part name="parameters" element="tns:insertarProcedimiento" />
   </message>
   <message name="insertarProcedimientoResponse">
     <part name="parameters" element="tns:insertarProcedimientoResponse" />
   </message>
+<<<<<<< HEAD
   <portType name="ProcedimientoWS">
     <operation name="listarProcedimientosPorTipo">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosPorTipoRequest" message="tns:listarProcedimientosPorTipo" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosPorTipoResponse" message="tns:listarProcedimientosPorTipoResponse" />
     </operation>
+=======
+  <message name="listarProcedimientosPorTipo">
+    <part name="parameters" element="tns:listarProcedimientosPorTipo" />
+  </message>
+  <message name="listarProcedimientosPorTipoResponse">
+    <part name="parameters" element="tns:listarProcedimientosPorTipoResponse" />
+  </message>
+  <portType name="ProcedimientoWS">
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="eliminarProcedimiento">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimientoRequest" message="tns:eliminarProcedimiento" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/eliminarProcedimientoResponse" message="tns:eliminarProcedimientoResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="obtenerProcedimientoPorId">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoPorIdRequest" message="tns:obtenerProcedimientoPorId" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoPorIdResponse" message="tns:obtenerProcedimientoPorIdResponse" />
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="modificarProcedimiento">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimientoRequest" message="tns:modificarProcedimiento" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/modificarProcedimientoResponse" message="tns:modificarProcedimientoResponse" />
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="obtenerProcedimientoPorId">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoPorIdRequest" message="tns:obtenerProcedimientoPorId" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/obtenerProcedimientoPorIdResponse" message="tns:obtenerProcedimientoPorIdResponse" />
+    </operation>
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="insertarProcedimiento">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimientoRequest" message="tns:insertarProcedimiento" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/insertarProcedimientoResponse" message="tns:insertarProcedimientoResponse" />
     </operation>
+<<<<<<< HEAD
   </portType>
   <binding name="ProcedimientoWSPortBinding" type="tns:ProcedimientoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -68,6 +104,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+    <operation name="listarProcedimientosPorTipo">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosPorTipoRequest" message="tns:listarProcedimientosPorTipo" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ProcedimientoWS/listarProcedimientosPorTipoResponse" message="tns:listarProcedimientosPorTipoResponse" />
+    </operation>
+  </portType>
+  <binding name="ProcedimientoWSPortBinding" type="tns:ProcedimientoWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="eliminarProcedimiento">
       <soap:operation soapAction="" />
       <input>
@@ -77,6 +122,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="obtenerProcedimientoPorId">
       <soap:operation soapAction="" />
       <input>
@@ -86,6 +132,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="modificarProcedimiento">
       <soap:operation soapAction="" />
       <input>
@@ -95,6 +143,18 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="obtenerProcedimientoPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="insertarProcedimiento">
       <soap:operation soapAction="" />
       <input>
@@ -104,6 +164,18 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
+=======
+    <operation name="listarProcedimientosPorTipo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </binding>
   <service name="ProcedimientoWS">
     <port name="ProcedimientoWSPort" binding="tns:ProcedimientoWSPortBinding">

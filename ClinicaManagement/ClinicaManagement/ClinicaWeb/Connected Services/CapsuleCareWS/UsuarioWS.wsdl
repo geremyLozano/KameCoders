@@ -5,18 +5,22 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+<<<<<<< HEAD
   <message name="obtenerPorID">
     <part name="parameters" element="tns:obtenerPorID" />
   </message>
   <message name="obtenerPorIDResponse">
     <part name="parameters" element="tns:obtenerPorIDResponse" />
   </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <message name="verificarUsuario">
     <part name="parameters" element="tns:verificarUsuario" />
   </message>
   <message name="verificarUsuarioResponse">
     <part name="parameters" element="tns:verificarUsuarioResponse" />
   </message>
+<<<<<<< HEAD
   <message name="validarUsuario">
     <part name="parameters" element="tns:validarUsuario" />
   </message>
@@ -34,10 +38,14 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDRequest" message="tns:obtenerPorID" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDResponse" message="tns:obtenerPorIDResponse" />
     </operation>
+=======
+  <portType name="UsuarioWS">
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="verificarUsuario">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioRequest" message="tns:verificarUsuario" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioResponse" message="tns:verificarUsuarioResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="validarUsuario">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioRequest" message="tns:validarUsuario" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioResponse" message="tns:validarUsuarioResponse" />
@@ -58,6 +66,11 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+  </portType>
+  <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
     <operation name="verificarUsuario">
       <soap:operation soapAction="" />
       <input>
@@ -67,6 +80,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="validarUsuario">
       <soap:operation soapAction="" />
       <input>
@@ -85,6 +99,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </binding>
   <service name="UsuarioWS">
     <port name="UsuarioWSPort" binding="tns:UsuarioWSPortBinding">

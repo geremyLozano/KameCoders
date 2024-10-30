@@ -3,7 +3,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -192,90 +191,4 @@ public class PacienteMySQL implements PacienteDAO{
         }
         return resultado;
     }   
-    @Override
-    public Paciente obtenerPorId1(int idPaciente) {
-        Paciente resultado = null;
-        String query = "SELECT Persona.*, Paciente.historialActivo, Paciente.activo "
-                + "FROM Persona "
-                + "JOIN Paciente ON Persona.idPersona = Paciente.idPaciente "
-                + "WHERE Paciente.activo = ? AND Paciente.idPaciente = ?";
-
-        try {
-            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
-
-            statement.setBoolean(1, true);
-            statement.setInt(2, idPaciente);
-
-            // Ejecutar la consulta y procesar el resultado
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) { // Solo esperamos un resultado, por lo que usamos 'if'
-                resultado = new Paciente();
-                resultado.setIdPaciente(resultSet.getInt("idPersona"));
-                resultado.setDNI(resultSet.getString("DNI"));
-                resultado.setNombre(resultSet.getString("nombre"));
-                resultado.setApellido(resultSet.getString("apellido"));
-                resultado.setCorreoElectronico(resultSet.getString("correoElectronico"));
-                resultado.setNumTelefono(resultSet.getInt("numTelefono"));
-                resultado.setDireccion(resultSet.getString("direccion"));
-                resultado.setFechaNacimiento(resultSet.getDate("fechaNacimiento"));
-                resultado.setGenero(resultSet.getString("genero").charAt(0)); // Convertir a char
-                resultado.setHistorialActivo(resultSet.getBoolean("historialActivo"));
-                resultado.setActivo(resultSet.getBoolean("activo"));
-            }
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        } finally {
-            DBPoolManager.getInstance().cerrarConexion(); 
-        }
-
-        return resultado;
-    }
-    
-    @Override
-    public int insertar1(Paciente paciente) {
-        int resultado = 0;
-        int idPersona = 0;
-
-        String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryPaciente = "INSERT INTO Paciente(idPaciente, activo) "
-                + "VALUES (?, ?)";
-
-        try (Connection conn = DBPoolManager.getInstance().getConnection(); 
-                PreparedStatement psPersona = conn.prepareStatement(queryPersona, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement psPaciente = conn.prepareStatement(queryPaciente)) {
-
-            // Insertar en la tabla Persona
-            psPersona.setString(1, paciente.getDNI());
-            psPersona.setString(2, paciente.getNombre());
-            psPersona.setString(3, paciente.getApellido());
-            psPersona.setString(4, paciente.getCorreoElectronico());
-            psPersona.setInt(5, paciente.getNumTelefono());
-            psPersona.setString(6, paciente.getDireccion());
-            psPersona.setDate(7, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
-            psPersona.setString(8, String.valueOf(paciente.getGenero()));
-            psPersona.executeUpdate();
-
-            // Obtener el idPersona generado
-            try (ResultSet generatedKeys = psPersona.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    idPersona = generatedKeys.getInt(1);
-                } else {
-                    throw new SQLException("Fallo al insertar en Persona, no se pudo obtener el ID.");
-                }
-            }
-
-            psPaciente.setInt(1, idPersona);
-            psPaciente.setBoolean(2, paciente.isActivo());
-            resultado = psPaciente.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return resultado;
-    }
 }

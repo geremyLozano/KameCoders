@@ -23,6 +23,7 @@
   <message name="listarEspecialidadesResponse">
     <part name="parameters" element="tns:listarEspecialidadesResponse" />
   </message>
+<<<<<<< HEAD
   <message name="insertarEspecialidad">
     <part name="parameters" element="tns:insertarEspecialidad" />
   </message>
@@ -47,6 +48,8 @@
   <message name="insertarEspecialidad1Response">
     <part name="parameters" element="tns:insertarEspecialidad1Response" />
   </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <portType name="EspecialidadWS">
     <operation name="obtenerPorIDEspecialidad">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/obtenerPorIDEspecialidadRequest" message="tns:obtenerPorIDEspecialidad" />
@@ -60,6 +63,7 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRequest" message="tns:listarEspecialidades" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesResponse" message="tns:listarEspecialidadesResponse" />
     </operation>
+<<<<<<< HEAD
     <operation name="insertarEspecialidad">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidadRequest" message="tns:insertarEspecialidad" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidadResponse" message="tns:insertarEspecialidadResponse" />
@@ -76,6 +80,8 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidad1Request" message="tns:insertarEspecialidad1" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidad1Response" message="tns:insertarEspecialidad1Response" />
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </portType>
   <binding name="EspecialidadWSPortBinding" type="tns:EspecialidadWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -106,6 +112,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
+<<<<<<< HEAD
     <operation name="insertarEspecialidad">
       <soap:operation soapAction="" />
       <input>
@@ -142,6 +149,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </binding>
   <service name="EspecialidadWS">
     <port name="EspecialidadWSPort" binding="tns:EspecialidadWSPortBinding">
