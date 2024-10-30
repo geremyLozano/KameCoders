@@ -5,31 +5,31 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/MedicoWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="buscarPorEspecialidad">
-    <part name="parameters" element="tns:buscarPorEspecialidad" />
-  </message>
-  <message name="buscarPorEspecialidadResponse">
-    <part name="parameters" element="tns:buscarPorEspecialidadResponse" />
-  </message>
   <message name="insertarMedico">
     <part name="parameters" element="tns:insertarMedico" />
   </message>
   <message name="insertarMedicoResponse">
     <part name="parameters" element="tns:insertarMedicoResponse" />
   </message>
+  <message name="buscarPorEspecialidad">
+    <part name="parameters" element="tns:buscarPorEspecialidad" />
+  </message>
+  <message name="buscarPorEspecialidadResponse">
+    <part name="parameters" element="tns:buscarPorEspecialidadResponse" />
+  </message>
   <portType name="MedicoWS">
-    <operation name="buscarPorEspecialidad">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRequest" message="tns:buscarPorEspecialidad" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadResponse" message="tns:buscarPorEspecialidadResponse" />
-    </operation>
     <operation name="insertarMedico">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoRequest" message="tns:insertarMedico" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/insertarMedicoResponse" message="tns:insertarMedicoResponse" />
     </operation>
+    <operation name="buscarPorEspecialidad">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadRequest" message="tns:buscarPorEspecialidad" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/MedicoWS/buscarPorEspecialidadResponse" message="tns:buscarPorEspecialidadResponse" />
+    </operation>
   </portType>
   <binding name="MedicoWSPortBinding" type="tns:MedicoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="buscarPorEspecialidad">
+    <operation name="insertarMedico">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -38,7 +38,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="insertarMedico">
+    <operation name="buscarPorEspecialidad">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
