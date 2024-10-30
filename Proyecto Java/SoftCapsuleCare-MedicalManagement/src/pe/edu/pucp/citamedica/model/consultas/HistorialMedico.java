@@ -13,6 +13,78 @@ public class HistorialMedico {
     private int idPaciente;
     private ArrayList<CitaMedica>citas;
     private boolean activo;
+    
+    
+    private String enferPreExist;
+    private String alergias;
+    private String cirugiasPrevias;
+    private String vacunas;    
+    private double peso;
+    private double altura;
+    private String tipoSangre;
+
+    public String getEnferPreExist() {
+        return enferPreExist;
+    }
+
+    public void setEnferPreExist(String enferPreExist) {
+        this.enferPreExist = enferPreExist;
+    }
+
+    public String getAlergias() {
+        return alergias;
+    }
+
+    public void setAlergias(String alergias) {
+        this.alergias = alergias;
+    }
+
+    public String getCirugiasPrevias() {
+        return cirugiasPrevias;
+    }
+
+    public void setCirugiasPrevias(String cirugiasPrevias) {
+        this.cirugiasPrevias = cirugiasPrevias;
+    }
+
+    public String getVacunas() {
+        return vacunas;
+    }
+
+    public void setVacunas(String vacunas) {
+        this.vacunas = vacunas;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public String getTipoSangre() {
+        return tipoSangre;
+    }
+
+    public void setTipoSangre(String tipoSangre) {
+        this.tipoSangre = tipoSangre;
+    }
+   
+    
+    
+    
+    
+    
+    
 
     public HistorialMedico() {
         citas = new ArrayList<>();
