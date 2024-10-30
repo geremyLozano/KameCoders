@@ -32,3 +32,14 @@ C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDB
 C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaD.2602BD1C.Up2Date
 C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.dll
 C:\Users\User\Documents\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.pdb
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\ClinicaDBManager.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\ClinicaDBManager.pdb
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Memory.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\bin\Debug\System.Buffers.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.csproj.AssemblyReference.cache
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.csproj.CoreCompileInputs.cache
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaD.2602BD1C.Up2Date
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.dll
+C:\Users\berna\Documents\GitHub\KameCoders\ClinicaManagement\ClinicaManagement\ClinicaDBManager\obj\Debug\ClinicaDBManager.pdb
