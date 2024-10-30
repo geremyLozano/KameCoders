@@ -1,21 +1,45 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\",
+  "WorkspaceRootPath": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\user\\documents\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrologin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\gestionardatos.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\gestionardatos.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\gestiondatos\\pacientegestion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\gestiondatos\\pacientegestion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\gestiondatos\\pacientelista.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\gestiondatos\\pacientelista.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\gestiondatos\\especialidadgestion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\gestiondatos\\especialidadgestion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\gestiondatos\\especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\gestiondatos\\especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\principal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\principal.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|c:\\users\\hp\\desktop\\programacion 3\\ta final\\kamecoders\\clinicamanagement\\clinicamanagement\\clinicaweb\\views\\registrologin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrologin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrologin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrologin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrologin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrocitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\views\\registrocitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\views\\registrocitamedica-especialidad.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\master\\plantilla.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "AbsoluteMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\clinicaweb\\master\\plantilla.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
       "RelativeMoniker": "D:0:0:{1D2E7C42-0069-48CF-AFEE-AC3608846BAE}|ClinicaWeb\\ClinicaWeb.csproj|solutionrelative:clinicaweb\\master\\plantilla.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     }
   ],
@@ -31,23 +55,101 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GestionarDatos.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionarDatos.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\GestionarDatos.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionarDatos.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\GestionarDatos.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-30T07:13:15.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PacienteGestion.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\PacienteGestion.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\GestionDatos\\PacienteGestion.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\PacienteGestion.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\GestionDatos\\PacienteGestion.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:12:02.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PacienteLista.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\PacienteLista.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\GestionDatos\\PacienteLista.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\PacienteLista.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\GestionDatos\\PacienteLista.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:11:57.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EspecialidadGestion.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\EspecialidadGestion.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\GestionDatos\\EspecialidadGestion.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\EspecialidadGestion.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\GestionDatos\\EspecialidadGestion.aspx.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:06:30.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Especialidad.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\Especialidad.aspx.cs",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\GestionDatos\\Especialidad.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\GestionDatos\\Especialidad.aspx.cs",
+              "RelativeToolTip": "ClinicaWeb\\Views\\GestionDatos\\Especialidad.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:06:20.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Principal.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx",
+              "RelativeDocumentMoniker": "ClinicaWeb\\Views\\Principal.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\Principal.aspx",
+              "RelativeToolTip": "ClinicaWeb\\Views\\Principal.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-30T06:57:09.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "RegistroLogin.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
               "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
               "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAM4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAhwBgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-30T06:22:12.294Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "RegistroLogin.aspx",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
               "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroLogin.aspx",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroLogin.aspx",
               "RelativeToolTip": "ClinicaWeb\\Views\\RegistroLogin.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
@@ -56,23 +158,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Plantilla.Master",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
               "RelativeDocumentMoniker": "ClinicaWeb\\Master\\Plantilla.Master",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Master\\Plantilla.Master",
               "RelativeToolTip": "ClinicaWeb\\Master\\Plantilla.Master",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001823|",
-              "WhenOpened": "2024-10-30T05:54:52.633Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-10-30T05:54:52.633Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "RegistroCitaMedica-Especialidad.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
               "RelativeDocumentMoniker": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\Programacion 3\\TA FINAL\\KameCoders\\ClinicaManagement\\ClinicaManagement\\ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
               "RelativeToolTip": "ClinicaWeb\\Views\\RegistroCitaMedica-Especialidad.aspx.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

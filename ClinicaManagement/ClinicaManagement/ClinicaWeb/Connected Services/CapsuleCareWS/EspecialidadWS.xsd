@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminarEspecialidad" type="tns:eliminarEspecialidad" />
+  <xs:element name="eliminarEspecialidadResponse" type="tns:eliminarEspecialidadResponse" />
+  <xs:element name="insertarEspecialidad" type="tns:insertarEspecialidad" />
+  <xs:element name="insertarEspecialidad1" type="tns:insertarEspecialidad1" />
+  <xs:element name="insertarEspecialidad1Response" type="tns:insertarEspecialidad1Response" />
+  <xs:element name="insertarEspecialidadResponse" type="tns:insertarEspecialidadResponse" />
   <xs:element name="listarEspecialidades" type="tns:listarEspecialidades" />
   <xs:element name="listarEspecialidadesResponse" type="tns:listarEspecialidadesResponse" />
-  <xs:complexType name="listarEspecialidades">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarEspecialidadesResponse">
+  <xs:element name="modificarEspecialidad" type="tns:modificarEspecialidad" />
+  <xs:element name="modificarEspecialidadResponse" type="tns:modificarEspecialidadResponse" />
+  <xs:element name="obtenerPorIDEspecialidad" type="tns:obtenerPorIDEspecialidad" />
+  <xs:element name="obtenerPorIDEspecialidad1" type="tns:obtenerPorIDEspecialidad1" />
+  <xs:element name="obtenerPorIDEspecialidad1Response" type="tns:obtenerPorIDEspecialidad1Response" />
+  <xs:element name="obtenerPorIDEspecialidadResponse" type="tns:obtenerPorIDEspecialidadResponse" />
+  <xs:complexType name="eliminarEspecialidad">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:especialidad" />
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarEspecialidadResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarEspecialidad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:especialidad" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="especialidad">
@@ -16,6 +35,59 @@
       <xs:element name="costoConsulta" type="xs:double" />
       <xs:element name="idEspecialidad" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarEspecialidadResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarEspecialidad1">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:especialidad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarEspecialidad1Response">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarEspecialidad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:especialidad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarEspecialidadResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDEspecialidad">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDEspecialidadResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:especialidad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarEspecialidades">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarEspecialidadesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:especialidad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDEspecialidad1">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDEspecialidad1Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:especialidad" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

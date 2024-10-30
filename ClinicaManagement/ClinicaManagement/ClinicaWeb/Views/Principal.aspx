@@ -60,6 +60,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="card shadow-sm mb-4 rounded">
+                        <div class="card-body">
+                            <h2 class="card-title">Gestionar Datos</h2>
+                            <p class="card-text">Programa tus pruebas de laboratorio seleccionando fecha y servicio de forma rápida y segura.</p>
+                            <a class="btn btn-secondary" href="GestionarDatos.aspx" role="button">Agendar prueba</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>

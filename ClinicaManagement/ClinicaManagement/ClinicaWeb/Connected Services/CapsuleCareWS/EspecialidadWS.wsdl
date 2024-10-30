@@ -11,15 +11,129 @@
   <message name="listarEspecialidadesResponse">
     <part name="parameters" element="tns:listarEspecialidadesResponse" />
   </message>
+  <message name="insertarEspecialidad">
+    <part name="parameters" element="tns:insertarEspecialidad" />
+  </message>
+  <message name="insertarEspecialidadResponse">
+    <part name="parameters" element="tns:insertarEspecialidadResponse" />
+  </message>
+  <message name="obtenerPorIDEspecialidad1">
+    <part name="parameters" element="tns:obtenerPorIDEspecialidad1" />
+  </message>
+  <message name="obtenerPorIDEspecialidad1Response">
+    <part name="parameters" element="tns:obtenerPorIDEspecialidad1Response" />
+  </message>
+  <message name="insertarEspecialidad1">
+    <part name="parameters" element="tns:insertarEspecialidad1" />
+  </message>
+  <message name="insertarEspecialidad1Response">
+    <part name="parameters" element="tns:insertarEspecialidad1Response" />
+  </message>
+  <message name="obtenerPorIDEspecialidad">
+    <part name="parameters" element="tns:obtenerPorIDEspecialidad" />
+  </message>
+  <message name="obtenerPorIDEspecialidadResponse">
+    <part name="parameters" element="tns:obtenerPorIDEspecialidadResponse" />
+  </message>
+  <message name="modificarEspecialidad">
+    <part name="parameters" element="tns:modificarEspecialidad" />
+  </message>
+  <message name="modificarEspecialidadResponse">
+    <part name="parameters" element="tns:modificarEspecialidadResponse" />
+  </message>
+  <message name="eliminarEspecialidad">
+    <part name="parameters" element="tns:eliminarEspecialidad" />
+  </message>
+  <message name="eliminarEspecialidadResponse">
+    <part name="parameters" element="tns:eliminarEspecialidadResponse" />
+  </message>
   <portType name="EspecialidadWS">
     <operation name="listarEspecialidades">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesRequest" message="tns:listarEspecialidades" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/listarEspecialidadesResponse" message="tns:listarEspecialidadesResponse" />
     </operation>
+    <operation name="insertarEspecialidad">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidadRequest" message="tns:insertarEspecialidad" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidadResponse" message="tns:insertarEspecialidadResponse" />
+    </operation>
+    <operation name="obtenerPorIDEspecialidad1">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/obtenerPorIDEspecialidad1Request" message="tns:obtenerPorIDEspecialidad1" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/obtenerPorIDEspecialidad1Response" message="tns:obtenerPorIDEspecialidad1Response" />
+    </operation>
+    <operation name="insertarEspecialidad1">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidad1Request" message="tns:insertarEspecialidad1" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/insertarEspecialidad1Response" message="tns:insertarEspecialidad1Response" />
+    </operation>
+    <operation name="obtenerPorIDEspecialidad">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/obtenerPorIDEspecialidadRequest" message="tns:obtenerPorIDEspecialidad" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/obtenerPorIDEspecialidadResponse" message="tns:obtenerPorIDEspecialidadResponse" />
+    </operation>
+    <operation name="modificarEspecialidad">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/modificarEspecialidadRequest" message="tns:modificarEspecialidad" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/modificarEspecialidadResponse" message="tns:modificarEspecialidadResponse" />
+    </operation>
+    <operation name="eliminarEspecialidad">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/eliminarEspecialidadRequest" message="tns:eliminarEspecialidad" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/EspecialidadWS/eliminarEspecialidadResponse" message="tns:eliminarEspecialidadResponse" />
+    </operation>
   </portType>
   <binding name="EspecialidadWSPortBinding" type="tns:EspecialidadWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="listarEspecialidades">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarEspecialidad">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorIDEspecialidad1">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarEspecialidad1">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorIDEspecialidad">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarEspecialidad">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarEspecialidad">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
