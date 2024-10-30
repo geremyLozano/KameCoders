@@ -21,7 +21,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
@@ -35,20 +35,21 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.setString(10, auxiliar.getDireccion());
             cst.setDate(11, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
             cst.setString(12, String.valueOf(auxiliar.getGenero()));
+            cst.setInt(13, auxiliar.getEspecialidad().getIdEspecialidad());
         
             resultado = cst.executeUpdate();
             
             auxiliar.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             auxiliar.setIdAuxiliar(auxiliar.getIdPersona());
-            auxiliar.setDNI(auxiliar.getDNI());
-            auxiliar.setNombre(auxiliar.getNombre());
-            auxiliar.setApellido(auxiliar.getApellido());
-            auxiliar.setCorreoElectronico(auxiliar.getCorreoElectronico());
-            auxiliar.setNumTelefono(auxiliar.getNumTelefono());
-            auxiliar.setDireccion(auxiliar.getDireccion());
-            auxiliar.setFechaNacimiento(auxiliar.getFechaNacimiento());
-            auxiliar.setGenero(auxiliar.getGenero());
+//            auxiliar.setDNI(auxiliar.getDNI());
+//            auxiliar.setNombre(auxiliar.getNombre());
+//            auxiliar.setApellido(auxiliar.getApellido());
+//            auxiliar.setCorreoElectronico(auxiliar.getCorreoElectronico());
+//            auxiliar.setNumTelefono(auxiliar.getNumTelefono());
+//            auxiliar.setDireccion(auxiliar.getDireccion());
+//            auxiliar.setFechaNacimiento(auxiliar.getFechaNacimiento());
+//            auxiliar.setGenero(auxiliar.getGenero());
             auxiliar.setActivo(true);
         return resultado;
         }   catch (SQLException e) {

@@ -13,7 +13,7 @@
         <xs:sequence>
           <xs:element name="activo" type="xs:boolean" />
           <xs:element name="ahosExp" type="xs:int" />
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="diasLaborales" nillable="true" type="tns:diaSemana" />
+          <xs:element minOccurs="0" name="diasLaborales" type="xs:string" />
           <xs:element minOccurs="0" name="especialidad" type="tns:especialidad" />
           <xs:element minOccurs="0" name="horaFinTrabajo" type="tns:localTime" />
           <xs:element minOccurs="0" name="horaInicioTrabajo" type="tns:localTime" />
@@ -52,14 +52,4 @@
       <xs:element name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name="diaSemana">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Lunes" />
-      <xs:enumeration value="Martes" />
-      <xs:enumeration value="Miercoles" />
-      <xs:enumeration value="Jueves" />
-      <xs:enumeration value="Sabado" />
-      <xs:enumeration value="Domingo" />
-    </xs:restriction>
-  </xs:simpleType>
 </xs:schema>

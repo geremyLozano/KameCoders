@@ -12,4 +12,5 @@ public interface MedicoDAO {
     int eliminar(int idMedico);
     ArrayList<Medico> listarTodos();
     Medico obtenerPorId(int idMedico);
+    ArrayList<Medico> listarPorEspecialidad(String especialidad);
 }
