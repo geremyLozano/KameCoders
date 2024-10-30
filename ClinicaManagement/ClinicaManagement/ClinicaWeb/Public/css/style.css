@@ -12,7 +12,161 @@ select {
     font-family: "Poppins", sans-serif;
 }
 
-#listaEspecialidades{
+.error-message {
+    color: #dc3545;
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+#infoMedica {
+    text-align: center;
+}
+
+/* Estilos para el enlace de restablecer contraseña */
+.reset-password-link2 {
+    color: #5995fd;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+    .reset-password-link2:hover {
+        color: #4d84e2;
+        text-decoration: underline;
+    }
+
+/* Estilos para el modal */
+.modal2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message2 {
+    color: #ff3333;
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+.modal-content2 {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+    .modal-content2 h3 {
+        color: #333;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+/* Estilos para los campos de entrada del modal */
+.modal-input-field2 {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    background-color: #f0f0f0;
+    border-radius: 55px;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+    .modal-input-field2 i {
+        color: #acacac;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+    }
+
+.modal-input2 {
+    background: none !important;
+    outline: none !important;
+    border: none !important;
+    line-height: 1 !important;
+    font-weight: 500 !important;
+    font-size: 1.1rem !important;
+    color: #333 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+    .modal-input2::placeholder {
+        color: #aaa;
+        font-weight: 500;
+    }
+
+/* Estilos para los botones del modal */
+.modal-buttons2 {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-modal2 {
+    width: 150px !important;
+    height: 49px !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 49px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.confirm2 {
+    background-color: #4481eb !important;
+    color: white !important;
+}
+
+.back2 {
+    background-color: white !important;
+    color: #4481eb !important;
+    border: 2px solid #4481eb !important;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+}
+
+.confirm2:hover {
+    background-color: #3371db !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(68, 129, 235, 0.3) !important;
+}
+
+.back2:hover {
+    color: white !important;
+    border-color: #4481eb !important;
+    background-color: #4481eb !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(68, 129, 235, 0.3) !important;
+}
+
+
+
+#listaEspecialidades {
     margin-left: 240px; /* Ajusta este valor según tus necesidades */
 }
 
@@ -151,13 +305,13 @@ select {
 
 .title {
     font-size: 2.2rem;
-    color: #444;
+    color: #0b7bda;
     margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .subtitle {
-    color: #666;
+    color: #111111;
     font-size: 1rem;
     text-align: center;
     margin-bottom: 1.5rem;
@@ -230,37 +384,42 @@ select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         appearance: none !important;
-        
     }
 
-    .input-field input::placeholder {
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: relative;
+    left: -15px; /* Ajusta este valor según sea necesario */
+    cursor: pointer;
+}
+
+.input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+}
+
+.select-field select {
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+    .select-field select:invalid {
         color: #aaa;
-        font-weight: 500;
     }
 
-    .select-field select {
-        cursor: pointer;
-        padding-left: 10px;
-    }
+.select-field::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #5995fd;
+    pointer-events: none;
+    font-size: 1.2rem;
+}
 
-        .select-field select:invalid {
-            color: #aaa;
-        }
-
-    .select-field::after {
-        content: '\25BC';
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-        color: #5995fd;
-        pointer-events: none;
-        font-size: 1.2rem;
-    }
-
-    .select-field:hover::after {
-        color: #4d84e2;
-    }
+.select-field:hover::after {
+    color: #4d84e2;
+}
 
 #auxiliarEspecialidadContainer {
     width: 100%;

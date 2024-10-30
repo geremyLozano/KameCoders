@@ -95,6 +95,14 @@ namespace ClinicaWeb.Views
                 contrasenha = contrasenha
             };
 
+            usuario user = usuarioAPI.validarUsuario(dni);
+
+            if (user != null)
+            {
+                lblErrorRegistro.Visible = true;
+                return;
+            }
+
             if (rol == "paciente")
             {
                 paciente paciente = new paciente();
@@ -108,6 +116,7 @@ namespace ClinicaWeb.Views
                 paciente.fechaNacimientoSpecified = true;
                 paciente.genero = genero;
                 int resultado = pacienteAPI.insertarPaciente(paciente, usuario);
+
             }
             else if (rol == "medico")
             {
@@ -124,10 +133,11 @@ namespace ClinicaWeb.Views
                     numTelefono = telefono,
                     direccion = direccion,
                     fechaNacimiento = fecha,
+                    fechaNacimientoSpecified = true,
                     genero = genero,
                     numColegiatura = txtNumColegiatura.Text,
                     especialidad = especialidad,
-                    ahosExp = int.Parse(txtAnhosExperiencia.Text)
+                    ahosExp = int.Parse(txtAnhosExperiencia.Text),
                 };
                 int resultado = medicoAPI.insertarMedico(medico);
             }
@@ -142,6 +152,7 @@ namespace ClinicaWeb.Views
                     numTelefono = telefono,
                     direccion = direccion,
                     fechaNacimiento = fecha,
+                    fechaNacimientoSpecified = true,
                     genero = genero
                 };
                 int resultado = administradorAPI.insertarAdministrador(administrador, usuario);
@@ -150,7 +161,7 @@ namespace ClinicaWeb.Views
             {
                 especialidad especialidad = new especialidad()
                 {
-                    idEspecialidad = int.Parse(ddlEspecialidad.SelectedValue)
+                    idEspecialidad = int.Parse(ddlEspecialidad_aux.SelectedValue)
                 };
 
                 auxiliar auxiliar = new auxiliar()
@@ -163,15 +174,84 @@ namespace ClinicaWeb.Views
                     direccion = direccion,
                     especialidad = especialidad,
                     fechaNacimiento = fecha,
+                    fechaNacimientoSpecified = true,
                     genero = genero
                 };
                 int resultado = auxiliarAPI.insertarAuxiliar(auxiliar, usuario);
             }
+            Session["Usuario"] = usuario;
+            Response.Redirect("/Views/Principal.aspx");
+            //LimpiarCampos();
+        }
+
+        private void LimpiarCampos()
+        {
+            // Limpiar campos de texto
+            txtRegDNI.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtRegPassword.Text = string.Empty;
+            txtNumColegiatura.Text = string.Empty;
+            txtAnhosExperiencia.Text = string.Empty;
+
+            // Resetear dropdowns
+            ddlGenero.SelectedIndex = 0;
+            ddlRol.SelectedIndex = 0;
+            ddlEspecialidad.SelectedIndex = 0;
+            ddlEspecialidad_aux.SelectedIndex = 0;
+
+            // Limpiar fecha
+            dtpFechaNacimiento.Value = string.Empty;
         }
 
         protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        protected void btnConfirmReset_Click(object sender, EventArgs e)
+        {
+            string username = txtUsuarioReset.Text;
+            string newPassword = txtNewPassword.Text;
+            string confirmPassword = txtConfirmPassword.Text;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+            {
+                lblErrorRestablecer.Text = "Todos los campos son obligatorios";
+                lblErrorRestablecer.Visible = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "KeepModalOpen",
+                    "document.getElementById('resetPasswordModal2').style.display = 'flex';", true);
+                return;
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                lblErrorRestablecer.Text = "Las contraseñas no coinciden";
+                lblErrorRestablecer.Visible = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "KeepModalOpen",
+                    "document.getElementById('resetPasswordModal2').style.display = 'flex';", true);
+                return;
+            }
+
+            usuario user = usuarioAPI.validarUsuario(username);
+            if (user == null)
+            {
+                lblErrorRestablecer.Text = "Usuario no existente";
+                lblErrorRestablecer.Visible = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "KeepModalOpen",
+                    "document.getElementById('resetPasswordModal2').style.display = 'flex';", true);
+                return;
+            }
+            usuarioAPI.modificarUsuario(user);
+            lblErrorRestablecer.ForeColor = System.Drawing.ColorTranslator.FromHtml("#5995fd");
+            lblErrorRestablecer.Text = "Contraseña actualizada exitosamente";
+            lblErrorRestablecer.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "KeepModalOpen",
+                "document.getElementById('resetPasswordModal2').style.display = 'flex';", true);
+        }
+
     }
 }
