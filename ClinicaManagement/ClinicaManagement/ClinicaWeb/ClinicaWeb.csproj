@@ -94,19 +94,22 @@
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.verificarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.buscarPorEspecialidadResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarPagoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.medico.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.historialMedico.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerHistorialMedicoPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.modificarUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerPorIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.validarUsuarioResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\CapsuleCareWS\configuration91.svcinfo" />

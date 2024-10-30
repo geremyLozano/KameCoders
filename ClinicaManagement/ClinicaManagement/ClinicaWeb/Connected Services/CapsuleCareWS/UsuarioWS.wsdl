@@ -5,21 +5,78 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
+  <message name="obtenerPorID">
+    <part name="parameters" element="tns:obtenerPorID" />
+  </message>
+  <message name="obtenerPorIDResponse">
+    <part name="parameters" element="tns:obtenerPorIDResponse" />
+  </message>
+  <message name="validarUsuario">
+    <part name="parameters" element="tns:validarUsuario" />
+  </message>
+  <message name="validarUsuarioResponse">
+    <part name="parameters" element="tns:validarUsuarioResponse" />
+  </message>
   <message name="verificarUsuario">
     <part name="parameters" element="tns:verificarUsuario" />
   </message>
   <message name="verificarUsuarioResponse">
     <part name="parameters" element="tns:verificarUsuarioResponse" />
   </message>
+  <message name="modificarUsuario">
+    <part name="parameters" element="tns:modificarUsuario" />
+  </message>
+  <message name="modificarUsuarioResponse">
+    <part name="parameters" element="tns:modificarUsuarioResponse" />
+  </message>
   <portType name="UsuarioWS">
+    <operation name="obtenerPorID">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDRequest" message="tns:obtenerPorID" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDResponse" message="tns:obtenerPorIDResponse" />
+    </operation>
+    <operation name="validarUsuario">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioRequest" message="tns:validarUsuario" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioResponse" message="tns:validarUsuarioResponse" />
+    </operation>
     <operation name="verificarUsuario">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioRequest" message="tns:verificarUsuario" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioResponse" message="tns:verificarUsuarioResponse" />
     </operation>
+    <operation name="modificarUsuario">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioRequest" message="tns:modificarUsuario" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioResponse" message="tns:modificarUsuarioResponse" />
+    </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtenerPorID">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="validarUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="verificarUsuario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

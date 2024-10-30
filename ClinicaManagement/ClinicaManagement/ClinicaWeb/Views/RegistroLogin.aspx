@@ -31,6 +31,7 @@
             var lblError = document.getElementById('<%= lblErrorRegistro.ClientID %>');
             if (lblError) {
                 lblError.innerHTML = mensaje;
+
                 lblError.style.display = 'block';
             }
         }
