@@ -8,4 +8,6 @@
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
   <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/HistorialMedicoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/ProcedimientoWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://localhost:8080/SoftCapsuleCareWSBL/ComunicacionWS?WSDL" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>

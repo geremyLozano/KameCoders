@@ -5,27 +5,12 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/UsuarioWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-<<<<<<< HEAD
-  <message name="verificarUsuario">
-    <part name="parameters" element="tns:verificarUsuario" />
-  </message>
-  <message name="verificarUsuarioResponse">
-    <part name="parameters" element="tns:verificarUsuarioResponse" />
-  </message>
   <message name="obtenerPorID">
     <part name="parameters" element="tns:obtenerPorID" />
-=======
-  <message name="modificarUsuario">
-    <part name="parameters" element="tns:modificarUsuario" />
->>>>>>> 123648a136d596f677c54661b16c2121e8c95da4
   </message>
-  <message name="modificarUsuarioResponse">
-    <part name="parameters" element="tns:modificarUsuarioResponse" />
+  <message name="obtenerPorIDResponse">
+    <part name="parameters" element="tns:obtenerPorIDResponse" />
   </message>
-<<<<<<< HEAD
-  <message name="modificarUsuario">
-    <part name="parameters" element="tns:modificarUsuario" />
-=======
   <message name="verificarUsuario">
     <part name="parameters" element="tns:verificarUsuario" />
   </message>
@@ -34,38 +19,20 @@
   </message>
   <message name="validarUsuario">
     <part name="parameters" element="tns:validarUsuario" />
->>>>>>> 123648a136d596f677c54661b16c2121e8c95da4
   </message>
   <message name="validarUsuarioResponse">
     <part name="parameters" element="tns:validarUsuarioResponse" />
   </message>
-  <message name="obtenerPorID">
-    <part name="parameters" element="tns:obtenerPorID" />
+  <message name="modificarUsuario">
+    <part name="parameters" element="tns:modificarUsuario" />
   </message>
-  <message name="obtenerPorIDResponse">
-    <part name="parameters" element="tns:obtenerPorIDResponse" />
+  <message name="modificarUsuarioResponse">
+    <part name="parameters" element="tns:modificarUsuarioResponse" />
   </message>
   <portType name="UsuarioWS">
-<<<<<<< HEAD
-    <operation name="verificarUsuario">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioRequest" message="tns:verificarUsuario" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioResponse" message="tns:verificarUsuarioResponse" />
-    </operation>
     <operation name="obtenerPorID">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDRequest" message="tns:obtenerPorID" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDResponse" message="tns:obtenerPorIDResponse" />
-    </operation>
-    <operation name="validarUsuario">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioRequest" message="tns:validarUsuario" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioResponse" message="tns:validarUsuarioResponse" />
-    </operation>
-    <operation name="modificarUsuario">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioRequest" message="tns:modificarUsuario" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioResponse" message="tns:modificarUsuarioResponse" />
-=======
-    <operation name="modificarUsuario">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioRequest" message="tns:modificarUsuario" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioResponse" message="tns:modificarUsuarioResponse" />
     </operation>
     <operation name="verificarUsuario">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/verificarUsuarioRequest" message="tns:verificarUsuario" />
@@ -75,24 +42,13 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioRequest" message="tns:validarUsuario" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/validarUsuarioResponse" message="tns:validarUsuarioResponse" />
     </operation>
-    <operation name="obtenerPorID">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDRequest" message="tns:obtenerPorID" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/obtenerPorIDResponse" message="tns:obtenerPorIDResponse" />
->>>>>>> 123648a136d596f677c54661b16c2121e8c95da4
+    <operation name="modificarUsuario">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioRequest" message="tns:modificarUsuario" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/UsuarioWS/modificarUsuarioResponse" message="tns:modificarUsuarioResponse" />
     </operation>
   </portType>
   <binding name="UsuarioWSPortBinding" type="tns:UsuarioWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-<<<<<<< HEAD
-    <operation name="verificarUsuario">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="obtenerPorID">
       <soap:operation soapAction="" />
       <input>
@@ -102,21 +58,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="validarUsuario">
-=======
-    <operation name="modificarUsuario">
->>>>>>> 123648a136d596f677c54661b16c2121e8c95da4
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-<<<<<<< HEAD
-    <operation name="modificarUsuario">
-=======
     <operation name="verificarUsuario">
       <soap:operation soapAction="" />
       <input>
@@ -135,8 +76,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerPorID">
->>>>>>> 123648a136d596f677c54661b16c2121e8c95da4
+    <operation name="modificarUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

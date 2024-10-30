@@ -152,8 +152,61 @@
     <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.paciente.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.adminEliminarComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.adminInsertarComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.adminListarTodasLasComunicacionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.adminModificarContenidoComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.comunicacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.eliminarProcedimientoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.insertarProcedimientoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.listarProcedimientosPorTipoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.modificarProcedimientoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.obtenerProcedimientoPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.pacienteInsertarComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.pacienteListarComunicacionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.pacienteModificarContenidoComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.pacienteVerContenidoComunicacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CapsuleCareWS\ClinicaWeb.CapsuleCareWS.procedimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CapsuleCareWS\ComunicacionWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\ComunicacionWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CapsuleCareWS\configuration91.svcinfo" />
     <None Include="Connected Services\CapsuleCareWS\configuration.svcinfo" />
+    <None Include="Connected Services\CapsuleCareWS\ProcedimientoWS.wsdl" />
+    <None Include="Connected Services\CapsuleCareWS\ProcedimientoWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CapsuleCareWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
