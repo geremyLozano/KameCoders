@@ -26,7 +26,7 @@ public class Medico extends Persona{
 
     public Medico(Especialidad especialidad, String numColegiatura, LocalTime horaInicioTrabajo,
      LocalTime horaFinTrabajo, int ahosExp, ArrayList<CitaMedica> citas, boolean activo,
-      ArrayList<DiaSemana> diasLaborales,String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
+      String diasLaborales,String nombre, String apellido, String correoElectronico, int numTelefono, String direccion, 
                    Date fechaNacimiento, char genero, String DNI) {
         super(nombre,apellido,correoElectronico,numTelefono,direccion,fechaNacimiento,genero,DNI);
         this.idMedico = ++contador;
