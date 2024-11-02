@@ -152,6 +152,8 @@ public class PacienteMySQL implements PacienteDAO{
                 paciente.setCorreoElectronico(rs.getString("correoElectronico"));
                 paciente.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 paciente.setHistorialActivo(rs.getBoolean("historialActivo"));
+                paciente.setActivo(true);
+                paciente.setGenero(rs.getString("genero").charAt(0));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
