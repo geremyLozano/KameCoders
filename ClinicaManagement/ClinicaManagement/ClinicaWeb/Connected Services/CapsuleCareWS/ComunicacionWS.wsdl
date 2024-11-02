@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ComunicacionWS" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/ComunicacionWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="pacienteListarComunicaciones">
+    <part name="parameters" element="tns:pacienteListarComunicaciones" />
+  </message>
+  <message name="pacienteListarComunicacionesResponse">
+    <part name="parameters" element="tns:pacienteListarComunicacionesResponse" />
+  </message>
+  <message name="adminListarTodasLasComunicaciones">
+    <part name="parameters" element="tns:adminListarTodasLasComunicaciones" />
+  </message>
+  <message name="adminListarTodasLasComunicacionesResponse">
+    <part name="parameters" element="tns:adminListarTodasLasComunicacionesResponse" />
+  </message>
+  <message name="pacienteInsertarComunicacion">
+    <part name="parameters" element="tns:pacienteInsertarComunicacion" />
+  </message>
+  <message name="pacienteInsertarComunicacionResponse">
+    <part name="parameters" element="tns:pacienteInsertarComunicacionResponse" />
+  </message>
+  <message name="pacienteVerContenidoComunicacion">
+    <part name="parameters" element="tns:pacienteVerContenidoComunicacion" />
+  </message>
+  <message name="pacienteVerContenidoComunicacionResponse">
+    <part name="parameters" element="tns:pacienteVerContenidoComunicacionResponse" />
+  </message>
+  <message name="pacienteModificarContenidoComunicacion">
+    <part name="parameters" element="tns:pacienteModificarContenidoComunicacion" />
+  </message>
+  <message name="pacienteModificarContenidoComunicacionResponse">
+    <part name="parameters" element="tns:pacienteModificarContenidoComunicacionResponse" />
+  </message>
+  <message name="adminModificarContenidoComunicacion">
+    <part name="parameters" element="tns:adminModificarContenidoComunicacion" />
+  </message>
+  <message name="adminModificarContenidoComunicacionResponse">
+    <part name="parameters" element="tns:adminModificarContenidoComunicacionResponse" />
+  </message>
+  <message name="adminInsertarComunicacion">
+    <part name="parameters" element="tns:adminInsertarComunicacion" />
+  </message>
+  <message name="adminInsertarComunicacionResponse">
+    <part name="parameters" element="tns:adminInsertarComunicacionResponse" />
+  </message>
+  <message name="adminEliminarComunicacion">
+    <part name="parameters" element="tns:adminEliminarComunicacion" />
+  </message>
+  <message name="adminEliminarComunicacionResponse">
+    <part name="parameters" element="tns:adminEliminarComunicacionResponse" />
+  </message>
+  <portType name="ComunicacionWS">
+    <operation name="pacienteListarComunicaciones">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteListarComunicacionesRequest" message="tns:pacienteListarComunicaciones" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteListarComunicacionesResponse" message="tns:pacienteListarComunicacionesResponse" />
+    </operation>
+    <operation name="adminListarTodasLasComunicaciones">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminListarTodasLasComunicacionesRequest" message="tns:adminListarTodasLasComunicaciones" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminListarTodasLasComunicacionesResponse" message="tns:adminListarTodasLasComunicacionesResponse" />
+    </operation>
+    <operation name="pacienteInsertarComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteInsertarComunicacionRequest" message="tns:pacienteInsertarComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteInsertarComunicacionResponse" message="tns:pacienteInsertarComunicacionResponse" />
+    </operation>
+    <operation name="pacienteVerContenidoComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteVerContenidoComunicacionRequest" message="tns:pacienteVerContenidoComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteVerContenidoComunicacionResponse" message="tns:pacienteVerContenidoComunicacionResponse" />
+    </operation>
+    <operation name="pacienteModificarContenidoComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteModificarContenidoComunicacionRequest" message="tns:pacienteModificarContenidoComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/pacienteModificarContenidoComunicacionResponse" message="tns:pacienteModificarContenidoComunicacionResponse" />
+    </operation>
+    <operation name="adminModificarContenidoComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminModificarContenidoComunicacionRequest" message="tns:adminModificarContenidoComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminModificarContenidoComunicacionResponse" message="tns:adminModificarContenidoComunicacionResponse" />
+    </operation>
+    <operation name="adminInsertarComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminInsertarComunicacionRequest" message="tns:adminInsertarComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminInsertarComunicacionResponse" message="tns:adminInsertarComunicacionResponse" />
+    </operation>
+    <operation name="adminEliminarComunicacion">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminEliminarComunicacionRequest" message="tns:adminEliminarComunicacion" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/ComunicacionWS/adminEliminarComunicacionResponse" message="tns:adminEliminarComunicacionResponse" />
+    </operation>
+  </portType>
+  <binding name="ComunicacionWSPortBinding" type="tns:ComunicacionWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="pacienteListarComunicaciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="adminListarTodasLasComunicaciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="pacienteInsertarComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="pacienteVerContenidoComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="pacienteModificarContenidoComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="adminModificarContenidoComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="adminInsertarComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="adminEliminarComunicacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ComunicacionWS">
+    <port name="ComunicacionWSPort" binding="tns:ComunicacionWSPortBinding">
+      <soap:address location="http://localhost:8080/SoftCapsuleCareWSBL/ComunicacionWS" />
+    </port>
+  </service>
+</definitions>

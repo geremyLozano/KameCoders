@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="eliminarPaciente" type="tns:eliminarPaciente" />
-  <xs:element name="eliminarPacienteResponse" type="tns:eliminarPacienteResponse" />
   <xs:element name="insertarPaciente" type="tns:insertarPaciente" />
-  <xs:element name="insertarPaciente1" type="tns:insertarPaciente1" />
-  <xs:element name="insertarPaciente1Response" type="tns:insertarPaciente1Response" />
   <xs:element name="insertarPacienteResponse" type="tns:insertarPacienteResponse" />
-  <xs:element name="listarPaciente" type="tns:listarPaciente" />
-  <xs:element name="listarPacienteResponse" type="tns:listarPacienteResponse" />
-  <xs:element name="modificarPaciente" type="tns:modificarPaciente" />
-  <xs:element name="modificarPacienteResponse" type="tns:modificarPacienteResponse" />
-  <xs:element name="obtenerPorIDPaciente" type="tns:obtenerPorIDPaciente" />
-  <xs:element name="obtenerPorIDPaciente1" type="tns:obtenerPorIDPaciente1" />
-  <xs:element name="obtenerPorIDPaciente1Response" type="tns:obtenerPorIDPaciente1Response" />
-  <xs:element name="obtenerPorIDPacienteResponse" type="tns:obtenerPorIDPacienteResponse" />
-  <xs:complexType name="eliminarPaciente">
+  <xs:complexType name="insertarPaciente">
     <xs:sequence>
-      <xs:element name="paciente" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarPacienteResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarPaciente">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarPacienteResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:paciente" />
+      <xs:element minOccurs="0" name="paciente" type="tns:paciente" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="paciente">
@@ -107,12 +83,6 @@
       <xs:element minOccurs="0" name="vacunas" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertarPaciente">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="paciente" type="tns:paciente" />
-      <xs:element minOccurs="0" name="usuario" type="tns:usuario" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="usuario">
     <xs:sequence>
       <xs:element name="activo" type="xs:boolean" />
@@ -123,46 +93,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarPacienteResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIDPaciente">
-    <xs:sequence>
-      <xs:element name="paciente" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIDPacienteResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:paciente" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="insertarPaciente1">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="paciente" type="tns:paciente" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="insertarPaciente1Response">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIDPaciente1">
-    <xs:sequence>
-      <xs:element name="paciente" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIDPaciente1Response">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:paciente" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="modificarPaciente">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="especialidad" type="tns:paciente" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="modificarPacienteResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
     </xs:sequence>

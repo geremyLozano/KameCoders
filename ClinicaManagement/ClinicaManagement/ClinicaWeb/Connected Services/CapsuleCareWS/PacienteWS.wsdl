@@ -5,35 +5,30 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftCapsuleCareWSBL/PacienteWS?xsd=1" namespace="http://services.softcapsulecare.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="insertarPaciente">
-    <part name="parameters" element="tns:insertarPaciente" />
-  </message>
-  <message name="insertarPacienteResponse">
-    <part name="parameters" element="tns:insertarPacienteResponse" />
-  </message>
-  <message name="modificarPaciente">
-    <part name="parameters" element="tns:modificarPaciente" />
-  </message>
-  <message name="modificarPacienteResponse">
-    <part name="parameters" element="tns:modificarPacienteResponse" />
-  </message>
   <message name="eliminarPaciente">
     <part name="parameters" element="tns:eliminarPaciente" />
   </message>
   <message name="eliminarPacienteResponse">
     <part name="parameters" element="tns:eliminarPacienteResponse" />
   </message>
+<<<<<<< HEAD
+  <message name="modificarPaciente">
+    <part name="parameters" element="tns:modificarPaciente" />
+  </message>
+  <message name="modificarPacienteResponse">
+    <part name="parameters" element="tns:modificarPacienteResponse" />
+  </message>
+  <message name="insertarPaciente">
+    <part name="parameters" element="tns:insertarPaciente" />
+  </message>
+  <message name="insertarPacienteResponse">
+    <part name="parameters" element="tns:insertarPacienteResponse" />
+  </message>
   <message name="listarPaciente">
     <part name="parameters" element="tns:listarPaciente" />
   </message>
   <message name="listarPacienteResponse">
     <part name="parameters" element="tns:listarPacienteResponse" />
-  </message>
-  <message name="obtenerPorIDPaciente1">
-    <part name="parameters" element="tns:obtenerPorIDPaciente1" />
-  </message>
-  <message name="obtenerPorIDPaciente1Response">
-    <part name="parameters" element="tns:obtenerPorIDPaciente1Response" />
   </message>
   <message name="insertarPaciente1">
     <part name="parameters" element="tns:insertarPaciente1" />
@@ -47,26 +42,31 @@
   <message name="obtenerPorIDPacienteResponse">
     <part name="parameters" element="tns:obtenerPorIDPacienteResponse" />
   </message>
+  <message name="obtenerPorIDPaciente1">
+    <part name="parameters" element="tns:obtenerPorIDPaciente1" />
+  </message>
+  <message name="obtenerPorIDPaciente1Response">
+    <part name="parameters" element="tns:obtenerPorIDPaciente1Response" />
+  </message>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   <portType name="PacienteWS">
-    <operation name="insertarPaciente">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/insertarPacienteRequest" message="tns:insertarPaciente" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/insertarPacienteResponse" message="tns:insertarPacienteResponse" />
-    </operation>
-    <operation name="modificarPaciente">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteRequest" message="tns:modificarPaciente" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteResponse" message="tns:modificarPacienteResponse" />
-    </operation>
     <operation name="eliminarPaciente">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/eliminarPacienteRequest" message="tns:eliminarPaciente" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/eliminarPacienteResponse" message="tns:eliminarPacienteResponse" />
     </operation>
+<<<<<<< HEAD
+    <operation name="modificarPaciente">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteRequest" message="tns:modificarPaciente" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/modificarPacienteResponse" message="tns:modificarPacienteResponse" />
+    </operation>
+    <operation name="insertarPaciente">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/insertarPacienteRequest" message="tns:insertarPaciente" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/insertarPacienteResponse" message="tns:insertarPacienteResponse" />
+    </operation>
     <operation name="listarPaciente">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/listarPacienteRequest" message="tns:listarPaciente" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/listarPacienteResponse" message="tns:listarPacienteResponse" />
-    </operation>
-    <operation name="obtenerPorIDPaciente1">
-      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Request" message="tns:obtenerPorIDPaciente1" />
-      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Response" message="tns:obtenerPorIDPaciente1Response" />
     </operation>
     <operation name="insertarPaciente1">
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/insertarPaciente1Request" message="tns:insertarPaciente1" />
@@ -76,27 +76,15 @@
       <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPacienteRequest" message="tns:obtenerPorIDPaciente" />
       <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPacienteResponse" message="tns:obtenerPorIDPacienteResponse" />
     </operation>
+    <operation name="obtenerPorIDPaciente1">
+      <input wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Request" message="tns:obtenerPorIDPaciente1" />
+      <output wsam:Action="http://services.softcapsulecare.pucp.edu.pe/PacienteWS/obtenerPorIDPaciente1Response" message="tns:obtenerPorIDPaciente1Response" />
+    </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </portType>
   <binding name="PacienteWSPortBinding" type="tns:PacienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="insertarPaciente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="modificarPaciente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="eliminarPaciente">
       <soap:operation soapAction="" />
       <input>
@@ -106,7 +94,8 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="listarPaciente">
+<<<<<<< HEAD
+    <operation name="modificarPaciente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,7 +104,16 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="obtenerPorIDPaciente1">
+    <operation name="insertarPaciente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarPaciente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -142,6 +140,17 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="obtenerPorIDPaciente1">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+=======
+>>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
   </binding>
   <service name="PacienteWS">
     <port name="PacienteWSPort" binding="tns:PacienteWSPortBinding">

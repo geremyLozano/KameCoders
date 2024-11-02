@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softcapsulecare.pucp.edu.pe/" targetNamespace="http://services.softcapsulecare.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="adminEliminarComunicacion" type="tns:adminEliminarComunicacion" />
+  <xs:element name="adminEliminarComunicacionResponse" type="tns:adminEliminarComunicacionResponse" />
+  <xs:element name="adminInsertarComunicacion" type="tns:adminInsertarComunicacion" />
+  <xs:element name="adminInsertarComunicacionResponse" type="tns:adminInsertarComunicacionResponse" />
+  <xs:element name="adminListarTodasLasComunicaciones" type="tns:adminListarTodasLasComunicaciones" />
+  <xs:element name="adminListarTodasLasComunicacionesResponse" type="tns:adminListarTodasLasComunicacionesResponse" />
+  <xs:element name="adminModificarContenidoComunicacion" type="tns:adminModificarContenidoComunicacion" />
+  <xs:element name="adminModificarContenidoComunicacionResponse" type="tns:adminModificarContenidoComunicacionResponse" />
+  <xs:element name="pacienteInsertarComunicacion" type="tns:pacienteInsertarComunicacion" />
+  <xs:element name="pacienteInsertarComunicacionResponse" type="tns:pacienteInsertarComunicacionResponse" />
+  <xs:element name="pacienteListarComunicaciones" type="tns:pacienteListarComunicaciones" />
+  <xs:element name="pacienteListarComunicacionesResponse" type="tns:pacienteListarComunicacionesResponse" />
+  <xs:element name="pacienteModificarContenidoComunicacion" type="tns:pacienteModificarContenidoComunicacion" />
+  <xs:element name="pacienteModificarContenidoComunicacionResponse" type="tns:pacienteModificarContenidoComunicacionResponse" />
+  <xs:element name="pacienteVerContenidoComunicacion" type="tns:pacienteVerContenidoComunicacion" />
+  <xs:element name="pacienteVerContenidoComunicacionResponse" type="tns:pacienteVerContenidoComunicacionResponse" />
+  <xs:complexType name="pacienteModificarContenidoComunicacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comunicacion" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="comunicacion">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="contenido" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaComunicacion" type="xs:dateTime" />
+      <xs:element name="idComunicacion" type="xs:int" />
+      <xs:element name="idPaciente" type="xs:int" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipoComunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteModificarContenidoComunicacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminModificarContenidoComunicacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comunicacion" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminModificarContenidoComunicacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminEliminarComunicacion">
+    <xs:sequence>
+      <xs:element name="idComunicacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminEliminarComunicacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteListarComunicaciones">
+    <xs:sequence>
+      <xs:element name="idPaciente" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteListarComunicacionesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteVerContenidoComunicacion">
+    <xs:sequence>
+      <xs:element name="idComunicacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteVerContenidoComunicacionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminListarTodasLasComunicaciones">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="adminListarTodasLasComunicacionesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteInsertarComunicacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comunicacion" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pacienteInsertarComunicacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminInsertarComunicacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comunicacion" type="tns:comunicacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="adminInsertarComunicacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoComunicacion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Queja" />
+      <xs:enumeration value="Sugerencia" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

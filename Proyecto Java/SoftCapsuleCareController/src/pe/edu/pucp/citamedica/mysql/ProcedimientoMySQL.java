@@ -21,14 +21,14 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
-      
-    @Override
+
+        @Override
     public int insertar(Procedimiento procedimiento, int idAmbienteMedico) {
         int resultado = 0;
         try {
             con = DBPoolManager.getInstance().getConnection();
 
-            // Llamar al procedimiento almacenado
+            // Llamar al procedimiento almacenado con siete parámetros
             sql = "{CALL sp_insertar_procedimiento(?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
 
@@ -43,6 +43,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
 
             // Ejecutar el procedimiento
             resultado = cst.executeUpdate();
+
+            // Verificar si se realizó alguna inserción
+            if (resultado > 0) {
+                System.out.println("Procedimiento insertado correctamente.");
+            } else {
+                System.out.println("No se insertó ningún procedimiento.");
+            }
 
         } catch (SQLException e) {
             if (e.getSQLState().equals("45000")) {
@@ -60,7 +67,7 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         return resultado;
     }
 
-    
+
     
     @Override
     public int modificar(Procedimiento procedimiento) {

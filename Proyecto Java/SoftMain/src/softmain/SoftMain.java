@@ -1,16 +1,23 @@
 package softmain;
+
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
+import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
+import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
+import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
 import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
 
 public class SoftMain {
+
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -63,5 +70,33 @@ public class SoftMain {
 //        } else {
 //            System.out.println("Hubo un error al registrar el paciente");
 //        }
+// Formateador de fecha
+        
+        // Crear una instancia del DAO de Procedimiento
+            ProcedimientoDAO daoProcedimiento = new ProcedimientoMySQL();
+
+            // Llamar al método listarTodos()
+            ArrayList<Procedimiento> listaProcedimientos = daoProcedimiento.listarTodos();
+
+            // Verificar si la lista no está vacía
+            if (!listaProcedimientos.isEmpty()) {
+                System.out.println("Lista de procedimientos registrados:");
+                System.out.println("------------------------------------");
+
+                // Iterar sobre la lista y mostrar cada procedimiento
+                for (Procedimiento p : listaProcedimientos) {
+                    System.out.println("ID: " + p.getIdProcedimiento());
+                    System.out.println("Nombre: " + p.getNombre());
+                    System.out.println("Costo: " + p.getCosto());
+                    System.out.println("Descripción: " + p.getDescripcion());
+                    System.out.println("Requisitos Previos: " + p.getRequisitosPrevios());
+                    System.out.println("Tipo: " + p.getTipo());
+                    System.out.println("Activo: " + (p.isActivo() ? "Sí" : "No"));
+                    System.out.println("------------------------------------");
+                }
+            } else {
+                System.out.println("No se encontraron procedimientos registrados.");
+            }
+        
     }
 }

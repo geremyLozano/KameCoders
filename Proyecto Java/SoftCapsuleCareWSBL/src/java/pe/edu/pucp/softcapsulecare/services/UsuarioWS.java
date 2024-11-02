@@ -23,25 +23,4 @@ public class UsuarioWS {
         return usuario;
         //#00b9e8
     }
-    
-    @WebMethod(operationName = "modificarUsuario")
-    public int modificarUsuario(@WebParam(name = "username") Usuario usuario) {
-        int resultado = usuDAO.modificar(usuario);
-        return resultado;
-        //#00b9e8
-    }
-    
-    @WebMethod(operationName = "obtenerPorID")
-    public Usuario obtenerPorID(@WebParam(name = "username") int id) {
-        Usuario usuario = null;
-        usuario = usuDAO.obtenerPorId(id);
-        return usuario;
-    }
-    
-    @WebMethod(operationName = "validarUsuario")
-    public Usuario validarUsuario(@WebParam(name = "username") String username) {
-        Usuario usuario = null;
-        usuario = usuDAO.VerificarUsuario(username);
-        return usuario;
-    }
 }
