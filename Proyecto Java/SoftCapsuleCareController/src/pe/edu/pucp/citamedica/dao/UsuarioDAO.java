@@ -11,4 +11,5 @@ public interface UsuarioDAO {
     Usuario obtenerPorId(int idUsuario);
     Usuario ExisteUsuario(String username, String contrasenha);
     Usuario VerificarUsuario(String username);
+    Usuario ValidarReset(String username, String correo);
 }
