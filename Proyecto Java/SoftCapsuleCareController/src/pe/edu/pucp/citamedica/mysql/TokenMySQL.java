@@ -49,8 +49,8 @@ public class TokenMySQL implements TokenDAO{
 
             cst.execute();
 
-            esValido = cst.getBoolean(2); // p_es_valido
-            correo = cst.getString(3);    // p_email
+            esValido = cst.getBoolean(2);
+            correo = cst.getString(3);
 
             resultado = esValido ? 1 : 0;
 
