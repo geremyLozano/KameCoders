@@ -34,23 +34,21 @@ public class TokenMySQL implements TokenDAO{
     }
 
     @Override
-    public int validarToken(String token, boolean esValido, String correo) {
+    public int validarToken(String token, boolean esValido) {
         int resultado = -1;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "{CALL TokenValidar(?, ?, ?)}";
+            String sql = "{CALL TokenValidar(?, ?)}";
             cst = con.prepareCall(sql);
 
             cst.setString(1, token);
 
             cst.registerOutParameter(2, java.sql.Types.BOOLEAN);
-            cst.registerOutParameter(3, java.sql.Types.VARCHAR);
 
             cst.execute();
 
             esValido = cst.getBoolean(2);
-            correo = cst.getString(3);
 
             resultado = esValido ? 1 : 0;
 
