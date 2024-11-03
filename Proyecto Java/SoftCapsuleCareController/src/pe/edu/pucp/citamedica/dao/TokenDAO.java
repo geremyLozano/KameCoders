@@ -1,9 +1,8 @@
 package pe.edu.pucp.citamedica.dao;
-
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 public interface TokenDAO {
-    int crear(String email, String token, LocalDateTime expiracion);
+    int crear(String email, String token, Date expiracion);
     int validarToken(String token, boolean esValido, String correo);
 }

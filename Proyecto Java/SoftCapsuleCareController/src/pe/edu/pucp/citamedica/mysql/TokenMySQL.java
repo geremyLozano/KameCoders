@@ -5,7 +5,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.util.Date;
 import pe.edu.pucp.citamedica.dao.TokenDAO;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -16,7 +16,7 @@ public class TokenMySQL implements TokenDAO{
     private ResultSet rs;
     
     @Override
-    public int crear(String email, String token, LocalDateTime expiracion) {
+    public int crear(String email, String token, Date expiracion) {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -24,7 +24,7 @@ public class TokenMySQL implements TokenDAO{
             cst = con.prepareCall(sql);
             cst.setString(1, email);
             cst.setString(2, token);
-            cst.setTimestamp(3, Timestamp.valueOf(expiracion));
+            cst.setTimestamp(3, new Timestamp(expiracion.getTime()));
             resultado = cst.executeUpdate();
         return resultado;
         }   catch (SQLException e) {
