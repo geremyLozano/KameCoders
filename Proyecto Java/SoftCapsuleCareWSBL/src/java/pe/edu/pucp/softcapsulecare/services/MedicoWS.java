@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
 
 
