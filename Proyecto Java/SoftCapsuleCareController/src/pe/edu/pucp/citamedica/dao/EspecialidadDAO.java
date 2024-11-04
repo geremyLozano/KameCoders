@@ -1,6 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 
 public interface EspecialidadDAO{
