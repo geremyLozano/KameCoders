@@ -11,4 +11,5 @@ public interface EspecialidadDAO{
     Especialidad obtenerPorId(int idEspecialidad);
     Especialidad obtenerPorId1(int idEspecialidad);
     public int insertar1(Especialidad especialidad);
+    List<Especialidad> listar(String filtro);
 }
