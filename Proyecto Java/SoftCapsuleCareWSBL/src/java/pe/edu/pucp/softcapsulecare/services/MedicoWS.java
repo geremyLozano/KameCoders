@@ -23,6 +23,11 @@ public class MedicoWS {
     @WebMethod(operationName = "insertarMedico")
     public int medicoInsertar(@WebParam(name = "medico") Medico medico,
                               @WebParam(name = "usuario") Usuario usuario) {
+        
+        
+       
+        
+        
         medico.setHoraInicioTrabajo(LocalTime.MIDNIGHT);
         medico.setHoraFinTrabajo(LocalTime.MIN);
         return medicoDAO.insertar(medico,usuario);
