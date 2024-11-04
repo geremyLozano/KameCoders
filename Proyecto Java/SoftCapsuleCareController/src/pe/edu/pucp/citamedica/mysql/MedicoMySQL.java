@@ -362,7 +362,8 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setDiasLaborales(rs.getString("diasLaborales"));
                 medico.setAhosExp(rs.getInt("anhosExp"));
                 medico.setActivo(rs.getBoolean("activo"));
-
+                medico.setNombre(rs.getString("nombre"));
+                medico.setApellido(rs.getString("apellido"));
                 // Añadir el médico a la lista
                 listaMedicos.add(medico);
             }

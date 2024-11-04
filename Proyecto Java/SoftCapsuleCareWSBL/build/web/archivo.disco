@@ -17,10 +17,7 @@ ref="http://localhost:8080/SoftCapsuleCareWSBL/PagoWS?WSDL"/>
 ref="http://localhost:8080/SoftCapsuleCareWSBL/HistorialMedicoWS?WSDL"/>
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
 ref="http://localhost:8080/SoftCapsuleCareWSBL/ProcedimientoWS?WSDL"/>
-<<<<<<< HEAD
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
 ref="http://localhost:8080/SoftCapsuleCareWSBL/ComunicacionWS?WSDL"/>
-=======
 
->>>>>>> a8a92e68b7c550514f7c11e7050f8e0940bdd956
 </discovery>
