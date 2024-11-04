@@ -4,6 +4,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.mysql.EspecialidadMySQL;
