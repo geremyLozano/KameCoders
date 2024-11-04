@@ -47,6 +47,8 @@ public class PacienteMySQL implements PacienteDAO{
             
             paciente.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
+            usuario.setIdPersona(paciente.getIdPaciente());
+            usuario.setActivo(true);
             
             paciente.setIdPaciente(paciente.getIdPersona());
             paciente.setDNI(paciente.getDNI());

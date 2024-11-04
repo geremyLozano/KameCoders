@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -182,7 +183,7 @@ public class EspecialidadMySQL implements EspecialidadDAO {
 
         return resultado;
     }
-    
+    @Override
     public int insertar1(Especialidad especialidad) {
         String query = "INSERT INTO Especialidad(nombre, costoConsulta, activo) VALUES (?, ?, ?)";
         int resultado = 0;
@@ -208,5 +209,42 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         }
 
         return resultado;
+    }
+
+    @Override
+    public List<Especialidad> listar(String filtro) {
+        List<Especialidad> result = new ArrayList<Especialidad>();
+        Connection con = null;
+        
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo FROM Especialidad WHERE nombre LIKE ? AND activo = true";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setString(1, "%" + filtro + "%"); // Usamos '%' para buscar por coincidencia parcial
+            
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Especialidad especialidad = new Especialidad();
+                
+                especialidad.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                
+                if (cursor.getObject("nombre") != null) {
+                    especialidad.setNombre(cursor.getString("nombre"));
+                }
+                
+                if (cursor.getObject("costoConsulta") != null) {
+                    especialidad.setCostoConsulta(cursor.getDouble("costoConsulta"));
+                }
+                
+                especialidad.setActivo(cursor.getBoolean("activo"));
+                result.add(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        
+        return result;
     }
 }

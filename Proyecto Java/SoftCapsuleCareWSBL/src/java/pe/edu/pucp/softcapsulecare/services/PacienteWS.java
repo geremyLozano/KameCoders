@@ -3,6 +3,7 @@ package pe.edu.pucp.softcapsulecare.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -24,4 +25,39 @@ public class PacienteWS {
         int resultado = pacienteDAO.insertar(paciente,usuario);
         return resultado;
     }
+    @WebMethod(operationName = "listarPaciente")
+    public ArrayList<Paciente> listarPaciente() {
+        ArrayList<Paciente> resultado = pacienteDAO.listarTodos();
+        return resultado;
+    }
+        
+    @WebMethod(operationName = "eliminarPaciente")
+    public int pacienteEliminar(@WebParam(name = "paciente") int idPaciente) {
+        int resultado = pacienteDAO.eliminar(idPaciente);
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "modificarPaciente")
+    public int pacienteModificar(@WebParam(name = "especialidad") Paciente paciente) {
+        int resultado = pacienteDAO.modificar(paciente);
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "obtenerPorIDPaciente")
+    public Paciente pacienteObtenerID(@WebParam(name = "paciente") int idPaciente) {
+        Paciente resultado = pacienteDAO.obtenerPorId(idPaciente);
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "obtenerPorIDPaciente1")
+    public Paciente pacienteObtenerID1(@WebParam(name = "paciente") int idPaciente) {
+        Paciente resultado = pacienteDAO.obtenerPorId1(idPaciente);
+        return resultado;
+    }
+    @WebMethod(operationName = "insertarPaciente1")
+    public int pacienteInsertar1(@WebParam(name = "paciente") Paciente paciente) {
+        int resultado = pacienteDAO.insertar1(paciente);
+        return resultado;
+    }
+
 }
