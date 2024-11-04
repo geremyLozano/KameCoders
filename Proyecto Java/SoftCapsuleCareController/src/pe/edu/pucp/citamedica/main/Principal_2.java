@@ -48,7 +48,7 @@ public class Principal_2 {
 //        Paciente paciente = new Paciente();
 //        PacienteDAO pac = new PacienteMySQL();
         MedicoDAO m = new MedicoMySQL();
-        int resultado = m.insertar(med);
+//        int resultado = m.insertar(med);
 
 //        Auxiliar auxiliar = new Auxiliar();
 //        AuxiliarDAO aux = new AuxiliarMySQL();
@@ -57,10 +57,10 @@ public class Principal_2 {
 //        Administrador administrador = new Administrador();
 //        AdministradorDAO admin = new AdministradorMySQL();
 //        int resultado = admin.insertar(administrador, usuario, med);
-        if(resultado>0)
-            System.out.println("Se creo el usuario correctamente");
-        else
-            System.out.println("Error en la creacion");
+//        if(resultado>0)
+//            System.out.println("Se creo el usuario correctamente");
+//        else
+//            System.out.println("Error en la creacion");
 //        
 //        Scanner lectura = new Scanner(System.in);
 //        String dato = lectura.next();

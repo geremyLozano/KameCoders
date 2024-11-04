@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
+import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 
@@ -52,7 +53,7 @@ public class MedicoMySQL implements MedicoDAO {
     
     
     @Override
-    public int insertar(Medico medico) {
+    public int insertar(Medico medico, Usuario usuario) {
 
 
         int resultado = 0;
@@ -60,26 +61,26 @@ public class MedicoMySQL implements MedicoDAO {
             con = DBPoolManager.getInstance().getConnection();
             
             
-            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             
             
-            pstMedico = con.prepareStatement(sql);
+            cst = con.prepareCall(sql);
             
             
-            pstMedico.setString(1, medico.getDNI());
-            pstMedico.setString(2, medico.getNombre());
-            pstMedico.setString(3, medico.getApellido());
-            pstMedico.setString(4, medico.getCorreoElectronico());
-            pstMedico.setInt(5, medico.getNumTelefono());
-            pstMedico.setString(6, medico.getDireccion());
+            cst.setString(1, medico.getDNI());
+            cst.setString(2, medico.getNombre());
+            cst.setString(3, medico.getApellido());
+            cst.setString(4, medico.getCorreoElectronico());
+            cst.setInt(5, medico.getNumTelefono());
+            cst.setString(6, medico.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
-            pstMedico.setDate(7,sqlDate);
+            cst.setDate(7,sqlDate);
            
-            pstMedico.setString(8, String.valueOf(medico.getGenero()));
+            cst.setString(8, String.valueOf(medico.getGenero()));
             
-            pstMedico.setString(9, medico.getNumColegiatura());
-            pstMedico.setTime(10,Time.valueOf(medico.getHoraInicioTrabajo()));
-            pstMedico.setTime(11,Time.valueOf(medico.getHoraFinTrabajo()));
+            cst.setString(9, medico.getNumColegiatura());
+            cst.setTime(10,Time.valueOf(medico.getHoraInicioTrabajo()));
+            cst.setTime(11,Time.valueOf(medico.getHoraFinTrabajo()));
             
             
 //            String diasLaboralesString = medico.getDiasLaborales().stream()
@@ -87,12 +88,14 @@ public class MedicoMySQL implements MedicoDAO {
 //                .collect(Collectors.joining(",")); // Unirlos con coma
 //            
             
-            pstMedico.setString(12, medico.getDiasLaborales());       
-            pstMedico.setInt(13,medico.getAhosExp());
-            pstMedico.setBoolean(14,medico.isActivo());
-            pstMedico.setInt(15,medico.getEspecialidad().getIdEspecialidad());
-      
+            cst.setString(12, medico.getDiasLaborales());       
+            cst.setInt(13,medico.getAhosExp());
+            cst.setBoolean(14,medico.isActivo());
+            cst.setInt(15,medico.getEspecialidad().getIdEspecialidad());
+            cst.registerOutParameter(16, java.sql.Types.INTEGER);
+            cst.setString(17, usuario.getContrasenha());
             
+            medico.setIdMedico(cst.getInt(16));
             resultado = pstMedico.executeUpdate();
           
             
