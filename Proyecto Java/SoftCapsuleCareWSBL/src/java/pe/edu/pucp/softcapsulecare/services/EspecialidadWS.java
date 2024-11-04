@@ -57,4 +57,9 @@ public class EspecialidadWS {
         int resultado = espeDAO.insertar1(especialidad);
         return resultado;
     }
+    @WebMethod(operationName = "listarEspecialidadFiltro")
+    public List<Especialidad> listarEspecialidadFiltro(String filtro) {
+        List<Especialidad> resultado = espeDAO.listar(filtro);
+        return resultado;
+    }
 }
