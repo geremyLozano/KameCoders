@@ -1,5 +1,6 @@
 package pe.edu.pucp.citamedica.model.usuario;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Persona {  // Marcamos la clase como abstracta
@@ -30,7 +31,7 @@ public class Persona {  // Marcamos la clase como abstracta
         this.genero = genero;
         this.DNI = DNI;
     }
-
+    
     public int getIdPersona() {
         return idPersona;
     }

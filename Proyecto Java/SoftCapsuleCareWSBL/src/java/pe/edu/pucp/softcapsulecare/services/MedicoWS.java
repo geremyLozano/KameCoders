@@ -41,4 +41,44 @@ public class MedicoWS {
     }
     
     
+    @WebMethod(operationName = "listarMedico")
+    public ArrayList<Medico> listarMedico() {
+        ArrayList<Medico> resultado = medicoDAO.listarTodos();
+        return resultado;
+    }
+    /*@WebMethod(operationName = "listarMedicoFiltro")
+    public List<Paciente> listarMedicoFiltro(String filtro) {
+        List<Paciente> resultado = medicoDAO.listar(filtro);
+        return resultado;
+    }*/
+            
+    @WebMethod(operationName = "eliminarMedico")
+    public int medicoEliminar(@WebParam(name = "medico") int idMedico) {
+        int resultado = medicoDAO.eliminar(idMedico);
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "modificarMedico")
+    public int medicoModificar(@WebParam(name = "medico") Medico medico) {
+        int resultado = medicoDAO.modificar(medico);
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "obtenerPorIDMedico")
+    public Medico medicoObtenerID(@WebParam(name = "paciente") int idMedico) {
+        Medico resultado = medicoDAO.obtenerPorId(idMedico);
+        return resultado;
+    }
+    
+    /*@WebMethod(operationName = "obtenerPorIDPaciente1")
+    public Paciente pacienteObtenerID1(@WebParam(name = "paciente") int idPaciente) {
+        Paciente resultado = pacienteDAO.obtenerPorId1(idPaciente);
+        return resultado;
+    }
+    @WebMethod(operationName = "insertarPaciente1")
+    public int pacienteInsertar1(@WebParam(name = "paciente") Paciente paciente) {
+        int resultado = pacienteDAO.insertar1(paciente);
+        return resultado;
+    }*/
+    
 }
