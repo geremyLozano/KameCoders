@@ -1,11 +1,12 @@
 package pe.edu.pucp.citamedica.model.consultas;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
 public class CitaMedica {
-    private String idCitaMedica;
+    private int idCitaMedica;
     private TipoCita tipo;
     private EstadoCita estado;
     private int idPaciente;
@@ -20,11 +21,12 @@ public class CitaMedica {
     private int numeroAmbiente;
     private int idPago;
     private boolean activo;
+    private String horaStr;
 
     public CitaMedica() {
     }
     
-    public CitaMedica(String idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, boolean activo) {
+    public CitaMedica(int idCitaMedica, TipoCita tipo, EstadoCita estado, Date fecha, LocalTime hora, String plataforma, String enlace, LocalTime duracion, int numeroAmbiente, boolean activo) {
         this.idCitaMedica = idCitaMedica;
         this.tipo = tipo;
         this.estado = estado;
@@ -37,11 +39,11 @@ public class CitaMedica {
         this.activo = activo;
     }
 
-    public String getIdCitaMedica() {
+    public int getIdCitaMedica() {
         return idCitaMedica;
     }
 
-    public void setIdCitaMedica(String idCitaMedica) {
+    public void setIdCitaMedica(int idCitaMedica) {
         this.idCitaMedica = idCitaMedica;
     }
 
@@ -107,6 +109,7 @@ public class CitaMedica {
 
     public void setHora(LocalTime hora) {
         this.hora = hora;
+        this.horaStr = hora.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public String getPlataforma() {
@@ -155,6 +158,14 @@ public class CitaMedica {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+    
+    public void setHoraStr(String horaStr){
+        this.horaStr = horaStr;
+    }
+    
+    public String getHoraStr(){
+        return horaStr;
     }
 
 }

@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
+import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.dbmanager.config.DBManager;
 
@@ -22,6 +23,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     private Statement st;
     private String sql;
     private ResultSet rs;
+    
     @Override
     public int insertar(CitaMedica cita) {
         int resultado = 0;
@@ -80,7 +82,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             cst = con.prepareCall(sql);
 
             // Establecer los parámetros para el procedimiento.
-            cst.setInt(1, Integer.parseInt(citaMedica.getIdCitaMedica()));  // Convertir el ID si es String
+            cst.setInt(1, citaMedica.getIdCitaMedica());  // Convertir el ID si es String
             cst.setString(2, citaMedica.getEstado().name());                 // Asumimos que EstadoCita es un enum
             cst.setDate(3, new java.sql.Date(citaMedica.getFecha().getTime()));
             cst.setTime(4, java.sql.Time.valueOf(citaMedica.getHora()));
@@ -164,7 +166,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 CitaMedica citaMedica = new CitaMedica();
 
                 // Asignar valores a los atributos de CitaMedica desde el ResultSet
-                citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
+                citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
                 citaMedica.setFecha(rs.getDate("fecha"));
                 citaMedica.setHora(rs.getTime("hora").toLocalTime());
 
@@ -218,7 +220,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica = new CitaMedica();
 
                 // Asignar valores desde el ResultSet a la CitaMedica
-                citaMedica.setIdCitaMedica(rs.getString("idCitaMedica"));
+                citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
                 citaMedica.setFecha(rs.getDate("fecha"));
                 citaMedica.setHora(rs.getTime("hora").toLocalTime());
 
@@ -244,6 +246,67 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         // Devolver la cita médica o null si no se encontró
         return citaMedica;
     }
+    
+    @Override
+    public ArrayList<CitaMedica> listarPorPaciente(int idPaciente) {
+        ArrayList<CitaMedica> listaCitas = new ArrayList<>();
+        Connection con = null;
+        CallableStatement cst = null;
+        ResultSet rs = null;
+        String sql = "{CALL sp_listar_citas_por_idPaciente(?)}";  // Procedimiento almacenado
+
+        try {
+            // Obtener la conexión a la base de datos
+            con = DBManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPaciente);  // Establecer el parámetro de entrada (ID del paciente)
+
+            // Ejecutar la consulta
+            rs = cst.executeQuery();
+
+            // Iterar sobre el ResultSet y agregar cada cita a la lista
+            while (rs.next()) {
+                CitaMedica citaMedica = new CitaMedica();
+
+                // Asignar valores desde el ResultSet a la CitaMedica
+                citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
+                citaMedica.setTipo(TipoCita.valueOf(rs.getString("tipoCita")));
+                citaMedica.setEstado(EstadoCita.valueOf(rs.getString("estadoCita")));
+                citaMedica.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
+                citaMedica.setIdMedico(rs.getInt("idMedico"));
+                citaMedica.setFecha(rs.getDate("fecha"));
+                citaMedica.setHora(rs.getTime("hora").toLocalTime());
+                citaMedica.setPlataforma(rs.getString("plataforma"));
+                citaMedica.setEnlace(rs.getString("enlace"));
+                citaMedica.setDuracion(rs.getTime("duracion").toLocalTime());
+                citaMedica.setNumeroAmbiente(rs.getInt("numeroAmbiente"));
+                citaMedica.setIdPago(rs.getInt("idPago"));
+                citaMedica.setActivo(rs.getBoolean("activo"));
+                citaMedica.setIdPaciente(rs.getInt("idPaciente"));
+
+                // Agregar la cita a la lista
+                listaCitas.add(citaMedica);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al listar citas médicas por paciente: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+
+        // Devolver la lista de citas médicas
+        return listaCitas;
+    }
+
 
     
 }
