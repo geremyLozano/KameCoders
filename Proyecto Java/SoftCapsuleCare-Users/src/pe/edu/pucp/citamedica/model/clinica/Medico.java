@@ -1,6 +1,7 @@
 package pe.edu.pucp.citamedica.model.clinica;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
@@ -18,8 +19,11 @@ public class Medico extends Persona{
     private boolean activo;
     //private ArrayList<DiaSemana>diasLaborales;
     private String diasLaborales;
+    private String horaInicioTrabajoStr;
+    private String horaFinTrabajoStr;
     
     public Medico() {
+        
         citas = new ArrayList<>();
         //diasLaborales = new ArrayList<>();
     }
@@ -36,6 +40,9 @@ public class Medico extends Persona{
         this.horaFinTrabajo = horaFinTrabajo;
         this.ahosExp = ahosExp;
         this.citas = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        this.horaInicioTrabajoStr = horaInicioTrabajo.format(formatter);
+        this.horaFinTrabajoStr = horaFinTrabajo.format(formatter);
         //this.diasLaborales = new ArrayList<>();
         this.activo = true;
     }
@@ -93,6 +100,7 @@ public class Medico extends Persona{
 
     public void setHoraInicioTrabajo(LocalTime horaInicioTrabajo) {
         this.horaInicioTrabajo = horaInicioTrabajo;
+        this.horaInicioTrabajoStr = horaInicioTrabajo.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public LocalTime getHoraFinTrabajo() {
@@ -101,6 +109,7 @@ public class Medico extends Persona{
 
     public void setHoraFinTrabajo(LocalTime horaFinTrabajo) {
         this.horaFinTrabajo = horaFinTrabajo;
+        this.horaFinTrabajoStr = horaFinTrabajo.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public int getAhosExp() {
@@ -128,4 +137,23 @@ public class Medico extends Persona{
                                      Date fecha){
         
     }
+    
+    public void setHoraInicioTrabajoStr(String horaInicioTrabajoStr) {
+        this.horaInicioTrabajoStr = horaInicioTrabajoStr;
+    }
+    
+    public void setHoraFinTrabajoStr(String horaFinTrabajoStr) {
+        this.horaFinTrabajoStr = horaFinTrabajoStr;
+    }
+    
+    public String getHoraInicioTrabajoStr() {
+        return horaInicioTrabajoStr;
+    }
+
+    public String getHoraFinTrabajoStr() {
+        return horaFinTrabajoStr;
+    }
+    
+    
+    
 }
