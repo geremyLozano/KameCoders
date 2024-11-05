@@ -1,6 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 
 public interface UsuarioDAO {
@@ -12,4 +13,5 @@ public interface UsuarioDAO {
     Usuario ExisteUsuario(String username, String contrasenha);
     Usuario VerificarUsuario(String username);
     Usuario ValidarReset(String username, String correo);
+    List<String>obtenerRoles(int idPersona);
 }

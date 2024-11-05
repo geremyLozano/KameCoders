@@ -1,10 +1,12 @@
 package pe.edu.pucp.citamedica.mysql;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
@@ -208,5 +210,65 @@ public class UsuarioMySQL implements UsuarioDAO{
             }
         }
         return usuario;
+    }
+
+    @Override
+    public List<String> obtenerRoles(int idPersona) {
+        List<String> rolesActivos = new ArrayList<>();
+        PreparedStatement statementMedico = null;
+        PreparedStatement statementPaciente = null;
+        PreparedStatement statementAuxiliar = null;
+        PreparedStatement statementAdministrador = null;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+
+            String queryMedico = "SELECT 'Medico' AS rol FROM Medico WHERE idMedico = ? AND activo = true";
+            statementMedico = con.prepareStatement(queryMedico);
+            statementMedico.setInt(1, idPersona);
+            rs = statementMedico.executeQuery();
+            if (rs.next()) {
+                rolesActivos.add(rs.getString("rol"));
+            }
+
+            String queryPaciente = "SELECT 'Paciente' AS rol FROM Paciente WHERE idPaciente = ? AND activo = true";
+            statementPaciente = con.prepareStatement(queryPaciente);
+            statementPaciente.setInt(1, idPersona);
+            rs = statementPaciente.executeQuery();
+            if (rs.next()) {
+                rolesActivos.add(rs.getString("rol"));
+            }
+
+            String queryAuxiliar = "SELECT 'Auxiliar' AS rol FROM Auxiliar WHERE idAuxiliar = ? AND activo = true";
+            statementAuxiliar = con.prepareStatement(queryAuxiliar);
+            statementAuxiliar.setInt(1, idPersona);
+            rs = statementAuxiliar.executeQuery();
+            if (rs.next()) {
+                rolesActivos.add(rs.getString("rol"));
+            }
+
+            // Consultar en la tabla Administrador
+            String queryAdministrador = "SELECT 'Administrador' AS rol FROM Administrador WHERE idAdministrador = ? AND activo = true";
+            statementAdministrador = con.prepareStatement(queryAdministrador);
+            statementAdministrador.setInt(1, idPersona);
+            rs = statementAdministrador.executeQuery();
+            if (rs.next()) {
+                rolesActivos.add(rs.getString("rol"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar los recursos
+            try {
+                if (rs != null) rs.close();
+                if (statementMedico != null) statementMedico.close();
+                if (statementPaciente != null) statementPaciente.close();
+                if (statementAuxiliar != null) statementAuxiliar.close();
+                if (statementAdministrador != null) statementAdministrador.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rolesActivos;
     }
 }
