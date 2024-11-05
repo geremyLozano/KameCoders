@@ -1,4 +1,4 @@
-package pe.edu.pucp.citamedica.dao;
+    package pe.edu.pucp.citamedica.dao;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
