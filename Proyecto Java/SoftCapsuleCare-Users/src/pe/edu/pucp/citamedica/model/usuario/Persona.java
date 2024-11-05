@@ -3,7 +3,7 @@ package pe.edu.pucp.citamedica.model.usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Persona {  // Marcamos la clase como abstracta
+public class Persona {
     
     private static int contador = 0;
     private int idPersona;
