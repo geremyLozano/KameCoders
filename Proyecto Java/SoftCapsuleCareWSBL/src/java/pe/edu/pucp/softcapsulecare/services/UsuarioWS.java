@@ -3,6 +3,7 @@ package pe.edu.pucp.softcapsulecare.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
@@ -43,9 +44,9 @@ public class UsuarioWS {
         return usuDAO.ValidarReset(username,correo);
     }
 
-    @WebMethod(operationName = "obtenerRoles")
-    public List<String> obtenerRoles(@WebParam(name = "idPersona") int idPersona) {
-        List<String> roles = usuDAO.obtenerRoles(idPersona);
-        return roles != null ? roles : Collections.emptyList();
-    }
+//    @WebMethod(operationName = "obtenerRoles")
+//    public ArrayList<String> obtenerRoles(@WebParam(name = "idPersona") int idPersona) {
+//        List<String> roles = usuDAO.obtenerRoles(idPersona);
+//        return roles != null ? roles : Collections.emptyList();
+//    }
 }

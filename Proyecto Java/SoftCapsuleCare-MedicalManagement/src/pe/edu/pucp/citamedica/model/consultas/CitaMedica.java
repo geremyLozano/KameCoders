@@ -22,6 +22,7 @@ public class CitaMedica {
     private int idPago;
     private boolean activo;
     private String horaStr;
+    private String duracionStr;
 
     public CitaMedica() {
     }
@@ -134,6 +135,7 @@ public class CitaMedica {
 
     public void setDuracion(LocalTime duracion) {
         this.duracion = duracion;
+        this.duracionStr = duracion.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public int getNumeroAmbiente() {
@@ -166,6 +168,14 @@ public class CitaMedica {
     
     public String getHoraStr(){
         return horaStr;
+    }
+    
+    public void setDuracionStr(String duracionStr){
+        this.duracionStr = duracionStr;
+    }
+    
+    public String getDuracionStr(){
+        return duracionStr;
     }
 
 }
