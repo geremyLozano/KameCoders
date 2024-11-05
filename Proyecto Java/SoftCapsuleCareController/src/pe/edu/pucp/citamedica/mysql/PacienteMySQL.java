@@ -12,6 +12,7 @@ import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 import java.sql.Date; // Para java.sql.Date
 import java.util.Calendar; // Para Calendar
+import java.util.List;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -281,5 +282,50 @@ public class PacienteMySQL implements PacienteDAO{
         }
 
         return resultado;
+    }
+
+    @Override
+    public List<Paciente> listar(String filtro) {
+        List<Paciente> result = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT p.DNI, p.nombre, p.apellido, p.correoElectronico, p.numTelefono, " +
+                         "p.direccion, p.fechaNacimiento, p.genero, pac.idPaciente, pac.activo " +
+                         "FROM Persona p " +
+                         "JOIN Paciente pac ON p.DNI = pac.DNI " +
+                         "WHERE (p.nombre LIKE ? OR p.apellido LIKE ?) AND pac.activo = true";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setString(1, "%" + filtro + "%");
+            cmd.setString(2, "%" + filtro + "%");
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Paciente paciente = new Paciente();
+
+                // Datos de Persona
+                paciente.setDNI(cursor.getString("DNI"));
+                paciente.setNombre(cursor.getString("nombre"));
+                paciente.setApellido(cursor.getString("apellido"));
+                paciente.setCorreoElectronico(cursor.getString("correoElectronico"));
+                paciente.setNumTelefono(cursor.getInt("numTelefono"));
+                paciente.setDireccion(cursor.getString("direccion"));
+                paciente.setFechaNacimiento(cursor.getDate("fechaNacimiento"));
+                paciente.setGenero(cursor.getString("genero").charAt(0));
+
+                // Datos específicos de Paciente
+                paciente.setIdPaciente(cursor.getInt("idPaciente"));
+                paciente.setActivo(cursor.getBoolean("activo"));
+
+                result.add(paciente);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result;
     }
 }

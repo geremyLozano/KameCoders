@@ -4,6 +4,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.dao.PacienteDAO;
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -30,7 +31,12 @@ public class PacienteWS {
         ArrayList<Paciente> resultado = pacienteDAO.listarTodos();
         return resultado;
     }
-        
+    @WebMethod(operationName = "listarPacienteFiltro")
+    public List<Paciente> listarPacienteFiltro(String filtro) {
+        List<Paciente> resultado = pacienteDAO.listar(filtro);
+        return resultado;
+    }
+            
     @WebMethod(operationName = "eliminarPaciente")
     public int pacienteEliminar(@WebParam(name = "paciente") int idPaciente) {
         int resultado = pacienteDAO.eliminar(idPaciente);
