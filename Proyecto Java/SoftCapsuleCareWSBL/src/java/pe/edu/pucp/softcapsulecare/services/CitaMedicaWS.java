@@ -42,4 +42,10 @@ public class CitaMedicaWS {
     public ArrayList<CitaMedica> listar() {
         return citaMedicaDAO.listarTodos();
     }
+    
+    @WebMethod(operationName = "listarPorIdPaciente")
+    public ArrayList<CitaMedica> listarPorIdPaciente(@WebParam(name = "idPaciente") int idPaciente) {
+        return citaMedicaDAO.listarPorPaciente(idPaciente);
+    }
+    
 }
