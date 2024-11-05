@@ -9,4 +9,5 @@ public interface CitaMedicaDAO {
     int eliminar(int idCitaMedica);
     ArrayList<CitaMedica> listarTodos();
     CitaMedica obtenerPorId(int idCitaMedica);
+    ArrayList<CitaMedica> listarPorPaciente(int idPaciente);
 }
