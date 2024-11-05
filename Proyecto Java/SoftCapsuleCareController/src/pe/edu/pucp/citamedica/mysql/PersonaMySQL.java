@@ -59,7 +59,7 @@ public class PersonaMySQL implements PersonaDAO{
         sql = "UPDATE Persona SET dni = ?, nombre = ?, apellido = ?, correoElectronico = ?, numTelefono = ?"
                 + "direccion = ?, fechaNacimiento = ?, genero = ? " + " WHERE idPersona = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
+        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
              PreparedStatement cst = con.prepareStatement(sql)) {
 
             // Configuramos los valores a modificar en el PreparedStatement
@@ -94,7 +94,7 @@ public class PersonaMySQL implements PersonaDAO{
         int resultado = 0;
         sql = "DELETE FROM Persona WHERE idPersona = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement cst = con.prepareStatement(sql)) {
 
             cst.setInt(1, idPersona);
@@ -119,7 +119,7 @@ public class PersonaMySQL implements PersonaDAO{
     public ArrayList<Persona> listarTodos(){
         ArrayList<Persona> listaPersona = new ArrayList<>();
         sql = "SELECT * FROM Persona";
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement cst = con.prepareStatement(sql);
              ResultSet rs = cst.executeQuery()) {
 
@@ -156,7 +156,7 @@ public class PersonaMySQL implements PersonaDAO{
         Persona persona = null;
         sql = "SELECT * FROM Persona WHERE idPersona = ?";
 
-        try (Connection con = DBManager.getInstance().getConnection();
+        try (Connection con = DBPoolManager.getInstance().getConnection();
              PreparedStatement cst = con.prepareStatement(sql)) {
 
             cst.setInt(1, idPersona);
