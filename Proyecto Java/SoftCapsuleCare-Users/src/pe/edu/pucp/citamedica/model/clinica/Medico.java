@@ -138,6 +138,14 @@ public class Medico extends Persona{
         
     }
     
+    public void setHoraInicioTrabajoStr(String horaInicioTrabajoStr) {
+        this.horaInicioTrabajoStr = horaInicioTrabajoStr;
+    }
+    
+    public void setHoraFinTrabajoStr(String horaFinTrabajoStr) {
+        this.horaFinTrabajoStr = horaFinTrabajoStr;
+    }
+    
     public String getHoraInicioTrabajoStr() {
         return horaInicioTrabajoStr;
     }
