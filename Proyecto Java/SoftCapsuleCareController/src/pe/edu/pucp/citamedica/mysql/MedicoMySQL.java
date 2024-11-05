@@ -90,7 +90,7 @@ public class MedicoMySQL implements MedicoDAO {
             
             cst.setString(12, medico.getDiasLaborales());       
             cst.setInt(13,medico.getAhosExp());
-            cst.setBoolean(14,medico.isActivo());
+            cst.setBoolean(14,true);
             cst.setInt(15,medico.getEspecialidad().getIdEspecialidad());
             cst.registerOutParameter(16, java.sql.Types.INTEGER);
             cst.setString(17, usuario.getContrasenha());
