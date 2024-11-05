@@ -42,4 +42,10 @@ public class UsuarioWS {
                                       @WebParam(name = "correo") String correo) {
         return usuDAO.ValidarReset(username,correo);
     }
+
+    @WebMethod(operationName = "obtenerRoles")
+    public List<String> obtenerRoles(@WebParam(name = "idPersona") int idPersona) {
+        List<String> roles = usuDAO.obtenerRoles(idPersona);
+        return roles != null ? roles : Collections.emptyList();
+    }
 }
