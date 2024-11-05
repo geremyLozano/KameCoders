@@ -13,6 +13,7 @@ import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
+import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
 import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
@@ -100,10 +101,10 @@ public class SoftMain {
 //            } else {
 //                System.out.println("No se encontraron procedimientos registrados.");
 //            }
-        MedicoDAO medicoDao = new MedicoMySQL();
-        ArrayList<Medico> medicos = medicoDao.listarPorEspecialidad("Traumatología");
-        for(Medico medico: medicos){
-            System.out.println(medico.getHoraInicioTrabajoStr() + " - " + medico.getHoraFinTrabajoStr());
+        CitaMedicaDAO citaDao = new CitaMedicaMySQL();
+        ArrayList<CitaMedica> citas = citaDao.listarPorPaciente(7);
+        for(CitaMedica cita: citas){
+            System.out.println(cita.getIdCitaMedica());
         }
     }
 }

@@ -14,6 +14,7 @@ import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class CitaMedicaMySQL implements CitaMedicaDAO {
     private Connection con;
@@ -27,17 +28,14 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     @Override
     public int insertar(CitaMedica cita) {
         int resultado = 0;
-
         try {
-            con = DBManager.getInstance().getConnection();
-
-            // Llamamos al procedimiento almacenado
+            con = DBPoolManager.getInstance().getConnection();
             String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
 
             // Seteamos los parámetros del procedimiento
-            cst.setString(1, cita.getTipo().name()); // TipoCita es un enum
-            cst.setString(2, cita.getEstado().name()); // EstadoCita es un enum
+            cst.setString(1, cita.getTipo().toString()); // TipoCita es un enum
+            cst.setString(2, cita.getEstado().toString()); // EstadoCita es un enum
             cst.setDate(3, new java.sql.Date(cita.getFecha().getTime()));
             cst.setTime(4, java.sql.Time.valueOf(cita.getHora()));
             cst.setInt(5, cita.getIdMedico());
@@ -49,7 +47,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             cst.setInt(11, cita.getIdPago());
 
             // Ejecutamos el procedimiento
-            cst.execute();
+            cst.executeUpdate();
             resultado = 1; // Si todo va bien, retornamos éxito
 
         } catch (SQLException e) {
@@ -76,7 +74,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         try {
             // Obtener la conexión desde el DBManager.
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Preparar la llamada al procedimiento almacenado.
             cst = con.prepareCall(sql);
@@ -114,7 +112,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         try {
             // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Preparar la llamada al procedimiento almacenado
             cst = con.prepareCall(sql);
@@ -153,7 +151,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         try {
             // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Preparar la llamada al procedimiento almacenado
             cst = con.prepareCall(sql);
@@ -206,7 +204,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         try {
             // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Preparar la llamada al procedimiento almacenado
             cst = con.prepareCall(sql);
@@ -257,7 +255,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         try {
             // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
+            con = DBPoolManager.getInstance().getConnection();
 
             // Preparar la llamada al procedimiento almacenado
             cst = con.prepareCall(sql);
@@ -283,7 +281,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setDuracion(rs.getTime("duracion").toLocalTime());
                 citaMedica.setNumeroAmbiente(rs.getInt("numeroAmbiente"));
                 citaMedica.setIdPago(rs.getInt("idPago"));
-                citaMedica.setActivo(rs.getBoolean("activo"));
+                citaMedica.setActivo(true);
                 citaMedica.setIdPaciente(rs.getInt("idPaciente"));
 
                 // Agregar la cita a la lista
