@@ -388,7 +388,7 @@ public class MedicoMySQL implements MedicoDAO {
 
         String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryMedico = "INSERT INTO Medico(idMedico,numColegiatura,horaInicioTrabajo,horaFinTrabajo,ahosExp,"
+        String queryMedico = "INSERT INTO Medico(idMedico,numColegiatura,horaInicioTrabajo,horaFinTrabajo,anhosExp,"
                 + " activo,diasLaborales) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
