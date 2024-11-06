@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Time;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
@@ -380,6 +381,10 @@ public class MedicoMySQL implements MedicoDAO {
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
+        
+        // Suponiendo que recibes `Date` o `DateTime` en el servicio y solo necesitas la hora
+        LocalTime horaInicio = medico.getHoraIni().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+        LocalTime horaFin = medico.getHoraFin().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
 
         String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -416,8 +421,10 @@ public class MedicoMySQL implements MedicoDAO {
             psMedico.setInt(1, idPersona);
             psMedico.setInt(2,medico.getEspecialidad().getIdEspecialidad());
             psMedico.setString(3, medico.getNumColegiatura());
-            psMedico.setTime(4, java.sql.Time.valueOf(medico.getHoraInicioTrabajo()));
-            psMedico.setTime(5, java.sql.Time.valueOf(medico.getHoraFinTrabajo()));
+//            psMedico.setTime(4, java.sql.Time.valueOf(medico.getHoraInicioTrabajo()));
+            psMedico.setTime(4, java.sql.Time.valueOf(horaInicio));
+//            psMedico.setTime(5, java.sql.Time.valueOf(medico.getHoraFinTrabajo()));
+            psMedico.setTime(5, java.sql.Time.valueOf(horaFin));
             psMedico.setInt(6, medico.getAhosExp());
             psMedico.setBoolean(7, medico.isActivo());
             psMedico.setString(8, medico.getDiasLaborales());
