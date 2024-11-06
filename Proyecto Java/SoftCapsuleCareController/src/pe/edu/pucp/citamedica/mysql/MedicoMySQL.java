@@ -388,9 +388,9 @@ public class MedicoMySQL implements MedicoDAO {
 
         String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryMedico = "INSERT INTO Medico(idMedico, especialidad,numColegiatura,horaInicioTrabajo,horaFinTrabajo,ahosExp,"
+        String queryMedico = "INSERT INTO Medico(idMedico,numColegiatura,horaInicioTrabajo,horaFinTrabajo,ahosExp,"
                 + " activo,diasLaborales) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBPoolManager.getInstance().getConnection(); 
                 PreparedStatement psPersona = conn.prepareStatement(queryPersona, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement psMedico = conn.prepareStatement(queryMedico)) {
@@ -419,15 +419,15 @@ public class MedicoMySQL implements MedicoDAO {
             }
 
             psMedico.setInt(1, idPersona);
-            psMedico.setInt(2,medico.getEspecialidad().getIdEspecialidad());
-            psMedico.setString(3, medico.getNumColegiatura());
+//            psMedico.setInt(2,medico.getEspecialidad().getIdEspecialidad());
+            psMedico.setString(2, medico.getNumColegiatura());
 //            psMedico.setTime(4, java.sql.Time.valueOf(medico.getHoraInicioTrabajo()));
-            psMedico.setTime(4, java.sql.Time.valueOf(horaInicio));
+            psMedico.setTime(3, java.sql.Time.valueOf(horaInicio));
 //            psMedico.setTime(5, java.sql.Time.valueOf(medico.getHoraFinTrabajo()));
-            psMedico.setTime(5, java.sql.Time.valueOf(horaFin));
-            psMedico.setInt(6, medico.getAhosExp());
-            psMedico.setBoolean(7, medico.isActivo());
-            psMedico.setString(8, medico.getDiasLaborales());
+            psMedico.setTime(4, java.sql.Time.valueOf(horaFin));
+            psMedico.setInt(5, medico.getAhosExp());
+            psMedico.setBoolean(6, medico.isActivo());
+            psMedico.setString(7, medico.getDiasLaborales());
             resultado = psMedico.executeUpdate();
 
         } catch (SQLException e) {
