@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
 import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
+import pe.edu.pucp.citamedica.model.dto.HistorialMedicoDto;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -156,6 +157,45 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         }
 
         return historial;
+    }
+    
+    
+    	 @Override
+    public ArrayList<HistorialMedicoDto> listarTodosPorCampImp() {
+    
+        
+        ArrayList<HistorialMedicoDto> listaHistorial = new ArrayList<>();
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListarPorCamposImp}";
+            cst = con.prepareCall(sql);
+            rs = cst.executeQuery();
+            while(rs.next()){
+                HistorialMedicoDto historial = new HistorialMedicoDto();
+                
+                historial.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
+                historial.setFechaCreacion(rs.getDate("fechaCreacion"));
+                historial.setIdPaciente(rs.getInt("idPaciente"));            
+                historial.setDniPaciente(rs.getString("DNI"));              
+                historial.setNombrePaciente(rs.getString("nombre"));
+                historial.setApellidoPaciente(rs.getString("apellido"));
+               
+                
+                listaHistorial.add(historial);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return listaHistorial;
+        
+    
     }
     
 }
