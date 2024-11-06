@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softcapsulecare.services;
 
 import jakarta.jws.WebService;
@@ -12,7 +8,6 @@ import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
 
-
 @WebService(serviceName = "ProcedimientoWS")
 public class ProcedimientoWS {
 
@@ -22,12 +17,17 @@ public class ProcedimientoWS {
         procedimientoDAO = new ProcedimientoMySQL();
     }
 
-    // -------- Métodos para el Auxiliar Médico --------
-
     // Método para insertar un nuevo procedimiento
     @WebMethod(operationName = "insertarProcedimiento")
     public int insertarProcedimiento(@WebParam(name = "procedimiento") Procedimiento procedimiento, 
-                                     @WebParam(name = "idAmbienteMedico") int idAmbienteMedico) {
+                                     @WebParam(name = "idAmbienteMedico") int idAmbienteMedico)
+    {
+        System.out.println("Nombre Procedimiento: " + procedimiento.getNombre());
+        System.out.println("Descripcion: " + procedimiento.getDescripcion());
+        System.out.println("Requisitos previos: " + procedimiento.getRequisitosPrevios());
+        System.out.println("Costo: " + procedimiento.getCosto());
+        System.out.println("Tipo: " + procedimiento.getTipoProcedimiento());
+        System.out.println("Id ambiente medico: " + idAmbienteMedico);
         return procedimientoDAO.insertar(procedimiento, idAmbienteMedico);
     }
 
@@ -43,23 +43,15 @@ public class ProcedimientoWS {
         return procedimientoDAO.eliminar(idProcedimiento);
     }
 
+    // Método para listar todos los procedimientos
+    @WebMethod(operationName = "listarTodosProcedimientos")
+    public ArrayList<Procedimiento> listarTodosProcedimientos() {
+        return procedimientoDAO.listarTodos();
+    }
 
     // Método para obtener un procedimiento por su ID
     @WebMethod(operationName = "obtenerProcedimientoPorId")
     public Procedimiento obtenerProcedimientoPorId(@WebParam(name = "idProcedimiento") int idProcedimiento) {
         return procedimientoDAO.obtenerPorId(idProcedimiento);
-    }
-
-    // Método para filtrar procedimientos por tipo (Chequeo, Imágenes, Laboratorio)
-    @WebMethod(operationName = "listarProcedimientosPorTipo")
-    public ArrayList<Procedimiento> listarProcedimientosPorTipo(@WebParam(name = "tipoProcedimiento") String tipoProcedimiento) {
-        ArrayList<Procedimiento> todos = procedimientoDAO.listarTodos();
-        ArrayList<Procedimiento> filtrados = new ArrayList<>();
-        for (Procedimiento p : todos) {
-            if (p.getTipo().name().equalsIgnoreCase(tipoProcedimiento)) {
-                filtrados.add(p);
-            }
-        }
-        return filtrados;
     }
 }
