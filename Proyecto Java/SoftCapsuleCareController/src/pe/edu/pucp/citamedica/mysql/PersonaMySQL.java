@@ -56,23 +56,28 @@ public class PersonaMySQL implements PersonaDAO{
     @Override
     public int modificar(Persona persona){
         int resultado = 0;
-        sql = "UPDATE Persona SET dni = ?, nombre = ?, apellido = ?, correoElectronico = ?, numTelefono = ?"
-                + "direccion = ?, fechaNacimiento = ?, genero = ? " + " WHERE idPersona = ?";
+        String sql = "UPDATE Persona SET dni = ?, nombre = ?, apellido = ?, correoElectronico = ?, "
+                + "numTelefono = ?, direccion = ?, fechaNacimiento = ?, genero = ? "
+                + "WHERE idPersona = ?";
 
-        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement cst = con.prepareStatement(sql)) {
+        try {
+            // Obtener la conexión desde DBManager y preparar la sentencia
+            con = DBPoolManager.getInstance().getConnection();
+            pst = con.prepareStatement(sql);
 
-            // Configuramos los valores a modificar en el PreparedStatement
-            cst.setString(1, persona.getDNI());
-            cst.setString(2, persona.getApellido());
-            cst.setString(3, persona.getCorreoElectronico());
-            cst.setInt(4, persona.getNumTelefono());
-            cst.setString(5, persona.getDireccion());
+            // Configurar los valores en el PreparedStatement
+            pst.setString(1, persona.getDNI());
+            pst.setString(2, persona.getNombre());
+            pst.setString(3, persona.getApellido());
+            pst.setString(4, persona.getCorreoElectronico());
+            pst.setInt(5, persona.getNumTelefono());
+            pst.setString(6, persona.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(persona.getFechaNacimiento().getTime());
-            cst.setDate(6, sqlDate);
-            cst.setString(7, String.valueOf(persona.getGenero()));
-            cst.setInt(8, persona.getIdPersona());
-            // Ejecutar la consulta de actualización
+            pst.setDate(7, sqlDate);
+            pst.setString(8, String.valueOf(persona.getGenero()));
+            pst.setInt(9, persona.getIdPersona());
+
+            // Ejecutar la consulta de actualización y obtener la cantidad de filas afectadas
             resultado = cst.executeUpdate();
 
             // Verificar si la modificación fue exitosa
@@ -83,7 +88,19 @@ public class PersonaMySQL implements PersonaDAO{
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            e.printStackTrace(); // Imprimir la excepción si ocurre un error
+        } finally {
+            // Cerrar recursos para liberar la conexión y el PreparedStatement
+            if (pst != null) try {
+                pst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (con != null) try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return resultado;
