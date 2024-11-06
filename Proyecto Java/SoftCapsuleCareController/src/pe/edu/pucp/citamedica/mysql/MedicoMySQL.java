@@ -288,6 +288,7 @@ public class MedicoMySQL implements MedicoDAO {
 
                 Especialidad especialidad = new Especialidad();
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setNombre(rs.getString("especialidad"));
                 medico.setEspecialidad(especialidad);
                 
 
@@ -297,7 +298,8 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
                 medico.setNombre(rs.getString("nombre"));
                 medico.setApellido(rs.getString("apellido"));
-
+                
+                
                 
                 String diasLaboralesString = rs.getString("diasLaborales"); // Este sería el valor de la base de datos
 

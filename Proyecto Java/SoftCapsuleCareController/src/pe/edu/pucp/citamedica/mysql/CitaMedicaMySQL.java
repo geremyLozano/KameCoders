@@ -227,7 +227,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         Connection con = null;
         CallableStatement cst = null;
         ResultSet rs = null;
-        String sql = "{CALL sp_obtener_cita_medica_por_id(?)}";  // Procedimiento almacenado
+        String sql = "{CALL ObtenerCitaMedicaPorId(?)}";  // Procedimiento almacenado
 
         try {
             // Obtener la conexión a la base de datos
@@ -246,13 +246,22 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
                 // Asignar valores desde el ResultSet a la CitaMedica
                 citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
-                citaMedica.setFecha(rs.getDate("fecha"));
-                citaMedica.setHora(rs.getTime("hora").toLocalTime());
-
+                citaMedica.setTipoStr(rs.getString("tipoCita"));
+                citaMedica.setEstadoStr(rs.getString("estadoCita"));
+                citaMedica.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
                 // Convertir el estado de la cita (asumiendo que es un enum)
-                String estadoStr = rs.getString("estadoCita");
-                EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());
+                EstadoCita estado = EstadoCita.valueOf(citaMedica.getEstadoStr());
                 citaMedica.setEstado(estado);
+                citaMedica.setIdMedico(rs.getInt("idMedico"));
+                citaMedica.setFechaStr(rs.getDate("fecha").toString());
+                citaMedica.setHoraStr(rs.getTime("hora").toString());
+                citaMedica.setPlataforma(rs.getString("plataforma"));
+                citaMedica.setPlataforma(rs.getString("enlace"));
+                citaMedica.setDuracionStr(rs.getTime("duracion").toString());
+                citaMedica.setNumeroAmbiente(rs.getInt("numeroAmbiente"));
+                citaMedica.setIdPago(rs.getInt("idPago"));
+                citaMedica.setActivo(rs.getBoolean("activo"));
+                citaMedica.setIdPaciente(rs.getInt("idPaciente"));
             }
 
         } catch (SQLException e) {
