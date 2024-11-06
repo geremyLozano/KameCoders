@@ -78,7 +78,7 @@ public class PersonaMySQL implements PersonaDAO{
             pst.setInt(9, persona.getIdPersona());
 
             // Ejecutar la consulta de actualización y obtener la cantidad de filas afectadas
-            resultado = cst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             // Verificar si la modificación fue exitosa
             if (resultado > 0) {
