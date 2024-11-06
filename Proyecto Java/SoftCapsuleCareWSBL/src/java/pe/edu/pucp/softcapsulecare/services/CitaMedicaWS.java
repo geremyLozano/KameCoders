@@ -48,4 +48,10 @@ public class CitaMedicaWS {
         return citaMedicaDAO.listarPorPaciente(idPaciente);
     }
     
+    @WebMethod(operationName = "obtenerPorId")
+    public CitaMedica obtenerPorId(@WebParam(name = "idPaciente") int idPaciente) {
+        return citaMedicaDAO.obtenerPorId(idPaciente);
+        
+    }
+    
 }

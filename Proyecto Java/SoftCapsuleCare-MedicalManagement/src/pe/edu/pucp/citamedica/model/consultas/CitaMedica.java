@@ -24,6 +24,8 @@ public class CitaMedica {
     private String horaStr;
     private String duracionStr;
     private String fechaStr;
+    private String tipoStr;
+    private String estadoStr;
 
     public CitaMedica() {
     }
@@ -185,6 +187,22 @@ public class CitaMedica {
     
     public String getFechaStr(){
         return fechaStr;
+    }
+    
+    public void setTipoStr(String tipoStr){
+        this.tipoStr = tipoStr;
+    }
+    
+    public String getTipoStr(){
+        return tipoStr;
+    }
+    
+    public void setEstadoStr(String estadoStr){
+        this.estadoStr = estadoStr;
+    }
+    
+    public String getEstadoStr(){
+        return estadoStr;
     }
 
 }
