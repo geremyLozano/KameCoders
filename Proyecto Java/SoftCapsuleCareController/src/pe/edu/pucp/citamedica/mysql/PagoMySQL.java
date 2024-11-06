@@ -17,30 +17,48 @@ public class PagoMySQL implements PagoDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Pago pago){
-        int resultado = -1;
+    public int insertar(Pago pago) {
+        int idPagoGenerado = -1; // Cambié el nombre de la variable para mayor claridad
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL PagoInsertar(?, ?, ?, ?, ?, ?)}";
+            String sql = "{CALL PagoInsertar(?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
+
+            // Registrar el parámetro de salida para obtener el idPago generado
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
+
+            // Configurar los parámetros de entrada
             cst.setDouble(2, pago.getDescuentoPorSeguro());
             cst.setDouble(3, pago.getMontoParcial());
             cst.setDouble(4, pago.getMontoTotal());
             cst.setString(5, pago.getConcepto());
             cst.setInt(6, pago.getIdPaciente());
-        
-            resultado = cst.executeUpdate();
-            
-            pago.setIdPago(cst.getInt(1));
+
+            // Ejecutar el procedimiento almacenado
+            cst.executeUpdate();
+
+            // Obtener el idPago generado
+            idPagoGenerado = cst.getInt(1);
+            pago.setIdPago(idPagoGenerado);
+
+            // Asignar valores adicionales al objeto Pago
             pago.setEstado(true);
             pago.setFechaPago(java.sql.Date.valueOf(LocalDate.now()));
-        return resultado;
-        }   catch (SQLException e) {
-                System.out.println(e.getMessage());
+
+        } catch (SQLException e) {
+            System.out.println("Error al insertar el pago: " + e.getMessage());
+        } finally {
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
         }
-        return resultado;
+
+        return idPagoGenerado; // Retorna el idPago generado, o -1 si hubo un error
     }
+
         
     @Override
     public int eliminar(int idPago){

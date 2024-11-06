@@ -23,6 +23,7 @@ public class CitaMedica {
     private boolean activo;
     private String horaStr;
     private String duracionStr;
+    private String fechaStr;
 
     public CitaMedica() {
     }
@@ -176,6 +177,14 @@ public class CitaMedica {
     
     public String getDuracionStr(){
         return duracionStr;
+    }
+    
+    public void setFechaStr(String fechaStr){
+        this.fechaStr = fechaStr;
+    }
+    
+    public String getFechaStr(){
+        return fechaStr;
     }
 
 }

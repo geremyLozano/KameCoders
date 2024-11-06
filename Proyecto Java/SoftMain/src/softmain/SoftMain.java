@@ -101,10 +101,10 @@ public class SoftMain {
 //            } else {
 //                System.out.println("No se encontraron procedimientos registrados.");
 //            }
-        CitaMedicaDAO citaDao = new CitaMedicaMySQL();
-        ArrayList<CitaMedica> citas = citaDao.listarPorPaciente(7);
+        CitaMedicaDAO citadao = new CitaMedicaMySQL();
+        ArrayList<CitaMedica> citas = citadao.listarPorPaciente(7);
         for(CitaMedica cita: citas){
-            System.out.println(cita.getIdCitaMedica());
+            System.out.println(cita.getTipo());
         }
     }
 }
