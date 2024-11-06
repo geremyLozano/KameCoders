@@ -44,32 +44,39 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
 
     @Override
     public int modificar(HistorialMedico historialorial) {
-        int resultado = 0;
-        sql = "UPDATE HistorialMedico SET fechaCreacion = ?, "
-                + "numeroDocumentoIdentidadPaciente = ? " + " WHERE idHistorialMedico = ?";
+       
+          int resultado = 0;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            
+            
+            sql = "{CALL HistorialMedicoModificar(?,?,?,?,?,?,?,?)}";
+            
+            
+            
+            pst = con.prepareStatement(sql);
+            
+            pst.setInt(1, historialorial.getIdHistorial());           
+            pst.setString(2, historialorial.getEnferPreExist());
+             pst.setString(3, historialorial.getAlergias());
+             pst.setString(4, historialorial.getCirugiasPrevias());
+             pst.setString(5, historialorial.getVacunas());
 
-        try (Connection con = DBPoolManager.getInstance().getConnection();  // Obtener la conexión desde DBManager
-             PreparedStatement pstHistorial = con.prepareStatement(sql)) {
-
-            // Configuramos los valores a modificar en el PreparedStatement
-            java.sql.Date sqlDate = new java.sql.Date(historialorial.getFechaDeCreacion().getTime());
-            pstHistorial.setDate(1, sqlDate);
-            pstHistorial.setInt(2, historialorial.getIdPaciente());
-            pstHistorial.setInt(3, historialorial.getIdHistorial());
-            // Ejecutar la consulta de actualización
-            resultado = pstHistorial.executeUpdate();
-
-            // Verificar si la modificación fue exitosa
-            if (resultado > 0) {
-                System.out.println("HistorialMedico modificado correctamente.");
-            } else {
-                System.out.println("No se encontró ningún historialorial con ese ID.");
-            }
-
+             pst.setDouble(6, historialorial.getPeso());
+             pst.setDouble(7, historialorial.getAltura());
+             pst.setString(8, historialorial.getTipoSangre());
+            
+   
+            resultado = pst.executeUpdate();
+          
+            
         } catch (SQLException e) {
-            e.printStackTrace();  // Imprimir la excepción si ocurre un error
+            e.printStackTrace();
+            System.out.print("Error en la base de datos: " + e.getMessage());
+        }catch( Exception e){
+            e.printStackTrace();
+            System.out.print("Error general" + e.getMessage());
         }
-
         return resultado;
     }
 
