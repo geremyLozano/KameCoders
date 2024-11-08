@@ -14,8 +14,6 @@ public class Medico extends Persona{
     private String numColegiatura;
     private LocalTime horaInicioTrabajo;
     private LocalTime horaFinTrabajo;
-    private Date horaIni;
-    private Date horaFin;
     private int ahosExp;
     private ArrayList<CitaMedica>citas;
     private boolean activo;
@@ -47,22 +45,6 @@ public class Medico extends Persona{
         this.horaFinTrabajoStr = horaFinTrabajo.format(formatter);
         //this.diasLaborales = new ArrayList<>();
         this.activo = true;
-    }
-
-    public Date getHoraIni() {
-        return horaIni;
-    }
-
-    public void setHoraIni(Date horaIni) {
-        this.horaIni = horaIni;
-    }
-
-    public Date getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
     }
     
     public int getIdMedico(){
