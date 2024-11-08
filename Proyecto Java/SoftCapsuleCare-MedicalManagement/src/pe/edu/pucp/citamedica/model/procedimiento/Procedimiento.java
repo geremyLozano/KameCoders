@@ -1,6 +1,7 @@
 package pe.edu.pucp.citamedica.model.procedimiento;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Procedimiento {
     private int idProcedimiento;
@@ -9,28 +10,41 @@ public class Procedimiento {
     private ArrayList<ResultadoProcedimiento> resultados;
     private String descripcion;
     private String requisitosPrevios;
-    private TipoProcedimiento tipoProcedimiento;
+    private TipoProcedimiento tipoProcedimiento; // Mantiene el nombre consistente con la columna de la BD
     private boolean activo;
+    private Date fecha; // Nuevo campo para la fecha
 
     public Procedimiento() {
         this.resultados = new ArrayList<>();
     }
 
-    public Procedimiento(int idProcedimiento, String nombre, double costo, String resultado, String descripcion, String requisitosPrevios, TipoProcedimiento tipo) {
+    public Procedimiento(int idProcedimiento, String nombre, double costo, String descripcion, String requisitosPrevios, TipoProcedimiento tipoProcedimiento, boolean activo, Date fecha) {
         this.idProcedimiento = idProcedimiento;
         this.nombre = nombre;
         this.costo = costo;
         this.resultados = new ArrayList<>();
         this.descripcion = descripcion;
         this.requisitosPrevios = requisitosPrevios;
-        this.tipoProcedimiento = tipo;
-        this.activo = true;
+        this.tipoProcedimiento = tipoProcedimiento;
+        this.activo = activo;
+        this.fecha = fecha;
     }
 
+    // Getter y setter para 'fecha'
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    // Getter y setter para 'resultados'
     public ArrayList<ResultadoProcedimiento> getResultados() {
         return resultados;
     }
 
+    // Getter y setter para 'descripcion'
     public String getDescripcion() {
         return descripcion;
     }
@@ -39,6 +53,7 @@ public class Procedimiento {
         this.descripcion = descripcion;
     }
 
+    // Getter y setter para 'requisitosPrevios'
     public String getRequisitosPrevios() {
         return requisitosPrevios;
     }
@@ -47,14 +62,16 @@ public class Procedimiento {
         this.requisitosPrevios = requisitosPrevios;
     }
 
-    public TipoProcedimiento getTipo() {
+    // Getter y setter para 'tipoProcedimiento'
+    public TipoProcedimiento getTipoProcedimiento() {
         return tipoProcedimiento;
     }
 
-    public void setTipo(TipoProcedimiento tipo) {
-        this.tipoProcedimiento = tipo;
+    public void setTipoProcedimiento(TipoProcedimiento tipoProcedimiento) {
+        this.tipoProcedimiento = tipoProcedimiento;
     }
 
+    // Getter y setter para 'idProcedimiento'
     public int getIdProcedimiento() {
         return idProcedimiento;
     }
@@ -63,6 +80,7 @@ public class Procedimiento {
         this.idProcedimiento = idProcedimiento;
     }
 
+    // Getter y setter para 'nombre'
     public String getNombre() {
         return nombre;
     }
@@ -71,6 +89,7 @@ public class Procedimiento {
         this.nombre = nombre;
     }
 
+    // Getter y setter para 'costo'
     public double getCosto() {
         return costo;
     }
@@ -79,6 +98,7 @@ public class Procedimiento {
         this.costo = costo;
     }
 
+    // Getter y setter para 'activo'
     public boolean isActivo() {
         return activo;
     }
@@ -86,7 +106,6 @@ public class Procedimiento {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
     
     
 }
