@@ -10,8 +10,12 @@ import java.util.List;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
+import pe.edu.pucp.seguridad.PasswordHash;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
-public class UsuarioMySQL implements UsuarioDAO{
+public class UsuarioMySQL implements UsuarioDAO {
+
     private Connection con;
     private CallableStatement cst;
     private String sql;
@@ -20,17 +24,7 @@ public class UsuarioMySQL implements UsuarioDAO{
     @Override
     public int insertar(Usuario usuario) {
         int resultado = 0;
-//        try {
-//            con = DBManager.getInstance().getConnection();
-//            sql = "INSERT into Usuario(username,contrasenha,idpersona) values(?,?,?)";
-//            pst = con.prepareStatement(sql);
-//            pst.setString(1, usuario.getUsername());
-//            pst.setString(2, usuario.getContrasenha());
-//            pst.setInt(3,usuario.getDatosPersonales().getIdPersona());
-//            resultado = pst.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.print(e.getMessage());
-//        }
+        // El método insertar está comentado, se mantiene así
         return resultado;
     }
 
@@ -38,15 +32,31 @@ public class UsuarioMySQL implements UsuarioDAO{
     public int modificar(Usuario usuario) {
         int resultado = -1;
         try {
+            // Primero hasheamos la nueva contraseña
+            String hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL UsuarioModificar(?, ?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, usuario.getIdUsuario());
-            cst.setString(2, usuario.getContrasenha());
+            cst.setString(2, hashedPassword);
             resultado = cst.executeUpdate();
-        return resultado;
-        }   catch (SQLException e) {
-                System.out.println(e.getMessage());
+            return resultado;
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
         }
         return resultado;
     }
@@ -62,6 +72,17 @@ public class UsuarioMySQL implements UsuarioDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
         return resultado;
     }
@@ -74,11 +95,11 @@ public class UsuarioMySQL implements UsuarioDAO{
             sql = "{CALL UsuarioListar}";
             cst = con.prepareCall(sql);
             rs = cst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
-                usuario.setContrasenha(rs.getString("contrasenha"));
+                usuario.setContrasenha(rs.getString("contrasenha")); // No decodificamos la contraseña
                 usuario.setIdPersona(rs.getInt("idPersona"));
                 usuarios.add(usuario);
             }
@@ -86,9 +107,17 @@ public class UsuarioMySQL implements UsuarioDAO{
             System.out.println(e.getMessage());
         } finally {
             try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
         return usuarios;
@@ -96,7 +125,7 @@ public class UsuarioMySQL implements UsuarioDAO{
 
     @Override
     public Usuario obtenerPorId(int idUsuario) {
-       Usuario usuario = null;
+        Usuario usuario = null;
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL UsuarioListarPorID(?)}";
@@ -107,7 +136,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
-                usuario.setContrasenha(rs.getString("contrasenha"));
+                usuario.setContrasenha(rs.getString("contrasenha")); // No decodificamos la contraseña
                 usuario.setIdPersona(rs.getInt("idPersona"));
                 usuario.setActivo(true);
             }
@@ -115,9 +144,17 @@ public class UsuarioMySQL implements UsuarioDAO{
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
         return usuario;
@@ -127,27 +164,42 @@ public class UsuarioMySQL implements UsuarioDAO{
     public Usuario ExisteUsuario(String username, String contrasenha) {
         Usuario usuario = null;
         try {
+            // Primero obtenemos el usuario por username
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL ExisteUsuario(?,?)}";
+            sql = "{CALL UsuarioValidar(?)}";
             cst = con.prepareCall(sql);
             cst.setString(1, username);
-            cst.setString(2, contrasenha);
             rs = cst.executeQuery();
+
             if (rs.next()) {
-                usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("idUsuario"));
-                usuario.setUsername(rs.getString("username"));
-                usuario.setContrasenha(rs.getString("contrasenha"));
-                usuario.setIdPersona(rs.getInt("idPersona"));
-                usuario.setActivo(true);
+                String hashedPasswordFromDB = rs.getString("contrasenha");
+                // Verificamos si la contraseña coincide
+                if (PasswordHash.verifyPassword(contrasenha, hashedPasswordFromDB)) {
+                    usuario = new Usuario();
+                    usuario.setIdUsuario(rs.getInt("idUsuario"));
+                    usuario.setUsername(rs.getString("username"));
+                    usuario.setContrasenha(hashedPasswordFromDB); // Mantenemos el hash
+                    usuario.setIdPersona(rs.getInt("idPersona"));
+                    usuario.setActivo(true);
+                }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error SQL: " + e.getMessage());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al verificar la contraseña: " + e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
         return usuario;
@@ -166,7 +218,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
-                usuario.setContrasenha(rs.getString("contrasenha"));
+                usuario.setContrasenha(rs.getString("contrasenha")); // No decodificamos la contraseña
                 usuario.setIdPersona(rs.getInt("idPersona"));
                 usuario.setActivo(true);
             }
@@ -174,9 +226,17 @@ public class UsuarioMySQL implements UsuarioDAO{
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
         return usuario;
@@ -196,7 +256,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("username"));
-                usuario.setContrasenha(rs.getString("contrasenha"));
+                usuario.setContrasenha(rs.getString("contrasenha")); // No decodificamos la contraseña
                 usuario.setIdPersona(rs.getInt("idPersona"));
                 usuario.setActivo(true);
             }
@@ -204,9 +264,17 @@ public class UsuarioMySQL implements UsuarioDAO{
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
         return usuario;
@@ -246,7 +314,6 @@ public class UsuarioMySQL implements UsuarioDAO{
                 rolesActivos.add(rs.getString("rol"));
             }
 
-            // Consultar en la tabla Administrador
             String queryAdministrador = "SELECT 'Administrador' AS rol FROM Administrador WHERE idAdministrador = ? AND activo = true";
             statementAdministrador = con.prepareStatement(queryAdministrador);
             statementAdministrador.setInt(1, idPersona);
@@ -254,19 +321,30 @@ public class UsuarioMySQL implements UsuarioDAO{
             if (rs.next()) {
                 rolesActivos.add(rs.getString("rol"));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
         } finally {
-            // Cerrar los recursos
             try {
-                if (rs != null) rs.close();
-                if (statementMedico != null) statementMedico.close();
-                if (statementPaciente != null) statementPaciente.close();
-                if (statementAuxiliar != null) statementAuxiliar.close();
-                if (statementAdministrador != null) statementAdministrador.close();
-                if (con != null) con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (statementMedico != null) {
+                    statementMedico.close();
+                }
+                if (statementPaciente != null) {
+                    statementPaciente.close();
+                }
+                if (statementAuxiliar != null) {
+                    statementAuxiliar.close();
+                }
+                if (statementAdministrador != null) {
+                    statementAdministrador.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
         return rolesActivos;
