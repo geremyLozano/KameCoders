@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
+import java.util.Arrays;
 
 public class PasswordHash {
     private static final int ITERATIONS = 10000;
@@ -30,16 +31,21 @@ public class PasswordHash {
         
         byte[] testHash = generateHash(password.toCharArray(), salt);
         
+        // Comparación de hashes sin protección contra ataques de tiempo
+        return Arrays.equals(hash, testHash);
+        
         // Comparación segura contra ataques de tiempo
-        return slowEquals(hash, testHash);
+        // return slowEquals(hash, testHash);
     }
     
+    /*
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
         for(int i = 0; i < a.length && i < b.length; i++)
             diff |= a[i] ^ b[i];
         return diff == 0;
     }
+    */
     
     private static byte[] generateSalt() {
         SecureRandom random = new SecureRandom();
