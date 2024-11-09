@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -18,6 +19,7 @@ import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -25,6 +27,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     private Connection con;
     private PreparedStatement pstProcedimiento;
     private PreparedStatement pstCitaMedica;
+    private PreparedStatement pst;
     private CallableStatement cst;
     private Statement st;
     private String sql;
@@ -349,6 +352,58 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         // Devolver la lista de citas médicas
         return listaCitas;
     }
+    
+    @Override
+    public ArrayList<CitaMedica> obtenerCitasPendientes(LocalDateTime reminderThreshold, Persona persona) {
+        ArrayList<CitaMedica> citasPendientes = new ArrayList<>();
+        String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente "
+                + "FROM CitaMedica c, Persona p "
+                + "WHERE c.idPaciente = p.idPersona AND c.fecha = ? AND c.hora = ?";
 
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            pst = con.prepareStatement(sql);
+
+            // Establecer los parámetros de la consulta
+            pst.setDate(1, java.sql.Date.valueOf(reminderThreshold.toLocalDate()));
+            pst.setTime(2, java.sql.Time.valueOf(reminderThreshold.toLocalTime()));
+
+            rs = pst.executeQuery();
+
+            // Procesar los resultados y agregar las citas a la lista
+            while (rs.next()) {
+                CitaMedica cita = new CitaMedica();
+                java.sql.Date fechaSql = java.sql.Date.valueOf(rs.getDate("fecha").toLocalDate());
+                cita.setFecha(fechaSql); 
+                cita.setHora(rs.getTime("hora").toLocalTime());
+                cita.setIdPaciente(rs.getInt("idPaciente"));
+                
+                // Asignar los valores a la persona
+                persona.setCorreoElectronico(rs.getString("correoElectronico"));
+                persona.setNombre(rs.getString("nombre"));
+                persona.setApellido(rs.getString("apellido"));
+
+                citasPendientes.add(cita);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener citas pendientes para recordatorio: " + e.getMessage());
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+        return citasPendientes;
+    }
 
 }

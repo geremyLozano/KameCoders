@@ -1,7 +1,9 @@
 package pe.edu.pucp.citamedica.dao;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
 
 public interface CitaMedicaDAO {
     int insertar(CitaMedica citaMedica);
@@ -10,4 +12,5 @@ public interface CitaMedicaDAO {
     ArrayList<CitaMedica> listarTodos();
     CitaMedica obtenerPorId(int idCitaMedica);
     ArrayList<CitaMedica> listarPorPaciente(int idPaciente);
+    ArrayList<CitaMedica> obtenerCitasPendientes(LocalDateTime reminderThreshold, Persona persona);
 }
