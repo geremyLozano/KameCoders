@@ -25,6 +25,11 @@ public class SoftMain {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
+        
+        
+        // Test por consola
+        
+        
 //        // Creación de un paciente
 //        Paciente paciente = new Paciente();
 //        // Datos de Persona-Paciente
