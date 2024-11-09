@@ -81,8 +81,12 @@ public int insertar(Paciente paciente, Usuario usuario) {
         return resultado;
     } finally {
         try {
-            if (cst != null) cst.close();
-            if (con != null) con.close();
+            if (cst != null) {
+                cst.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         } catch (SQLException e) {
             System.out.println("Error al cerrar la conexión: " + e.getMessage());
         }
