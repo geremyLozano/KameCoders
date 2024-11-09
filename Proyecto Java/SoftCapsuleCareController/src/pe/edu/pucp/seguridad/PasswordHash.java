@@ -8,16 +8,14 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
 public class PasswordHash {
-    // Reducimos el tamaño de la sal y la longitud de la clave para un hash más corto
     private static final int ITERATIONS = 10000;
-    private static final int KEY_LENGTH = 128; // Reducido de 256 a 128 bits
-    private static final int SALT_LENGTH = 8;  // Reducido de 16 a 8 bytes
+    private static final int KEY_LENGTH = 128; //128 bits
+    private static final int SALT_LENGTH = 8;  //8 bytes
     
     public static String hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] salt = generateSalt();
         byte[] hash = generateHash(password.toCharArray(), salt);
         
-        // Combinar salt y hash en un string más corto
         return Base64.getEncoder().encodeToString(salt) + ":" + 
                Base64.getEncoder().encodeToString(hash);
     }
