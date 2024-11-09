@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
@@ -354,41 +355,53 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     }
     
     @Override
-    public ArrayList<CitaMedica> obtenerCitasPendientes(LocalDateTime reminderThreshold, Persona persona) {
-        ArrayList<CitaMedica> citasPendientes = new ArrayList<>();
+    public void obtenerCitasPendientes(List<Persona> personas) {
+    // Obtener la hora actual y calcular el rango de tiempo para la consulta
+    LocalDateTime ahora = LocalDateTime.now();
+    LocalDateTime horaFinal = ahora.plusHours(1); // Hora actual + 1 hora
+    
+    // Consulta SQL para obtener las citas dentro del rango de tiempo
         String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente "
-                + "FROM CitaMedica c, Persona p "
-                + "WHERE c.idPaciente = p.idPersona AND c.fecha = ? AND c.hora = ?";
+                + "FROM CitaMedica c "
+                + "JOIN Persona p ON c.idPaciente = p.idPersona "
+                + "WHERE c.fecha = ? AND c.hora BETWEEN ? AND ?";
 
         try {
+            // Obtener la conexión a la base de datos
             con = DBPoolManager.getInstance().getConnection();
             pst = con.prepareStatement(sql);
 
             // Establecer los parámetros de la consulta
-            pst.setDate(1, java.sql.Date.valueOf(reminderThreshold.toLocalDate()));
-            pst.setTime(2, java.sql.Time.valueOf(reminderThreshold.toLocalTime()));
+            pst.setDate(1, java.sql.Date.valueOf(ahora.toLocalDate()));
+            pst.setTime(2, java.sql.Time.valueOf(ahora.toLocalTime()));
+            pst.setTime(3, java.sql.Time.valueOf(horaFinal.toLocalTime()));
 
+            // Ejecutar la consulta
             rs = pst.executeQuery();
 
-            // Procesar los resultados y agregar las citas a la lista
+            // Procesar los resultados y agregar las personas a la lista
             while (rs.next()) {
-                CitaMedica cita = new CitaMedica();
-                java.sql.Date fechaSql = java.sql.Date.valueOf(rs.getDate("fecha").toLocalDate());
-                cita.setFecha(fechaSql); 
-                cita.setHora(rs.getTime("hora").toLocalTime());
-                cita.setIdPaciente(rs.getInt("idPaciente"));
-                
-                // Asignar los valores a la persona
+                // Crear un nuevo objeto Persona para cada paciente
+                Persona persona = new Persona();
                 persona.setCorreoElectronico(rs.getString("correoElectronico"));
                 persona.setNombre(rs.getString("nombre"));
                 persona.setApellido(rs.getString("apellido"));
+                persona.setIdPersona(rs.getInt("idPaciente"));
 
-                citasPendientes.add(cita);
+                // Crear la cita médica asociada con la persona
+//                CitaMedica cita = new CitaMedica();
+//                cita.setFecha(rs.getDate("fecha"));
+//                cita.setHora(rs.getTime("hora").toLocalTime());
+//                cita.setIdPaciente(rs.getInt("idPaciente"));
+//                cita.setPersona(persona); // Asociamos la persona a la cita médica
+
+                // Agregar la persona a la lista de personas
+                personas.add(persona);
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener citas pendientes para recordatorio: " + e.getMessage());
         } finally {
-            // Cerrar recursos
+            // Cerrar los recursos
             try {
                 if (rs != null) {
                     rs.close();
@@ -403,7 +416,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 System.out.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
-        return citasPendientes;
     }
+
 
 }
