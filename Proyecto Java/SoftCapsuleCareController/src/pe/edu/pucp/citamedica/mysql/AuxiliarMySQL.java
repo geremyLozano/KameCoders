@@ -1,4 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import pe.edu.pucp.citamedica.model.clinica.Auxiliar;
 import pe.edu.pucp.citamedica.dao.AuxiliarDAO;
 import java.sql.Connection;
@@ -9,6 +11,7 @@ import java.sql.ResultSet;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
+import pe.edu.pucp.seguridad.PasswordHash;
 
 public class AuxiliarMySQL implements AuxiliarDAO{
     private Connection con;
@@ -17,8 +20,18 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(Auxiliar auxiliar, Usuario usuario){
+    public int insertar(Auxiliar auxiliar, Usuario usuario) {
         int resultado = -1;
+        String hashedPassword;
+
+        // Intentamos generar el hash de la contraseña
+        try {
+            hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+            return resultado;
+        }
+
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -26,7 +39,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
             cst.setString(3, usuario.getUsername());
-            cst.setString(4, usuario.getContrasenha());
+            cst.setString(4, hashedPassword); // Usamos la contraseña hasheada
             cst.setString(5, auxiliar.getDNI());
             cst.setString(6, auxiliar.getNombre());
             cst.setString(7, auxiliar.getApellido());
@@ -36,28 +49,21 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.setDate(11, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
             cst.setString(12, String.valueOf(auxiliar.getGenero()));
             cst.setInt(13, auxiliar.getEspecialidad().getIdEspecialidad());
-        
+
             resultado = cst.executeUpdate();
-            
+
             auxiliar.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             auxiliar.setIdAuxiliar(auxiliar.getIdPersona());
-//            auxiliar.setDNI(auxiliar.getDNI());
-//            auxiliar.setNombre(auxiliar.getNombre());
-//            auxiliar.setApellido(auxiliar.getApellido());
-//            auxiliar.setCorreoElectronico(auxiliar.getCorreoElectronico());
-//            auxiliar.setNumTelefono(auxiliar.getNumTelefono());
-//            auxiliar.setDireccion(auxiliar.getDireccion());
-//            auxiliar.setFechaNacimiento(auxiliar.getFechaNacimiento());
-//            auxiliar.setGenero(auxiliar.getGenero());
             auxiliar.setActivo(true);
-        return resultado;
-        }   catch (SQLException e) {
-                System.out.println(e.getMessage());
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
         return resultado;
     }
-    
+  
     @Override
     public int modificar(Auxiliar auxiliar) {
         int resultado = -1;

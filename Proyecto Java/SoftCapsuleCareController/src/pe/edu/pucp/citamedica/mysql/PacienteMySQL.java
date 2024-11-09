@@ -25,73 +25,73 @@ public class PacienteMySQL implements PacienteDAO{
     private String sql;
     private ResultSet rs;
     
-@Override
-public int insertar(Paciente paciente, Usuario usuario) {
-    int resultado = -1;
-    String hashedPassword;
-    
-    // Primero intentamos generar el hash de la contraseña
-    try {
-        hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
-    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-        System.out.println("Error al hashear la contraseña: " + e.getMessage());
-        return resultado;
-    }
-    
-    // Si el hash se generó correctamente, procedemos con la inserción
-    try {
-        con = DBPoolManager.getInstance().getConnection();
-        sql = "{CALL PacienteInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-        cst = con.prepareCall(sql);
-        cst.registerOutParameter(1, java.sql.Types.INTEGER);
-        cst.registerOutParameter(2, java.sql.Types.INTEGER);
-        cst.setString(3, usuario.getUsername());
-        cst.setString(4, hashedPassword);
-        cst.setString(5, paciente.getDNI());
-        cst.setString(6, paciente.getNombre());
-        cst.setString(7, paciente.getApellido());
-        cst.setString(8, paciente.getCorreoElectronico());
-        cst.setInt(9, paciente.getNumTelefono());
-        cst.setString(10, paciente.getDireccion());
-        cst.setDate(11, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
-        cst.setString(12, String.valueOf(paciente.getGenero()));
-       
-        resultado = cst.executeUpdate();
-        
-        paciente.setIdPersona(cst.getInt(1));
-        usuario.setIdUsuario(cst.getInt(2));
-        usuario.setIdPersona(paciente.getIdPaciente());
-        usuario.setActivo(true);
-        
-        paciente.setIdPaciente(paciente.getIdPersona());
-        paciente.setDNI(paciente.getDNI());
-        paciente.setNombre(paciente.getNombre());
-        paciente.setApellido(paciente.getApellido());
-        paciente.setCorreoElectronico(paciente.getCorreoElectronico());
-        paciente.setNumTelefono(paciente.getNumTelefono());
-        paciente.setDireccion(paciente.getDireccion());
-        paciente.setFechaNacimiento(paciente.getFechaNacimiento());
-        paciente.setGenero(paciente.getGenero());
-        paciente.setActivo(true);
-        paciente.setHistorialActivo(false);
-        
-        return resultado;
-    } catch (SQLException e) {
-        System.out.println("Error SQL: " + e.getMessage());
-        return resultado;
-    } finally {
+    @Override
+    public int insertar(Paciente paciente, Usuario usuario) {
+        int resultado = -1;
+        String hashedPassword;
+
+        // Primero intentamos generar el hash de la contraseña
         try {
-            if (cst != null) {
-                cst.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+            hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+            return resultado;
+        }
+
+        // Si el hash se generó correctamente, procedemos con la inserción
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL PacienteInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(3, usuario.getUsername());
+            cst.setString(4, hashedPassword);
+            cst.setString(5, paciente.getDNI());
+            cst.setString(6, paciente.getNombre());
+            cst.setString(7, paciente.getApellido());
+            cst.setString(8, paciente.getCorreoElectronico());
+            cst.setInt(9, paciente.getNumTelefono());
+            cst.setString(10, paciente.getDireccion());
+            cst.setDate(11, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
+            cst.setString(12, String.valueOf(paciente.getGenero()));
+
+            resultado = cst.executeUpdate();
+
+            paciente.setIdPersona(cst.getInt(1));
+            usuario.setIdUsuario(cst.getInt(2));
+            usuario.setIdPersona(paciente.getIdPaciente());
+            usuario.setActivo(true);
+
+            paciente.setIdPaciente(paciente.getIdPersona());
+            paciente.setDNI(paciente.getDNI());
+            paciente.setNombre(paciente.getNombre());
+            paciente.setApellido(paciente.getApellido());
+            paciente.setCorreoElectronico(paciente.getCorreoElectronico());
+            paciente.setNumTelefono(paciente.getNumTelefono());
+            paciente.setDireccion(paciente.getDireccion());
+            paciente.setFechaNacimiento(paciente.getFechaNacimiento());
+            paciente.setGenero(paciente.getGenero());
+            paciente.setActivo(true);
+            paciente.setHistorialActivo(false);
+
+            return resultado;
         } catch (SQLException e) {
-            System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            System.out.println("Error SQL: " + e.getMessage());
+            return resultado;
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
         }
     }
-}
 
     @Override
     public int eliminar(int idPaciente) {
