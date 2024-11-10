@@ -36,7 +36,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     
     @Override
     public int insertar(CitaMedica cita) {
-        int resultado = 0;
+        int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
