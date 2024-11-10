@@ -1,5 +1,7 @@
 package pe.edu.pucp.citamedica.mysql;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,6 +11,7 @@ import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
+import pe.edu.pucp.seguridad.PasswordHash;
 
 /**
  *
@@ -24,6 +27,16 @@ public class AdministradorMySQL implements AdministradorDAO{
     @Override
     public int insertar(Administrador administrador, Usuario usuario) {
         int resultado = -1;
+        String hashedPassword;
+
+        // Intentamos generar el hash de la contraseña
+        try {
+            hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+            return resultado;
+        }
+
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AdministradorInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -31,7 +44,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
             cst.setString(3, usuario.getUsername());
-            cst.setString(4, usuario.getContrasenha());
+            cst.setString(4, hashedPassword); // Usamos la contraseña hasheada
             cst.setString(5, administrador.getDNI());
             cst.setString(6, administrador.getNombre());
             cst.setString(7, administrador.getApellido());
@@ -40,25 +53,26 @@ public class AdministradorMySQL implements AdministradorDAO{
             cst.setString(10, administrador.getDireccion());
             cst.setDate(11, new java.sql.Date(administrador.getFechaNacimiento().getTime()));
             cst.setString(12, String.valueOf(administrador.getGenero()));
-        
+
             resultado = cst.executeUpdate();
-            
+
             administrador.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
-            administrador.setIdAdministrador(administrador.getIdPersona());
-            administrador.setDNI(administrador.getDNI());
-            administrador.setNombre(administrador.getNombre());
-            administrador.setApellido(administrador.getApellido());
-            administrador.setCorreoElectronico(administrador.getCorreoElectronico());
-            administrador.setNumTelefono(administrador.getNumTelefono());
-            administrador.setDireccion(administrador.getDireccion());
-            administrador.setFechaNacimiento(administrador.getFechaNacimiento());
-            administrador.setGenero(administrador.getGenero());
+//            administrador.setIdAdministrador(administrador.getIdPersona());
+//            administrador.setDNI(administrador.getDNI());
+//            administrador.setNombre(administrador.getNombre());
+//            administrador.setApellido(administrador.getApellido());
+//            administrador.setCorreoElectronico(administrador.getCorreoElectronico());
+//            administrador.setNumTelefono(administrador.getNumTelefono());
+//            administrador.setDireccion(administrador.getDireccion());
+//            administrador.setFechaNacimiento(administrador.getFechaNacimiento());
+//            administrador.setGenero(administrador.getGenero());
             administrador.setActivo(true);
-        return resultado;
-        }   catch (SQLException e) {
-                System.out.println(e.getMessage());
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
         return resultado;
     }
 

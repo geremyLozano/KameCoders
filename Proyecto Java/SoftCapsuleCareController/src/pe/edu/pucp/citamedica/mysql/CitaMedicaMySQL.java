@@ -10,14 +10,17 @@ import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
+import pe.edu.pucp.citamedica.model.usuario.Persona;
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
@@ -25,6 +28,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     private Connection con;
     private PreparedStatement pstProcedimiento;
     private PreparedStatement pstCitaMedica;
+    private PreparedStatement pst;
     private CallableStatement cst;
     private Statement st;
     private String sql;
@@ -32,7 +36,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     
     @Override
     public int insertar(CitaMedica cita) {
-        int resultado = 0;
+        int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -348,6 +352,70 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
         // Devolver la lista de citas médicas
         return listaCitas;
+    }
+    
+    @Override
+    public void obtenerCitasPendientes(List<Persona> personas) {
+    // Obtener la hora actual y calcular el rango de tiempo para la consulta
+    LocalDateTime ahora = LocalDateTime.now();
+    LocalDateTime horaFinal = ahora.plusHours(1); // Hora actual + 1 hora
+    
+    // Consulta SQL para obtener las citas dentro del rango de tiempo
+        String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente "
+                + "FROM CitaMedica c "
+                + "JOIN Persona p ON c.idPaciente = p.idPersona "
+                + "WHERE c.fecha = ? AND c.hora BETWEEN ? AND ?";
+
+        try {
+            // Obtener la conexión a la base de datos
+            con = DBPoolManager.getInstance().getConnection();
+            pst = con.prepareStatement(sql);
+
+            // Establecer los parámetros de la consulta
+            pst.setDate(1, java.sql.Date.valueOf(ahora.toLocalDate()));
+            pst.setTime(2, java.sql.Time.valueOf(ahora.toLocalTime()));
+            pst.setTime(3, java.sql.Time.valueOf(horaFinal.toLocalTime()));
+
+            // Ejecutar la consulta
+            rs = pst.executeQuery();
+
+            // Procesar los resultados y agregar las personas a la lista
+            while (rs.next()) {
+                // Crear un nuevo objeto Persona para cada paciente
+                Persona persona = new Persona();
+                persona.setCorreoElectronico(rs.getString("correoElectronico"));
+                persona.setNombre(rs.getString("nombre"));
+                persona.setApellido(rs.getString("apellido"));
+                persona.setIdPersona(rs.getInt("idPaciente"));
+
+                // Crear la cita médica asociada con la persona
+//                CitaMedica cita = new CitaMedica();
+//                cita.setFecha(rs.getDate("fecha"));
+//                cita.setHora(rs.getTime("hora").toLocalTime());
+//                cita.setIdPaciente(rs.getInt("idPaciente"));
+//                cita.setPersona(persona); // Asociamos la persona a la cita médica
+
+                // Agregar la persona a la lista de personas
+                personas.add(persona);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener citas pendientes para recordatorio: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
     }
 
 

@@ -1,4 +1,6 @@
 package pe.edu.pucp.citamedica.mysql;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import java.sql.CallableStatement;
@@ -15,6 +17,7 @@ import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
 import pe.edu.pucp.citamedica.model.clinica.Especialidad;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
+import pe.edu.pucp.seguridad.PasswordHash;
 
 
 
@@ -54,19 +57,21 @@ public class MedicoMySQL implements MedicoDAO {
     
     @Override
     public int insertar(Medico medico, Usuario usuario) {
+        int resultado = -1;
+        String hashedPassword;
 
+        // Intentamos generar el hash de la contraseña
+        try {
+            hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+            return resultado;
+        }
 
-        int resultado = 0;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            
-            
             sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-            
-            
             cst = con.prepareCall(sql);
-            
-            
             cst.setString(1, medico.getDNI());
             cst.setString(2, medico.getNombre());
             cst.setString(3, medico.getApellido());
@@ -74,49 +79,29 @@ public class MedicoMySQL implements MedicoDAO {
             cst.setInt(5, medico.getNumTelefono());
             cst.setString(6, medico.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
-            cst.setDate(7,sqlDate);
-           
+            cst.setDate(7, sqlDate);
             cst.setString(8, String.valueOf(medico.getGenero()));
-            
             cst.setString(9, medico.getNumColegiatura());
-            cst.setTime(10,Time.valueOf(medico.getHoraInicioTrabajo()));
-            cst.setTime(11,Time.valueOf(medico.getHoraFinTrabajo()));
-            
-            
-//            String diasLaboralesString = medico.getDiasLaborales().stream()
-//                .map(DiaSemana::name) // Obtener el nombre del enum
-//                .collect(Collectors.joining(",")); // Unirlos con coma
-//            
-            
-            cst.setString(12, medico.getDiasLaborales());       
-            cst.setInt(13,medico.getAhosExp());
-            cst.setBoolean(14,true);
-            cst.setInt(15,medico.getEspecialidad().getIdEspecialidad());
+            cst.setTime(10, Time.valueOf(medico.getHoraInicioTrabajo()));
+            cst.setTime(11, Time.valueOf(medico.getHoraFinTrabajo()));
+            cst.setString(12, medico.getDiasLaborales());
+            cst.setInt(13, medico.getAhosExp());
+            cst.setBoolean(14, true);
+            cst.setInt(15, medico.getEspecialidad().getIdEspecialidad());
             cst.registerOutParameter(16, java.sql.Types.INTEGER);
-            cst.setString(17, usuario.getContrasenha());
-            
+            cst.setString(17, hashedPassword); // Usamos la contraseña hasheada
+
             medico.setIdMedico(cst.getInt(16));
-            resultado = pstMedico.executeUpdate();
-          
-            
-           
-           // resultado = pstMedico.executeUpdate();
-            
+            resultado = cst.executeUpdate(); // Ejecutamos la inserción
+
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        } catch (Exception e) {
+            System.out.print("Error general: " + e.getMessage());
         }
         return resultado;
-        
-        
-        
-
-
-
     }
+
 
     @Override
     public int modificar(Medico medico) {
