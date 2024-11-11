@@ -68,9 +68,4 @@ public class PacienteWS {
         return resultado;
     }
     
-    @WebMethod(operationName = "listarPacienteFiltro")
-    public List<Paciente> listarFiltroPaciente(String filtro) {
-        List<Paciente> resultado = pacienteDAO.listar(filtro);
-        return resultado;
-    }
 }
