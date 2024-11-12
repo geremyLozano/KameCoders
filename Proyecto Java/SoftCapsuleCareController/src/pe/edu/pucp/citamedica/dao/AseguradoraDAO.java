@@ -9,4 +9,5 @@ public interface AseguradoraDAO {
     int eliminar(int idAseguradora);
     ArrayList<Aseguradora> listarTodos();
     Aseguradora obtenerPorId(int idAseguradora);
+    int insertarPacienteAseguradora(int idPaciente,int idAseguradora);
 }

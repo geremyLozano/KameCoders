@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import pe.edu.pucp.citamedica.dao.AseguradoraDAO;
 import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
@@ -16,6 +17,7 @@ import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
+import pe.edu.pucp.citamedica.mysql.AseguradoraMySQL;
 import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
 import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
 import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
@@ -106,10 +108,7 @@ public class SoftMain {
 //            } else {
 //                System.out.println("No se encontraron procedimientos registrados.");
 //            }
-        CitaMedicaDAO citadao = new CitaMedicaMySQL();
-        ArrayList<CitaMedica> citas = citadao.listarPorPaciente(7);
-        for(CitaMedica cita: citas){
-            System.out.println(cita.getTipo());
-        }
+        AseguradoraDAO asedao = new AseguradoraMySQL();
+        asedao.insertarPacienteAseguradora(85, 6);
     }
 }

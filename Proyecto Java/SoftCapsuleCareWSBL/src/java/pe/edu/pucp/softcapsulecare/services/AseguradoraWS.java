@@ -49,4 +49,10 @@ public class AseguradoraWS {
         return aseguradoraDAO.obtenerPorId(idAseguradora);
     }
     
+    @WebMethod(operationName = "insertarPacienteAseguradora")
+    public int insertarPacienteAseguradora(@WebParam(name = "paciente") int idPaciente,
+            @WebParam(name = "aseguradora") int idAseguradora) {
+        return aseguradoraDAO.insertarPacienteAseguradora(idPaciente, idAseguradora);
+    }
+    
 }

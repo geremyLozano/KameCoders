@@ -134,4 +134,25 @@ public class AseguradoraMySQL implements AseguradoraDAO {
         }
         return aseguradora;
     }
+
+    @Override
+    public int insertarPacienteAseguradora(int idPaciente, int idAseguradora) {
+        int resultado = 0;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call PACIENTE_ASEGURADORA_INSERTAR(?,?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPaciente);
+            cst.setInt(2, idAseguradora);
+            resultado = cst.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        return resultado;
+    }
+    
+    
+    
 }
