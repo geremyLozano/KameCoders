@@ -45,7 +45,7 @@ public class PacienteMySQL implements PacienteDAO{
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
-            cst.setString(3, usuario.getUsername());
+            cst.setString(3, paciente.getDNI());
             cst.setString(4, hashedPassword);
             cst.setString(5, paciente.getDNI());
             cst.setString(6, paciente.getNombre());
@@ -65,13 +65,13 @@ public class PacienteMySQL implements PacienteDAO{
 
             paciente.setIdPaciente(paciente.getIdPersona());
             paciente.setDNI(paciente.getDNI());
-            paciente.setNombre(paciente.getNombre());
-            paciente.setApellido(paciente.getApellido());
-            paciente.setCorreoElectronico(paciente.getCorreoElectronico());
-            paciente.setNumTelefono(paciente.getNumTelefono());
-            paciente.setDireccion(paciente.getDireccion());
-            paciente.setFechaNacimiento(paciente.getFechaNacimiento());
-            paciente.setGenero(paciente.getGenero());
+//            paciente.setNombre(paciente.getNombre());
+//            paciente.setApellido(paciente.getApellido());
+//            paciente.setCorreoElectronico(paciente.getCorreoElectronico());
+//            paciente.setNumTelefono(paciente.getNumTelefono());
+//            paciente.setDireccion(paciente.getDireccion());
+//            paciente.setFechaNacimiento(paciente.getFechaNacimiento());
+//            paciente.setGenero(paciente.getGenero());
             paciente.setActivo(true);
             paciente.setHistorialActivo(false);
 
