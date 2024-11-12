@@ -70,7 +70,7 @@ public class MedicoMySQL implements MedicoDAO {
 
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL insertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            sql = "{CALL InsertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             cst = con.prepareCall(sql);
             cst.setString(1, medico.getDNI());
             cst.setString(2, medico.getNombre());
