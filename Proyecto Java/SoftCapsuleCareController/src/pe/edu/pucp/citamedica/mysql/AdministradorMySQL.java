@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.sql.PreparedStatement;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.dao.AdministradorDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -179,4 +181,142 @@ public class AdministradorMySQL implements AdministradorDAO{
         }
         return administrador;
     }   
+
+
+
+    @Override
+    public Administrador obtenerPorId1(int idAdmin) {
+        Administrador resultado = null;
+        String query = "SELECT Persona.*, Administrador.activo "
+                + "FROM Persona "
+                + "JOIN Administrador ON Persona.idPersona = Administrador.idAdministrador "
+                + "WHERE Administrador.activo = ? AND Administrador.idAdministrador = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setBoolean(1, true);
+            statement.setInt(2, idAdmin);
+
+            // Ejecutar la consulta y procesar el resultado
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                resultado = new Administrador();
+                resultado.setIdAdministrador(resultSet.getInt("idPersona"));
+                resultado.setDNI(resultSet.getString("DNI"));
+                resultado.setNombre(resultSet.getString("nombre"));
+                resultado.setApellido(resultSet.getString("apellido"));
+                resultado.setCorreoElectronico(resultSet.getString("correoElectronico"));
+                resultado.setNumTelefono(resultSet.getInt("numTelefono"));
+                resultado.setDireccion(resultSet.getString("direccion"));
+                resultado.setFechaNacimiento(resultSet.getDate("fechaNacimiento"));
+                resultado.setGenero(resultSet.getString("genero").charAt(0));
+                resultado.setActivo(resultSet.getBoolean("activo"));
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion(); 
+        }
+
+        return resultado;
+        
+    }
+
+    @Override
+    public int insertar1(Administrador admin) {
+        int resultado = 0;
+        int idPersona = 0;
+
+        String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String queryAdmin = "INSERT INTO Administrador(idAdministrador, activo) "
+                + "VALUES (?, ?)";
+
+        try (Connection conn = DBPoolManager.getInstance().getConnection(); 
+                PreparedStatement psPersona = conn.prepareStatement(queryPersona, PreparedStatement.RETURN_GENERATED_KEYS); 
+                PreparedStatement psAdmin = conn.prepareStatement(queryAdmin)) {
+
+            psPersona.setString(1, admin.getDNI());
+            psPersona.setString(2, admin.getNombre());
+            psPersona.setString(3, admin.getApellido());
+            psPersona.setString(4, admin.getCorreoElectronico());
+            psPersona.setInt(5, admin.getNumTelefono());
+            psPersona.setString(6, admin.getDireccion());
+            psPersona.setDate(7, new java.sql.Date(admin.getFechaNacimiento().getTime()));
+            psPersona.setString(8, String.valueOf(admin.getGenero()));
+            psPersona.executeUpdate();
+
+            System.out.println("Ejecutando inserción en Persona...");
+            psPersona.executeUpdate();
+            
+            try (ResultSet generatedKeys = psPersona.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    idPersona = generatedKeys.getInt(1);
+                    System.out.println("ID generado para Persona: " + idPersona);
+                } else {
+                    System.err.println("Fallo al insertar en Persona, no se pudo obtener el ID.");
+                    return 0; 
+                }
+            }
+
+            psAdmin.setInt(1, idPersona);
+            psAdmin.setBoolean(2, admin.isActivo());
+            resultado = psAdmin.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
+    
+    @Override
+    public List<Administrador> listar(String filtro) {
+        System.out.println("Filtro recibido: " + filtro);
+        List<Administrador> result = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT a.idAdministrador, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, a.activo "
+                    + "FROM Administrador a "
+                    + "JOIN Persona p ON a.idAdministrador = p.idPersona "
+                    + "WHERE p.nombre LIKE ? AND a.activo = true";
+
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setString(1, "%" + filtro + "%"); 
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+             
+                Administrador admin = new Administrador();
+
+                
+                admin.setDNI(cursor.getString("DNI"));
+                if (cursor.getObject("nombre") != null) {
+                    admin.setNombre(cursor.getString("nombre"));
+                }
+                //admin.setNombre(cursor.getString("nombre"));
+                admin.setApellido(cursor.getString("apellido"));
+                admin.setCorreoElectronico(cursor.getString("correoElectronico"));
+                admin.setFechaNacimiento(cursor.getDate("fechaNacimiento"));
+
+                admin.setIdAdministrador(cursor.getInt("idAdministrador"));
+                admin.setActivo(cursor.getBoolean("activo"));
+
+                result.add(admin);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result;
+    }
 }

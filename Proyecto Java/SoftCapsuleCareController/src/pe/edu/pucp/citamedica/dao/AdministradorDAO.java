@@ -1,6 +1,7 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 
@@ -12,4 +13,7 @@ public interface AdministradorDAO{
     ArrayList<Administrador> listarTodos();
     Administrador obtenerPorId(int idAdministrador);
     
+    public Administrador obtenerPorId1(int idAdmin);
+    int insertar1(Administrador admin);
+    List<Administrador> listar(String filtro);
 }

@@ -70,15 +70,24 @@ public class MedicoWS {
         return resultado;
     }
     
-    /*@WebMethod(operationName = "obtenerPorIDPaciente1")
-    public Paciente pacienteObtenerID1(@WebParam(name = "paciente") int idPaciente) {
-        Paciente resultado = pacienteDAO.obtenerPorId1(idPaciente);
+    
+
+    @WebMethod(operationName = "insertarMedico1")
+    public int medicoInsertar1(@WebParam(name = "paciente") Medico medico) {
+        int resultado = medicoDAO.insertarMedico1(medico);
         return resultado;
     }
-    @WebMethod(operationName = "insertarPaciente1")
-    public int pacienteInsertar1(@WebParam(name = "paciente") Paciente paciente) {
-        int resultado = pacienteDAO.insertar1(paciente);
+
+    @WebMethod(operationName = "listarMedico1")
+    public ArrayList<Medico> listarMedico1() {
+        ArrayList<Medico> resultado = medicoDAO.listarTodos1();
         return resultado;
-    }*/
+    }
+    
+    @WebMethod(operationName = "obtenerPorIDMedico1")
+    public Medico medicoObtenerID1(@WebParam(name = "medico") int idMedico) {
+        Medico resultado = medicoDAO.obtenerPorId1(idMedico);
+        return resultado;
+    }
     
 }

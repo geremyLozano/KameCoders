@@ -10,6 +10,7 @@ public interface PacienteDAO{
     int eliminar(int idPaciente);
     ArrayList<Paciente> listarTodos();
     Paciente obtenerPorId(int idPaciente);
+
     public Paciente obtenerPorId1(int idPaciente);
     public int insertar1(Paciente paciente);
     List<Paciente> listar(String filtro);

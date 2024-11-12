@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Time;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
@@ -48,67 +50,7 @@ public class MedicoMySQL implements MedicoDAO {
 //        return resultado;
 //    }
     
-    @Override
-    public ArrayList<Medico> listarTodos1() {
-        ArrayList<Medico> listaMedicos = new ArrayList<>();
-
-        String sql = "SELECT m.idMedico, m.numColegiatura, m.horaInicioTrabajo, m.horaFinTrabajo, "
-                + "m.diasLaborales, m.anhosExp, e.idEspecialidad, "
-                + "p.DNI, p.nombre, p.apellido "
-                + "FROM Medico m "
-                + "JOIN Persona p ON m.idMedico = p.idPersona "
-                + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad WHERE m.activo = true";
-
-        try (Connection con = DBPoolManager.getInstance().getConnection(); PreparedStatement pstMedico = con.prepareStatement(sql); ResultSet rs = pstMedico.executeQuery()) {
-
-            // Iterar sobre cada registro en el ResultSet
-            while (rs.next()) {
-                // Crear un nuevo objeto Medico
-                Medico medico = new Medico();
-                medico.setIdMedico(rs.getInt("idMedico"));
-
-                // Crear un objeto Especialidad y asignarlo al Medico
-                Especialidad especialidad = new Especialidad();
-                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
-                medico.setEspecialidad(especialidad);
-
-                // Asignar atributos heredados de Persona
-                medico.setDNI(rs.getString("DNI"));
-                medico.setNombre(rs.getString("nombre"));
-                medico.setApellido(rs.getString("apellido"));
-
-                // Asignar atributos específicos de Medico
-                medico.setNumColegiatura(rs.getString("numColegiatura"));
-
-                // Convertir las horas de inicio y fin de trabajo
-                Time horaInicioTrabajoTime = rs.getTime("horaInicioTrabajo");
-                Time horaFinTrabajoTime = rs.getTime("horaFinTrabajo");
-                if (horaInicioTrabajoTime != null) {
-                    medico.setHoraInicioTrabajo(horaInicioTrabajoTime.toLocalTime());
-                } else {
-                    medico.setHoraInicioTrabajo(null);
-                }
-                if (horaFinTrabajoTime != null) {
-                    medico.setHoraFinTrabajo(horaFinTrabajoTime.toLocalTime());
-                } else {
-                    medico.setHoraFinTrabajo(null);
-                }
-
-                // Asignar otros atributos de Medico
-                medico.setDiasLaborales(rs.getString("diasLaborales"));
-                medico.setAhosExp(rs.getInt("anhosExp"));
-
-                // Agregar el medico a la lista
-                listaMedicos.add(medico);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();  // Manejar la excepción si ocurre un error
-        }
-
-        return listaMedicos;
-    }
-    
+      
     
     @Override
     public int insertar(Medico medico, Usuario usuario) {
@@ -420,6 +362,192 @@ public class MedicoMySQL implements MedicoDAO {
         return listaMedicos; // Retornar la lista de médicos filtrada por especialidad
     }
 
+
+
+
+
+   @Override
+    public int insertarMedico1(Medico medico) {
+        int resultado = 0;
+        int idPersona = 0;
+        
+        // Suponiendo que recibes `Date` o `DateTime` en el servicio y solo necesitas la hora
+        LocalTime horaInicio = medico.getHoraIni().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+        LocalTime horaFin = medico.getHoraFin().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+
+        String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String queryMedico = "INSERT INTO Medico(idMedico,numColegiatura,horaInicioTrabajo,horaFinTrabajo,anhosExp,"
+                + " activo,diasLaborales) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DBPoolManager.getInstance().getConnection(); 
+                PreparedStatement psPersona = conn.prepareStatement(queryPersona, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement psMedico = conn.prepareStatement(queryMedico)) {
+
+            // Insertar en la tabla Persona
+            psPersona.setString(1, medico.getDNI());
+            psPersona.setString(2, medico.getNombre());
+            psPersona.setString(3, medico.getApellido());
+            psPersona.setString(4, medico.getCorreoElectronico());
+            psPersona.setInt(5, medico.getNumTelefono());
+            psPersona.setString(6, medico.getDireccion());
+            psPersona.setDate(7, new java.sql.Date(medico.getFechaNacimiento().getTime()));
+            psPersona.setString(8, String.valueOf(medico.getGenero()));
+            
+            System.out.println("Ejecutando inserción en Persona...");
+            psPersona.executeUpdate();
+            
+            try (ResultSet generatedKeys = psPersona.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    idPersona = generatedKeys.getInt(1);
+                    System.out.println("ID generado para Persona: " + idPersona);
+                } else {
+                    System.err.println("Fallo al insertar en Persona, no se pudo obtener el ID.");
+                    return 0; 
+                }
+            }
+
+            psMedico.setInt(1, idPersona);
+//            psMedico.setInt(2,medico.getEspecialidad().getIdEspecialidad());
+            psMedico.setString(2, medico.getNumColegiatura());
+//            psMedico.setTime(4, java.sql.Time.valueOf(medico.getHoraInicioTrabajo()));
+            psMedico.setTime(3, java.sql.Time.valueOf(horaInicio));
+//            psMedico.setTime(5, java.sql.Time.valueOf(medico.getHoraFinTrabajo()));
+            psMedico.setTime(4, java.sql.Time.valueOf(horaFin));
+            psMedico.setInt(5, medico.getAhosExp());
+            psMedico.setBoolean(6, medico.isActivo());
+            psMedico.setString(7, medico.getDiasLaborales());
+            resultado = psMedico.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
+
+    @Override
+    public ArrayList<Medico> listarTodos1() {
+        ArrayList<Medico> listaMedicos = new ArrayList<>();
+
+        String sql = "SELECT m.idMedico, m.numColegiatura, m.horaInicioTrabajo, m.horaFinTrabajo, "
+                + "m.diasLaborales, m.anhosExp, e.idEspecialidad, e.nombre as EspecialidadNombre, "
+                + "p.DNI, p.nombre, p.apellido "
+                + "FROM Medico m "
+                + "JOIN Persona p ON m.idMedico = p.idPersona "
+                + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad WHERE m.activo = true";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection(); PreparedStatement pstMedico = con.prepareStatement(sql); ResultSet rs = pstMedico.executeQuery()) {
+
+            // Iterar sobre cada registro en el ResultSet
+            while (rs.next()) {
+                // Crear un nuevo objeto Medico
+                Medico medico = new Medico();
+                medico.setIdMedico(rs.getInt("idMedico"));
+
+                // Crear un objeto Especialidad y asignarlo al Medico
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                medico.setEspecialidad(especialidad);
+
+                // Asignar atributos heredados de Persona
+                medico.setDNI(rs.getString("DNI"));
+                medico.setNombre(rs.getString("nombre"));
+                medico.setApellido(rs.getString("apellido"));
+
+                // Asignar atributos específicos de Medico
+                medico.setNumColegiatura(rs.getString("numColegiatura"));
+
+                // Convertir las horas de inicio y fin de trabajo
+                Time horaInicioTrabajoTime = rs.getTime("horaInicioTrabajo");
+                Time horaFinTrabajoTime = rs.getTime("horaFinTrabajo");
+                if (horaInicioTrabajoTime != null) {
+                    medico.setHoraInicioTrabajo(horaInicioTrabajoTime.toLocalTime());
+                } else {
+                    medico.setHoraInicioTrabajo(null);
+                }
+                if (horaFinTrabajoTime != null) {
+                    medico.setHoraFinTrabajo(horaFinTrabajoTime.toLocalTime());
+                } else {
+                    medico.setHoraFinTrabajo(null);
+                }
+
+                // Asignar otros atributos de Medico
+                medico.setDiasLaborales(rs.getString("EspecialidadNombre"));
+                medico.setAhosExp(rs.getInt("anhosExp"));
+
+                // Agregar el medico a la lista
+                listaMedicos.add(medico);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Manejar la excepción si ocurre un error
+        }
+
+        return listaMedicos;
+    }
+ 
+    @Override
+    public Medico obtenerPorId1(int idMedico) {
+        Medico medico = new Medico();
+        String sql = "SELECT m.idMedico, m.numColegiatura, m.horaInicioTrabajo, m.horaFinTrabajo, "
+                + "m.diasLaborales, m.anhosExp, e.idEspecialidad, "
+                + "p.DNI, p.nombre, p.apellido, p.correoElectronico, p.numTelefono, p.direccion, p.fechaNacimiento, "
+                + "p.genero "
+                + "FROM Medico m "
+                + "JOIN Persona p ON m.idMedico = p.idPersona "
+                + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad WHERE m.activo = true AND m.idMedico = ?";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection(); PreparedStatement pstMedico = con.prepareStatement(sql)) {
+
+            pstMedico.setInt(1, idMedico); 
+
+            try (ResultSet rs = pstMedico.executeQuery()) {
+                if (rs.next()) { 
+                    medico.setIdMedico(rs.getInt("idMedico"));
+
+                    Especialidad especialidad = new Especialidad();
+                    especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                    medico.setEspecialidad(especialidad);
+
+                    medico.setDNI(rs.getString("DNI"));
+                    medico.setNombre(rs.getString("nombre"));
+                    medico.setApellido(rs.getString("apellido"));
+                    medico.setCorreoElectronico(rs.getString("correoElectronico"));
+                    medico.setNumTelefono(rs.getInt("numTelefono"));
+                    medico.setDireccion(rs.getString("direccion"));
+                    medico.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                    medico.setGenero(rs.getString("genero").charAt(0));
+
+                    medico.setNumColegiatura(rs.getString("numColegiatura"));
+
+                    // Convertir Time a LocalTime
+                    Time horaInicioTrabajoTime = rs.getTime("horaInicioTrabajo");
+                    Time horaFinTrabajoTime = rs.getTime("horaFinTrabajo");
+                    if (horaInicioTrabajoTime != null) {
+                        medico.setHoraInicioTrabajo(horaInicioTrabajoTime.toLocalTime());
+                    } else {
+                        medico.setHoraInicioTrabajo(null);
+                    }
+                    if (horaFinTrabajoTime != null) {
+                        medico.setHoraFinTrabajo(horaFinTrabajoTime.toLocalTime());
+                    } else {
+                        medico.setHoraFinTrabajo(null);
+                    }
+
+                    medico.setDiasLaborales(rs.getString("diasLaborales"));
+                    medico.setAhosExp(rs.getInt("anhosExp"));
+                    medico.setActivo(rs.getBoolean("activo"));
+                }
+            }
+
+        } catch (SQLException e) {
+            // Usar un logger o manejar la excepción de forma más detallada
+            e.printStackTrace();
+        }
+
+        return medico;
+    }
  
     
 }

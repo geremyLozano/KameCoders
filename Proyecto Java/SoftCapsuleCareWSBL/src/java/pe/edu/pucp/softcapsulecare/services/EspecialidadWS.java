@@ -47,6 +47,8 @@ public class EspecialidadWS {
         return resultado;
     }
     
+
+
     @WebMethod(operationName = "obtenerPorIDEspecialidad1")
     public Especialidad especialidadObtenerID1( int idEspecialidad) {
         Especialidad resultado = espeDAO.obtenerPorId1(idEspecialidad);

@@ -201,6 +201,10 @@ public class PacienteMySQL implements PacienteDAO{
         }
         return resultado;
     }   
+    
+
+
+
     @Override
     public Paciente obtenerPorId1(int idPaciente) {
         Paciente resultado = null;
@@ -251,8 +255,8 @@ public class PacienteMySQL implements PacienteDAO{
 
         String queryPersona = "INSERT INTO Persona(DNI, nombre, apellido, correoElectronico, numTelefono, direccion, fechaNacimiento, genero) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryPaciente = "INSERT INTO Paciente(idPaciente, activo) "
-                + "VALUES (?, ?)";
+        String queryPaciente = "INSERT INTO Paciente(idPaciente, historialActivo,activo) "
+                + "VALUES (?, ?, ?)";
 
         try (Connection conn = DBPoolManager.getInstance().getConnection(); 
                 PreparedStatement psPersona = conn.prepareStatement(queryPersona, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement psPaciente = conn.prepareStatement(queryPaciente)) {
@@ -278,7 +282,8 @@ public class PacienteMySQL implements PacienteDAO{
             }
 
             psPaciente.setInt(1, idPersona);
-            psPaciente.setBoolean(2, paciente.isActivo());
+            psPaciente.setBoolean(2, paciente.getHistorialActivo());
+            psPaciente.setBoolean(3, paciente.isActivo());
             resultado = psPaciente.executeUpdate();
 
         } catch (SQLException e) {

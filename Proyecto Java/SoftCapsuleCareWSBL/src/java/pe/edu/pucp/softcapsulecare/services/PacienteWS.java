@@ -55,6 +55,8 @@ public class PacienteWS {
         return resultado;
     }
     
+
+
     @WebMethod(operationName = "obtenerPorIDPaciente1")
     public Paciente pacienteObtenerID1(@WebParam(name = "paciente") int idPaciente) {
         Paciente resultado = pacienteDAO.obtenerPorId1(idPaciente);
@@ -64,6 +66,6 @@ public class PacienteWS {
     public int pacienteInsertar1(@WebParam(name = "paciente") Paciente paciente) {
         int resultado = pacienteDAO.insertar1(paciente);
         return resultado;
-    }
+    }  
 
 }

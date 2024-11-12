@@ -14,5 +14,8 @@ public interface MedicoDAO {
     ArrayList<Medico> listarTodos();
     Medico obtenerPorId(int idMedico);
     ArrayList<Medico> listarPorEspecialidad(String especialidad);
+
+    int insertarMedico1(Medico medico);
     ArrayList<Medico> listarTodos1();
+    Medico obtenerPorId1(int idMedico);
 }
