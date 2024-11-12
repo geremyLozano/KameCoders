@@ -72,27 +72,29 @@ public class MedicoMySQL implements MedicoDAO {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL InsertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             cst = con.prepareCall(sql);
-            cst.setString(1, medico.getDNI());
-            cst.setString(2, medico.getNombre());
-            cst.setString(3, medico.getApellido());
-            cst.setString(4, medico.getCorreoElectronico());
-            cst.setInt(5, medico.getNumTelefono());
-            cst.setString(6, medico.getDireccion());
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.setString(2, medico.getDNI());
+            cst.setString(3, medico.getNombre());
+            cst.setString(4, medico.getApellido());
+            cst.setString(5, medico.getCorreoElectronico());
+            cst.setInt(6, medico.getNumTelefono());
+            cst.setString(7, medico.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
-            cst.setDate(7, sqlDate);
-            cst.setString(8, String.valueOf(medico.getGenero()));
-            cst.setString(9, medico.getNumColegiatura());
-            cst.setTime(10, Time.valueOf(medico.getHoraInicioTrabajo()));
-            cst.setTime(11, Time.valueOf(medico.getHoraFinTrabajo()));
-            cst.setString(12, medico.getDiasLaborales());
-            cst.setInt(13, medico.getAhosExp());
-            cst.setBoolean(14, true);
-            cst.setInt(15, medico.getEspecialidad().getIdEspecialidad());
-            cst.registerOutParameter(16, java.sql.Types.INTEGER);
+            cst.setDate(8, sqlDate);
+            cst.setString(9, String.valueOf(medico.getGenero()));
+            cst.setString(10, medico.getNumColegiatura());
+            cst.setTime(11, Time.valueOf(medico.getHoraInicioTrabajo()));
+            cst.setTime(12, Time.valueOf(medico.getHoraFinTrabajo()));
+            cst.setString(13, medico.getDiasLaborales());
+            cst.setInt(14, medico.getAhosExp());
+            cst.setBoolean(15, true);
+            cst.setInt(16, medico.getEspecialidad().getIdEspecialidad());
+            
             cst.setString(17, hashedPassword); // Usamos la contraseña hasheada
 
-            medico.setIdMedico(cst.getInt(16));
             resultado = cst.executeUpdate(); // Ejecutamos la inserción
+            
+            medico.setIdMedico(cst.getInt(1));
 
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
