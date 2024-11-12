@@ -448,6 +448,7 @@ public class MedicoMySQL implements MedicoDAO {
                 // Crear un objeto Especialidad y asignarlo al Medico
                 Especialidad especialidad = new Especialidad();
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setNombre(rs.getString("EspecialidadNombre"));
                 medico.setEspecialidad(especialidad);
 
                 // Asignar atributos heredados de Persona
