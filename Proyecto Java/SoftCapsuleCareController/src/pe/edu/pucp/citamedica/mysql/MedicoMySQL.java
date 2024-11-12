@@ -19,11 +19,6 @@ import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 import pe.edu.pucp.seguridad.PasswordHash;
 
-
-
-
-
-
 public class MedicoMySQL implements MedicoDAO {
     private Connection con;
     private Statement st;
@@ -53,6 +48,66 @@ public class MedicoMySQL implements MedicoDAO {
 //        return resultado;
 //    }
     
+    @Override
+    public ArrayList<Medico> listarTodos1() {
+        ArrayList<Medico> listaMedicos = new ArrayList<>();
+
+        String sql = "SELECT m.idMedico, m.numColegiatura, m.horaInicioTrabajo, m.horaFinTrabajo, "
+                + "m.diasLaborales, m.anhosExp, e.idEspecialidad, "
+                + "p.DNI, p.nombre, p.apellido "
+                + "FROM Medico m "
+                + "JOIN Persona p ON m.idMedico = p.idPersona "
+                + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad WHERE m.activo = true";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection(); PreparedStatement pstMedico = con.prepareStatement(sql); ResultSet rs = pstMedico.executeQuery()) {
+
+            // Iterar sobre cada registro en el ResultSet
+            while (rs.next()) {
+                // Crear un nuevo objeto Medico
+                Medico medico = new Medico();
+                medico.setIdMedico(rs.getInt("idMedico"));
+
+                // Crear un objeto Especialidad y asignarlo al Medico
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                medico.setEspecialidad(especialidad);
+
+                // Asignar atributos heredados de Persona
+                medico.setDNI(rs.getString("DNI"));
+                medico.setNombre(rs.getString("nombre"));
+                medico.setApellido(rs.getString("apellido"));
+
+                // Asignar atributos específicos de Medico
+                medico.setNumColegiatura(rs.getString("numColegiatura"));
+
+                // Convertir las horas de inicio y fin de trabajo
+                Time horaInicioTrabajoTime = rs.getTime("horaInicioTrabajo");
+                Time horaFinTrabajoTime = rs.getTime("horaFinTrabajo");
+                if (horaInicioTrabajoTime != null) {
+                    medico.setHoraInicioTrabajo(horaInicioTrabajoTime.toLocalTime());
+                } else {
+                    medico.setHoraInicioTrabajo(null);
+                }
+                if (horaFinTrabajoTime != null) {
+                    medico.setHoraFinTrabajo(horaFinTrabajoTime.toLocalTime());
+                } else {
+                    medico.setHoraFinTrabajo(null);
+                }
+
+                // Asignar otros atributos de Medico
+                medico.setDiasLaborales(rs.getString("diasLaborales"));
+                medico.setAhosExp(rs.getInt("anhosExp"));
+
+                // Agregar el medico a la lista
+                listaMedicos.add(medico);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Manejar la excepción si ocurre un error
+        }
+
+        return listaMedicos;
+    }
     
     
     @Override

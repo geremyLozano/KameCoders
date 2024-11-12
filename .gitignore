@@ -89,3 +89,4 @@ nb-configuration.xml
 ##############################
 *.log
 /Proyecto Java/SoftCapsuleCareController/build
+/Proyecto Java/SoftCapsuleCare-Users/build
