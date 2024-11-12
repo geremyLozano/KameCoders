@@ -183,7 +183,8 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
                 
                 historial.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
                 historial.setFechaCreacion(rs.getDate("fechaCreacion"));
-                historial.setIdPaciente(rs.getInt("idPaciente"));            
+                historial.setIdPaciente(rs.getInt("idPaciente"));    
+                historial.setActivo(rs.getBoolean("activo"));
                 historial.setDniPaciente(rs.getString("DNI"));              
                 historial.setNombrePaciente(rs.getString("nombre"));
                 historial.setApellidoPaciente(rs.getString("apellido"));
