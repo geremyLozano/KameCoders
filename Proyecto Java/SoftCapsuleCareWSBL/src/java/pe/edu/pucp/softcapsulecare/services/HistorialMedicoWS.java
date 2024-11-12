@@ -72,13 +72,14 @@ public class HistorialMedicoWS {
     
     
     
-    @WebMethod(operationName = "eliminarHistorialMedicoPorId")
-    public int eliminarHistorialMedicoPorId( int idHistorialMedico) {
+
+    @WebMethod(operationName = "cambiarEstadoHistorialPorId")
+    public int cambiarEstadoHistorialPorId( int idHistorialMedico) {
         
         
         daoHistorial = new HistorialMedicoMySQL();
         
-        int resultado = daoHistorial.eliminar(idHistorialMedico);
+        int resultado = daoHistorial.cambiarEstadoHistorial(idHistorialMedico);
         
         
         return resultado;
@@ -109,6 +110,23 @@ public class HistorialMedicoWS {
         
     }
     
+    
+    
+    @WebMethod(operationName = "listarTodosPorDniNombreApellido")
+    public ArrayList<HistorialMedicoDto> listarTodosPorDniNombreApellido(String patron) {
+        
+        
+        ArrayList<HistorialMedicoDto> historial = null;
+
+        try{
+            daoHistorial = new HistorialMedicoMySQL();
+            historial = daoHistorial.listarTodosPorDniNombreApellido(patron);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return historial;
+    }
     
     
     

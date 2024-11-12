@@ -7,11 +7,13 @@ import pe.edu.pucp.citamedica.model.dto.HistorialMedicoDto;
 public interface HistorialMedicoDAO {
     int insertar(HistorialMedico historial);
     int modificar(HistorialMedico historial);
-    int eliminar(int idHistorial);
+    int cambiarEstadoHistorial(int idHistorial);
     ArrayList<HistorialMedico> listarTodos();
     HistorialMedico obtenerPorId(int idHistorial);
     
     
-     ArrayList<HistorialMedicoDto> listarTodosPorCampImp();
+    ArrayList<HistorialMedicoDto> listarTodosPorCampImp();
     
+     
+    ArrayList<HistorialMedicoDto> listarTodosPorDniNombreApellido(String patronCaracteres);
 }

@@ -22,7 +22,7 @@ public class HistorialMedicoDto {
     private String dniPaciente;
     private String nombrePaciente;
     private String apellidoPaciente;
-    
+    private boolean activo;
     
     
     public HistorialMedicoDto() {
@@ -39,6 +39,18 @@ public class HistorialMedicoDto {
         this.nombrePaciente = nombrePaciente;
         this.apellidoPaciente = apellidoPaciente;
     }
+    
+    
+    public boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
+    
 
     public int getIdHistorialMedico() {
         return idHistorialMedico;

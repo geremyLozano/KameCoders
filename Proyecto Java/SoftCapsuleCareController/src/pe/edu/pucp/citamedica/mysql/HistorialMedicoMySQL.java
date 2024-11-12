@@ -80,12 +80,12 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         return resultado;
     }
 
-    @Override
-    public int eliminar(int idHistorial) {
+  @Override
+    public int cambiarEstadoHistorial(int idHistorial) {
         int resultado = 0;
         try{
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{call HistorialMedicoEliminar(?)}";
+            sql = "{call HistorialMedicoCambiarEstado(?)}";
             cst = con.prepareCall(sql);  
             cst.setInt(1, idHistorial);
             resultado = cst.executeUpdate();
@@ -203,6 +203,50 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         return listaHistorial;
         
     
+    }
+    
+    
+      @Override
+    public ArrayList<HistorialMedicoDto> listarTodosPorDniNombreApellido(String patronCaracteres){
+        
+        
+        
+        ArrayList<HistorialMedicoDto> listaHistorial = new ArrayList<>();
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListarPorDniNombreApellido(?)}";
+            cst = con.prepareCall(sql);
+            
+            cst.setString(1, patronCaracteres);
+            
+            
+            rs = cst.executeQuery();
+            while(rs.next()){
+                HistorialMedicoDto historial = new HistorialMedicoDto();
+                
+                historial.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
+                historial.setFechaCreacion(rs.getDate("fechaCreacion"));
+                historial.setIdPaciente(rs.getInt("idPaciente"));    
+                historial.setActivo(rs.getBoolean("activo"));
+                historial.setDniPaciente(rs.getString("DNI"));              
+                historial.setNombrePaciente(rs.getString("nombre"));
+                historial.setApellidoPaciente(rs.getString("apellido"));
+               
+                
+                listaHistorial.add(historial);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return listaHistorial;
+        
     }
     
 }
