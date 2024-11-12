@@ -38,7 +38,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst = con.prepareCall(sql);
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
-            cst.setString(3, usuario.getUsername());
+            cst.setString(3, auxiliar.getDNI());
             cst.setString(4, hashedPassword); // Usamos la contraseña hasheada
             cst.setString(5, auxiliar.getDNI());
             cst.setString(6, auxiliar.getNombre());
