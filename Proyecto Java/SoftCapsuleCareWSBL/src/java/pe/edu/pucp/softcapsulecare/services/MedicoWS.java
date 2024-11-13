@@ -6,6 +6,7 @@ import jakarta.jws.WebParam;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -85,5 +86,9 @@ public class MedicoWS {
         Medico resultado = medicoDAO.obtenerPorId1(idMedico);
         return resultado;
     }
-    
+    @WebMethod(operationName = "listarFiltroMedico")
+    public List<Medico> listarFiltroMedico(String filtro)  {
+        List<Medico> resultado = medicoDAO.listarFiltro(filtro);
+        return resultado;
+    }
 }

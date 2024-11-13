@@ -303,11 +303,10 @@ public class PacienteMySQL implements PacienteDAO{
             String sql = "SELECT p.DNI, p.nombre, p.apellido, p.correoElectronico, p.numTelefono, " +
                          "p.direccion, p.fechaNacimiento, p.genero, pac.idPaciente, pac.activo " +
                          "FROM Persona p " +
-                         "JOIN Paciente pac ON p.DNI = pac.DNI " +
-                         "WHERE (p.nombre LIKE ? OR p.apellido LIKE ?) AND pac.activo = true";
+                         "JOIN Paciente pac ON p.idPersona = pac.idPaciente " +
+                         "WHERE p.nombre LIKE ? ";
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
-            cmd.setString(2, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {

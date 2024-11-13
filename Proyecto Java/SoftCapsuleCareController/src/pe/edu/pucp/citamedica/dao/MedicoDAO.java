@@ -1,5 +1,6 @@
     package pe.edu.pucp.citamedica.dao;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 
@@ -18,4 +19,5 @@ public interface MedicoDAO {
     int insertarMedico1(Medico medico);
     ArrayList<Medico> listarTodos1();
     Medico obtenerPorId1(int idMedico);
+    List<Medico> listarFiltro(String filtro);
 }
