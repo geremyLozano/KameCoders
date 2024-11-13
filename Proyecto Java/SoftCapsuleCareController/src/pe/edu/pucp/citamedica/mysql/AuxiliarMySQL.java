@@ -199,7 +199,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 resultado = new Auxiliar();
                 resultado.setIdAuxiliar(resultSet.getInt("idPersona"));
                 Especialidad especialidad = new Especialidad();
-                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
                 resultado.setEspecialidad(especialidad);
                 resultado.setDNI(resultSet.getString("DNI"));
                 resultado.setNombre(resultSet.getString("nombre"));
