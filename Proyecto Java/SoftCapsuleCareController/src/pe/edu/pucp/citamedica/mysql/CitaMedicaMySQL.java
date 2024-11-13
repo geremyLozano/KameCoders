@@ -354,17 +354,18 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         return listaCitas;
     }
     
-    @Override
     public void obtenerCitasPendientes(List<Persona> personas) {
     // Obtener la hora actual y calcular el rango de tiempo para la consulta
-    LocalDateTime ahora = LocalDateTime.now();
-    LocalDateTime horaFinal = ahora.plusHours(1); // Hora actual + 1 hora
-    
-    // Consulta SQL para obtener las citas dentro del rango de tiempo
-        String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente "
+        LocalDateTime ahora = LocalDateTime.now();
+        LocalDateTime horaFinal = ahora.plusHours(1); // Hora actual + 1 hora
+
+        // Consulta SQL para obtener las citas dentro del rango de tiempo y que no tengan recordatorio
+        String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente, c.idCitaMedica "
                 + "FROM CitaMedica c "
                 + "JOIN Persona p ON c.idPaciente = p.idPersona "
-                + "WHERE c.fecha = ? AND c.hora BETWEEN ? AND ?";
+                + "WHERE c.fecha = ? AND c.hora BETWEEN ? AND ? AND c.recordatorio = 0";
+
+        String updateSql = "UPDATE CitaMedica SET recordatorio = 1 WHERE idCitaMedica = ?";
 
         try {
             // Obtener la conexión a la base de datos
@@ -388,15 +389,20 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 persona.setApellido(rs.getString("apellido"));
                 persona.setIdPersona(rs.getInt("idPaciente"));
 
-                // Crear la cita médica asociada con la persona
-//                CitaMedica cita = new CitaMedica();
-//                cita.setFecha(rs.getDate("fecha"));
-//                cita.setHora(rs.getTime("hora").toLocalTime());
-//                cita.setIdPaciente(rs.getInt("idPaciente"));
-//                cita.setPersona(persona); // Asociamos la persona a la cita médica
-
                 // Agregar la persona a la lista de personas
                 personas.add(persona);
+
+                // Actualizar el campo recordatorio a 1 para la cita actual
+                PreparedStatement updatePst = null;
+                try {
+                    updatePst = con.prepareStatement(updateSql);
+                    updatePst.setInt(1, rs.getInt("idCitaMedica"));
+                    updatePst.executeUpdate();
+                } finally {
+                    if (updatePst != null) {
+                        updatePst.close();
+                    }
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener citas pendientes para recordatorio: " + e.getMessage());
@@ -417,6 +423,5 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             }
         }
     }
-
 
 }
