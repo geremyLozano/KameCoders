@@ -358,7 +358,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
     // Obtener la hora actual y calcular el rango de tiempo para la consulta
         LocalDateTime ahora = LocalDateTime.now();
         LocalDateTime horaFinal = ahora.plusHours(1); // Hora actual + 1 hora
-
+//        LocalDateTime horaFinal = ahora.with(LocalTime.of(23, 58));
         // Consulta SQL para obtener las citas dentro del rango de tiempo y que no tengan recordatorio
         String sql = "SELECT p.correoElectronico, p.nombre, p.apellido, c.fecha, c.hora, c.idPaciente, c.idCitaMedica "
                 + "FROM CitaMedica c "
