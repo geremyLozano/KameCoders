@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
@@ -102,10 +104,18 @@ public class MedicoMySQL implements MedicoDAO {
     }
 
 
-    @Override
+   @Override
     public int modificar(Medico medico) {
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
         
+        // Convertir las cadenas de hora a LocalTime
+        LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
+        // Mostrar los valores convertidos
+        System.out.println("Hora inicio: " + horaInicio);
+        System.out.println("Hora fin: " + horaFin);
        
         int resultado = 0;
         try {
@@ -119,8 +129,8 @@ public class MedicoMySQL implements MedicoDAO {
             
             pstMedico.setInt(1, medico.getIdMedico());           
             pstMedico.setString(2, medico.getNumColegiatura());
-            pstMedico.setTime(3,Time.valueOf(medico.getHoraInicioTrabajo()));
-            pstMedico.setTime(4,Time.valueOf(medico.getHoraFinTrabajo()));
+            pstMedico.setTime(3,Time.valueOf(horaInicio));
+            pstMedico.setTime(4,Time.valueOf(horaFin));
             
             
 //            String diasLaboralesString = medico.getDiasLaborales().stream()
@@ -130,7 +140,7 @@ public class MedicoMySQL implements MedicoDAO {
             
             pstMedico.setString(5, medico.getDiasLaborales());       
             pstMedico.setInt(6,medico.getAhosExp());
-            pstMedico.setBoolean(7,medico.isActivo());
+            pstMedico.setBoolean(7,true);
             
       
             
@@ -149,9 +159,6 @@ public class MedicoMySQL implements MedicoDAO {
         }
         return resultado;
         
-        
-        
-
     }
 
     @Override
@@ -366,7 +373,7 @@ public class MedicoMySQL implements MedicoDAO {
 
 
 
-   @Override
+  @Override
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
@@ -474,7 +481,7 @@ public class MedicoMySQL implements MedicoDAO {
                 }
 
                 // Asignar otros atributos de Medico
-                medico.setDiasLaborales(rs.getString("EspecialidadNombre"));
+                medico.setDiasLaborales(rs.getString("diasLaborales"));
                 medico.setAhosExp(rs.getInt("anhosExp"));
 
                 // Agregar el medico a la lista
@@ -538,7 +545,7 @@ public class MedicoMySQL implements MedicoDAO {
 
                     medico.setDiasLaborales(rs.getString("diasLaborales"));
                     medico.setAhosExp(rs.getInt("anhosExp"));
-                    medico.setActivo(rs.getBoolean("activo"));
+                    medico.setActivo(true);
                 }
             }
 
@@ -548,6 +555,52 @@ public class MedicoMySQL implements MedicoDAO {
         }
 
         return medico;
+    }
+    
+    @Override
+    public List<Medico> listarFiltro(String filtro) {
+        System.out.println("Filtro recibido: " + filtro);
+        List<Medico> result = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura "
+                    + "FROM Medico m "
+                    + "JOIN Persona p ON m.idMedico = p.idPersona "
+                    + "WHERE p.nombre LIKE ? ";
+
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setString(1, "%" + filtro + "%");
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Medico medico = new Medico();
+
+                medico.setDNI(cursor.getString("DNI"));
+                if (cursor.getObject("nombre") != null) {
+                    medico.setNombre(cursor.getString("nombre"));
+                }
+                medico.setApellido(cursor.getString("apellido"));
+                medico.setCorreoElectronico(cursor.getString("correoElectronico"));
+                medico.setFechaNacimiento(cursor.getDate("fechaNacimiento"));
+                medico.setIdMedico(cursor.getInt("idMedico"));
+                medico.setActivo(cursor.getBoolean("activo"));
+                medico.setNumColegiatura(cursor.getString("numColegiatura"));
+                Especialidad esp = new Especialidad();
+                esp.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                medico.setEspecialidad(esp);
+
+                result.add(medico);
+            }
+            return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result;
     }
  
     
