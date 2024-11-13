@@ -184,7 +184,7 @@ public class AdministradorMySQL implements AdministradorDAO{
 
 
 
-    @Override
+   @Override
     public Administrador obtenerPorId1(int idAdmin) {
         Administrador resultado = null;
         String query = "SELECT Persona.*, Administrador.activo "
@@ -286,7 +286,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             String sql = "SELECT a.idAdministrador, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, a.activo "
                     + "FROM Administrador a "
                     + "JOIN Persona p ON a.idAdministrador = p.idPersona "
-                    + "WHERE p.nombre LIKE ? AND a.activo = true";
+                    + "WHERE p.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%"); 
