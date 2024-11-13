@@ -273,14 +273,14 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "SELECT a.idAuxiliar, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, a.activo, a.especialidad "
+            String sql = "SELECT a.idAuxiliar, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, a.activo, a.idEspecialidad, e.nombre AS EspeNombre "
                     + "FROM Auxiliar a "
                     + "JOIN Persona p ON a.idAuxiliar = p.idPersona "
-                    + "WHERE (p.nombre LIKE ? OR p.apellido LIKE ?) AND a.activo = true";
+                    + "JOIN Especialidad e ON e.idEspecialidad = a.idEspecialidad "
+                    + "WHERE p.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
-            cmd.setString(2, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
@@ -297,11 +297,13 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 auxiliar.setActivo(cursor.getBoolean("activo"));
 
                 Especialidad esp = new Especialidad();
-                esp.setNombre(cursor.getString("especialidad"));
+                esp.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                esp.setNombre(cursor.getString("EspeNombre"));
                 auxiliar.setEspecialidad(esp);
 
                 result.add(auxiliar);
             }
+            return result;
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -332,6 +334,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                 // Crear un objeto Especialidad y asignarlo al Medico
                 Especialidad especialidad = new Especialidad();
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setNombre(rs.getString("EspecialidadNombre"));
                 auxiliar.setEspecialidad(especialidad);
 
                 // Asignar atributos heredados de Persona
