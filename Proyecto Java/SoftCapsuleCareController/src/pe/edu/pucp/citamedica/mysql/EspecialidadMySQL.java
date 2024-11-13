@@ -158,7 +158,7 @@ public List<Especialidad> listar(String filtro) {
     
     try {
         con = DBPoolManager.getInstance().getConnection();
-        String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo FROM Especialidad WHERE nombre LIKE ? AND activo = true";
+        String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo FROM Especialidad WHERE nombre LIKE ?";
         PreparedStatement cmd = con.prepareStatement(sql);
         cmd.setString(1, "%" + filtro + "%");
         
@@ -248,4 +248,5 @@ public List<Especialidad> listar(String filtro) {
 
         return resultado;
     }
+   
 }
