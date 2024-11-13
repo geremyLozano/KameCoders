@@ -13,4 +13,5 @@ public interface CitaMedicaDAO {
     CitaMedica obtenerPorId(int idCitaMedica);
     ArrayList<CitaMedica> listarPorPaciente(int idPaciente);
     void obtenerCitasPendientes(List<Persona> personas);
+    ArrayList<CitaMedica> listarPorMedico(int idMedico);
 }
