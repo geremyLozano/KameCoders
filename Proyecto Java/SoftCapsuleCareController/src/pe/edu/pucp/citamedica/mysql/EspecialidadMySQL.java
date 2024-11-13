@@ -203,7 +203,7 @@ public List<Especialidad> listar(String filtro) {
             if (reader != null) {
                 if (reader.next()) { // Usar next() para obtener la primera fila
                     resultado = new Especialidad();
-                    resultado.setIdEspecialidad(reader.getInt("idEspecialidad"));
+                    resultado.setIdEspecialidad(idEspecialidad);
                     resultado.setNombre(reader.getString("nombre"));
                     resultado.setCostoConsulta(reader.getDouble("costoConsulta"));
                     resultado.setActivo(reader.getBoolean("activo"));
