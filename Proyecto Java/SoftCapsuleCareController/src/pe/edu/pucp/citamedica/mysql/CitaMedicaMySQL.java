@@ -65,7 +65,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             java.sql.Time duracion = java.sql.Time.valueOf(duracionLocalTime);
 
             // Seteamos los parámetros del procedimiento
-            cst.setNull(1,java.sql.Types.VARCHAR);
+            cst.setString(1,cita.getTipoStr());
             cst.setString(2,EstadoCita.Pendiente.toString()); // EstadoCita es un enum
             cst.setDate(3,fecha);
             cst.setTime(4,hora);
@@ -313,13 +313,6 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
                 // Verificar si tipoCita es null antes de convertirlo al enum
                 String tipoCitaStr = rs.getString("tipoCita");
-                if (tipoCitaStr != null) {
-                    citaMedica.setTipo(TipoCita.valueOf(tipoCitaStr));
-                } else {
-                    // Puedes asignar un valor predeterminado o dejarlo como null si es opcional
-                    citaMedica.setTipo(TipoCita.NO_ASIGNADO); // Suponiendo que tienes un valor DEFAULT en TipoCita
-                }
-
                 citaMedica.setEstado(EstadoCita.valueOf(rs.getString("estadoCita")));
                 citaMedica.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
                 citaMedica.setIdMedico(rs.getInt("idMedico"));
