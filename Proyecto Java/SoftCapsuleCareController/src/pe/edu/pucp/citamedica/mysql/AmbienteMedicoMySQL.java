@@ -99,7 +99,7 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
               String tipoAmbienteStr = rs.getString("tipoAmbiente");
               if (tipoAmbienteStr != null) {
                   try {
-                      ambiente.setTipoAmbiente(TipoAmbiente.valueOf(tipoAmbienteStr.toUpperCase()));
+                      ambiente.setTipoAmbiente(TipoAmbiente.valueOf(tipoAmbienteStr));
                   } catch (IllegalArgumentException e) {
                       System.out.println("Valor inválido para TipoAmbiente: " + tipoAmbienteStr);
                       ambiente.setTipoAmbiente(null); // O un valor predeterminado
