@@ -181,7 +181,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public Auxiliar obtenerPorId1(int idAuxiliar) {
         Auxiliar resultado = null;
-        String query = "SELECT Persona.*, Auxiliar.activo "
+        String query = "SELECT Persona.*, Auxiliar.activo, Auxiliar.idEspecialidad "
                 + "FROM Persona "
                 + "JOIN Auxiliar ON Persona.idPersona = Auxiliar.idAuxiliar "
                 + "WHERE Auxiliar.activo = ? AND Auxiliar.idAuxiliar = ?";
@@ -198,6 +198,9 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             if (resultSet.next()) {
                 resultado = new Auxiliar();
                 resultado.setIdAuxiliar(resultSet.getInt("idPersona"));
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
+                resultado.setEspecialidad(especialidad);
                 resultado.setDNI(resultSet.getString("DNI"));
                 resultado.setNombre(resultSet.getString("nombre"));
                 resultado.setApellido(resultSet.getString("apellido"));

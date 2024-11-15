@@ -40,7 +40,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.SoftCapsuleCareDBManager.jar}</file>
+                    <file>${reference.SoftCapsuleCareDBManager-1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -86,7 +86,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>SoftCapsuleCareDBManager</foreign-project>
+                <foreign-project>SoftCapsuleCareDBManager-1</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
