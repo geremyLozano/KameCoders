@@ -11,10 +11,13 @@ import pe.edu.pucp.citamedica.model.clinica.TipoAmbiente;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
+    
     private Connection con;
     private CallableStatement cst;
     private String sql;
     private ResultSet rs;
+    
+    
     
     @Override
     public int insertar(AmbienteMedico ambiente) {
@@ -87,7 +90,30 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
+                
+                
+                
+               // ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
+                
+                
+              String tipoAmbienteStr = rs.getString("tipoAmbiente");
+              if (tipoAmbienteStr != null) {
+                  try {
+                      ambiente.setTipoAmbiente(TipoAmbiente.valueOf(tipoAmbienteStr));
+                  } catch (IllegalArgumentException e) {
+                      System.out.println("Valor inválido para TipoAmbiente: " + tipoAmbienteStr);
+                      ambiente.setTipoAmbiente(null); // O un valor predeterminado
+                  }
+              } else {
+                  ambiente.setTipoAmbiente(null);
+              }
+
+                
+                
+                
+                ambiente.setActivo(rs.getBoolean("activo"));
+                
+                
                 ambientes.add(ambiente);
             }
 
