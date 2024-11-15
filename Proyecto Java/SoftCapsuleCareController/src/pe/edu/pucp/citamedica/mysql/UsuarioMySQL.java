@@ -290,14 +290,6 @@ public class UsuarioMySQL implements UsuarioDAO {
         try {
             con = DBPoolManager.getInstance().getConnection();
 
-            String queryMedico = "SELECT 'Medico' AS rol FROM Medico WHERE idMedico = ? AND activo = true";
-            statementMedico = con.prepareStatement(queryMedico);
-            statementMedico.setInt(1, idPersona);
-            rs = statementMedico.executeQuery();
-            if (rs.next()) {
-                rolesActivos.add(rs.getString("rol"));
-            }
-
             String queryPaciente = "SELECT 'Paciente' AS rol FROM Paciente WHERE idPaciente = ? AND activo = true";
             statementPaciente = con.prepareStatement(queryPaciente);
             statementPaciente.setInt(1, idPersona);
@@ -310,6 +302,14 @@ public class UsuarioMySQL implements UsuarioDAO {
             statementAuxiliar = con.prepareStatement(queryAuxiliar);
             statementAuxiliar.setInt(1, idPersona);
             rs = statementAuxiliar.executeQuery();
+            if (rs.next()) {
+                rolesActivos.add(rs.getString("rol"));
+            }
+            
+            String queryMedico = "SELECT 'Medico' AS rol FROM Medico WHERE idMedico = ? AND activo = true";
+            statementMedico = con.prepareStatement(queryMedico);
+            statementMedico.setInt(1, idPersona);
+            rs = statementMedico.executeQuery();
             if (rs.next()) {
                 rolesActivos.add(rs.getString("rol"));
             }
