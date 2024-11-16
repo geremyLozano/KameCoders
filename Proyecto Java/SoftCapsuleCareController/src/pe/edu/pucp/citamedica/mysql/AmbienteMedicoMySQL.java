@@ -25,14 +25,19 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
         try {
             con = DBPoolManager.getInstance().getConnection();
             // Llamar al procedimiento almacenado
-            sql = "{CALL sp_insertar_ambiente_medico_activo(?, ?, ?, ?)}";
+            sql = "{CALL sp_insertar_ambiente_medico(?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             // Pasar los parámetros al procedimiento almacenado
             cst.setInt(1, ambiente.getNumPiso());
             cst.setString(2, ambiente.getUbicacion());
             cst.setInt(3, ambiente.getCapacidad());
-            cst.setString(4, ambiente.getTipoAmbiente().toString());
+            
+            
+            
+            cst.setString(4, ambiente.getTipoAmbiente().name());
 
+            
+            
             // Ejecutar el procedimiento
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
@@ -90,27 +95,18 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                
-                
-                
-               // ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
-                
-                
-              String tipoAmbienteStr = rs.getString("tipoAmbiente");
-              if (tipoAmbienteStr != null) {
+                   
+                String tipoAmbienteStr = rs.getString("tipoAmbiente");
+                if (tipoAmbienteStr != null) {
                   try {
                       ambiente.setTipoAmbiente(TipoAmbiente.valueOf(tipoAmbienteStr));
                   } catch (IllegalArgumentException e) {
                       System.out.println("Valor inválido para TipoAmbiente: " + tipoAmbienteStr);
                       ambiente.setTipoAmbiente(null); // O un valor predeterminado
                   }
-              } else {
+                } else {
                   ambiente.setTipoAmbiente(null);
-              }
-
-                
-                
-                
+                }
                 ambiente.setActivo(rs.getBoolean("activo"));
                 
                 
@@ -151,15 +147,21 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 ambiente.setNumPiso(rs.getInt("numPiso"));
                 ambiente.setUbicacion(rs.getString("ubicacion"));
                 ambiente.setCapacidad(rs.getInt("capacidad"));
-                ambiente.setTipoAmbiente(rs.getObject("tipoAmbiente", TipoAmbiente.class));
-
-                // Obtener el valor del campo activo
-                int activo = rs.getInt("activo");
-                if (activo == 1) {
-                    System.out.println("El ambiente médico está activo.");
+                            
+                String tipoAmbienteStr = rs.getString("tipoAmbiente");
+                if (tipoAmbienteStr != null) {
+                  try {
+                      ambiente.setTipoAmbiente(TipoAmbiente.valueOf(tipoAmbienteStr));
+                  } catch (IllegalArgumentException e) {
+                      System.out.println("Valor inválido para TipoAmbiente: " + tipoAmbienteStr);
+                      ambiente.setTipoAmbiente(null); // O un valor predeterminado
+                  }
                 } else {
-                    System.out.println("El ambiente médico está inactivo.");
+                  ambiente.setTipoAmbiente(null);
                 }
+                ambiente.setActivo(rs.getBoolean("activo"));
+                
+
             } else {
                 System.out.println("No se encontró ningún ambiente médico con el ID proporcionado.");
             }
@@ -206,5 +208,24 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
             }
         }
         return resultado;
-    } 
+    }
+    
+    
+    @Override
+    public int cambiarEstadoAmbiente(int idAmbiente) {
+        int resultado = 0;
+        try{
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call sp_cambio_estado_ambiente_medico(?)}";
+            cst = con.prepareCall(sql);  
+            cst.setInt(1, idAmbiente);
+            resultado = cst.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    
+    
 }
