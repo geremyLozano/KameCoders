@@ -25,8 +25,6 @@ public class MedicoWS {
     public int medicoInsertar(@WebParam(name = "medico") Medico medico,
                               @WebParam(name = "usuario") Usuario usuario) {
         
-        medico.setHoraInicioTrabajo(LocalTime.MIDNIGHT);
-        medico.setHoraFinTrabajo(LocalTime.MIN);
         return medicoDAO.insertar(medico,usuario);
     }
     
@@ -57,8 +55,7 @@ public class MedicoWS {
     
     @WebMethod(operationName = "modificarMedico")
     public int medicoModificar(@WebParam(name = "medico") Medico medico) {
-        int resultado = medicoDAO.modificar(medico);
-        return resultado;
+        return medicoDAO.modificar(medico);
     }
     
     @WebMethod(operationName = "obtenerPorIDMedico")

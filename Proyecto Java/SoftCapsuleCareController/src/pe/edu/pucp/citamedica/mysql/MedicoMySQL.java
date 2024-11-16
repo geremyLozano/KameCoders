@@ -58,7 +58,8 @@ public class MedicoMySQL implements MedicoDAO {
     public int insertar(Medico medico, Usuario usuario) {
         int resultado = -1;
         String hashedPassword;
-
+        LocalTime horaIni = LocalTime.of(0, 0); // 00:00
+        LocalTime horaFin = LocalTime.of(0, 0);    // 00:00
         // Intentamos generar el hash de la contraseña
         try {
             hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
@@ -82,8 +83,8 @@ public class MedicoMySQL implements MedicoDAO {
             cst.setDate(8, sqlDate);
             cst.setString(9, String.valueOf(medico.getGenero()));
             cst.setString(10, medico.getNumColegiatura());
-            cst.setTime(11, Time.valueOf(medico.getHoraInicioTrabajo()));
-            cst.setTime(12, Time.valueOf(medico.getHoraFinTrabajo()));
+            cst.setTime(11, Time.valueOf(horaIni));
+            cst.setTime(12, Time.valueOf(horaFin));
             cst.setString(13, medico.getDiasLaborales());
             cst.setInt(14, medico.getAhosExp());
             cst.setBoolean(15, true);
