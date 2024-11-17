@@ -569,10 +569,14 @@ public class MedicoMySQL implements MedicoDAO {
             String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura "
                     + "FROM Medico m "
                     + "JOIN Persona p ON m.idMedico = p.idPersona "
-                    + "WHERE p.nombre LIKE ? ";
+                    + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
+                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
+            cmd.setString(2, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
