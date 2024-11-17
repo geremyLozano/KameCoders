@@ -576,7 +576,7 @@ public class MedicoMySQL implements MedicoDAO {
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
             cmd.setString(3, "%" + filtro + "%");
-            cmd.setString(3, "%" + filtro + "%");
+            cmd.setString(4, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
