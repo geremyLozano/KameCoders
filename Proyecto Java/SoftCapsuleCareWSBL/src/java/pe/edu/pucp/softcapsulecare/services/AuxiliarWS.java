@@ -26,8 +26,6 @@ public class AuxiliarWS {
         return resultado;
     }
 
-
-    
     //Insercion Geremy
     @WebMethod(operationName = "listarAuxiliar")
     public ArrayList<Auxiliar> listarAuxiliar() {
