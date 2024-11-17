@@ -296,7 +296,7 @@ public class PacienteMySQL implements PacienteDAO{
     @Override
     public List<Paciente> listar(String filtro) {
         List<Paciente> result = new ArrayList<>();
-        Connection con = null;
+        con = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
@@ -337,5 +337,32 @@ public class PacienteMySQL implements PacienteDAO{
         }
 
         return result;
+    }
+
+    @Override
+    public int modificar_v2(Paciente paciente) {
+        int resultado = 0;
+        con = null;
+        String query = "UPDATE Paciente set historialActivo = ?, "
+                + "activo = true "
+                + "WHERE idPaciente = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setBoolean(1, paciente.getHistorialActivo());
+            statement.setInt(2, paciente.getIdPaciente());
+
+            ResultSet resultSet = statement.executeQuery();
+            
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion(); 
+        }
+
+        return resultado;
     }
 }

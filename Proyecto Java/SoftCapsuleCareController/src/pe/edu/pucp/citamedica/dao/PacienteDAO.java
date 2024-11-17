@@ -14,4 +14,5 @@ public interface PacienteDAO{
     public Paciente obtenerPorId1(int idPaciente);
     public int insertar1(Paciente paciente);
     List<Paciente> listar(String filtro);
+    int modificar_v2(Paciente paciente);
 }
