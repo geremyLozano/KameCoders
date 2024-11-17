@@ -10,8 +10,7 @@ import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
 
-@WebService(serviceName = "PacienteWS",
-            targetNamespace = "http://services.softcapsulecare.pucp.edu.pe/")
+@WebService(serviceName = "PacienteWS")
 public class PacienteWS {
     private PacienteDAO pacienteDAO;
     
