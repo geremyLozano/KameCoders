@@ -15,4 +15,5 @@ public interface AuxiliarDAO{
     int insertar1(Auxiliar auxiliar);
     List<Auxiliar> listarFiltro(String filtro);
     ArrayList<Auxiliar> listarTodos1();
+    int modificar_v2(Auxiliar auxiliar);
 }

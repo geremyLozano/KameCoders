@@ -342,10 +342,9 @@ public class PacienteMySQL implements PacienteDAO{
     @Override
     public int modificar_v2(Paciente paciente) {
         int resultado = 0;
-        con = null;
-        String query = "UPDATE Paciente set historialActivo = ?, "
-                + "activo = true "
-                + "WHERE idPaciente = ?";
+        String query = "UPDATE Paciente SET historialActivo = ?, "
+                     + "activo = true "
+                     + "WHERE idPaciente = ?";
 
         try {
             PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
@@ -353,16 +352,16 @@ public class PacienteMySQL implements PacienteDAO{
             statement.setBoolean(1, paciente.getHistorialActivo());
             statement.setInt(2, paciente.getIdPaciente());
 
-            ResultSet resultSet = statement.executeQuery();
-            
-            resultSet.close();
+            resultado = statement.executeUpdate();
+
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         } finally {
-            DBPoolManager.getInstance().cerrarConexion(); 
+            DBPoolManager.getInstance().cerrarConexion();
         }
 
         return resultado;
     }
+
 }

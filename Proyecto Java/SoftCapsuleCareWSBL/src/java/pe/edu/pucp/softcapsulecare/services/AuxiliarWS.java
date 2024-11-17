@@ -71,4 +71,9 @@ public class AuxiliarWS {
         List<Auxiliar> resultado = auxiliarDAO.listarFiltro(filtro);
         return resultado;
     }
+    
+    @WebMethod(operationName = "modificar_v2")
+    public int modificar_v2(@WebParam(name = "auxiliar") Auxiliar auxiliar) {
+        return auxiliarDAO.modificar_v2(auxiliar);
+    }
 }

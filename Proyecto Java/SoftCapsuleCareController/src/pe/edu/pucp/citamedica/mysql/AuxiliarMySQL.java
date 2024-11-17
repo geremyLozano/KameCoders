@@ -359,4 +359,28 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
         return listaAuxiliar;
     }
+
+    @Override
+    public int modificar_v2(Auxiliar auxiliar) {
+        int resultado = 0;
+        String query = "UPDATE Auxiliar SET idEspecialidad = ?, "
+                     + "activo = true "
+                     + "WHERE idAuxiliar = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setInt(1, auxiliar.getEspecialidad().getIdEspecialidad());
+            statement.setInt(2, auxiliar.getIdAuxiliar());
+            resultado = statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return resultado;
+    }
 }
