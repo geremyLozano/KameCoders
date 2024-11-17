@@ -284,8 +284,8 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
-            cmd.setString(1, "%" + filtro + "%");
-            cmd.setString(1, "%" + filtro + "%");
+            cmd.setString(2, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
