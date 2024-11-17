@@ -461,7 +461,8 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setIdPago(rs.getInt("idPago"));
                 citaMedica.setActivo(true);
                 citaMedica.setIdPaciente(rs.getInt("idPaciente"));
-                citaMedica.setHoraStr(citaMedica.getHora().toString());
+                citaMedica.setFechaStr(rs.getDate("fecha").toString());
+                citaMedica.setHoraStr(rs.getTime("hora").toString());
 
                 // Agregar la cita a la lista
                 listaCitas.add(citaMedica);
