@@ -71,7 +71,7 @@ public class AdministradorWS {
     }
     
     @WebMethod(operationName = "modificar_v2")
-    public int modificar_v2(@WebParam(name = "admin") Administrador admin) {
+    public int modificarAdmin_V2(@WebParam(name = "admin") Administrador admin) {
         return adminDAO.modificar_v2(admin);
     }
 }

@@ -71,7 +71,7 @@ public class AuxiliarWS {
     }
     
     @WebMethod(operationName = "modificar_v2")
-    public int modificar_v2(@WebParam(name = "auxiliar") Auxiliar auxiliar) {
+    public int modificarAuxiliar_V2(@WebParam(name = "auxiliar") Auxiliar auxiliar) {
         return auxiliarDAO.modificar_v2(auxiliar);
     }
 }
