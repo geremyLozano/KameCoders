@@ -607,6 +607,42 @@ public class MedicoMySQL implements MedicoDAO {
 
         return result;
     }
- 
+
+    @Override
+    public int modificar_v2(Medico medico) {
+        int resultado = 0;
+        con = null;
+        String query = "UPDATE Medico set numColegiatura = ?, diasLaborales = ?, anhosExp = ?, "
+                + "activo = true, horaInicioTrabajo = ?, horaFinTrabajo = ?, idEspecialidad = ? "
+                + "WHERE idPaciente = ?";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
+        
+        // Convertir las cadenas de hora a LocalTime
+        LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+        
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+            
+            statement.setString(1, medico.getNumColegiatura());
+            statement.setString(2, medico.getDiasLaborales());
+            statement.setInt(3,medico.getAhosExp());
+
+            statement.setTime(4,Time.valueOf(horaInicio));
+            statement.setTime(5,Time.valueOf(horaFin));
+            statement.setInt(6, medico.getEspecialidad().getIdEspecialidad());
+            statement.setInt(7, medico.getIdMedico());
+            
+            resultado = statement.executeUpdate();
+            
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion(); 
+        }
+
+        return resultado;
+    }
     
 }
