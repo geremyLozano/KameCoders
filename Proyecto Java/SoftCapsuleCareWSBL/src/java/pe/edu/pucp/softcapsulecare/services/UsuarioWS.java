@@ -5,6 +5,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.UsuarioDAO;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
@@ -49,5 +50,12 @@ public class UsuarioWS {
     public List<String> obtenerRoles(@WebParam(name = "idPersona") int idPersona) {
         List<String> roles = usuDAO.obtenerRoles(idPersona);
         return roles != null ? roles : Collections.emptyList();
+    }
+
+
+    @WebMethod(operationName = "listarUser")
+    public ArrayList<Usuario> listarUser() {
+        ArrayList<Usuario> resultado = usuDAO.listarTodos();
+        return resultado;
     }
 }

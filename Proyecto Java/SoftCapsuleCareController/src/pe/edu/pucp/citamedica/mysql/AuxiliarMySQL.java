@@ -280,10 +280,12 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                     + "FROM Auxiliar a "
                     + "JOIN Persona p ON a.idAuxiliar = p.idPersona "
                     + "JOIN Especialidad e ON e.idEspecialidad = a.idEspecialidad "
-                    + "WHERE p.nombre LIKE ? ";
+                    + "WHERE p.nombre LIKE ? p.apellido LIKE ? OR e.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
+            cmd.setString(2, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
