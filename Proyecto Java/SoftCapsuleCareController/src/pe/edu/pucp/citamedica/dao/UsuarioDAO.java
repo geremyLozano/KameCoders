@@ -14,4 +14,6 @@ public interface UsuarioDAO {
     Usuario VerificarUsuario(String username);
     Usuario ValidarReset(String username, String correo);
     List<String>obtenerRoles(int idPersona);
+
+    List<Usuario> listarActivoNoActivo(int valor);
 }
