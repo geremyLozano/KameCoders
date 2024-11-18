@@ -58,4 +58,9 @@ public class UsuarioWS {
         ArrayList<Usuario> resultado = usuDAO.listarTodos();
         return resultado;
     }
+    @WebMethod(operationName = "listarActivoNoActivoUser")
+    public List<Usuario> listarActivoNoActivoUser(int valor) {
+        List<Usuario> resultado = usuDAO.listarActivoNoActivo(valor);
+        return resultado;
+    }
 }
