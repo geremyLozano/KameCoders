@@ -14,4 +14,8 @@ public interface EspecialidadDAO{
     Especialidad obtenerPorId1(int idEspecialidad);
     public int insertar1(Especialidad especialidad);
     List<Especialidad> listar(String filtro);
+    List<Especialidad> listarAscendente();
+    List<Especialidad> listarDescendente();
+    List<Especialidad> listarTodos1();
+    List<Especialidad> listarActivoNoActivo(int valor);
 }
