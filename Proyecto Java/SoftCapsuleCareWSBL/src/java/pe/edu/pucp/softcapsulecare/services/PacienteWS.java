@@ -67,7 +67,7 @@ public class PacienteWS {
         return resultado;
     }
     
-    @WebMethod(operationName = "modificar_v2")
+    @WebMethod(operationName = "modificar_v2_paciente")
     public int modificarPaciente_V2(@WebParam(name = "paciente") Paciente paciente) {
         return pacienteDAO.modificar_v2(paciente);
     }
