@@ -21,45 +21,77 @@ public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
     private ResultSet rs;
     
     @Override
-    public int insertar(ResultadoProcedimiento resPro){
+    public int insertar(ResultadoProcedimiento resPro) {
         int resultado = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "INSERT into ResultadoProcedimiento(idProcedimiento,observaciones,estado,fechaResultado)"
-                    + " values(?,?,?,?)";
+            sql = "INSERT into ResultadoProcedimiento(idProcedimiento, observaciones, estado, fechaResultado) "
+                    + "values(?,?,?,?)";
             pst = con.prepareStatement(sql);
-            pst.setInt(1,resPro.getProcedimiento().getIdProcedimiento());
-            pst.setString(2,resPro.getObservaciones());
+            pst.setInt(1, resPro.getProcedimiento().getIdProcedimiento());
+            pst.setString(2, resPro.getObservaciones());
             pst.setString(3, resPro.getEstado().toString());
             java.sql.Date sqlDate = new java.sql.Date(resPro.getFechaResultado().getTime());
-            pst.setDate(4,sqlDate);
+            pst.setDate(4, sqlDate);
+
             resultado = pst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();  // Cerrar PreparedStatement
+                }
+                if (con != null) {
+                    con.close();  // Cerrar Connection
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return resultado;
     }
     
     @Override
-    public int modificar(ResultadoProcedimiento resPro){
+    public int modificar(ResultadoProcedimiento resPro) {
         int resultado = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+
         try {
             con = DBManager.getInstance().getConnection();
-            sql = "UPDATE ResultadoProcedimiento SET estado = ?"
-                    + " WHERE idResultadoProcedimiento = ?";
+            sql = "UPDATE ResultadoProcedimiento SET estado = ? "
+                    + "WHERE idResultadoProcedimiento = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1,resPro.getEstado().toString());
-            pst.setInt(2,resPro.getIdResultado());
+            pst.setString(1, resPro.getEstado().toString());
+            pst.setInt(2, resPro.getIdResultado());
             resultado = pst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();  // Cerrar PreparedStatement
+                }
+                if (con != null) {
+                    con.close();  // Cerrar Connection
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return resultado;
     }
     
     @Override
-    public int eliminar(int idResultadoProcedimiento){
+    public int eliminar(int idResultadoProcedimiento) {
         int resultado = 0;
+        Connection con = null;
+        CallableStatement cst = null;
+
         try {
             con = DBManager.getInstance().getConnection();
             sql = "{call RESULTADOPROCEDIMIENTO_ELIMINAR(?)}";
@@ -68,6 +100,17 @@ public class ResultadoProcedimientoMySQL implements ResultadoProcedimientoDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();  // Cerrar CallableStatement
+                }
+                if (con != null) {
+                    con.close();  // Cerrar Connection
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return resultado;
     }
