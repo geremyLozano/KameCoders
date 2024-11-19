@@ -233,11 +233,11 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
                 citaMedica.setFecha(rs.getDate("fecha"));
                 citaMedica.setHora(rs.getTime("hora").toLocalTime());
+                citaMedica.setActivo(true);
 
                 // Convertir el valor del estado de String a EstadoCita
                 String estadoStr = rs.getString("estadoCita");
-                EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());  // Conversión a enum
-                citaMedica.setEstado(estado);
+                citaMedica.setEstado(EstadoCita.valueOf(rs.getString("estadoCita")));
 
                 // Añadir la CitaMedica a la lista
                 citasMedicas.add(citaMedica);
@@ -519,6 +519,47 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         // Devolver la lista de citas médicas
         return listaCitas;
     }
+
+    @Override
+    public int actualizarEstadoCita(int idCitaMedica, EstadoCita estado) {
+        int resultado = 0;
+        Connection con = null;
+        CallableStatement cst = null;
+        String sql = "{CALL ActualizarEstadoCita(?, ?)}"; // Procedimiento almacenado
+
+        try {
+            // Obtener la conexión a la base de datos
+            con = DBPoolManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+
+            // Establecer los valores de los parámetros
+            cst.setInt(1, idCitaMedica);
+            cst.setString(2, estado.toString());
+
+            // Ejecutar la consulta
+            resultado = cst.executeUpdate();
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL
+            System.out.println("Error al actualizar el estado de la cita médica: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
+        }
+
+        // Devolver el resultado
+        return resultado;
+    }
+    
+   
+
 
 
 }
