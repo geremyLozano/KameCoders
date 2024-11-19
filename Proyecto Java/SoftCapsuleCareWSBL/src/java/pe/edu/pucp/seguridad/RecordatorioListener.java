@@ -107,12 +107,15 @@ public class RecordatorioListener implements ServletContextListener {
                     // Comparar las fechas
                     if (fechaCitaStr.equals(hoyStr)) {
                         // Si la hora actual está entre la hora de la cita y una hora después
-                        if (ahoraHora.isAfter(horaCita) && ahoraHora.isBefore(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("En_progreso")!=0) {
+                        if (ahoraHora.isAfter(horaCita) && ahoraHora.isBefore(horaCita.plusHours(1)) && 
+                                cita.getEstado().toString().compareTo("En_progreso")!=0 && cita.getEstado().toString().compareTo("Pendiente")!=0 &&
+                                cita.getEstado().toString().compareTo("Cancelada")!=0) {
                             citaDAO.actualizarEstadoCita(cita.getIdCitaMedica(), EstadoCita.En_progreso);
                             System.out.println("Cita cambiada a 'En_progreso': " + cita.getIdCitaMedica());
                         }
                         // Si la hora actual es mayor que la hora de la cita más una hora
-                        else if (ahoraHora.isAfter(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("Finalizada")!=0) {
+                        else if (ahoraHora.isAfter(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("Finalizada")!=0 
+                                && cita.getEstado().toString().compareTo("En_progreso") == 0) {
                             citaDAO.actualizarEstadoCita(cita.getIdCitaMedica(), EstadoCita.Finalizada);
                             System.out.println("Cita cambiada a 'Finalizado': " + cita.getIdCitaMedica());
                         }
