@@ -296,18 +296,19 @@ public class PacienteMySQL implements PacienteDAO{
     @Override
     public List<Paciente> listar(String filtro) {
         List<Paciente> result = new ArrayList<>();
-        Connection con = null;
+        con = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "SELECT p.DNI, p.nombre, p.apellido, p.correoElectronico, p.numTelefono, " +
                          "p.direccion, p.fechaNacimiento, p.genero, pac.idPaciente, pac.activo " +
                          "FROM Persona p " +
-                         "JOIN Paciente pac ON p.DNI = pac.DNI " +
-                         "WHERE (p.nombre LIKE ? OR p.apellido LIKE ?) AND pac.activo = true";
+                         "JOIN Paciente pac ON p.idPersona = pac.idPaciente " +
+                         "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ?";
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
 
             ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
@@ -337,4 +338,30 @@ public class PacienteMySQL implements PacienteDAO{
 
         return result;
     }
+
+    @Override
+    public int modificar_v2(Paciente paciente) {
+        int resultado = 0;
+        String query = "UPDATE Paciente SET historialActivo = ?, "
+                     + "activo = true "
+                     + "WHERE idPaciente = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setBoolean(1, paciente.getHistorialActivo());
+            statement.setInt(2, paciente.getIdPaciente());
+
+            resultado = statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return resultado;
+    }
+
 }

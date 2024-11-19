@@ -15,10 +15,7 @@ import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 import pe.edu.pucp.seguridad.PasswordHash;
 
-/**
- *
- * @author Usuario
- */
+
 public class AdministradorMySQL implements AdministradorDAO{
  
     private Connection con;
@@ -184,7 +181,7 @@ public class AdministradorMySQL implements AdministradorDAO{
 
 
 
-    @Override
+   @Override
     public Administrador obtenerPorId1(int idAdmin) {
         Administrador resultado = null;
         String query = "SELECT Persona.*, Administrador.activo "
@@ -286,7 +283,7 @@ public class AdministradorMySQL implements AdministradorDAO{
             String sql = "SELECT a.idAdministrador, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, a.activo "
                     + "FROM Administrador a "
                     + "JOIN Persona p ON a.idAdministrador = p.idPersona "
-                    + "WHERE p.nombre LIKE ? AND a.activo = true";
+                    + "WHERE p.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%"); 
@@ -318,5 +315,28 @@ public class AdministradorMySQL implements AdministradorDAO{
         }
 
         return result;
+    }
+
+    @Override
+    public int modificar_v2(Administrador administrador) {
+        int resultado = 0;
+        String query = "UPDATE Administrador SET activo = true, "
+                     + "WHERE idAdministrador = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setInt(1, administrador.getIdAdministrador());
+
+            resultado = statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return resultado;
     }
 }

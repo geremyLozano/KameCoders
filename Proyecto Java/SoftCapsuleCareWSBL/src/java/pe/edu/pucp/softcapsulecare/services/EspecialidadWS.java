@@ -65,4 +65,25 @@ public class EspecialidadWS {
         List<Especialidad> resultado = espeDAO.listar(filtro);
         return resultado;
     }
+
+    @WebMethod(operationName = "listarAscendente")
+    public List<Especialidad> listarAscendente() {
+        List<Especialidad> resultado = espeDAO.listarAscendente();
+        return resultado;
+    }
+    @WebMethod(operationName = "listarDescendente")
+    public List<Especialidad> listarDescendente() {
+        List<Especialidad> resultado = espeDAO.listarDescendente();
+        return resultado;
+    }
+    @WebMethod(operationName = "listarTodos1")
+    public List<Especialidad> listarTodos1() {
+        List<Especialidad> resultado = espeDAO.listarTodos1();
+        return resultado;
+    }
+    @WebMethod(operationName = "listarActivoNoActivo")
+    public List<Especialidad> listarActivoNoActivo(int valor) {
+        List<Especialidad> resultado = espeDAO.listarActivoNoActivo(valor);
+        return resultado;
+    }
 }

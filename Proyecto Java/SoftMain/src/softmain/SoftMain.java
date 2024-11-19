@@ -9,7 +9,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import pe.edu.pucp.citamedica.dao.AseguradoraDAO;
 import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
+import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
+import pe.edu.pucp.citamedica.dao.PersonaDAO;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
@@ -19,7 +21,9 @@ import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
 import pe.edu.pucp.citamedica.mysql.AseguradoraMySQL;
 import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+import pe.edu.pucp.citamedica.mysql.EspecialidadMySQL;
 import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
+import pe.edu.pucp.citamedica.mysql.PersonaMySQL;
 import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
 
 public class SoftMain {
@@ -108,7 +112,8 @@ public class SoftMain {
 //            } else {
 //                System.out.println("No se encontraron procedimientos registrados.");
 //            }
-        AseguradoraDAO asedao = new AseguradoraMySQL();
-        asedao.insertarPacienteAseguradora(85, 6);
+        PersonaDAO dao = new PersonaMySQL();
+         System.out.println(dao.obtenerPorId(94).getCorreoElectronico());
+        
     }
 }

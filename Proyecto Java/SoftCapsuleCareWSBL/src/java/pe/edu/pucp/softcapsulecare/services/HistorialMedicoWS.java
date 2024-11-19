@@ -90,13 +90,9 @@ public class HistorialMedicoWS {
     @WebMethod(operationName = "modificarHistorialMedico")
     public int modificarHistorialMedico( HistorialMedico historial) {
         
-        
-        
+             
         int resultado =0;
-
-        
-        
-        
+     
         try{
             daoHistorial = new HistorialMedicoMySQL();
             resultado = daoHistorial.modificar(historial);
@@ -105,9 +101,6 @@ public class HistorialMedicoWS {
         }
 
         return resultado;
-        
-
-        
     }
     
     

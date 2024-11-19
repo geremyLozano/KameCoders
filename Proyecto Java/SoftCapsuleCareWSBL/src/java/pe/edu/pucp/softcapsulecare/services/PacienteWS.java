@@ -10,8 +10,7 @@ import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
 
-@WebService(serviceName = "PacienteWS",
-            targetNamespace = "http://services.softcapsulecare.pucp.edu.pe/")
+@WebService(serviceName = "PacienteWS")
 public class PacienteWS {
     private PacienteDAO pacienteDAO;
     
@@ -66,6 +65,11 @@ public class PacienteWS {
     public int pacienteInsertar1(@WebParam(name = "paciente") Paciente paciente) {
         int resultado = pacienteDAO.insertar1(paciente);
         return resultado;
-    }  
+    }
+    
+    @WebMethod(operationName = "modificar_v2_paciente")
+    public int modificarPaciente_V2(@WebParam(name = "paciente") Paciente paciente) {
+        return pacienteDAO.modificar_v2(paciente);
+    }
 
 }

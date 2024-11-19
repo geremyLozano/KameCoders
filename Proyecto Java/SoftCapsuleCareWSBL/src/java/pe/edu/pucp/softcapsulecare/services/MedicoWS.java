@@ -6,6 +6,7 @@ import jakarta.jws.WebParam;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.citamedica.dao.MedicoDAO;
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
@@ -24,8 +25,6 @@ public class MedicoWS {
     public int medicoInsertar(@WebParam(name = "medico") Medico medico,
                               @WebParam(name = "usuario") Usuario usuario) {
         
-        medico.setHoraInicioTrabajo(LocalTime.MIDNIGHT);
-        medico.setHoraFinTrabajo(LocalTime.MIN);
         return medicoDAO.insertar(medico,usuario);
     }
     
@@ -56,8 +55,7 @@ public class MedicoWS {
     
     @WebMethod(operationName = "modificarMedico")
     public int medicoModificar(@WebParam(name = "medico") Medico medico) {
-        int resultado = medicoDAO.modificar(medico);
-        return resultado;
+        return medicoDAO.modificar(medico);
     }
     
     @WebMethod(operationName = "obtenerPorIDMedico")
@@ -85,5 +83,13 @@ public class MedicoWS {
         Medico resultado = medicoDAO.obtenerPorId1(idMedico);
         return resultado;
     }
-    
+    @WebMethod(operationName = "listarFiltroMedico")
+    public List<Medico> listarFiltroMedico(String filtro)  {
+        List<Medico> resultado = medicoDAO.listarFiltro(filtro);
+        return resultado;
+    }
+    @WebMethod(operationName = "modificarMedicoV_2")
+    public int medicoModificarV_2(@WebParam(name = "medico") Medico medico) {
+        return medicoDAO.modificar_v2(medico);
+    }
 }

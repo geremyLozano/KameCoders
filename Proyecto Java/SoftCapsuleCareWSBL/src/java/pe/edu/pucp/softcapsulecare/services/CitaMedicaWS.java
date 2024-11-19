@@ -51,7 +51,11 @@ public class CitaMedicaWS {
     @WebMethod(operationName = "obtenerPorId")
     public CitaMedica obtenerPorId(@WebParam(name = "idPaciente") int idPaciente) {
         return citaMedicaDAO.obtenerPorId(idPaciente);
-        
+    }
+    
+    @WebMethod(operationName = "listarPorIdMedico")
+    public ArrayList<CitaMedica> listarPorIdMedico(@WebParam(name = "idMedico") int idMedico) {
+        return citaMedicaDAO.listarPorMedico(idMedico);
     }
     
 }

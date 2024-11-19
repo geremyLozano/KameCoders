@@ -9,4 +9,6 @@ public interface AmbienteMedicoDAO {
     int eliminar(int idAmbienteMedico);
     ArrayList<AmbienteMedico> listarTodos();
     AmbienteMedico obtenerPorId(int idAmbienteMedico);
+    
+    int cambiarEstadoAmbiente(int idAmbienteMedico);
 }

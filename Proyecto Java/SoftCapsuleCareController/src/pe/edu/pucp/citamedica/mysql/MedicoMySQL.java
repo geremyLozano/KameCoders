@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import pe.edu.pucp.citamedica.model.clinica.DiaSemana;
@@ -56,7 +58,8 @@ public class MedicoMySQL implements MedicoDAO {
     public int insertar(Medico medico, Usuario usuario) {
         int resultado = -1;
         String hashedPassword;
-
+        LocalTime horaIni = LocalTime.of(0, 0); // 00:00
+        LocalTime horaFin = LocalTime.of(0, 0);    // 00:00
         // Intentamos generar el hash de la contraseña
         try {
             hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
@@ -80,8 +83,8 @@ public class MedicoMySQL implements MedicoDAO {
             cst.setDate(8, sqlDate);
             cst.setString(9, String.valueOf(medico.getGenero()));
             cst.setString(10, medico.getNumColegiatura());
-            cst.setTime(11, Time.valueOf(medico.getHoraInicioTrabajo()));
-            cst.setTime(12, Time.valueOf(medico.getHoraFinTrabajo()));
+            cst.setTime(11, Time.valueOf(horaIni));
+            cst.setTime(12, Time.valueOf(horaFin));
             cst.setString(13, medico.getDiasLaborales());
             cst.setInt(14, medico.getAhosExp());
             cst.setBoolean(15, true);
@@ -102,10 +105,18 @@ public class MedicoMySQL implements MedicoDAO {
     }
 
 
-    @Override
+   @Override
     public int modificar(Medico medico) {
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
         
+        // Convertir las cadenas de hora a LocalTime
+        LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
+        // Mostrar los valores convertidos
+        System.out.println("Hora inicio: " + horaInicio);
+        System.out.println("Hora fin: " + horaFin);
        
         int resultado = 0;
         try {
@@ -119,8 +130,8 @@ public class MedicoMySQL implements MedicoDAO {
             
             pstMedico.setInt(1, medico.getIdMedico());           
             pstMedico.setString(2, medico.getNumColegiatura());
-            pstMedico.setTime(3,Time.valueOf(medico.getHoraInicioTrabajo()));
-            pstMedico.setTime(4,Time.valueOf(medico.getHoraFinTrabajo()));
+            pstMedico.setTime(3,Time.valueOf(horaInicio));
+            pstMedico.setTime(4,Time.valueOf(horaFin));
             
             
 //            String diasLaboralesString = medico.getDiasLaborales().stream()
@@ -130,7 +141,7 @@ public class MedicoMySQL implements MedicoDAO {
             
             pstMedico.setString(5, medico.getDiasLaborales());       
             pstMedico.setInt(6,medico.getAhosExp());
-            pstMedico.setBoolean(7,medico.isActivo());
+            pstMedico.setBoolean(7,true);
             
       
             
@@ -149,9 +160,6 @@ public class MedicoMySQL implements MedicoDAO {
         }
         return resultado;
         
-        
-        
-
     }
 
     @Override
@@ -280,6 +288,8 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setNumColegiatura(rs.getString("numColegiatura"));
                 medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
+                medico.setHoraInicioTrabajoStr(medico.getHoraInicioTrabajo().toString());
+                medico.setHoraFinTrabajoStr(medico.getHoraFinTrabajo().toString());
                 medico.setNombre(rs.getString("nombre"));
                 medico.setApellido(rs.getString("apellido"));
                 
@@ -366,7 +376,7 @@ public class MedicoMySQL implements MedicoDAO {
 
 
 
-   @Override
+  @Override
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
@@ -474,7 +484,7 @@ public class MedicoMySQL implements MedicoDAO {
                 }
 
                 // Asignar otros atributos de Medico
-                medico.setDiasLaborales(rs.getString("EspecialidadNombre"));
+                medico.setDiasLaborales(rs.getString("diasLaborales"));
                 medico.setAhosExp(rs.getInt("anhosExp"));
 
                 // Agregar el medico a la lista
@@ -538,7 +548,7 @@ public class MedicoMySQL implements MedicoDAO {
 
                     medico.setDiasLaborales(rs.getString("diasLaborales"));
                     medico.setAhosExp(rs.getInt("anhosExp"));
-                    medico.setActivo(rs.getBoolean("activo"));
+                    medico.setActivo(true);
                 }
             }
 
@@ -549,6 +559,89 @@ public class MedicoMySQL implements MedicoDAO {
 
         return medico;
     }
- 
+    
+    @Override
+    public List<Medico> listarFiltro(String filtro) {
+        System.out.println("Filtro recibido: " + filtro);
+        List<Medico> result = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura, e.idEspecialidad, e.nombre AS NombreEspe "
+                    + "FROM Medico m "
+                    + "JOIN Persona p ON m.idMedico = p.idPersona "
+                    + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
+                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
+
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setString(1, "%" + filtro + "%");
+            cmd.setString(2, "%" + filtro + "%");
+            cmd.setString(3, "%" + filtro + "%");
+            cmd.setString(4, "%" + filtro + "%");
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Medico medico = new Medico();
+
+                medico.setDNI(cursor.getString("DNI"));
+                if (cursor.getObject("nombre") != null) {
+                    medico.setNombre(cursor.getString("nombre"));
+                }
+                medico.setApellido(cursor.getString("apellido"));
+                medico.setCorreoElectronico(cursor.getString("correoElectronico"));
+                medico.setFechaNacimiento(cursor.getDate("fechaNacimiento"));
+                medico.setIdMedico(cursor.getInt("idMedico"));
+                medico.setActivo(cursor.getBoolean("activo"));
+                medico.setNumColegiatura(cursor.getString("numColegiatura"));
+                Especialidad esp = new Especialidad();
+                esp.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                esp.setNombre(cursor.getString("NombreEspe"));
+                medico.setEspecialidad(esp);
+
+                result.add(medico);
+            }
+            return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result;
+    }
+    
+
+    @Override
+    public int modificar_v2(Medico medico) {
+        int resultado = 0;
+        String query = "UPDATE Medico SET numColegiatura = ?, diasLaborales = ?, anhosExp = ?, "
+                     + "activo = ?, horaInicioTrabajo = ?, horaFinTrabajo = ?, idEspecialidad = ? "
+                     + "WHERE idMedico = ?";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+            LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
+            statement.setString(1, medico.getNumColegiatura());
+            statement.setString(2, medico.getDiasLaborales());
+            statement.setInt(3, medico.getAhosExp());
+            statement.setBoolean(4, true);
+            statement.setTime(5, Time.valueOf(horaInicio));
+            statement.setTime(6, Time.valueOf(horaFin));
+            statement.setInt(7, medico.getEspecialidad().getIdEspecialidad());
+            statement.setInt(8, medico.getIdMedico());
+
+            resultado = statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar el médico: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
     
 }

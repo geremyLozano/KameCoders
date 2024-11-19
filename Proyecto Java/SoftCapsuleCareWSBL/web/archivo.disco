@@ -27,4 +27,9 @@ ref="http://localhost:8080/SoftCapsuleCareWSBL/TokenWS?WSDL"/>
 ref="http://localhost:8080/SoftCapsuleCareWSBL/PersonaWS?WSDL"/>
 <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
 ref="http://localhost:8080/SoftCapsuleCareWSBL/AseguradoraWS?WSDL"/>
+<contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+ref="http://localhost:8080/SoftCapsuleCareWSBL/AmbienteMedicoWS?WSDL"/>
+
+
+
 </discovery>
