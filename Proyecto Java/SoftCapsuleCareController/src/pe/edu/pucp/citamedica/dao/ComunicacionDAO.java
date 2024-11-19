@@ -1,8 +1,8 @@
 package pe.edu.pucp.citamedica.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import pe.edu.pucp.citamedica.model.comunicacion.Comunicacion;
-
 
 public interface ComunicacionDAO {
     int insertar(Comunicacion comunicacion);
@@ -10,4 +10,7 @@ public interface ComunicacionDAO {
     int eliminar(int idComunicacion);
     ArrayList<Comunicacion> listarTodos();
     Comunicacion obtenerPorId(int idComunicacion);
+    ArrayList<Comunicacion> listarPorPaciente(int idPaciente); // Nuevo método
+    ArrayList<Comunicacion> listarComunicacionesFiltradas(String tipo, String estado, Date fechaInicio, Date fechaFin, Integer idPaciente);
+    public ArrayList<String[]> obtenerConteoPorEstado();
 }

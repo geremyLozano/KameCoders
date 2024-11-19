@@ -250,4 +250,40 @@ public class HistorialMedicoMySQL implements HistorialMedicoDAO{
         
     }
     
+    
+    @Override
+    public HistorialMedico obtenerPorPaciente(int idPaciente) {
+        HistorialMedico historial = null;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            st = con.createStatement();
+            sql = "{CALL HistorialMedicoListarPorIDPaciente(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPaciente);
+            rs = cst.executeQuery();
+            if (rs.next()) {
+                historial = new HistorialMedico();
+                historial.setIdHistorial(rs.getInt("idHistorialMedico"));
+                historial.setFechaDeCreacion(rs.getDate("fechaCreacion"));
+                historial.setActivo(rs.getBoolean("activo"));
+                historial.setIdPaciente(rs.getInt("idPaciente"));
+                
+                
+                historial.setEnferPreExist(rs.getString("enferPreExist"));
+                historial.setAlergias(rs.getString("alergias"));
+                historial.setCirugiasPrevias(rs.getString("cirugiasPrevias"));
+                historial.setVacunas(rs.getString("vacunas"));
+                
+                historial.setPeso(rs.getDouble("peso"));
+                historial.setAltura(rs.getDouble("altura"));
+                historial.setTipoSangre(rs.getString("tipoSangre"));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return historial;
+    }
+    
 }

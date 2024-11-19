@@ -1,5 +1,4 @@
 package pe.edu.pucp.citamedica.model.procedimiento;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +12,7 @@ public class Procedimiento {
     private TipoProcedimiento tipoProcedimiento; // Mantiene el nombre consistente con la columna de la BD
     private boolean activo;
     private Date fecha; // Nuevo campo para la fecha
+    private String fechaString;
 
     public Procedimiento() {
         this.resultados = new ArrayList<>();
@@ -38,6 +38,14 @@ public class Procedimiento {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+    public String getFechaString() {
+        return fechaString;
+    }
+
+    public void setFechaString (String fecha) {
+        this.fechaString = fecha;
+    }
+    
 
     // Getter y setter para 'resultados'
     public ArrayList<ResultadoProcedimiento> getResultados() {

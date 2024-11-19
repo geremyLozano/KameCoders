@@ -2,8 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
         <group>
-            <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCare-MedicalManagement/src/pe/edu/pucp/citamedica/model/consultas/EstadoCita.java</file>
+            <file>file:/C:/Users/berna/Desktop/lab12/back/KameCoders/Proyecto%20Java/SoftCapsuleCare-MedicalManagement/src/pe/edu/pucp/citamedica/model/procedimiento/Procedimiento.java</file>
+            <file>file:/C:/Users/berna/Desktop/lab12/back/KameCoders/Proyecto%20Java/SoftCapsuleCare-MedicalManagement/src/pe/edu/pucp/citamedica/model/procedimiento/TipoProcedimiento.java</file>
         </group>
+=======
+<<<<<<< HEAD
+        <group/>
+=======
+>>>>>>> eb86c240e607f5e80c907793b2ded839562263af
+        <group>
+            <file>file:/C:/Users/User/Desktop/CapsuleCare/Back/KameCoders/Proyecto%20Java/SoftCapsuleCare-MedicalManagement/src/pe/edu/pucp/citamedica/model/consultas/CitaMedica.java</file>
+        </group>
+<<<<<<< HEAD
+=======
+>>>>>>> a2a33d7e1303db68d44f2fcaddf7fd355b04a50f
+>>>>>>> 50879c3c7605b742bc7b62d80148cc7406442067
+>>>>>>> eb86c240e607f5e80c907793b2ded839562263af
     </open-files>
 </project-private>

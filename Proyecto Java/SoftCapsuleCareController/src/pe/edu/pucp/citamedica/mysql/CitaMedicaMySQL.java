@@ -97,24 +97,59 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
 
 
     @Override
-    public int modificar(CitaMedica citaMedica) {
+    public int modificar(CitaMedica cita) {
         int resultado = 0;
         Connection con = null;
         CallableStatement cst = null;
-        String sql = "{CALL sp_modificar_cita_medica(?, ?, ?, ?)}";
+        String sql = "{CALL sp_modificar_cita_medica(?, ?, ?, ?, ?, ?, ?)}";
 
         try {
             // Obtener la conexión desde el DBManager.
             con = DBPoolManager.getInstance().getConnection();
-
             // Preparar la llamada al procedimiento almacenado.
             cst = con.prepareCall(sql);
+            
+            LocalTime horaLocalTime;
+            LocalTime duracionLocalTime;
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaLocalDate = LocalDate.parse(cita.getFechaStr(), dateFormatter);
+            java.sql.Date fecha = java.sql.Date.valueOf(fechaLocalDate);
+            
+            
+            if (cita.getHoraStr().length() == 5) { // Formato "HH:mm"
+                horaLocalTime = LocalTime.parse(cita.getHoraStr(), DateTimeFormatter.ofPattern("HH:mm"));
+            } else { // Formato "HH:mm:ss"
+                horaLocalTime = LocalTime.parse(cita.getHoraStr(), DateTimeFormatter.ofPattern("HH:mm:ss"));
+            }
 
-            // Establecer los parámetros para el procedimiento.
-            cst.setInt(1, citaMedica.getIdCitaMedica());  // Convertir el ID si es String
-            cst.setString(2, citaMedica.getEstado().name());                 // Asumimos que EstadoCita es un enum
-            cst.setDate(3, new java.sql.Date(citaMedica.getFecha().getTime()));
-            cst.setTime(4, java.sql.Time.valueOf(citaMedica.getHora()));
+            if (cita.getDuracionStr().length() == 5) { // Formato "HH:mm"
+                duracionLocalTime = LocalTime.parse(cita.getDuracionStr(), DateTimeFormatter.ofPattern("HH:mm"));
+            } else { // Formato "HH:mm:ss"
+                duracionLocalTime = LocalTime.parse(cita.getDuracionStr(), DateTimeFormatter.ofPattern("HH:mm:ss"));
+            }
+            
+            java.sql.Time hora = java.sql.Time.valueOf(horaLocalTime);
+            java.sql.Time duracion = java.sql.Time.valueOf(duracionLocalTime);
+
+            cst.setInt(1, cita.getIdCitaMedica());
+            cst.setString(2, cita.getEstado().toString());
+            cst.setDate(3, fecha);
+            cst.setTime(4,hora);
+            if(cita.getEstado().toString().compareTo("Confirmada") == 0 || cita.getEstado().toString().compareTo("Cancelada") == 0){
+                if(cita.getTipoStr().compareTo("Virtual") == 0){
+                cst.setString(5, cita.getPlataforma());
+                cst.setString(6, cita.getEnlace());
+                cst.setNull(7, java.sql.Types.INTEGER);
+                } else {
+                    cst.setNull(5, java.sql.Types.VARCHAR);
+                    cst.setNull(6, java.sql.Types.VARCHAR);
+                    cst.setInt(7, cita.getNumeroAmbiente());
+                }
+            } else{
+                cst.setNull(5, java.sql.Types.VARCHAR);
+                cst.setNull(6, java.sql.Types.VARCHAR);
+                cst.setNull(7, java.sql.Types.INTEGER);
+            }
 
             // Ejecutar el procedimiento almacenado.
             resultado = cst.executeUpdate();
@@ -198,11 +233,11 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
                 citaMedica.setFecha(rs.getDate("fecha"));
                 citaMedica.setHora(rs.getTime("hora").toLocalTime());
+                citaMedica.setActivo(true);
 
                 // Convertir el valor del estado de String a EstadoCita
                 String estadoStr = rs.getString("estadoCita");
-                EstadoCita estado = EstadoCita.valueOf(estadoStr.toUpperCase());  // Conversión a enum
-                citaMedica.setEstado(estado);
+                citaMedica.setEstado(EstadoCita.valueOf(rs.getString("estadoCita")));
 
                 // Añadir la CitaMedica a la lista
                 citasMedicas.add(citaMedica);
@@ -484,6 +519,47 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         // Devolver la lista de citas médicas
         return listaCitas;
     }
+
+    @Override
+    public int actualizarEstadoCita(int idCitaMedica, EstadoCita estado) {
+        int resultado = 0;
+        Connection con = null;
+        CallableStatement cst = null;
+        String sql = "{CALL ActualizarEstadoCita(?, ?)}"; // Procedimiento almacenado
+
+        try {
+            // Obtener la conexión a la base de datos
+            con = DBPoolManager.getInstance().getConnection();
+
+            // Preparar la llamada al procedimiento almacenado
+            cst = con.prepareCall(sql);
+
+            // Establecer los valores de los parámetros
+            cst.setInt(1, idCitaMedica);
+            cst.setString(2, estado.toString());
+
+            // Ejecutar la consulta
+            resultado = cst.executeUpdate();
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL
+            System.out.println("Error al actualizar el estado de la cita médica: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
+        }
+
+        // Devolver el resultado
+        return resultado;
+    }
+    
+   
+
 
 
 }

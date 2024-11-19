@@ -10,10 +10,7 @@ public interface HistorialMedicoDAO {
     int cambiarEstadoHistorial(int idHistorial);
     ArrayList<HistorialMedico> listarTodos();
     HistorialMedico obtenerPorId(int idHistorial);
-    
-    
     ArrayList<HistorialMedicoDto> listarTodosPorCampImp();
-    
-     
     ArrayList<HistorialMedicoDto> listarTodosPorDniNombreApellido(String patronCaracteres);
+    HistorialMedico obtenerPorPaciente(int idPaciente);
 }

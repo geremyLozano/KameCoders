@@ -23,12 +23,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
     private String sql;
     private ResultSet rs;
 
+    
     @Override
     public int insertar(Procedimiento procedimiento, int idAmbienteMedico) {
         int resultado = 0;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL sp_insertar_procedimiento(?, ?, ?, ?, ?, ?)}";
+            sql = "{CALL sp_insertar_procedimiento(?, ?, ?, ?, ?, ?, ?)}"; // Ahora incluye el parámetro fecha
             cst = con.prepareCall(sql);
             cst.setString(1, procedimiento.getNombre());
             cst.setDouble(2, procedimiento.getCosto());
@@ -36,18 +37,23 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
             cst.setString(4, procedimiento.getRequisitosPrevios());
             cst.setString(5, procedimiento.getTipoProcedimiento().name());
             cst.setInt(6, idAmbienteMedico);
+            cst.setDate(7, new java.sql.Date(procedimiento.getFecha().getTime())); // Enviar la fecha
+            
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
+                if (con != null) {
+                    con.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
         return resultado;
     }
+
 
     @Override
     public int modificar(Procedimiento procedimiento) {
