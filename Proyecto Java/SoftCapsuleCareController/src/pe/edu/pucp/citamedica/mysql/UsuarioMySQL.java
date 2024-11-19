@@ -400,23 +400,21 @@ public class UsuarioMySQL implements UsuarioDAO {
     
     @Override
     public List<Usuario> listar(String filtro) {
-        List<Usuario> result = new ArrayList<Usuario>(); // Lista vacía inicializada
+        List<Usuario> result = new ArrayList<Usuario>(); // lista vacía inicializada
         Connection con = null;
-        PreparedStatement cmd = null;
-        ResultSet cursor = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "SELECT u.idUsuario, u.username, u.contrasenha, u.idPersona, u.activo "
-                       + "FROM Usuario u "
-                       + "JOIN Persona p ON u.idPersona = p.idPersona "
-                       + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR u.username LIKE ? ";
-            cmd = con.prepareStatement(sql);
+                    + "FROM Usuario u "
+                    + "JOIN Persona p ON u.idPersona = p.idPersona "
+                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR u.username LIKE ? ";
+            PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
             cmd.setString(3, "%" + filtro + "%");
-
-            cursor = cmd.executeQuery();
+            
+            ResultSet cursor = cmd.executeQuery();
             while (cursor.next()) {
                 Usuario user = new Usuario();
                 user.setIdUsuario(cursor.getInt("idUsuario"));
@@ -429,18 +427,37 @@ public class UsuarioMySQL implements UsuarioDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            // Cerrar el ResultSet, PreparedStatement y Connection en el bloque finally
-            try {
-                if (cursor != null) {
-                    cursor.close();
-                }
-                if (cmd != null) {
-                    cmd.close();
-                }
-                DBPoolManager.getInstance().cerrarConexion();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result;            
+    }
+    
+    @Override
+    public ArrayList<Usuario> listarTodos1() {
+        ArrayList<Usuario> result = new ArrayList<Usuario>(); // lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT u.idUsuario, u.username, u.contrasenha, u.idPersona, u.activo "
+                    + "FROM Usuario u ";
+            PreparedStatement cmd = con.prepareStatement(sql);
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(cursor.getInt("idUsuario"));
+                user.setUsername(cursor.getString("username"));
+                user.setContrasenha(cursor.getString("contrasenha"));
+                user.setIdPersona(cursor.getInt("idPersona"));
+                user.setActivo(cursor.getBoolean("activo"));
+                result.add(user);
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
         }
 
         return result;            
