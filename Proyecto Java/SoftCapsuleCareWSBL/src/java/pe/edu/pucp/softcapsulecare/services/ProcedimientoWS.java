@@ -8,6 +8,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+import java.util.Date;
 import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
@@ -23,18 +24,27 @@ public class ProcedimientoWS {
     }
 
     // Método para insertar un nuevo procedimiento
-    @WebMethod(operationName = "insertarProcedimiento")
-    public int insertarProcedimiento(@WebParam(name = "procedimiento") Procedimiento procedimiento, 
-                                     @WebParam(name = "idAmbienteMedico") int idAmbienteMedico)
-    {
+@WebMethod(operationName = "insertarProcedimiento")
+    public int insertarProcedimiento(@WebParam(name = "procedimiento") Procedimiento procedimiento,
+            @WebParam(name = "idAmbienteMedico") int idAmbienteMedico) {
+        // Validar y configurar la fecha actual si no se ha especificado
+        if (procedimiento.getFecha() == null) {
+            procedimiento.setFecha(new Date()); // Asigna la fecha actual
+        }
+
+        // Imprimir los datos del procedimiento para depuración
         System.out.println("Nombre Procedimiento: " + procedimiento.getNombre());
-        System.out.println("Descripcion: " + procedimiento.getDescripcion());
+        System.out.println("Descripción: " + procedimiento.getDescripcion());
         System.out.println("Requisitos previos: " + procedimiento.getRequisitosPrevios());
         System.out.println("Costo: " + procedimiento.getCosto());
         System.out.println("Tipo: " + procedimiento.getTipoProcedimiento());
-        System.out.println("Id ambiente medico: " + idAmbienteMedico);
+        System.out.println("Fecha: " + procedimiento.getFecha());
+        System.out.println("ID Ambiente Médico: " + idAmbienteMedico);
+
+        // Llamar al método del DAO para insertar el procedimiento
         return procedimientoDAO.insertar(procedimiento, idAmbienteMedico);
     }
+
 
     // Método para modificar un procedimiento existente
     @WebMethod(operationName = "modificarProcedimiento")
