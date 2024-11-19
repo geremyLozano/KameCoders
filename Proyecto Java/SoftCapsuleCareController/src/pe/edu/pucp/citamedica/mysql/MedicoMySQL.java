@@ -288,6 +288,8 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setNumColegiatura(rs.getString("numColegiatura"));
                 medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
+                medico.setHoraInicioTrabajoStr(medico.getHoraInicioTrabajo().toString());
+                medico.setHoraFinTrabajoStr(medico.getHoraFinTrabajo().toString());
                 medico.setNombre(rs.getString("nombre"));
                 medico.setApellido(rs.getString("apellido"));
                 
@@ -374,7 +376,7 @@ public class MedicoMySQL implements MedicoDAO {
 
 
 
-  @Override
+    @Override
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
@@ -563,22 +565,24 @@ public class MedicoMySQL implements MedicoDAO {
         System.out.println("Filtro recibido: " + filtro);
         List<Medico> result = new ArrayList<>();
         Connection con = null;
+        PreparedStatement cmd = null;
+        ResultSet cursor = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura "
-                    + "FROM Medico m "
-                    + "JOIN Persona p ON m.idMedico = p.idPersona "
-                    + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
-                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
+            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura, e.idEspecialidad, e.nombre AS NombreEspe "
+                        + "FROM Medico m "
+                        + "JOIN Persona p ON m.idMedico = p.idPersona "
+                        + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
+                        + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
 
-            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
             cmd.setString(3, "%" + filtro + "%");
             cmd.setString(4, "%" + filtro + "%");
 
-            ResultSet cursor = cmd.executeQuery();
+            cursor = cmd.executeQuery();
             while (cursor.next()) {
                 Medico medico = new Medico();
 
@@ -594,6 +598,7 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setNumColegiatura(cursor.getString("numColegiatura"));
                 Especialidad esp = new Especialidad();
                 esp.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                esp.setNombre(cursor.getString("NombreEspe"));
                 medico.setEspecialidad(esp);
 
                 result.add(medico);
@@ -602,44 +607,50 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            DBPoolManager.getInstance().cerrarConexion();
+            // Asegúrate de cerrar el ResultSet, PreparedStatement y Connection
+            try {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                if (cmd != null) {
+                    cmd.close();
+                }
+                DBPoolManager.getInstance().cerrarConexion(); // Si tu pool no cierra automáticamente la conexión, hazlo aquí
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
 
         return result;
     }
-
+    
     @Override
     public int modificar_v2(Medico medico) {
         int resultado = 0;
-        con = null;
-        String query = "UPDATE Medico set numColegiatura = ?, diasLaborales = ?, anhosExp = ?, "
-                + "activo = true, horaInicioTrabajo = ?, horaFinTrabajo = ?, idEspecialidad = ? "
-                + "WHERE idPaciente = ?";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
-        
-        // Convertir las cadenas de hora a LocalTime
-        LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
-        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
-        
-        try {
-            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
-            
+        String query = "UPDATE Medico SET numColegiatura = ?, diasLaborales = ?, anhosExp = ?, "
+                     + "activo = ?, horaInicioTrabajo = ?, horaFinTrabajo = ?, idEspecialidad = ? "
+                     + "WHERE idMedico = ?";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+            LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
             statement.setString(1, medico.getNumColegiatura());
             statement.setString(2, medico.getDiasLaborales());
-            statement.setInt(3,medico.getAhosExp());
+            statement.setInt(3, medico.getAhosExp());
+            statement.setBoolean(4, true);
+            statement.setTime(5, Time.valueOf(horaInicio));
+            statement.setTime(6, Time.valueOf(horaFin));
+            statement.setInt(7, medico.getEspecialidad().getIdEspecialidad());
+            statement.setInt(8, medico.getIdMedico());
 
-            statement.setTime(4,Time.valueOf(horaInicio));
-            statement.setTime(5,Time.valueOf(horaFin));
-            statement.setInt(6, medico.getEspecialidad().getIdEspecialidad());
-            statement.setInt(7, medico.getIdMedico());
-            
             resultado = statement.executeUpdate();
-            
-            statement.close();
         } catch (SQLException e) {
-            e.printStackTrace(); 
-        } finally {
-            DBPoolManager.getInstance().cerrarConexion(); 
+            System.err.println("Error al actualizar el médico: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return resultado;

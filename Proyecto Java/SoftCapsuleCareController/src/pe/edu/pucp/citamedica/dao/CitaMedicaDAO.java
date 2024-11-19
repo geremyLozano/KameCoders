@@ -3,6 +3,7 @@ package pe.edu.pucp.citamedica.dao;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
+import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
 
 public interface CitaMedicaDAO {
@@ -14,4 +15,5 @@ public interface CitaMedicaDAO {
     ArrayList<CitaMedica> listarPorPaciente(int idPaciente);
     void obtenerCitasPendientes(List<Persona> personas);
     ArrayList<CitaMedica> listarPorMedico(int idMedico);
+    int actualizarEstadoCita(int idCitaMedica, EstadoCita estado);
 }

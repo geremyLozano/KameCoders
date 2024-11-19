@@ -248,5 +248,139 @@ public List<Especialidad> listar(String filtro) {
 
         return resultado;
     }
-   
+
+    @Override
+    public List<Especialidad> listarDescendente() {
+        List<Especialidad> result = new ArrayList<>(); // Lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            // Modificación para ordenar por costoConsulta de mayor a menor
+            String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo "
+                    + "FROM Especialidad "
+                    + "ORDER BY costoConsulta DESC";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            //cmd.setString(1, "%" + filtro + "%");
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                if (cursor.getObject("nombre") != null) {
+                    especialidad.setNombre(cursor.getString("nombre"));
+                }
+                if (cursor.getObject("costoConsulta") != null) {
+                    especialidad.setCostoConsulta(cursor.getDouble("costoConsulta"));
+                }
+                especialidad.setActivo(cursor.getBoolean("activo"));
+                result.add(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result; // Retorna una lista vacía si no hay resultados
+    }
+    
+    @Override
+    public List<Especialidad> listarAscendente() {
+        List<Especialidad> result = new ArrayList<>(); // Lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            // Modificación para ordenar por costoConsulta de mayor a menor
+            String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo "
+                    + "FROM Especialidad "
+                    + "ORDER BY costoConsulta ASC";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            //cmd.setString(1, "%" + filtro + "%");
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                if (cursor.getObject("nombre") != null) {
+                    especialidad.setNombre(cursor.getString("nombre"));
+                }
+                if (cursor.getObject("costoConsulta") != null) {
+                    especialidad.setCostoConsulta(cursor.getDouble("costoConsulta"));
+                }
+                especialidad.setActivo(cursor.getBoolean("activo"));
+                result.add(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return result; // Retorna una lista vacía si no hay resultados
+    }
+    
+    @Override
+    public List<Especialidad> listarTodos1() {
+        List<Especialidad> result = new ArrayList<>(); // Lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo "
+                    + "FROM Especialidad ";
+            PreparedStatement cmd = con.prepareStatement(sql);
+
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                if (cursor.getObject("nombre") != null) {
+                    especialidad.setNombre(cursor.getString("nombre"));
+                }
+                if (cursor.getObject("costoConsulta") != null) {
+                    especialidad.setCostoConsulta(cursor.getDouble("costoConsulta"));
+                }
+                especialidad.setActivo(cursor.getBoolean("activo"));
+                result.add(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        return result;
+    }
+    @Override
+    public List<Especialidad> listarActivoNoActivo(int valor) {
+        List<Especialidad> result = new ArrayList<>(); // Lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT idEspecialidad, nombre, costoConsulta, activo "
+                    + "FROM Especialidad WHERE activo = ?";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setInt(1, valor);
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                if (cursor.getObject("nombre") != null) {
+                    especialidad.setNombre(cursor.getString("nombre"));
+                }
+                if (cursor.getObject("costoConsulta") != null) {
+                    especialidad.setCostoConsulta(cursor.getDouble("costoConsulta"));
+                }
+                especialidad.setActivo(cursor.getBoolean("activo"));
+                result.add(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        return result;
+    }
 }

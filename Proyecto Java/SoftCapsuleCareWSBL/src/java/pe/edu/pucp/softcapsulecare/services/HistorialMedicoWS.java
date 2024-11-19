@@ -121,6 +121,27 @@ public class HistorialMedicoWS {
         return historial;
     }
     
+    @WebMethod(operationName = "obtenerHistorialMedicoPorIdPersona")
+    public HistorialMedico obtenerHistorialMedicoPorIdPersona(@WebParam(name = "idPersona") int idPersona) {
+        
+        
+        HistorialMedico historial =null;
+        
+        try{
+            
+            daoHistorial= new HistorialMedicoMySQL();
+            
+            historial=daoHistorial.obtenerPorPaciente(idPersona);
+            
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+        return historial;
+    }
     
     
 }
