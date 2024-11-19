@@ -17,4 +17,5 @@ public interface UsuarioDAO {
 
     List<Usuario> listarActivoNoActivo(int valor);
     List<Usuario> listar(String filtro);
+    ArrayList<Usuario> listarTodos1();
 }
