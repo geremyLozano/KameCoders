@@ -288,6 +288,8 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setNumColegiatura(rs.getString("numColegiatura"));
                 medico.setHoraInicioTrabajo(rs.getTime("horaInicioTrabajo").toLocalTime());
                 medico.setHoraFinTrabajo(rs.getTime("horaFinTrabajo").toLocalTime());
+                medico.setHoraInicioTrabajoStr(medico.getHoraInicioTrabajo().toString());
+                medico.setHoraFinTrabajoStr(medico.getHoraFinTrabajo().toString());
                 medico.setNombre(rs.getString("nombre"));
                 medico.setApellido(rs.getString("apellido"));
                 
