@@ -349,4 +349,39 @@ public class UsuarioMySQL implements UsuarioDAO {
         }
         return rolesActivos;
     }
+
+
+    
+    @Override
+    public List<Usuario> listarActivoNoActivo(int valor) {
+        List<Usuario> result = new ArrayList<>(); // Lista vacía inicializada
+        Connection con = null;
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            String sql = "SELECT idUsuario, username, contrasenha, idPersona, activo "
+                    + "FROM Usuario WHERE activo = ?";
+            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd.setInt(1, valor);
+            ResultSet cursor = cmd.executeQuery();
+            while (cursor.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(cursor.getInt("idUsuario"));
+                if (cursor.getObject("username") != null) {
+                    user.setUsername(cursor.getString("username"));
+                }
+                if (cursor.getObject("contrasenha") != null) {
+                    user.setContrasenha(cursor.getString("contrasenha"));
+                }
+                user.setIdPersona(cursor.getInt("idPersona"));
+                user.setActivo(cursor.getBoolean("activo"));
+                result.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        return result;
+    }
 }

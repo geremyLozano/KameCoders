@@ -280,7 +280,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
                     + "FROM Auxiliar a "
                     + "JOIN Persona p ON a.idAuxiliar = p.idPersona "
                     + "JOIN Especialidad e ON e.idEspecialidad = a.idEspecialidad "
-                    + "WHERE p.nombre LIKE ? p.apellido LIKE ? OR e.nombre LIKE ? ";
+                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR e.nombre LIKE ? ";
 
             PreparedStatement cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
@@ -358,5 +358,29 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         }
 
         return listaAuxiliar;
+    }
+
+    @Override
+    public int modificar_v2(Auxiliar auxiliar) {
+        int resultado = 0;
+        String query = "UPDATE Auxiliar SET idEspecialidad = ?, "
+                     + "activo = true "
+                     + "WHERE idAuxiliar = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setInt(1, auxiliar.getEspecialidad().getIdEspecialidad());
+            statement.setInt(2, auxiliar.getIdAuxiliar());
+            resultado = statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return resultado;
     }
 }

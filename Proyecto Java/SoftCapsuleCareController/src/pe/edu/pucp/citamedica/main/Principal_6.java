@@ -17,7 +17,7 @@ import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
 public class Principal_6 {
     public static MedicoDAO dao;
     public static void main(String[] args) {
-        List<Medico> medicos = generarMedicos(5); // Generar una lista de 5 médicos
+        List<Medico> medicos = generarMedicos(3); // Generar una lista de 5 médicos
         Usuario usuario;
         dao=new MedicoMySQL();
         for (Medico medico : medicos) {
@@ -33,8 +33,8 @@ public class Principal_6 {
         Random random = new Random();
 
         // Nombres y apellidos menos comunes
-        String[] nombres = {"Ismael", "Beatriz", "Adriano", "Cecilia", "Leandro", "Marta", "Renato", "Nina", "Valeria", "Sergio"};
-        String[] apellidos = {"Palacios", "Mendoza", "Salazar", "Ríos", "Silva", "Vargas"};
+        String[] nombres = {"Lucía", "Joaquín", "Sofía", "Emilio", "Valentina", "Hugo", "Camila", "Mateo", "Ariadna", "Simón"};
+        String[] apellidos = {"González", "Pérez", "López", "Torres", "Martínez", "Ramírez", "Fernández", "Ortega", "Navarro", "Cruz"};
         
         // Combinaciones de días laborales con al menos tres días y separados por guiones
         String[] diasLaborales = {
@@ -59,11 +59,12 @@ public class Principal_6 {
             Date fechaNacimiento = new Date(90, random.nextInt(12), random.nextInt(28) + 1);
             char genero = random.nextBoolean() ? 'M' : 'F';
             String colegiatura = String.valueOf(10000 + random.nextInt(90000));
-            LocalTime horaInicio = LocalTime.of(8, 0);
-            LocalTime horaFin = LocalTime.of(16, 0);
+            LocalTime horaInicio = LocalTime.of(14, 0);
+            LocalTime horaFin = LocalTime.of(20, 0);
             String diasLab = diasLaborales[random.nextInt(diasLaborales.length)];
             int anhosExp = 1 + random.nextInt(21); // Experiencia aleatoria entre 0 y 20 años
-            int especialidad = 18 + random.nextInt(12); // ID de especialidad entre 18 y 29
+//            int especialidad = 18 + random.nextInt(12); // ID de especialidad entre 18 y 29
+            int especialidad = 21; // ID de especialidad entre 18 y 29
             
             Medico medico = new Medico();
             medico.setDNI(dni);

@@ -568,7 +568,7 @@ public class MedicoMySQL implements MedicoDAO {
 
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura "
+            String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura, e.idEspecialidad, e.nombre AS NombreEspe "
                     + "FROM Medico m "
                     + "JOIN Persona p ON m.idMedico = p.idPersona "
                     + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
@@ -596,6 +596,7 @@ public class MedicoMySQL implements MedicoDAO {
                 medico.setNumColegiatura(cursor.getString("numColegiatura"));
                 Especialidad esp = new Especialidad();
                 esp.setIdEspecialidad(cursor.getInt("idEspecialidad"));
+                esp.setNombre(cursor.getString("NombreEspe"));
                 medico.setEspecialidad(esp);
 
                 result.add(medico);
@@ -609,6 +610,38 @@ public class MedicoMySQL implements MedicoDAO {
 
         return result;
     }
- 
+    
+
+    @Override
+    public int modificar_v2(Medico medico) {
+        int resultado = 0;
+        String query = "UPDATE Medico SET numColegiatura = ?, diasLaborales = ?, anhosExp = ?, "
+                     + "activo = ?, horaInicioTrabajo = ?, horaFinTrabajo = ?, idEspecialidad = ? "
+                     + "WHERE idMedico = ?";
+
+        try (Connection con = DBPoolManager.getInstance().getConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+            LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
+            statement.setString(1, medico.getNumColegiatura());
+            statement.setString(2, medico.getDiasLaborales());
+            statement.setInt(3, medico.getAhosExp());
+            statement.setBoolean(4, true);
+            statement.setTime(5, Time.valueOf(horaInicio));
+            statement.setTime(6, Time.valueOf(horaFin));
+            statement.setInt(7, medico.getEspecialidad().getIdEspecialidad());
+            statement.setInt(8, medico.getIdMedico());
+
+            resultado = statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar el médico: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
     
 }

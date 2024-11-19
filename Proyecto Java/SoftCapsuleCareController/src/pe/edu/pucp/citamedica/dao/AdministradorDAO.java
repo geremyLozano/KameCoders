@@ -16,4 +16,5 @@ public interface AdministradorDAO{
     public Administrador obtenerPorId1(int idAdmin);
     int insertar1(Administrador admin);
     List<Administrador> listar(String filtro);
+    int modificar_v2(Administrador administrador);
 }

@@ -15,10 +15,7 @@ import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 import pe.edu.pucp.seguridad.PasswordHash;
 
-/**
- *
- * @author Usuario
- */
+
 public class AdministradorMySQL implements AdministradorDAO{
  
     private Connection con;
@@ -318,5 +315,28 @@ public class AdministradorMySQL implements AdministradorDAO{
         }
 
         return result;
+    }
+
+    @Override
+    public int modificar_v2(Administrador administrador) {
+        int resultado = 0;
+        String query = "UPDATE Administrador SET activo = true, "
+                     + "WHERE idAdministrador = ?";
+
+        try {
+            PreparedStatement statement = DBPoolManager.getInstance().getConnection().prepareStatement(query);
+
+            statement.setInt(1, administrador.getIdAdministrador());
+
+            resultado = statement.executeUpdate();
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+
+        return resultado;
     }
 }
