@@ -26,8 +26,6 @@ public class AuxiliarWS {
         return resultado;
     }
 
-
-    
     //Insercion Geremy
     @WebMethod(operationName = "listarAuxiliar")
     public ArrayList<Auxiliar> listarAuxiliar() {
@@ -70,5 +68,10 @@ public class AuxiliarWS {
     public List<Auxiliar> listarFiltroAuxiliar(String filtro)  {
         List<Auxiliar> resultado = auxiliarDAO.listarFiltro(filtro);
         return resultado;
+    }
+    
+    @WebMethod(operationName = "modificarAuxiliar_v2")
+    public int modificarAuxiliar_V2(@WebParam(name = "auxiliar") Auxiliar auxiliar) {
+        return auxiliarDAO.modificar_v2(auxiliar);
     }
 }

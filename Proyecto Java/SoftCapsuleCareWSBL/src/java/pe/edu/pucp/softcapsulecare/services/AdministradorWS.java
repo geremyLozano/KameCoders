@@ -69,5 +69,9 @@ public class AdministradorWS {
         List<Administrador> resultado = adminDAO.listar(filtro);
         return resultado;
     }
-
+    
+    @WebMethod(operationName = "modificarAdmin_v2")
+    public int modificarAdmin_V2(@WebParam(name = "admin") Administrador admin) {
+        return adminDAO.modificar_v2(admin);
+    }
 }

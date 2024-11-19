@@ -88,4 +88,8 @@ public class MedicoWS {
         List<Medico> resultado = medicoDAO.listarFiltro(filtro);
         return resultado;
     }
+    @WebMethod(operationName = "modificarMedicoV_2")
+    public int medicoModificarV_2(@WebParam(name = "medico") Medico medico) {
+        return medicoDAO.modificar_v2(medico);
+    }
 }
