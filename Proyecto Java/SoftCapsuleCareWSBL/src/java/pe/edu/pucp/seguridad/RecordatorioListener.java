@@ -37,7 +37,7 @@ public class RecordatorioListener implements ServletContextListener {
             // Programar la tarea para revisar las citas pendientes cada 10 minutos
             scheduler.scheduleAtFixedRate(this::checkAndSendReminders, 0, 10, TimeUnit.MINUTES);
             // Programar la tarea para revisar y finalizar citas cada 10 minutos
-            scheduler.scheduleAtFixedRate(this::checkAndFinalizeAppointments, 0, 1, TimeUnit.MINUTES);
+            scheduler.scheduleAtFixedRate(this::checkAndFinalizeAppointments, 0, 10, TimeUnit.MINUTES);
             
         } catch (Exception e) {
             System.err.println("Error al iniciar el listener: " + e.getMessage());
