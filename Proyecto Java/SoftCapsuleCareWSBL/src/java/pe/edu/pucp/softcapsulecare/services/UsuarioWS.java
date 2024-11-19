@@ -63,4 +63,9 @@ public class UsuarioWS {
         List<Usuario> resultado = usuDAO.listarActivoNoActivo(valor);
         return resultado;
     }
+    @WebMethod(operationName = "listarFiltroUser")
+    public List<Usuario> listarFiltroUser(String filtro)  {
+        List<Usuario> resultado = usuDAO.listar(filtro);
+        return resultado;
+    }
 }
