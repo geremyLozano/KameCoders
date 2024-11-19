@@ -3,10 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/duran/Desktop/PROG3%20FINAL%20TA/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/PacienteWS.java</file>
-            <file>file:/C:/Users/duran/Desktop/PROG3%20FINAL%20TA/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/ProcedimientoWS.java</file>
-=======
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/PacienteWS.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/MedicoWS.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/AuxiliarWS.java</file>
@@ -16,7 +12,6 @@
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/UsuarioWS.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/AdministradorWS.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/ComunicacionWS.java</file>
->>>>>>> b452bd54535e307ddbf2fd305aae105e5de28e77
         </group>
     </open-files>
 </project-private>
