@@ -376,7 +376,7 @@ public class MedicoMySQL implements MedicoDAO {
 
 
 
-  @Override
+    @Override
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
@@ -565,22 +565,24 @@ public class MedicoMySQL implements MedicoDAO {
         System.out.println("Filtro recibido: " + filtro);
         List<Medico> result = new ArrayList<>();
         Connection con = null;
+        PreparedStatement cmd = null;
+        ResultSet cursor = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura, e.idEspecialidad, e.nombre AS NombreEspe "
-                    + "FROM Medico m "
-                    + "JOIN Persona p ON m.idMedico = p.idPersona "
-                    + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
-                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
+                        + "FROM Medico m "
+                        + "JOIN Persona p ON m.idMedico = p.idPersona "
+                        + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
+                        + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
 
-            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
             cmd.setString(3, "%" + filtro + "%");
             cmd.setString(4, "%" + filtro + "%");
 
-            ResultSet cursor = cmd.executeQuery();
+            cursor = cmd.executeQuery();
             while (cursor.next()) {
                 Medico medico = new Medico();
 
@@ -605,13 +607,23 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            DBPoolManager.getInstance().cerrarConexion();
+            // Asegúrate de cerrar el ResultSet, PreparedStatement y Connection
+            try {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                if (cmd != null) {
+                    cmd.close();
+                }
+                DBPoolManager.getInstance().cerrarConexion(); // Si tu pool no cierra automáticamente la conexión, hazlo aquí
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
 
         return result;
     }
     
-
     @Override
     public int modificar_v2(Medico medico) {
         int resultado = 0;

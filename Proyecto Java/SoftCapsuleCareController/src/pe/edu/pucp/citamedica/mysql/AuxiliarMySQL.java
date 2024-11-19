@@ -24,7 +24,9 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int insertar(Auxiliar auxiliar, Usuario usuario) {
         int resultado = -1;
-        String hashedPassword;
+        String hashedPassword = null;
+        Connection con = null;
+        CallableStatement cst = null;
 
         // Intentamos generar el hash de la contraseña
         try {
@@ -35,11 +37,16 @@ public class AuxiliarMySQL implements AuxiliarDAO{
         }
 
         try {
+            // Obtener conexión
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String sql = "{CALL AuxiliarInsertar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
+
+            // Registrar los parámetros de salida
             cst.registerOutParameter(1, java.sql.Types.INTEGER);
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            // Establecer los parámetros de entrada
             cst.setString(3, auxiliar.getDNI());
             cst.setString(4, hashedPassword); // Usamos la contraseña hasheada
             cst.setString(5, auxiliar.getDNI());
@@ -52,8 +59,10 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.setString(12, String.valueOf(auxiliar.getGenero()));
             cst.setInt(13, auxiliar.getEspecialidad().getIdEspecialidad());
 
+            // Ejecutar la consulta
             resultado = cst.executeUpdate();
 
+            // Obtener los parámetros de salida
             auxiliar.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             auxiliar.setIdAuxiliar(auxiliar.getIdPersona());
@@ -61,6 +70,18 @@ public class AuxiliarMySQL implements AuxiliarDAO{
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            // Cerrar el CallableStatement y la conexión, si es necesario
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    DBPoolManager.getInstance().cerrarConexion();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar los recursos: " + e.getMessage());
+            }
         }
 
         return resultado;
@@ -69,10 +90,14 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public int modificar(Auxiliar auxiliar) {
         int resultado = -1;
+        Connection con = null;
+        CallableStatement cst = null;
+
         try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String sql = "{CALL AuxiliarModificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
+
             cst.setInt(1, auxiliar.getIdAuxiliar());
             cst.setString(2, auxiliar.getDNI());
             cst.setString(3, auxiliar.getNombre());
@@ -82,30 +107,57 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             cst.setString(7, auxiliar.getDireccion());
             cst.setDate(8, new java.sql.Date(auxiliar.getFechaNacimiento().getTime()));
             cst.setString(9, String.valueOf(auxiliar.getGenero()));
-            cst.setInt(10, 1);
+            cst.setInt(10, 1);  // Suponiendo que el valor 1 es fijo o se calcula antes
             cst.setBoolean(11, auxiliar.isActivo());
-            
+
             resultado = cst.executeUpdate();
-            
-        return resultado;
-        }   catch (SQLException e) {
-                System.out.println(e.getMessage());
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (con != null) {
+                    DBPoolManager.getInstance().cerrarConexion();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar los recursos: " + e.getMessage());
+            }
         }
+
         return resultado;
     }
     
     @Override
     public int eliminar(int idAuxiliar) {
         int resultado = 0;
-        try{
+        Connection con = null;
+        CallableStatement cst = null;
+
+        try {
             con = DBPoolManager.getInstance().getConnection();
-            sql = "{call AuxiliarEliminar(?)}";
+            String sql = "{call AuxiliarEliminar(?)}";
             cst = con.prepareCall(sql);  
             cst.setInt(1, idAuxiliar);
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            // Si DBPoolManager maneja la conexión, solo cerramos los recursos directamente
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                // Aquí solo cerramos la conexión si DBPoolManager no lo hace automáticamente
+                DBPoolManager.getInstance().cerrarConexion();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar los recursos: " + e.getMessage());
+            }
         }
+
         return resultado;
     }
 
@@ -145,12 +197,17 @@ public class AuxiliarMySQL implements AuxiliarDAO{
     @Override
     public Auxiliar obtenerPorId(int idAuxiliar) {
         Auxiliar auxiliar = null;
+        Connection con = null;
+        CallableStatement cst = null;
+        ResultSet rs = null;
+
         try {
             con = DBPoolManager.getInstance().getConnection();
             sql = "{CALL AuxiliarListarPorID(?)}";
             cst = con.prepareCall(sql);
             cst.setInt(1, idAuxiliar);
             rs = cst.executeQuery();
+
             if (rs.next()) {
                 auxiliar = new Auxiliar();
                 Especialidad esp = new Especialidad();
@@ -167,15 +224,21 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (con != null) con.close();
+                if (rs != null) {
+                    rs.close();  // Cerrar ResultSet
+                }
+                if (cst != null) {
+                    cst.close();  // Cerrar CallableStatement
+                }
+                if (con != null) {
+                    con.close();  // Cerrar Connection
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
         return auxiliar;
-    }  
-
-
+    }
 
 
     @Override
