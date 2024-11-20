@@ -129,6 +129,37 @@ END //
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE sp_obtener_procedimientos_por_paciente (
+    IN p_idPaciente INT
+)
+BEGIN
+    SELECT 
+        p.idProcedimiento,
+        p.nombre AS Procedimiento,
+        p.descripcion,
+        p.tipoProcedimiento,
+        p.costo,
+        c.idCitaMedica,
+        c.fecha AS FechaCita,
+        c.hora AS HoraCita,
+        cmp.asistencia,
+        cmp.observaciones,
+        cmp.fechaResultado
+    FROM 
+        CitaMedica c
+    JOIN 
+        CitaMedica_has_Procedimiento cmp ON c.idCitaMedica = cmp.idCitaMedica
+    JOIN 
+        Procedimiento p ON cmp.Procedimiento_idProcedimiento = p.idProcedimiento
+    WHERE 
+        c.idPaciente = p_idPaciente;
+END$$
+
+DELIMITER ;
+
+
 /*
 CALL sp_insertar_procedimiento('Consulta General', 150.00, 'Consulta de rutina', 'Ninguno', 'TIPO_A', 1);
 CALL sp_insertar_procedimiento('Cirugía Menor', 500.00, 'Cirugía ambulatoria', 'Ayuno de 8 horas', 'TIPO_B', 1);
