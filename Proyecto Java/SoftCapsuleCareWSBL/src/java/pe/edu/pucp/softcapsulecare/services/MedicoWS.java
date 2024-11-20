@@ -24,10 +24,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
-import pe.edu.pucp.citamedica.dao.MedicoDAO;
+import pe.edu.pucp.capsuleCare.users.dao.MedicoDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.MedicoMySQL;
+
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
+
 import pe.edu.pucp.dbmanager.config.DBManager;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 

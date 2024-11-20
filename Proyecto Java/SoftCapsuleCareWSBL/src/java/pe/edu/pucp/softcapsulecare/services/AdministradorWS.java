@@ -9,10 +9,12 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.citamedica.dao.AdministradorDAO;
+import pe.edu.pucp.capsuleCare.users.dao.AdministradorDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.AdministradorMySQL;
+
 import pe.edu.pucp.citamedica.model.clinica.Administrador;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.citamedica.mysql.AdministradorMySQL;
+
 
 @WebService(serviceName = "AdministradorWS")
 public class AdministradorWS {
