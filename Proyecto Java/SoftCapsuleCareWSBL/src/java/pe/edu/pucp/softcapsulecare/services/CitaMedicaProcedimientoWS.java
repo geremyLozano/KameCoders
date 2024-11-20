@@ -4,7 +4,10 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+>>>>>>> 21c0a71c8f27eba87fda4cbe5597bcab73b20488
 import pe.edu.pucp.citamedica.dao.CitaProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedicaProcedimiento;
 import pe.edu.pucp.citamedica.mysql.CitaProcedimientoMySQL;
@@ -45,6 +48,7 @@ public class CitaMedicaProcedimientoWS {
      * Modifica un registro existente en la tabla CitaMedica_has_Procedimiento.
      */
     @WebMethod(operationName = "modificarCitaMedicaProcedimiento")
+<<<<<<< HEAD
 public int modificarCitaMedicaProcedimiento(
         @WebParam(name = "idCitaMedica") int idCitaMedica,
         @WebParam(name = "idProcedimiento") int idProcedimiento,
@@ -74,6 +78,18 @@ public int modificarCitaMedicaProcedimiento(
     return resultado;
 }
 
+=======
+    public int modificarCitaMedicaProcedimiento(@WebParam(name = "citaMedicaProcedimiento") CitaMedicaProcedimiento cmp) {
+        int resultado = 0;
+        try {
+            daoCitaProcedimiento = new CitaProcedimientoMySQL();
+            resultado = daoCitaProcedimiento.modificar(cmp);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return resultado;
+    }
+>>>>>>> 21c0a71c8f27eba87fda4cbe5597bcab73b20488
 
     /**
      * Realiza una eliminación lógica de un registro en la tabla CitaMedica_has_Procedimiento.

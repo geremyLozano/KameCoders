@@ -376,7 +376,7 @@ public class MedicoMySQL implements MedicoDAO {
 
 
 
-  @Override
+    @Override
     public int insertarMedico1(Medico medico) {
         int resultado = 0;
         int idPersona = 0;
@@ -565,22 +565,24 @@ public class MedicoMySQL implements MedicoDAO {
         System.out.println("Filtro recibido: " + filtro);
         List<Medico> result = new ArrayList<>();
         Connection con = null;
+        PreparedStatement cmd = null;
+        ResultSet cursor = null;
 
         try {
             con = DBPoolManager.getInstance().getConnection();
             String sql = "SELECT m.idMedico, p.DNI, p.nombre, p.apellido, p.correoElectronico, p.fechaNacimiento, m.activo, m.idEspecialidad, m.numColegiatura, e.idEspecialidad, e.nombre AS NombreEspe "
-                    + "FROM Medico m "
-                    + "JOIN Persona p ON m.idMedico = p.idPersona "
-                    + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
-                    + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
+                        + "FROM Medico m "
+                        + "JOIN Persona p ON m.idMedico = p.idPersona "
+                        + "JOIN Especialidad e ON m.idEspecialidad = e.idEspecialidad "
+                        + "WHERE p.nombre LIKE ? OR p.apellido LIKE ? OR p.DNI LIKE ? OR e.nombre LIKE ? ";
 
-            PreparedStatement cmd = con.prepareStatement(sql);
+            cmd = con.prepareStatement(sql);
             cmd.setString(1, "%" + filtro + "%");
             cmd.setString(2, "%" + filtro + "%");
             cmd.setString(3, "%" + filtro + "%");
             cmd.setString(4, "%" + filtro + "%");
 
-            ResultSet cursor = cmd.executeQuery();
+            cursor = cmd.executeQuery();
             while (cursor.next()) {
                 Medico medico = new Medico();
 
@@ -605,13 +607,23 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            DBPoolManager.getInstance().cerrarConexion();
+            // Asegúrate de cerrar el ResultSet, PreparedStatement y Connection
+            try {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                if (cmd != null) {
+                    cmd.close();
+                }
+                DBPoolManager.getInstance().cerrarConexion(); // Si tu pool no cierra automáticamente la conexión, hazlo aquí
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
 
         return result;
     }
     
-
     @Override
     public int modificar_v2(Medico medico) {
         int resultado = 0;
@@ -643,5 +655,57 @@ public class MedicoMySQL implements MedicoDAO {
 
         return resultado;
     }
-    
+
+    @Override
+    public int insertarNuevo(Medico medico, Usuario usuario) {
+        int resultado = -1;
+        String hashedPassword;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
+        
+        // Convertir las cadenas de hora a LocalTime
+        LocalTime horaIni = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+        // Intentamos generar el hash de la contraseña
+        try {
+            hashedPassword = PasswordHash.hashPassword(usuario.getContrasenha());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Error al hashear la contraseña: " + e.getMessage());
+            return resultado;
+        }
+
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{CALL InsertarMedico(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            cst = con.prepareCall(sql);
+            cst.registerOutParameter(1, java.sql.Types.INTEGER);
+            cst.setString(2, medico.getDNI());
+            cst.setString(3, medico.getNombre());
+            cst.setString(4, medico.getApellido());
+            cst.setString(5, medico.getCorreoElectronico());
+            cst.setInt(6, medico.getNumTelefono());
+            cst.setString(7, medico.getDireccion());
+            java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
+            cst.setDate(8, sqlDate);
+            cst.setString(9, String.valueOf(medico.getGenero()));
+            cst.setString(10, medico.getNumColegiatura());
+            cst.setTime(11, Time.valueOf(horaIni));
+            cst.setTime(12, Time.valueOf(horaFin));
+            cst.setString(13, medico.getDiasLaborales());
+            cst.setInt(14, medico.getAhosExp());
+            cst.setBoolean(15, true);
+            cst.setInt(16, medico.getEspecialidad().getIdEspecialidad());
+            
+            cst.setString(17, hashedPassword); // Usamos la contraseña hasheada
+
+            resultado = cst.executeUpdate(); // Ejecutamos la inserción
+            
+            medico.setIdMedico(cst.getInt(1));
+
+        } catch (SQLException e) {
+            System.out.print("Error en la base de datos: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.print("Error general: " + e.getMessage());
+        }
+        return resultado;
+    }
 }

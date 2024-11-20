@@ -19,5 +19,5 @@ public interface ProcedimientoDAO {
     int eliminar(int idProcedimiento);
     ArrayList<Procedimiento> listarTodos();
     Procedimiento obtenerPorId(int idProcedimiento);
-    
+    ArrayList<Procedimiento> listarPorPaciente(int idPaciente);
 }

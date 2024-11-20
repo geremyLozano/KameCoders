@@ -8,9 +8,11 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
-import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+import pe.edu.pucp.capsuleCare.medical.dao.CitaMedicaDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.CitaMedicaMySQL;
+
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
+import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 /**
  *
  * @author diego
@@ -56,6 +58,12 @@ public class CitaMedicaWS {
     @WebMethod(operationName = "listarPorIdMedico")
     public ArrayList<CitaMedica> listarPorIdMedico(@WebParam(name = "idMedico") int idMedico) {
         return citaMedicaDAO.listarPorMedico(idMedico);
+    }
+    
+    @WebMethod(operationName = "actualizarEstadoCitaMedica")
+    public int actualizarEstadoCitaMedica(@WebParam(name = "cita") int idCitaMedica,
+            @WebParam(name = "estadoCita") EstadoCita estado) {
+        return citaMedicaDAO.actualizarEstadoCita(idCitaMedica,estado);
     }
     
 }

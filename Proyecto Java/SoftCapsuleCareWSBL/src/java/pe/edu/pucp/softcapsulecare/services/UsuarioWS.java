@@ -6,9 +6,11 @@ import jakarta.jws.WebParam;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.UsuarioDAO;
+import pe.edu.pucp.capsuleCare.users.dao.UsuarioDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.UsuarioMySQL;
+
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
+
 
 @WebService(serviceName = "UsuarioWS")
 public class UsuarioWS {
@@ -61,6 +63,16 @@ public class UsuarioWS {
     @WebMethod(operationName = "listarActivoNoActivoUser")
     public List<Usuario> listarActivoNoActivoUser(int valor) {
         List<Usuario> resultado = usuDAO.listarActivoNoActivo(valor);
+        return resultado;
+    }
+    @WebMethod(operationName = "listarFiltroUser")
+    public List<Usuario> listarFiltroUser(String filtro)  {
+        List<Usuario> resultado = usuDAO.listar(filtro);
+        return resultado;
+    }
+    @WebMethod(operationName = "listarUser1")
+    public ArrayList<Usuario> listarUser1() {
+        ArrayList<Usuario> resultado = usuDAO.listarTodos1();
         return resultado;
     }
 }

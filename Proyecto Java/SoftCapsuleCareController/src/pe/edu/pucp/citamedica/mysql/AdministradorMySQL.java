@@ -320,7 +320,7 @@ public class AdministradorMySQL implements AdministradorDAO{
     @Override
     public int modificar_v2(Administrador administrador) {
         int resultado = 0;
-        String query = "UPDATE Administrador SET activo = true, "
+        String query = "UPDATE Administrador SET activo = true "
                      + "WHERE idAdministrador = ?";
 
         try {

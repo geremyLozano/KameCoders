@@ -1,0 +1,82 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="medicoHorizontal" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="493753f5-3448-414c-a8fd-1809d252de4e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="bXlkYi5gRXNwZWNpYWxpZGFkYCAsMTk3LDc3LGZhMTVjNzk3LWVkNzItNDkzZS05YzQ3LWI5Nzli&#xa;NzIyYjcwNjtteWRiLmBNZWRpY29gICwxNSwxNSw2NDc0ZTkxOC0wNmUzLTQxOTAtOTg3YS0zNmIz&#xa;NmNkNDM2YjY7"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CapsuleAdapter"/>
+	<parameter name="logo" class="java.awt.Image"/>
+	<query language="SQL"><![CDATA[SELECT m.`idMedico`,
+	m.`horaInicioTrabajo`,
+	m.`horaFinTrabajo`,
+	m.`anhosExp`,
+	m.`diasLaborales`,
+	e.nombre AS especialidad
+FROM mydb.`Medico` m
+	INNER JOIN mydb.`Especialidad` e ON 
+	 m.`idEspecialidad` = e.`idEspecialidad`]]></query>
+	<field name="idMedico" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idMedico"/>
+		<property name="com.jaspersoft.studio.field.label" value="idMedico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
+	</field>
+	<field name="horaInicioTrabajo" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="horaInicioTrabajo"/>
+		<property name="com.jaspersoft.studio.field.label" value="horaInicioTrabajo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
+	</field>
+	<field name="horaFinTrabajo" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="horaFinTrabajo"/>
+		<property name="com.jaspersoft.studio.field.label" value="horaFinTrabajo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
+	</field>
+	<field name="anhosExp" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="anhosExp"/>
+		<property name="com.jaspersoft.studio.field.label" value="anhosExp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
+	</field>
+	<field name="diasLaborales" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diasLaborales"/>
+		<property name="com.jaspersoft.studio.field.label" value="diasLaborales"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
+	</field>
+	<field name="especialidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="especialidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Especialidad"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="106" splitType="Stretch">
+		<element kind="staticText" uuid="8b432f45-26ed-4021-bdaf-7729b8ec5af7" x="170" y="40" width="470" height="50" fontSize="33.0" hTextAlign="Center">
+			<text><![CDATA[Reporte de médicos]]></text>
+		</element>
+		<element kind="image" uuid="720d1ae4-8f96-4fc0-91e1-7c7963ad97b7" x="30" y="18" width="110" height="88">
+			<expression><![CDATA[$P{logo}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch">
+		<element kind="textField" uuid="a678a15c-1a33-4cda-a68f-4a714b0ac328" x="692" y="-3" width="100" height="30" pattern="MMMMM dd, yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="120" splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter height="240" splitType="Stretch">
+		<element kind="chart" chartType="bar" uuid="76ff401b-eb4c-445b-b5de-43b7034652dc" x="20" y="-128" width="800" height="268" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA["Especialidades"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{especialidad}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{anhosExp}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="staticText" uuid="53788087-48f9-497e-b636-e36a02be3966" x="0" y="-50" width="20" height="96" rotation="Left">
+			<text><![CDATA[Años de experiencia]]></text>
+		</element>
+	</columnFooter>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

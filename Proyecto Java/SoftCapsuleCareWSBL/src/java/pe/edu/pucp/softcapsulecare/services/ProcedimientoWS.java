@@ -9,9 +9,11 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import java.util.Date;
-import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
+import pe.edu.pucp.capsuleCare.medical.dao.ProcedimientoDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.ProcedimientoMySQL;
+
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
-import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
+
 
 
 @WebService(serviceName = "ProcedimientoWS")
@@ -68,5 +70,14 @@ public class ProcedimientoWS {
     @WebMethod(operationName = "obtenerProcedimientoPorId")
     public Procedimiento obtenerProcedimientoPorId(@WebParam(name = "idProcedimiento") int idProcedimiento) {
         return procedimientoDAO.obtenerPorId(idProcedimiento);
+    }
+    
+    @WebMethod(operationName = "listarProcedimientosPorPaciente")
+    public ArrayList<Procedimiento> listarProcedimientosPorPaciente(@WebParam(name = "idPaciente") int idPaciente) {
+        ArrayList<Procedimiento> procedimientos = procedimientoDAO.listarPorPaciente(idPaciente);
+        if (procedimientos == null) {
+            procedimientos = new ArrayList<>(); // Retornar lista vacía si no hay procedimientos
+        }
+        return procedimientos;
     }
 }

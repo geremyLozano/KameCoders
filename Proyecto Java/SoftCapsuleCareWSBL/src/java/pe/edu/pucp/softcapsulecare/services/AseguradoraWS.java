@@ -8,9 +8,11 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.AseguradoraDAO;
+import pe.edu.pucp.capsuleCare.users.dao.AseguradoraDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.AseguradoraMySQL;
+
 import pe.edu.pucp.citamedica.model.usuario.Aseguradora;
-import pe.edu.pucp.citamedica.mysql.AseguradoraMySQL;
+
 
 /**
  *

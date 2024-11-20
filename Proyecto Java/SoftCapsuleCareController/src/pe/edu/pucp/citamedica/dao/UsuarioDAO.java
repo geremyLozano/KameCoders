@@ -16,4 +16,6 @@ public interface UsuarioDAO {
     List<String>obtenerRoles(int idPersona);
 
     List<Usuario> listarActivoNoActivo(int valor);
+    List<Usuario> listar(String filtro);
+    ArrayList<Usuario> listarTodos1();
 }

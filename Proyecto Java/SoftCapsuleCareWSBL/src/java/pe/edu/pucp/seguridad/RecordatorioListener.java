@@ -12,11 +12,14 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
+import pe.edu.pucp.capsuleCare.medical.dao.CitaMedicaDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.CitaMedicaMySQL;
+
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
-import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+
+
 
 @WebListener
 public class RecordatorioListener implements ServletContextListener {
@@ -37,7 +40,7 @@ public class RecordatorioListener implements ServletContextListener {
             // Programar la tarea para revisar las citas pendientes cada 10 minutos
             scheduler.scheduleAtFixedRate(this::checkAndSendReminders, 0, 10, TimeUnit.MINUTES);
             // Programar la tarea para revisar y finalizar citas cada 10 minutos
-            scheduler.scheduleAtFixedRate(this::checkAndFinalizeAppointments, 0, 1, TimeUnit.MINUTES);
+            scheduler.scheduleAtFixedRate(this::checkAndFinalizeAppointments, 0, 10, TimeUnit.MINUTES);
             
         } catch (Exception e) {
             System.err.println("Error al iniciar el listener: " + e.getMessage());
@@ -107,12 +110,15 @@ public class RecordatorioListener implements ServletContextListener {
                     // Comparar las fechas
                     if (fechaCitaStr.equals(hoyStr)) {
                         // Si la hora actual está entre la hora de la cita y una hora después
-                        if (ahoraHora.isAfter(horaCita) && ahoraHora.isBefore(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("En_progreso")!=0) {
+                        if (ahoraHora.isAfter(horaCita) && ahoraHora.isBefore(horaCita.plusHours(1)) && 
+                                cita.getEstado().toString().compareTo("En_progreso")!=0 && cita.getEstado().toString().compareTo("Pendiente")!=0 &&
+                                cita.getEstado().toString().compareTo("Cancelada")!=0) {
                             citaDAO.actualizarEstadoCita(cita.getIdCitaMedica(), EstadoCita.En_progreso);
                             System.out.println("Cita cambiada a 'En_progreso': " + cita.getIdCitaMedica());
                         }
                         // Si la hora actual es mayor que la hora de la cita más una hora
-                        else if (ahoraHora.isAfter(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("Finalizada")!=0) {
+                        else if (ahoraHora.isAfter(horaCita.plusHours(1)) && cita.getEstado().toString().compareTo("Finalizada")!=0 
+                                && cita.getEstado().toString().compareTo("En_progreso") == 0) {
                             citaDAO.actualizarEstadoCita(cita.getIdCitaMedica(), EstadoCita.Finalizada);
                             System.out.println("Cita cambiada a 'Finalizado': " + cita.getIdCitaMedica());
                         }

@@ -5,11 +5,13 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import java.util.Date;
-import pe.edu.pucp.citamedica.dao.ComunicacionDAO;
+import pe.edu.pucp.capsuleCare.medical.dao.ComunicacionDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.ComunicacionMySQL;
+
 import pe.edu.pucp.citamedica.model.comunicacion.Comunicacion;
 import pe.edu.pucp.citamedica.model.comunicacion.TipoComunicacion;
 import pe.edu.pucp.citamedica.model.comunicacion.EstadoComunicacion;
-import pe.edu.pucp.citamedica.mysql.ComunicacionMySQL;
+
 
 @WebService(serviceName = "ComunicacionWS")
 public class ComunicacionWS {
