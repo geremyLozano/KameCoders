@@ -111,45 +111,51 @@ public class MedicoWS {
     public int medicoModificarV_2(@WebParam(name = "medico") Medico medico) {
         return medicoDAO.modificar_v2(medico);
     }
-    
-    
-    
-    
-    private String getFileResource(String fileName){ 
+    @WebMethod(operationName = "insertarNuevoMedico")
+    public int insertarNuevoMedico(@WebParam(name = "medico") Medico medico,
+                              @WebParam(name = "usuario") Usuario usuario) {
+        
+        return medicoDAO.insertarNuevo(medico,usuario);
+    }
+
+
+
+
+    private String getFileResource(String fileName){
         String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
         return filePath;
     }
-     
-     
+
+
      @WebMethod(operationName = "reportePDF")
     public byte[] reportePDF() throws Exception {
-        try {            
+        try {
             Map<String, Object> params = new HashMap<>();
-           
-            params.put("logo",ImageIO.read(new File(getFileResource("logo.png")))); 
-            return generarBuffer(getFileResource("medicoHorizontal.jrxml"), params);                    
+
+            params.put("logo",ImageIO.read(new File(getFileResource("logo.png"))));
+            return generarBuffer(getFileResource("medicoHorizontal.jrxml"), params);
          } catch (Exception ex) {
             Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
      public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
         //Se compila una sola vez
         String fileJasper = inFileXML +".jasper";
         //if(!new File(fileJasper).exists()){
             //para compilar en GlassFish se requiere las librerias: jasperreports-jdt, ecj
-            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);         
+            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);
         //}
         //1- leer el archivo compilado
         JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
         //2- poblar el reporte
         Connection conn = DBPoolManager.getInstance().getConnection();
-        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
+        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);
         return JasperExportManager.exportReportToPdf(jp);
     }
-    
-    
-    
+
+
+
 }

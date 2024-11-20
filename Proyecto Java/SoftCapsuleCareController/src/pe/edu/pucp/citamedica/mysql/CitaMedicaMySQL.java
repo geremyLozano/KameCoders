@@ -39,7 +39,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             
             LocalTime horaLocalTime;
@@ -76,7 +76,6 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             cst.setTime(9,duracion);
             cst.setNull(10, java.sql.Types.INTEGER);
             cst.setInt(11, cita.getIdPago());
-            cst.setInt(12, cita.getIdHistorialMedico());
 
             // Ejecutamos el procedimiento
             cst.executeUpdate();
@@ -136,7 +135,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             cst.setString(2, cita.getEstado().toString());
             cst.setDate(3, fecha);
             cst.setTime(4,hora);
-            if(cita.getEstado().toString().compareTo("Confirmada") == 0 || cita.getEstado().toString().compareTo("Reprogramada") == 0){
+            if(cita.getEstado().toString().compareTo("Confirmada") == 0 || cita.getEstado().toString().compareTo("Cancelada") == 0){
                 if(cita.getTipoStr().compareTo("Virtual") == 0){
                 cst.setString(5, cita.getPlataforma());
                 cst.setString(6, cita.getEnlace());
@@ -296,7 +295,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setFechaStr(rs.getDate("fecha").toString());
                 citaMedica.setHoraStr(rs.getTime("hora").toString());
                 citaMedica.setPlataforma(rs.getString("plataforma"));
-                citaMedica.setEnlace(rs.getString("enlace"));
+                citaMedica.setPlataforma(rs.getString("enlace"));
                 citaMedica.setDuracionStr(rs.getTime("duracion").toString());
                 citaMedica.setNumeroAmbiente(rs.getInt("numeroAmbiente"));
                 citaMedica.setIdPago(rs.getInt("idPago"));
@@ -348,8 +347,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
                 citaMedica.setIdCitaMedica(rs.getInt("idCitaMedica"));
 
                 // Verificar si tipoCita es null antes de convertirlo al enum
-                citaMedica.setTipo(TipoCita.valueOf(rs.getString("tipoCita")));
-                citaMedica.setTipoStr(rs.getString("tipoCita"));
+                String tipoCitaStr = rs.getString("tipoCita");
                 citaMedica.setEstado(EstadoCita.valueOf(rs.getString("estadoCita")));
                 citaMedica.setIdHistorialMedico(rs.getInt("idHistorialMedico"));
                 citaMedica.setIdMedico(rs.getInt("idMedico"));
