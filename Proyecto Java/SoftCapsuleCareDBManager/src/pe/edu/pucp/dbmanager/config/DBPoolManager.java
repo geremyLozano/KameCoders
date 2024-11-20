@@ -25,7 +25,7 @@ public class DBPoolManager {
     private void connectToDatabase(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://"+host + ":" + port + "/" + db + "?useSSL=false"; 
+            String url = "jdbc:mysql://"+host + ":" + port + "/" + db + "?useSSL=false&connectTimeout=10000"; 
             dataSource = new BasicDataSource();
             dataSource.setUrl(url);
             dataSource.setUsername(username);
