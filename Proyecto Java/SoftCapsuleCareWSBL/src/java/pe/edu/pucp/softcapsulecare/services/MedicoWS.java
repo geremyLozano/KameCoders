@@ -111,6 +111,12 @@ public class MedicoWS {
     public int medicoModificarV_2(@WebParam(name = "medico") Medico medico) {
         return medicoDAO.modificar_v2(medico);
     }
+    @WebMethod(operationName = "insertarNuevoMedico")
+    public int insertarNuevoMedico(@WebParam(name = "medico") Medico medico,
+                              @WebParam(name = "usuario") Usuario usuario) {
+        
+        return medicoDAO.insertarNuevo(medico,usuario);
+    }
 
 
 
