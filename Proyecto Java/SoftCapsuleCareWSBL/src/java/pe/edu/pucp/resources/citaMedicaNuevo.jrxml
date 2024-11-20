@@ -1,0 +1,63 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="citaMedicaNuevo" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="96bfe41b-3958-436c-8096-0ac02e7f4d75">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="bXlkYi5gQ2l0YU1lZGljYWAgLDE1LDE1LDc5ZGJmNTYzLTU0ZjUtNDI5ZS1iY2NjLWJkMzIxNWZk&#xa;ZTJkZjs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CapsuleAdapter"/>
+	<parameter name="logoSecundario" class="java.awt.Image"/>
+	<query language="SQL"><![CDATA[SELECT `tipoCita`,
+	`estadoCita`,
+	COUNT(*) AS cantidad
+FROM mydb.`CitaMedica`
+WHERE 
+	 mydb.`CitaMedica`.activo = 1 
+GROUP BY mydb.`CitaMedica`.`tipoCita`,
+	mydb.`CitaMedica`.`estadoCita`
+ORDER BY mydb.`CitaMedica`.`tipoCita` DESC,
+	mydb.`CitaMedica`.`estadoCita` DESC]]></query>
+	<field name="tipoCita" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipoCita"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipoCita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="CitaMedica"/>
+	</field>
+	<field name="estadoCita" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estadoCita"/>
+		<property name="com.jaspersoft.studio.field.label" value="estadoCita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="CitaMedica"/>
+	</field>
+	<field name="cantidad" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="108" splitType="Stretch">
+		<element kind="staticText" uuid="dcb7c13b-0d65-4043-a8dd-a12c7a184b61" x="130" y="40" width="310" height="40" fontSize="25.0" hTextAlign="Center">
+			<text><![CDATA[Reporte de citas médicas]]></text>
+		</element>
+		<element kind="image" uuid="f3bb4bc8-afd2-4921-9708-612d29937af7" x="20" y="20" width="100" height="70">
+			<expression><![CDATA[$P{logoSecundario}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="61" splitType="Stretch"/>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<element kind="chart" chartType="bar" uuid="7eeaede4-4408-4935-8be7-b5e532bda776" x="30" y="-72" width="540" height="272" evaluationTime="Report">
+				<dataset kind="category">
+					<series>
+						<seriesExpression><![CDATA[$F{estadoCita}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tipoCita}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{cantidad}]]></valueExpression>
+					</series>
+				</dataset>
+				<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+					<itemLabel/>
+				</plot>
+			</element>
+			<element kind="staticText" uuid="b4ea23f4-1868-473c-a412-b41293fc9097" x="10" y="10" width="30" height="81" rotation="Left">
+				<text><![CDATA[Frecuencia]]></text>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="243" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

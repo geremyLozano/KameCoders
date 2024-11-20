@@ -7,12 +7,31 @@ package pe.edu.pucp.softcapsulecare.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.imageio.ImageIO;
 import pe.edu.pucp.capsuleCare.medical.dao.CitaMedicaDAO;
 import pe.edu.pucp.capsuleCare.medical.mysql.CitaMedicaMySQL;
 
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
+
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+
+import java.sql.Connection;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
+
 /**
  *
  * @author diego
@@ -65,5 +84,50 @@ public class CitaMedicaWS {
             @WebParam(name = "estadoCita") EstadoCita estado) {
         return citaMedicaDAO.actualizarEstadoCita(idCitaMedica,estado);
     }
+    
+    
+    
+    
+    
+     private String getFileResource(String fileName){
+        String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+
+
+     @WebMethod(operationName = "reportePDF")
+    public byte[] reportePDF() throws Exception {
+        try {
+            Map<String, Object> params = new HashMap<>();
+
+            params.put("logoSecundario",ImageIO.read(new File(getFileResource("logoSecundario.png"))));
+            return generarBuffer(getFileResource("citaMedicaNuevo.jrxml"), params);
+         } catch (Exception ex) {
+            Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+     public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
+        //Se compila una sola vez
+        String fileJasper = inFileXML +".jasper";
+        //if(!new File(fileJasper).exists()){
+            //para compilar en GlassFish se requiere las librerias: jasperreports-jdt, ecj
+            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);
+        //}
+        //1- leer el archivo compilado
+        JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+        //2- poblar el reporte
+        Connection conn = DBPoolManager.getInstance().getConnection();
+        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);
+        return JasperExportManager.exportReportToPdf(jp);
+    }
+    
+    
+    
+    
+    
+    
     
 }

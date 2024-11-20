@@ -13,6 +13,8 @@ import pe.edu.pucp.citamedica.model.comunicacion.TipoComunicacion;
 import pe.edu.pucp.citamedica.model.comunicacion.EstadoComunicacion;
 
 
+
+
 @WebService(serviceName = "ComunicacionWS")
 public class ComunicacionWS {
 
