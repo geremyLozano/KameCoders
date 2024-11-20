@@ -5,10 +5,12 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.citamedica.dao.PacienteDAO;
+import pe.edu.pucp.capsuleCare.users.dao.PacienteDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.PacienteMySQL;
+
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
+
 
 @WebService(serviceName = "PacienteWS")
 public class PacienteWS {
