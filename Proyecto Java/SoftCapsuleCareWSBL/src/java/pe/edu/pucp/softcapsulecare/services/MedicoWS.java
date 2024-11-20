@@ -29,6 +29,7 @@ import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
 import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
 import pe.edu.pucp.dbmanager.config.DBManager;
+import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 
 @WebService(serviceName = "MedicoWS")
@@ -127,7 +128,7 @@ public class MedicoWS {
             Map<String, Object> params = new HashMap<>();
            
             params.put("logo",ImageIO.read(new File(getFileResource("logo.png")))); 
-            return generarBuffer(getFileResource("Alumnos.jrxml"), params);                    
+            return generarBuffer(getFileResource("medicoHorizontal.jrxml"), params);                    
          } catch (Exception ex) {
             Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -137,14 +138,14 @@ public class MedicoWS {
      public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
         //Se compila una sola vez
         String fileJasper = inFileXML +".jasper";
-        if(!new File(fileJasper).exists()){
+        //if(!new File(fileJasper).exists()){
             //para compilar en GlassFish se requiere las librerias: jasperreports-jdt, ecj
             JasperCompileManager.compileReportToFile(inFileXML, fileJasper);         
-        }
+        //}
         //1- leer el archivo compilado
         JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
         //2- poblar el reporte
-        Connection conn = DBManager.getInstance().getConnection();
+        Connection conn = DBPoolManager.getInstance().getConnection();
         JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
         return JasperExportManager.exportReportToPdf(jp);
     }
