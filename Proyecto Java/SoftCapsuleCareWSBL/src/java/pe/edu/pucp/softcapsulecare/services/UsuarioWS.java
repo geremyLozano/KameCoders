@@ -6,9 +6,11 @@ import jakarta.jws.WebParam;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.UsuarioDAO;
+import pe.edu.pucp.capsuleCare.users.dao.UsuarioDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.UsuarioMySQL;
+
 import pe.edu.pucp.citamedica.model.usuario.Usuario;
-import pe.edu.pucp.citamedica.mysql.UsuarioMySQL;
+
 
 @WebService(serviceName = "UsuarioWS")
 public class UsuarioWS {

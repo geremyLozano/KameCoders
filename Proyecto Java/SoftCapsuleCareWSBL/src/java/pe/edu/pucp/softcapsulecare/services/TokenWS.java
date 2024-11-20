@@ -4,8 +4,9 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.Date;
-import pe.edu.pucp.citamedica.dao.TokenDAO;
-import pe.edu.pucp.citamedica.mysql.TokenMySQL;
+import pe.edu.pucp.capsuleCare.users.dao.TokenDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.TokenMySQL;
+
 
 @WebService(serviceName = "TokenWS")
 public class TokenWS {

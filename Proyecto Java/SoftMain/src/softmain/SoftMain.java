@@ -1,30 +1,21 @@
 package softmain;
 
 import pe.edu.pucp.citamedica.model.usuario.Paciente;
-import pe.edu.pucp.citamedica.mysql.PacienteMySQL;
-import pe.edu.pucp.citamedica.dao.PacienteDAO;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.AseguradoraDAO;
-import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
-import pe.edu.pucp.citamedica.dao.EspecialidadDAO;
-import pe.edu.pucp.citamedica.dao.MedicoDAO;
-import pe.edu.pucp.citamedica.dao.PersonaDAO;
-import pe.edu.pucp.citamedica.dao.ProcedimientoDAO;
+import pe.edu.pucp.capsuleCare.users.dao.PersonaDAO;
+import pe.edu.pucp.capsuleCare.users.mysql.PersonaMySQL;
+
 import pe.edu.pucp.citamedica.model.clinica.Medico;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.consultas.TipoCita;
 import pe.edu.pucp.citamedica.model.procedimiento.Procedimiento;
 import pe.edu.pucp.citamedica.model.procedimiento.TipoProcedimiento;
-import pe.edu.pucp.citamedica.mysql.AseguradoraMySQL;
-import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
-import pe.edu.pucp.citamedica.mysql.EspecialidadMySQL;
-import pe.edu.pucp.citamedica.mysql.MedicoMySQL;
-import pe.edu.pucp.citamedica.mysql.PersonaMySQL;
-import pe.edu.pucp.citamedica.mysql.ProcedimientoMySQL;
+
 
 public class SoftMain {
 

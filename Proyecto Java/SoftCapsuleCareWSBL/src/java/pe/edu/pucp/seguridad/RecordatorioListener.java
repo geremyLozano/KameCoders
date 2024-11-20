@@ -12,11 +12,14 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import pe.edu.pucp.citamedica.dao.CitaMedicaDAO;
+import pe.edu.pucp.capsuleCare.medical.dao.CitaMedicaDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.CitaMedicaMySQL;
+
 import pe.edu.pucp.citamedica.model.consultas.CitaMedica;
 import pe.edu.pucp.citamedica.model.consultas.EstadoCita;
 import pe.edu.pucp.citamedica.model.usuario.Persona;
-import pe.edu.pucp.citamedica.mysql.CitaMedicaMySQL;
+
+
 
 @WebListener
 public class RecordatorioListener implements ServletContextListener {

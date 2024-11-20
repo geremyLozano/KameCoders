@@ -8,13 +8,15 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+import pe.edu.pucp.capsuleCare.medical.dao.HistorialMedicoDAO;
+import pe.edu.pucp.capsuleCare.medical.mysql.HistorialMedicoMySQL;
 
 
 
-import pe.edu.pucp.citamedica.dao.HistorialMedicoDAO;
+
 import pe.edu.pucp.citamedica.model.consultas.HistorialMedico;
 import pe.edu.pucp.citamedica.model.dto.HistorialMedicoDto;
-import pe.edu.pucp.citamedica.mysql.HistorialMedicoMySQL;
+
 
 
 
