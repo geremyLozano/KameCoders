@@ -69,4 +69,13 @@ public class ProcedimientoWS {
     public Procedimiento obtenerProcedimientoPorId(@WebParam(name = "idProcedimiento") int idProcedimiento) {
         return procedimientoDAO.obtenerPorId(idProcedimiento);
     }
+    
+    @WebMethod(operationName = "listarProcedimientosPorPaciente")
+    public ArrayList<Procedimiento> listarProcedimientosPorPaciente(@WebParam(name = "idPaciente") int idPaciente) {
+        ArrayList<Procedimiento> procedimientos = procedimientoDAO.listarPorPaciente(idPaciente);
+        if (procedimientos == null) {
+            procedimientos = new ArrayList<>(); // Retornar lista vacía si no hay procedimientos
+        }
+        return procedimientos;
+    }
 }
