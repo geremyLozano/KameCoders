@@ -4,6 +4,10 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
+<<<<<<< HEAD
+import java.util.Date;
+=======
+>>>>>>> 21c0a71c8f27eba87fda4cbe5597bcab73b20488
 import pe.edu.pucp.citamedica.dao.CitaProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedicaProcedimiento;
 import pe.edu.pucp.citamedica.mysql.CitaProcedimientoMySQL;
@@ -44,6 +48,37 @@ public class CitaMedicaProcedimientoWS {
      * Modifica un registro existente en la tabla CitaMedica_has_Procedimiento.
      */
     @WebMethod(operationName = "modificarCitaMedicaProcedimiento")
+<<<<<<< HEAD
+public int modificarCitaMedicaProcedimiento(
+        @WebParam(name = "idCitaMedica") int idCitaMedica,
+        @WebParam(name = "idProcedimiento") int idProcedimiento,
+        @WebParam(name = "idPago") int idPago,
+        @WebParam(name = "asistencia") boolean asistencia,
+        @WebParam(name = "observaciones") String observaciones,
+        @WebParam(name = "fechaResultado") Date fechaResultado,
+        @WebParam(name = "activo") boolean activo) {
+    int resultado = 0;
+    try {
+        daoCitaProcedimiento = new CitaProcedimientoMySQL();
+
+        // Convertir la fechaResultado a java.sql.Date si no es nula
+        java.sql.Date sqlFechaResultado = fechaResultado != null ? new java.sql.Date(fechaResultado.getTime()) : null;
+
+        // Llamar al método del DAO que usa el nuevo procedimiento almacenado
+        resultado = daoCitaProcedimiento.modificar(idCitaMedica,
+                idProcedimiento,
+                idPago,
+                asistencia,
+                observaciones,
+                sqlFechaResultado,
+                activo);
+    } catch (Exception ex) {
+        System.out.println("Error en modificarCitaMedicaProcedimientoV2: " + ex.getMessage());
+    }
+    return resultado;
+}
+
+=======
     public int modificarCitaMedicaProcedimiento(@WebParam(name = "citaMedicaProcedimiento") CitaMedicaProcedimiento cmp) {
         int resultado = 0;
         try {
@@ -54,6 +89,7 @@ public class CitaMedicaProcedimientoWS {
         }
         return resultado;
     }
+>>>>>>> 21c0a71c8f27eba87fda4cbe5597bcab73b20488
 
     /**
      * Realiza una eliminación lógica de un registro en la tabla CitaMedica_has_Procedimiento.

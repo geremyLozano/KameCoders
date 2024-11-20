@@ -30,4 +30,31 @@ public class PagoWS {
         int resultado  = pagoDAO.insertar(pago);
         return resultado;
     }
+    @WebMethod(operationName = "listarTodosPagos")
+    public java.util.List<Pago> listarTodosPagos() {
+        java.util.List<Pago> listaPagos = new java.util.ArrayList<>();
+        try {
+            listaPagos = pagoDAO.listarTodos();
+
+            // Imprimir los valores obtenidos
+            System.out.println("Pagos obtenidos:");
+            for (Pago pago : listaPagos) {
+                System.out.println("ID Pago: " + pago.getIdPago());
+                System.out.println("Descuento por Seguro: " + pago.getDescuentoPorSeguro());
+                System.out.println("Monto Parcial: " + pago.getMontoParcial());
+                System.out.println("Monto Total: " + pago.getMontoTotal());
+                System.out.println("Fecha Pago: " + pago.getFechaPago());
+                System.out.println("Concepto: " + pago.getConcepto());
+                System.out.println("ID Paciente: " + pago.getIdPaciente());
+                System.out.println("--------------");
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al listar los pagos: " + ex.getMessage());
+        }
+        return listaPagos;
+    }
+
+
+    
+    
 }
