@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pe.edu.pucp.citamedica.mysql;
+package pe.edu.pucp.capsuleCare.medical.mysql;
 
 import java.sql.*;
 import java.util.ArrayList;
-import pe.edu.pucp.citamedica.dao.CitaProcedimientoDAO;
+import pe.edu.pucp.capsuleCare.medical.dao.CitaProcedimientoDAO;
 import pe.edu.pucp.citamedica.model.consultas.CitaMedicaProcedimiento;
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
