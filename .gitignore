@@ -86,3 +86,4 @@ local.properties
 # Proyecto específico
 /Proyecto Java/*/build/
 /Proyecto Java/*/nbproject/private/
+/Proyecto Java/SoftCapsuleCareWSBL/dist/
