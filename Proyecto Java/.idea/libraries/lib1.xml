@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/lib/softCareProcedimiento.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/lib/softCareConsultas.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/lib/softCareClinica.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/lib/softCareComunicacion.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/lib/softCareUsuario.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

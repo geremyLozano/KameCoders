@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Proyecto Java.iml" filepath="$PROJECT_DIR$/.idea/Proyecto Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/SoftCapsuleCare-MedicalManagement.iml" filepath="$PROJECT_DIR$/SoftCapsuleCare-MedicalManagement/SoftCapsuleCare-MedicalManagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftCapsuleCare-Users/SoftCapsuleCare-Users.iml" filepath="$PROJECT_DIR$/SoftCapsuleCare-Users/SoftCapsuleCare-Users.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftCapsuleCareController/SoftCapsuleCareController.iml" filepath="$PROJECT_DIR$/SoftCapsuleCareController/SoftCapsuleCareController.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftCapsuleCareDBManager/SoftCapsuleCareDBManager.iml" filepath="$PROJECT_DIR$/SoftCapsuleCareDBManager/SoftCapsuleCareDBManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftCapsuleCareWSBL/SoftCapsuleCareWSBL.iml" filepath="$PROJECT_DIR$/SoftCapsuleCareWSBL/SoftCapsuleCareWSBL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftMain/SoftMain.iml" filepath="$PROJECT_DIR$/SoftMain/SoftMain.iml" />
+    </modules>
+  </component>
+</project>

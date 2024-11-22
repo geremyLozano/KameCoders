@@ -11,12 +11,14 @@ import pe.edu.pucp.capsuleCare.medical.dao.PagoDAO;
 import pe.edu.pucp.capsuleCare.medical.mysql.PagoMySQL;
 import pe.edu.pucp.citamedica.model.procedimiento.Pago;
 
+
 /**
  *
  * @author User
  */
 @WebService(serviceName = "PagoWS")
 public class PagoWS {
+    
     private PagoDAO pagoDAO;
     /**
      * This is a sample web service operation
