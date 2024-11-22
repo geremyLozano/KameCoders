@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCareDBManager/lib/commons-pool2-2.12.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCareDBManager/lib/commons-logging-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SoftCapsuleCareDBManager/lib/commons-dbcp2-2.12.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
