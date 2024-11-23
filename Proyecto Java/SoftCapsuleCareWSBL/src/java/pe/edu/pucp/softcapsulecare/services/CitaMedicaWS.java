@@ -30,7 +30,9 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import java.sql.Connection;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+
 import pe.edu.pucp.dbmanager.config.DBPoolManager;
 
 /**
@@ -98,15 +100,24 @@ public class CitaMedicaWS {
 
 
      @WebMethod(operationName = "reportePDF")
-    public byte[] reportePDF(@WebParam(name = "fechaIni") Date fechaIni, 
-                         @WebParam(name = "fechaFin") Date fechaFin) throws Exception {
+    public byte[] reportePDF(@WebParam(name = "fechaIni") String fechaIni, 
+                         @WebParam(name = "fechaFin") String fechaFin) throws Exception {
         try {
             Map<String, Object> params = new HashMap<>();
 
             params.put("logoSecundario",ImageIO.read(new File(getFileResource("logoSecundario.png"))));
             
-            params.put("fechaIni", fechaIni);
-            params.put("fechaFin", fechaFin);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date fechaI = sdf.parse(fechaIni);
+            java.util.Date fechaF = sdf.parse(fechaFin);
+            
+            
+            java.sql.Date sqlFechaIni = new java.sql.Date(fechaI.getTime());
+            java.sql.Date sqlFechaFin = new java.sql.Date(fechaF.getTime());
+            
+            params.put("fechaIni", sqlFechaIni);
+            params.put("fechaFin", sqlFechaFin);
             
             return generarBuffer(getFileResource("citaMedicaNuevo.jrxml"), params);
          } catch (Exception ex) {
