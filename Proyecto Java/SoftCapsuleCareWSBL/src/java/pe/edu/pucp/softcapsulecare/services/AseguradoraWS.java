@@ -57,4 +57,9 @@ public class AseguradoraWS {
         return aseguradoraDAO.insertarPacienteAseguradora(idPaciente, idAseguradora);
     }
     
+    @WebMethod(operationName = "listarAseguradorasPorPaciente")
+    public ArrayList<Aseguradora> listarAseguradorasPorPaciente(@WebParam(name = "paciente") int idPaciente) {
+        return aseguradoraDAO.listarPorPaciente(idPaciente);
+    }
+    
 }
