@@ -88,3 +88,6 @@ local.properties
 /Proyecto Java/*/nbproject/private/
 /Proyecto Java/SoftCapsuleCareWSBL/dist/
 /Proyecto Java/SoftCapsuleCare-MedicalManagement/nbproject
+/Proyecto Java/SoftCapsuleCare-MedicalManagement/dist/
+/Proyecto Java/SoftCapsuleCareController-Medical/dist/
+/Proyecto Java/SoftCapsuleCareController-Users/dist/
