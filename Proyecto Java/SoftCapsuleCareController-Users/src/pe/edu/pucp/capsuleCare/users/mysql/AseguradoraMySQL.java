@@ -153,6 +153,36 @@ public class AseguradoraMySQL implements AseguradoraDAO {
         }
         return resultado;
     }
+
+    @Override
+    public ArrayList<Aseguradora> listarPorPaciente(int idPaciente) {
+        ArrayList<Aseguradora> aseguradoras = new ArrayList<>();
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            sql = "{call listarAseguradorasDePaciente(?)}";
+            cst = con.prepareCall(sql);
+            cst.setInt(1, idPaciente);
+        
+            rs = cst.executeQuery();
+
+            while (rs.next()) {
+                Aseguradora aseguradora = new Aseguradora();
+                aseguradora.setIdAseguradora(rs.getInt("idAseguradora"));
+                aseguradora.setNombre(rs.getString("nombre"));
+                aseguradora.setDireccion(rs.getString("direccion"));
+                aseguradora.setTelefono(rs.getInt("telefono"));
+                aseguradora.setTipoSeguro(rs.getString("tipoSeguro"));
+                aseguradora.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
+                aseguradora.setActivo(rs.getBoolean("activo"));
+                aseguradoras.add(aseguradora);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            DBPoolManager.getInstance().cerrarConexion();
+        }
+        return aseguradoras;
+    }
     
     
     
