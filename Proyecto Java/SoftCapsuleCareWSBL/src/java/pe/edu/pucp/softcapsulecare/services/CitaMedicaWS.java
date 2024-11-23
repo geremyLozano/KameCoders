@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/WebService.java to edit this template
- */
 package pe.edu.pucp.softcapsulecare.services;
 
 import jakarta.jws.WebService;
@@ -88,10 +84,6 @@ public class CitaMedicaWS {
         return citaMedicaDAO.actualizarEstadoCita(idCitaMedica,estado);
     }
     
-    
-    
-    
-    
      private String getFileResource(String fileName){
         String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
@@ -140,11 +132,36 @@ public class CitaMedicaWS {
         JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);
         return JasperExportManager.exportReportToPdf(jp);
     }
-    
-    
-    
-    
-    
-    
-    
+     
+    @WebMethod(operationName = "reporteCitasProcedimientos")
+    public byte[] citas_prodecimientos_pdf() throws Exception {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("URL", ImageIO.read(new File(getFileResource("logo.png"))));
+            
+            return generarBufferSinCompilado(getFileResource("Citas-Procedimientos"), params);
+            } catch (Exception ex) {
+               Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            return null;
+        }
+        
+    public byte[] generarBufferSinCompilado(String jrxmlFileName, Map<String, Object> params) throws Exception {
+        String fileJasper = getFileResource(jrxmlFileName + ".jasper");
+        JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+        Connection conn = null;
+        try {
+            conn = DBPoolManager.getInstance().getConnection();
+            JasperPrint jp = JasperFillManager.fillReport(jr, params, conn);
+            return JasperExportManager.exportReportToPdf(jp);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }  
 }

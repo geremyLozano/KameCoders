@@ -120,9 +120,6 @@ public class MedicoWS {
         return medicoDAO.insertarNuevo(medico,usuario);
     }
 
-
-
-
     private String getFileResource(String fileName){
         String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
