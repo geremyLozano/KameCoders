@@ -119,7 +119,7 @@ public class CitaMedicaWS {
             params.put("fechaIni", sqlFechaIni);
             params.put("fechaFin", sqlFechaFin);
             
-            return generarBuffer(getFileResource("citaMedicaNuevo.jrxml"), params);
+            return generarBuffer(getFileResource("citaMedicaReporte.jrxml"), params);
          } catch (Exception ex) {
             Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
         }
