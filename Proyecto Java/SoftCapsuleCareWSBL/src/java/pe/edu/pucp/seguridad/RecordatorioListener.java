@@ -24,8 +24,8 @@ import pe.edu.pucp.citamedica.model.usuario.Persona;
 @WebListener
 public class RecordatorioListener implements ServletContextListener {
 
-    private static final String GMAIL_USER = "josephaparicio12@gmail.com";
-    private static final String GMAIL_PASSWORD = "tnqraecksivopdcn";
+    private static final String GMAIL_USER = "capsulecare2024@gmail.com";
+    private static final String GMAIL_PASSWORD = "vopwspwyzcspgeis";
     private EmailService emailService;
     private ScheduledExecutorService scheduler;
     private CitaMedicaDAO citaDAO;

@@ -91,32 +91,32 @@ public class CitaMedicaWS {
     }
 
 
-     @WebMethod(operationName = "reportePDF")
-    public byte[] reportePDF(@WebParam(name = "fechaIni") String fechaIni, 
-                         @WebParam(name = "fechaFin") String fechaFin) throws Exception {
-        try {
-            Map<String, Object> params = new HashMap<>();
-
-            params.put("logoSecundario",ImageIO.read(new File(getFileResource("logoSecundario.png"))));
-            
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date fechaI = sdf.parse(fechaIni);
-            java.util.Date fechaF = sdf.parse(fechaFin);
-            
-            
-            java.sql.Date sqlFechaIni = new java.sql.Date(fechaI.getTime());
-            java.sql.Date sqlFechaFin = new java.sql.Date(fechaF.getTime());
-            
-            params.put("fechaIni", sqlFechaIni);
-            params.put("fechaFin", sqlFechaFin);
-            
-            return generarBuffer(getFileResource("citaMedicaReporte.jrxml"), params);
-         } catch (Exception ex) {
-            Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+//    @WebMethod(operationName = "reportePDF")
+//    public byte[] reportePDF(@WebParam(name = "fechaIni") String fechaIni, 
+//                         @WebParam(name = "fechaFin") String fechaFin) throws Exception {
+//        try {
+//            Map<String, Object> params = new HashMap<>();
+//
+//            params.put("logoSecundario",ImageIO.read(new File(getFileResource("logoSecundario.png"))));
+//            
+//            
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date fechaI = sdf.parse(fechaIni);
+//            java.util.Date fechaF = sdf.parse(fechaFin);
+//            
+//            
+//            java.sql.Date sqlFechaIni = new java.sql.Date(fechaI.getTime());
+//            java.sql.Date sqlFechaFin = new java.sql.Date(fechaF.getTime());
+//            
+//            params.put("fechaIni", sqlFechaIni);
+//            params.put("fechaFin", sqlFechaFin);
+//            
+//            return generarBuffer(getFileResource("citaMedicaReporte.jrxml"), params);
+//         } catch (Exception ex) {
+//            Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
 
      public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
         //Se compila una sola vez
