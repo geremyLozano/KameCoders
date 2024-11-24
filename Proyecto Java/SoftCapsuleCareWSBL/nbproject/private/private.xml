@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/CitaMedicaProcedimientoWS.java</file>
-            <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/CitaMedicaWS.java</file>
-            <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/UsuarioWS.java</file>
-=======
-            <file>file:/C:/Users/User/Desktop/CapsuleCare/Back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/web/index.html</file>
->>>>>>> b872e00773700002c8eeab085419b00586e7b456
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/nbproject/build-impl.xml</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/resources/medicoHorizontal.jrxml</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/CitaMedicaWS.java</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/resources/logo.png</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/MedicoWS.java</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/resources/citaMedicaReporte.jrxml</file>
+            <file>file:/E:/backup/Gianfranco/Backup/pucp/2024-2/Programacion%203/git3/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/AdministradorWS.java</file>
         </group>
     </open-files>
 </project-private>
