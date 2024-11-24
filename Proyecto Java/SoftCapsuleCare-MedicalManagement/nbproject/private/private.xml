@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group>
+            <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCare-MedicalManagement/src/pe/edu/pucp/citamedica/model/procedimiento/TipoProcedimiento.java</file>
+        </group>
+=======
         <group/>
+>>>>>>> b872e00773700002c8eeab085419b00586e7b456
     </open-files>
 </project-private>
