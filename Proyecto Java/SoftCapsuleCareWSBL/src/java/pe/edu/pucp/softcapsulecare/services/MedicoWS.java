@@ -119,6 +119,12 @@ public class MedicoWS {
         
         return medicoDAO.insertarNuevo(medico,usuario);
     }
+    @WebMethod(operationName = "modificarMedicoCompleto")
+    public int modificarMedicoCompleto(@WebParam(name = "medico") Medico medico) {
+        return medicoDAO.modificarCompleto(medico);
+    }
+    
+    
 
     private String getFileResource(String fileName){
         String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();

@@ -22,4 +22,5 @@ public interface MedicoDAO {
     List<Medico> listarFiltro(String filtro);
     int modificar_v2(Medico medico); 
     int insertarNuevo(Medico medico, Usuario usuario);
+    int modificarCompleto(Medico medico);
 }
