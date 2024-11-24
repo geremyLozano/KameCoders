@@ -68,7 +68,7 @@ public class AuxiliarMySQL implements AuxiliarDAO{
             auxiliar.setIdPersona(cst.getInt(1));
             usuario.setIdUsuario(cst.getInt(2));
             auxiliar.setIdAuxiliar(auxiliar.getIdPersona());
-            auxiliar.setActivo(true);
+            auxiliar.setActivo(false);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
