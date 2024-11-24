@@ -68,7 +68,7 @@ public class AdministradorMySQL implements AdministradorDAO{
 //            administrador.setDireccion(administrador.getDireccion());
 //            administrador.setFechaNacimiento(administrador.getFechaNacimiento());
 //            administrador.setGenero(administrador.getGenero());
-            administrador.setActivo(true);
+            administrador.setActivo(false);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
