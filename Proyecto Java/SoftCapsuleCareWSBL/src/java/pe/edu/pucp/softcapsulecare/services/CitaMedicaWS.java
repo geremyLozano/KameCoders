@@ -121,10 +121,10 @@ public class CitaMedicaWS {
      public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
         //Se compila una sola vez
         String fileJasper = inFileXML +".jasper";
-        //if(!new File(fileJasper).exists()){
+        if(!new File(fileJasper).exists()){
             //para compilar en GlassFish se requiere las librerias: jasperreports-jdt, ecj
             JasperCompileManager.compileReportToFile(inFileXML, fileJasper);
-        //}
+        }
         //1- leer el archivo compilado
         JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
         //2- poblar el reporte
