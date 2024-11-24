@@ -100,8 +100,15 @@ public class MedicoMySQL implements MedicoDAO {
 
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.print("Error general: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -156,9 +163,15 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pstMedico != null) pstMedico.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
         
@@ -188,9 +201,15 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pstMedico != null) pstMedico.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -705,8 +724,15 @@ public class MedicoMySQL implements MedicoDAO {
 
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.print("Error general: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
