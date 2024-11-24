@@ -54,7 +54,7 @@ public class MedicoMySQL implements MedicoDAO {
 //        return resultado;
 //    }
     
-      
+      //#5995FD
     
     @Override
     public int insertar(Medico medico, Usuario usuario) {
