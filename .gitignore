@@ -5,6 +5,7 @@
 *.war
 *.ear
 *.nar
+*.jar
 hs_err_pid*
 replay_pid*
 .mtj.tmp/
