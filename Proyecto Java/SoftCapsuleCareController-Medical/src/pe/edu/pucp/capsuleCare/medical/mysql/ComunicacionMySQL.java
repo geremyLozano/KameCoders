@@ -27,10 +27,12 @@ public class ComunicacionMySQL implements ComunicacionDAO {
     @Override
     public int insertar(Comunicacion comunicacion) {
         int resultado = 0;
-        try {
-            con = DBPoolManager.getInstance().getConnection();
-            sql = "CALL COMUNICACION_INSERTAR(?,?,?,?,?,?)";
-            pstComunica = con.prepareStatement(sql);
+        
+        String sql = "CALL COMUNICACION_INSERTAR(?,?,?,?,?,?)";
+        
+        try (Connection con = DBPoolManager.getInstance().getConnection();
+             PreparedStatement pstComunica = con.prepareStatement(sql)){
+           
             
             pstComunica.setString(1, comunicacion.getTipo().name());
             pstComunica.setString(2, comunicacion.getContenido());
@@ -128,10 +130,11 @@ public class ComunicacionMySQL implements ComunicacionDAO {
         sql = "CALL COMUNICACION_BUSCARPORID(?)";
 
         try (Connection con = DBPoolManager.getInstance().getConnection();
-             PreparedStatement pstComunicacion = con.prepareStatement(sql)) {
+             PreparedStatement pstComunicacion = con.prepareStatement(sql);
+                ResultSet rs = pstComunicacion.executeQuery();) {
 
             pstComunicacion.setInt(1, idComunicacion);
-            rs = pstComunicacion.executeQuery();
+           
 
             if (rs.next()) {
                 comunica = new Comunicacion();

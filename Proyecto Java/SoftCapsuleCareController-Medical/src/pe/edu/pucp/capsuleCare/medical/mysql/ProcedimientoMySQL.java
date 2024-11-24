@@ -44,12 +44,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
-                if (con != null) {
-                    con.close();
-                }
+               
+                if (cst != null) cst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return resultado;
@@ -74,10 +75,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+               
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return resultado;
@@ -95,10 +99,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return resultado;
@@ -126,10 +133,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return listaProcedimiento;
@@ -161,10 +171,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return procedimiento;
@@ -193,10 +206,13 @@ public class ProcedimientoMySQL implements ProcedimientoDAO{
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println("Error cerrando conexión: " + ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return listaProcedimientos; // Siempre retorna una lista, aunque esté vacía

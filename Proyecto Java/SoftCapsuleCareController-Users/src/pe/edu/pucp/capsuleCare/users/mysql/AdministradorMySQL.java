@@ -72,6 +72,15 @@ public class AdministradorMySQL implements AdministradorDAO{
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
 
         return resultado;
@@ -100,6 +109,15 @@ public class AdministradorMySQL implements AdministradorDAO{
         return resultado;
         }   catch (SQLException e) {
                 System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -115,6 +133,15 @@ public class AdministradorMySQL implements AdministradorDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -141,10 +168,13 @@ public class AdministradorMySQL implements AdministradorDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return administradores;        
@@ -172,10 +202,13 @@ public class AdministradorMySQL implements AdministradorDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return administrador;
