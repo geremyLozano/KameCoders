@@ -85,7 +85,7 @@ public class CitaMedicaWS {
     }
     
      private String getFileResource(String fileName){
-        String filePath = CitaMedicaWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
+        String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
         return filePath;
     }
