@@ -85,7 +85,7 @@ public class CitaMedicaWS {
     }
     
      private String getFileResource(String fileName){
-        String filePath = MedicoWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
+        String filePath = CitaMedicaWS.class.getResource("/pe/edu/pucp/resources/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
         return filePath;
     }
@@ -134,34 +134,48 @@ public class CitaMedicaWS {
     }
      
     @WebMethod(operationName = "reporteCitasProcedimientos")
-    public byte[] citas_prodecimientos_pdf() throws Exception {
+    public byte[] citas_procedimientos_pdf() throws Exception {
         try {
+            // Parámetros del reporte
             Map<String, Object> params = new HashMap<>();
             params.put("URL", ImageIO.read(new File(getFileResource("logo.png"))));
-            
-            return generarBufferSinCompilado(getFileResource("Citas-Procedimientos"), params);
-            } catch (Exception ex) {
-               Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            return null;
+
+            // Generar el PDF y obtener los bytes
+            return generarBufferSinCompilado("Citas-Procedimientos", params); // Usamos generarBuffer que retorna los bytes
+        } catch (Exception ex) {
+            Logger.getLogger(MedicoWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return null;
+    }
+
     public byte[] generarBufferSinCompilado(String jrxmlFileName, Map<String, Object> params) throws Exception {
+        // Definir la ruta del archivo compilado (.jasper)
         String fileJasper = getFileResource(jrxmlFileName + ".jasper");
+
+        // Cargar siempre el archivo Jasper compilado
         JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+
+        // Inicializar la conexión
         Connection conn = null;
         try {
+            // Obtener la conexión
             conn = DBPoolManager.getInstance().getConnection();
+
+            // Poblar el reporte con los parámetros
             JasperPrint jp = JasperFillManager.fillReport(jr, params, conn);
+
+            // Exportar el reporte a un buffer de bytes (en formato PDF)
             return JasperExportManager.exportReportToPdf(jp);
+
         } finally {
+            // Asegurarse de que la conexión se cierre
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    ex.printStackTrace(); // Manejo de error opcional
                 }
             }
         }
-    }  
+    }
 }
