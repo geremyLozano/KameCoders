@@ -5,6 +5,7 @@
 *.war
 *.ear
 *.nar
+*.jar
 hs_err_pid*
 replay_pid*
 .mtj.tmp/
@@ -87,3 +88,7 @@ local.properties
 /Proyecto Java/*/build/
 /Proyecto Java/*/nbproject/private/
 /Proyecto Java/SoftCapsuleCareWSBL/dist/
+/Proyecto Java/SoftCapsuleCare-MedicalManagement/nbproject
+/Proyecto Java/SoftCapsuleCare-MedicalManagement/dist/
+/Proyecto Java/SoftCapsuleCareController-Medical/dist/
+/Proyecto Java/SoftCapsuleCareController-Users/dist/

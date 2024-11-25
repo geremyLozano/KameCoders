@@ -72,6 +72,13 @@ public class PagoMySQL implements PagoDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            try {
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
         }
         return resultado;
     }
@@ -99,10 +106,13 @@ public class PagoMySQL implements PagoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return pagos;
@@ -131,10 +141,13 @@ public class PagoMySQL implements PagoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return pago;

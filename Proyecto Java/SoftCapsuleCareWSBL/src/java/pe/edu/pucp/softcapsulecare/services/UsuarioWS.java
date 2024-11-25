@@ -75,4 +75,9 @@ public class UsuarioWS {
         ArrayList<Usuario> resultado = usuDAO.listarTodos1();
         return resultado;
     }
+    @WebMethod(operationName = "eliminarUsuario")
+    public int usuarioEliminar(@WebParam(name = "usuario") int idUsuario) {
+        int resultado = usuDAO.eliminar(idUsuario);
+        return resultado;
+    }
 }

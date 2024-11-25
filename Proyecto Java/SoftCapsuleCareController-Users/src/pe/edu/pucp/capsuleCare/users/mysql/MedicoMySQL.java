@@ -54,7 +54,7 @@ public class MedicoMySQL implements MedicoDAO {
 //        return resultado;
 //    }
     
-      
+      //#5995FD
     
     @Override
     public int insertar(Medico medico, Usuario usuario) {
@@ -100,8 +100,15 @@ public class MedicoMySQL implements MedicoDAO {
 
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.print("Error general: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -156,9 +163,15 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pstMedico != null) pstMedico.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
         
@@ -188,9 +201,15 @@ public class MedicoMySQL implements MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pstMedico != null) pstMedico.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -705,9 +724,91 @@ public class MedicoMySQL implements MedicoDAO {
 
         } catch (SQLException e) {
             System.out.print("Error en la base de datos: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.print("Error general: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
+    }
+
+    @Override
+    public int modificarCompleto(Medico medico) {
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Suponiendo que la hora esté en formato "HH:mm"
+        
+        // Convertir las cadenas de hora a LocalTime
+        LocalTime horaInicio = LocalTime.parse(medico.getHoraInicioTrabajoStr(), formatter);
+        LocalTime horaFin = LocalTime.parse(medico.getHoraFinTrabajoStr(), formatter);
+
+        // Mostrar los valores convertidos
+        System.out.println("Hora inicio: " + horaInicio);
+        System.out.println("Hora fin: " + horaFin);
+       
+        int resultado = 0;
+        try {
+            con = DBPoolManager.getInstance().getConnection();
+            java.sql.Date sqlDate = new java.sql.Date(medico.getFechaNacimiento().getTime());
+            System.out.println("ID Médico: " + medico.getIdMedico());
+            System.out.println("DNI: " + medico.getDNI());
+            System.out.println("Nombre: " + medico.getNombre());
+            System.out.println("Apellido: " + medico.getApellido());
+            System.out.println("Correo Electrónico: " + medico.getCorreoElectronico());
+            System.out.println("Teléfono: " + medico.getNumTelefono());
+            System.out.println("Direccion: " + medico.getDireccion());
+            System.out.println("Nacimiento: " + sqlDate);
+            System.out.println("Genero: " + medico.getGenero());
+            sql = "{CALL ActualizarMedicoCompleto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            
+            
+            pstMedico = con.prepareStatement(sql);
+            
+            pstMedico.setInt(1, medico.getIdMedico());           
+            pstMedico.setString(2, medico.getNumColegiatura());
+            pstMedico.setTime(3,Time.valueOf(horaInicio));
+            pstMedico.setTime(4,Time.valueOf(horaFin));
+                   
+            
+            
+            pstMedico.setString(5, medico.getDiasLaborales());       
+            pstMedico.setInt(6,medico.getAhosExp());
+            pstMedico.setBoolean(7,true);
+            
+            pstMedico.setString(8, medico.getDNI());
+            pstMedico.setString(9, medico.getNombre());
+            pstMedico.setString(10, medico.getApellido());
+            pstMedico.setString(11, medico.getCorreoElectronico());
+            pstMedico.setInt(12, medico.getNumTelefono());
+            pstMedico.setString(13, medico.getDireccion());
+            
+            pstMedico.setDate(14, sqlDate);
+            pstMedico.setString(15, String.valueOf(medico.getGenero()));
+            
+            resultado = pstMedico.executeUpdate();
+          
+            
+           
+           // resultado = pstMedico.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.print("Error en la base de datos: " + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pstMedico != null) pstMedico.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+        return resultado;
+        
     }
 }

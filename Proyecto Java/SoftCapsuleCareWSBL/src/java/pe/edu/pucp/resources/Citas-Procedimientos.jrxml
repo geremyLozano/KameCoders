@@ -1,0 +1,231 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Citas-Procedimientos" language="java" columnCount="1" pageWidth="595" pageHeight="840" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="87536f06-b6f3-44c6-84e9-27e8aa659a40">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="clinicaCapsule"/>
+	<parameter name="URL" class="java.awt.Image"/>
+	<query language="SQL"><![CDATA[SELECT
+    proc.nombre AS nombreProcedimiento,
+    CASE 
+        WHEN proc.tipoProcedimiento = 'Evaluacion_por_imagenes' THEN 'Evaluación por imágenes'
+        ELSE proc.tipoProcedimiento
+    END AS tipoProcedimiento,
+    p.nombre AS nombreMedico,
+    e.nombre AS nombreEspecialidad,
+    DATE_FORMAT(COALESCE(cmp.fechaRealizacion, NOW()), '%d-%m') AS fechaRealizacion,
+    DATE_FORMAT(COALESCE(pag.fechaPago, NOW()), '%d-%m-%Y') AS fechaPago,
+    proc.costo,
+    am.numPiso,
+    am.ubicacion,
+    proc.idProcedimiento
+FROM 
+    CitaMedica cm
+INNER JOIN 
+    CitaMedica_has_Procedimiento cmp
+ON 
+    cm.idCitaMedica = cmp.idCitaMedica
+ INNER JOIN
+ 	Pago pag
+ ON
+ 	cmp.idPago = pag.idPago
+INNER JOIN 
+    Medico m
+ON 
+    cm.idMedico = m.idMedico
+INNER JOIN 
+    Especialidad e
+ON 
+    m.idEspecialidad = e.idEspecialidad
+INNER JOIN 
+    Persona p
+ON 
+    m.idMedico = p.idPersona
+INNER JOIN 
+    Procedimiento proc
+ON 
+    cmp.idProcedimiento = proc.idProcedimiento
+INNER JOIN 
+    AmbienteMedico am
+ON 
+    proc.idAmbienteMedico = am.idAmbienteMedico
+WHERE 
+    cm.activo = 1
+    AND cmp.activo = 1
+    AND cmp.idPago IS NOT NULL
+ ORDER BY cmp.fechaRealizacion ASC
+]]></query>
+	<field name="nombreProcedimiento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreProcedimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Procedimiento"/>
+	</field>
+	<field name="tipoProcedimiento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipoProcedimiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipoProcedimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Procedimiento"/>
+	</field>
+	<field name="nombreMedico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreMedico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Persona"/>
+	</field>
+	<field name="nombreEspecialidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreEspecialidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Especialidad"/>
+	</field>
+	<field name="fechaRealizacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fechaRealizacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaRealizacion"/>
+	</field>
+	<field name="fechaPago" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fechaPago"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaPago"/>
+	</field>
+	<field name="costo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="costo"/>
+		<property name="com.jaspersoft.studio.field.label" value="costo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Procedimiento"/>
+	</field>
+	<field name="numPiso" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="numPiso"/>
+		<property name="com.jaspersoft.studio.field.label" value="numPiso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="AmbienteMedico"/>
+	</field>
+	<field name="ubicacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ubicacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="ubicacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="AmbienteMedico"/>
+	</field>
+	<field name="idProcedimiento" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idProcedimiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="idProcedimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Procedimiento"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="100" splitType="Stretch">
+		<element kind="staticText" uuid="6b14c302-adca-4621-8ba9-1f663e9828be" x="110" y="30" width="364" height="30" fontName="Arial Black" fontSize="12.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[REPORTE DE INGRESOS DE LOS PROCEDIMIENTOS]]></text>
+		</element>
+		<element kind="line" uuid="21db58cb-a7d3-458a-aed3-7893a593df8e" x="-1" y="77" width="557" height="1"/>
+		<element kind="textField" uuid="8dc38abd-6cce-44f1-a593-ada290981610" x="462" y="57" width="94" height="20" pattern="MMMMM dd, yyyy" bold="true" hTextAlign="Right">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="image" uuid="21c2fe4b-c512-40cd-9cf7-309caba7ef67" x="20" y="15" width="80" height="60">
+			<expression><![CDATA[$P{URL}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+	</title>
+	<pageHeader height="7" splitType="Stretch"/>
+	<columnHeader height="45" splitType="Stretch">
+		<element kind="staticText" uuid="d698ab8f-1f3b-4ce8-8746-9d4c4af7f742" mode="Opaque" x="10" y="12" width="110" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Left">
+			<paragraph leftIndent="15"/>
+			<text><![CDATA[Procedimiento]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3523b546-17f0-41b0-a5a5-1f76caf90c69"/>
+			<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+		</element>
+		<element kind="staticText" uuid="51c54d14-2804-4e5a-a400-42c8a7dc755f" mode="Opaque" x="190" y="12" width="60" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Left">
+			<text><![CDATA[Medico]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="346e7076-8114-45dc-8b64-d42f58035cda"/>
+		</element>
+		<element kind="staticText" uuid="0002d44e-8730-4eaa-b97b-20aef1fca46e" mode="Opaque" x="250" y="12" width="102" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Left">
+			<paragraph leftIndent="10"/>
+			<text><![CDATA[Especialidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e07f8d3a-aff6-43d5-96e0-d0137540f980"/>
+			<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+		</element>
+		<element kind="staticText" uuid="37c708d9-ce09-4686-96e3-077e58a18764" mode="Opaque" x="352" y="12" width="65" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Left">
+			<paragraph leftIndent="0"/>
+			<text><![CDATA[Fecha Pago]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da6a1c6c-ed82-460c-838e-2ba7650eaf3f"/>
+			<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+		</element>
+		<element kind="staticText" uuid="c470e5e0-13e2-4b29-b193-15c463062d07" mode="Opaque" x="417" y="12" width="62" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Center">
+			<text><![CDATA[N ° Piso]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a703407-22ec-4b23-a528-e11096d6339e"/>
+		</element>
+		<element kind="staticText" uuid="0bc4c1cd-a77e-4565-b64a-4b472964beb2" mode="Opaque" x="479" y="12" width="68" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true" hTextAlign="Left">
+			<text><![CDATA[Ubicación]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="39cc68b2-8051-4fd8-875f-5b948f40b000"/>
+		</element>
+		<element kind="staticText" uuid="9c474eba-52c1-4b6b-93ba-1008111068f9" mode="Opaque" x="120" y="12" width="70" height="20" forecolor="#FFFFFF" backcolor="#007BA7" bold="true">
+			<text><![CDATA[Costo]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4b2de7ed-6fac-4a1b-a34f-4d03ba8d3078"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<element kind="textField" uuid="f68dfcaf-5dd7-4279-b608-235eb56cc34e" x="20" y="7" width="100" height="20" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{nombreProcedimiento}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3523b546-17f0-41b0-a5a5-1f76caf90c69"/>
+			</element>
+			<element kind="textField" uuid="1e3f2701-da5b-47cd-a4c6-7a025857298b" x="190" y="7" width="60" height="20" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{nombreMedico}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="346e7076-8114-45dc-8b64-d42f58035cda"/>
+			</element>
+			<element kind="textField" uuid="4de39d62-7db1-414a-bd7d-8b95ba7cd4bf" x="250" y="7" width="102" height="20" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{nombreEspecialidad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e07f8d3a-aff6-43d5-96e0-d0137540f980"/>
+			</element>
+			<element kind="textField" uuid="d360ad25-b8c7-4f73-bc93-c5955889eaa7" x="417" y="7" width="62" height="20" textAdjust="StretchHeight" hTextAlign="Center">
+				<expression><![CDATA[$F{numPiso}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a703407-22ec-4b23-a528-e11096d6339e"/>
+			</element>
+			<element kind="textField" uuid="e70dfaff-c31b-406c-8831-fd3c7ce226b7" x="479" y="7" width="68" height="20" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{ubicacion}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="39cc68b2-8051-4fd8-875f-5b948f40b000"/>
+			</element>
+			<element kind="textField" uuid="d86773bd-71cd-4e67-9e6d-c7ebb760e7f2" x="120" y="7" width="70" height="20" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{costo}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4b2de7ed-6fac-4a1b-a34f-4d03ba8d3078"/>
+			</element>
+			<element kind="textField" uuid="a0ad84a7-8047-4995-b414-3107bf411d5d" x="352" y="7" width="65" height="20">
+				<expression><![CDATA[$F{fechaPago}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb632dcc-4491-4560-8559-07aaf1ddf991"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="17" splitType="Stretch"/>
+	<pageFooter height="42" splitType="Stretch">
+		<element kind="line" uuid="626fad76-082f-4a0a-affd-9098a7d265f4" x="-1" y="20" width="557" height="1"/>
+		<element kind="staticText" uuid="ee3b2e96-e22a-4fab-950a-c2217c68feb4" x="389" y="20" width="90" height="18" hTextAlign="Right">
+			<text><![CDATA[Página: ]]></text>
+		</element>
+		<element kind="textField" uuid="3d1f0e99-750a-4592-bcb2-f6107eb03cdf" x="480" y="20" width="66" height="18">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="694" splitType="Stretch">
+		<element kind="chart" chartType="line" uuid="9cf2dc8b-2108-4eba-8675-bdfb07d31961" key="" stretchType="ElementGroupHeight" x="0" y="60" width="554" height="248" evaluationTime="Report" linkType="None" linkTarget="Self">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{tipoProcedimiento}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{fechaRealizacion}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{costo}]]></valueExpression>
+					<itemHyperlink linkType="None" linkTarget="Self"/>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000"/>
+			<property name="net.sf.jasperreports.chart.show.labels" value="true"/>
+		</element>
+		<element kind="chart" chartType="stackedBar" uuid="c14e5b62-30ae-4ce5-8f4d-741d128f21dc" x="80" y="420" width="382" height="250" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{nombreProcedimiento}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{tipoProcedimiento}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{costo}]]></valueExpression>
+					<labelExpression><![CDATA[$F{nombreProcedimiento}]]></labelExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="staticText" uuid="b504ffd6-121f-44dd-af9e-172fdd0a874a" x="116" y="10" width="322" height="30" fontSize="12.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Ingresos por fecha del último mes]]></text>
+		</element>
+		<element kind="staticText" uuid="f3c64036-eda9-4b0e-96d0-c91d02f97347" x="110" y="380" width="322" height="30" fontSize="12.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Ingresos por tipo de procedimiento]]></text>
+		</element>
+	</summary>
+</jasperReport>

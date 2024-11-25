@@ -32,9 +32,15 @@ public class EspecialidadMySQL implements EspecialidadDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print("Error en la base de datos: " + e.getMessage());
-        }catch( Exception e){
-            e.printStackTrace();
-            System.out.print("Error general" + e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (pst != null) pst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }

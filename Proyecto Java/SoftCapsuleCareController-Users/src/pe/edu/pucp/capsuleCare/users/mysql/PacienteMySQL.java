@@ -107,6 +107,15 @@ public class PacienteMySQL implements PacienteDAO{
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
 
         return resultado;
@@ -134,10 +143,13 @@ public class PacienteMySQL implements PacienteDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return pacientes;
@@ -167,10 +179,13 @@ public class PacienteMySQL implements PacienteDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return paciente;
@@ -200,6 +215,15 @@ public class PacienteMySQL implements PacienteDAO{
         return resultado;
         }   catch (SQLException e) {
                 System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }   

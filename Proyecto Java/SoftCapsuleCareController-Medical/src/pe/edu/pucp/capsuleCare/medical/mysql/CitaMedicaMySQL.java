@@ -42,7 +42,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
         int resultado = -1;
         try {
             con = DBPoolManager.getInstance().getConnection();
-            String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String sql = "{CALL sp_insertar_cita_medica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             cst = con.prepareCall(sql);
             
             LocalTime horaLocalTime;
@@ -79,7 +79,7 @@ public class CitaMedicaMySQL implements CitaMedicaDAO {
             cst.setTime(9,duracion);
             cst.setNull(10, java.sql.Types.INTEGER);
             cst.setInt(11, cita.getIdPago());
-
+            cst.setInt(12, cita.getIdHistorialMedico());
             // Ejecutamos el procedimiento
             cst.executeUpdate();
             resultado = 1; // Si todo va bien, retornamos éxito

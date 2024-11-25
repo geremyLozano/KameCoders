@@ -43,6 +43,15 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.print(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
@@ -71,6 +80,15 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 System.out.println("Error: " + e.getMessage());
             } else {
                 System.out.println("Error general: " + e.getMessage());
+            }
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return resultado;
@@ -117,10 +135,13 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return ambientes;
@@ -170,10 +191,13 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+                if (rs != null) rs.close();
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return ambiente;
@@ -202,10 +226,13 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
                 System.out.println("Error general: " + e.getMessage());
             }
         } finally {
+            // Cerrar los recursos de base de datos
             try {
+               
+                if (cst != null) cst.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
             }
         }
         return resultado;
@@ -223,7 +250,19 @@ public class AmbienteMedicoMySQL implements AmbienteMedicoDAO{
             resultado = cst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+                
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
+        
+        
+        
         return resultado;
     }
     

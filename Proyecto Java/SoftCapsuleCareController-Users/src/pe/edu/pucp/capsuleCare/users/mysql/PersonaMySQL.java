@@ -50,6 +50,15 @@ public class PersonaMySQL implements PersonaDAO{
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            // Cerrar los recursos de base de datos
+            try {
+               
+                if (cst != null) cst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
         return resultado;
     }
