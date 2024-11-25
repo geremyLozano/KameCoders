@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/User/Desktop/CapsuleCare/Back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/web/index.html</file>
+            <file>file:/C:/Users/User/Desktop/CapsuleCare/Back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/web/archivo.disco</file>
+=======
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/seguridad/EmailTemplate.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/seguridad/EmailService.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/CitaMedicaWS.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/seguridad/TesPDF.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/seguridad/RecordatorioListener.java</file>
             <file>file:/D:/prog3/repositorio/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/UsuarioWS.java</file>
+>>>>>>> 54ec0181563f2f8c6396163e1ae6ff4823121849
         </group>
     </open-files>
 </project-private>
