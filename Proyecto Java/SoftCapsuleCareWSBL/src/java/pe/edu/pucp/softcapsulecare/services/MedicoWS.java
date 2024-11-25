@@ -134,7 +134,7 @@ public class MedicoWS {
 
 
      @WebMethod(operationName = "reportePDF")
-    public byte[] reportePDF() throws Exception {
+    public byte[] reportePDF_medico() throws Exception {
         try {
             Map<String, Object> params = new HashMap<>();
 

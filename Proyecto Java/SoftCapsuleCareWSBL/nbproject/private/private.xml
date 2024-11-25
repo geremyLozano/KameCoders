@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
+=======
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/berna/Desktop/proyectoFinal/back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/MedicoWS.java</file>
+            <file>file:/C:/Users/berna/Desktop/proyectoFinal/back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/ProcedimientoWS.java</file>
+            <file>file:/C:/Users/berna/Desktop/proyectoFinal/back/KameCoders/Proyecto%20Java/SoftCapsuleCareWSBL/src/java/pe/edu/pucp/softcapsulecare/services/CitaMedicaProcedimientoWS.java</file>
+        </group>
+    </open-files>
+>>>>>>> b63c30df96886019ab790ee134dd989c629f625d
 </project-private>
